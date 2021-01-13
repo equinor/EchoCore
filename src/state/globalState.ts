@@ -1,4 +1,3 @@
-
 import { Atom } from '@dbeining/react-atom';
 import { createContext } from 'react';
 import { ActivePanel, GlobalState, GlobalStateContext } from '../types';
@@ -17,6 +16,8 @@ export function createGlobalState(): Atom<GlobalState> {
         activePanel: ActivePanel.None,
         activeModule: '',
         moduleState: {},
+        userProfile: undefined,
+        userPhotoUrl: undefined,
         legendOptions: {
             isActive: true
         }

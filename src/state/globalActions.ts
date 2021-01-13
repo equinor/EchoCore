@@ -1,4 +1,3 @@
-
 import { deref, swap } from '@dbeining/react-atom';
 import { GlobalState, GlobalStateContext } from '../types';
 
