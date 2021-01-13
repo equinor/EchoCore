@@ -19,5 +19,4 @@ export interface GlobalStateContext {
     state: Atom<GlobalState>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export type EchoCustomState<T> = Partial<T>;
