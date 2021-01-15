@@ -101,7 +101,7 @@ _OBS! Run `npm install` before linking, if not you might have to unlink to be ab
 1. Navigate to repository to link to
 
 ```sh-session
-cd ~/repo/my-app-to-link-to
+cd ~/repos/my-app-to-link-to
 npm unlink --no-save @equinor/echo-core
 ```
 
