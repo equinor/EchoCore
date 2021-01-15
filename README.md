@@ -64,6 +64,12 @@ $ npm test
 $ npm test-coverage
 ```
 
+-   And run this command to not do npm clean install when running tests:
+
+```sh-session
+$ npm test-wo-install
+```
+
 # Link echo-core
 
 1. Navigate to cloned echo-core repository
@@ -80,6 +86,16 @@ cd ~/repo/my-app-to-link-to
 npm link @equinor/echo-core
 ```
 
+3. Install npm-local-development if not already done: `npm i -g npm-local-development`
+
+    my-app-to-link-to must have a links.json file with link to react (and other peerDependencies in use), if not you will experience multiple versions of react when running my-app-to-link-to
+
+4. Run `npm-local-development ../EchoCore`
+
+**Linking of echo-core should now be set up and you can run both builds with watch**
+
+_OBS! Run `npm install` before linking, if not you might have to unlink to be able to install packages_
+
 # Unlinking echo-core
 
 1. Navigate to repository to link to
@@ -95,6 +111,8 @@ npm unlink --no-save @equinor/echo-core
 cd ~/repos/EchoCore
 npm unlink
 ```
+
+3. Stop `npm-local-development ../EchoCore` script (it watches for changes to echo-core dependencies)
 
 **Order is important**
 
