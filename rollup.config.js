@@ -1,8 +1,8 @@
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import del from 'rollup-plugin-delete';
 import dt from 'rollup-plugin-dts';
-import resolve from 'rollup-plugin-node-resolve';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 import ts2 from 'rollup-plugin-typescript2';
 import pkg from './package.json';
@@ -32,7 +32,7 @@ export default [
                     '@dbeining/react-atom': ['Atom', 'useAtom', 'deref', 'swap']
                 }
             }),
-            resolve()
+            nodeResolve()
         ]
     },
     {

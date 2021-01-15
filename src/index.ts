@@ -2,6 +2,7 @@ import { setLegendOption } from './actions/legendOptionsStateActions';
 import registerPanels from './actions/registerPanel';
 import { env, EnvironmentVariables, isDevelopment, isProduction, setEnv } from './configuration/environment';
 import useAppModuleState from './hooks/useAppModuleState';
+import useAuthenticate from './hooks/useAuthenticate';
 import useLegendOptions from './hooks/useLegendOptions';
 import useEchoSetup from './hooks/useSetup';
 import useUserPhoto from './hooks/useUserPhoto';
@@ -29,6 +30,7 @@ class Core {
     useLegendOptions = useLegendOptions;
     useUserProfile = useUserProfile;
     useUserPhoto = useUserPhoto;
+    useAuthenticate = useAuthenticate;
     setLegendOption = setLegendOption;
     ECHO_CORE_MAIN = ECHO_CORE_MAIN;
     ECHO_CORE_SEARCH = ECHO_CORE_SEARCH;
