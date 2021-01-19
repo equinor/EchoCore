@@ -3,6 +3,7 @@ import { User } from '@microsoft/microsoft-graph-types';
 import { ApplicationManifest } from './appModule';
 import { LegendOptions } from './legend';
 import { Panel } from './panel';
+import { Settings } from './settings';
 
 export interface GlobalState {
     modules: Array<ApplicationManifest>;
@@ -13,6 +14,7 @@ export interface GlobalState {
     userProfile?: User;
     userPhotoUrl?: string;
     legendOptions: LegendOptions;
+    settings: Settings;
 }
 
 export interface GlobalStateContext {

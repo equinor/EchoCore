@@ -1,6 +1,7 @@
 import { Atom } from '@dbeining/react-atom';
 import { createContext } from 'react';
 import { ActivePanel, GlobalState, GlobalStateContext } from '../types';
+import { legendOptions, settings } from './defaultStates';
 
 /**
  * Echo Core function for creating the GlobalState object.
@@ -18,9 +19,8 @@ export function createGlobalState(): Atom<GlobalState> {
         moduleState: {},
         userProfile: undefined,
         userPhotoUrl: undefined,
-        legendOptions: {
-            isActive: true
-        }
+        settings,
+        legendOptions
     };
 
     return Atom.of(defaultState);
