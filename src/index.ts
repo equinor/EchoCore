@@ -1,4 +1,4 @@
-import { setLegendOption } from './actions/legendOptionsStateActions';
+import { setLegendOptions } from './actions/legendOptionsStateActions';
 import registerPanels from './actions/registerPanel';
 import { env, EnvironmentVariables, isDevelopment, isProduction, setEnv } from './configuration/environment';
 import useAppModuleState from './hooks/useAppModuleState';
@@ -29,7 +29,7 @@ class Core {
     useLegendOptions = useLegendOptions;
     useUserProfile = useUserProfile;
     useUserPhoto = useUserPhoto;
-    setLegendOption = setLegendOption;
+    setLegendOption = setLegendOptions;
     ECHO_CORE_MAIN = ECHO_CORE_MAIN;
     ECHO_CORE_SEARCH = ECHO_CORE_SEARCH;
     EchoAuthProvider = EchoAuthProvider;
