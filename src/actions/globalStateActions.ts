@@ -1,5 +1,5 @@
 import { dispatch, readState } from '../state/globalActions';
-import { getCoreContext } from '../state/globalState';
+import { CoreContext, getCoreContext } from '../state/globalState';
 import { ApplicationManifest, GlobalState } from '../types';
 
 /**
@@ -21,5 +21,5 @@ export function getAppManifest(appKey: string): ApplicationManifest | undefined 
  * This state wil be over written when new module is mounted.
  */
 export function setModuleState<T>(moduleState: T): void {
-    dispatch(getCoreContext(), (state: GlobalState) => ({ ...state, moduleState }));
+    dispatch(CoreContext, (state: GlobalState) => ({ ...state, moduleState }));
 }
