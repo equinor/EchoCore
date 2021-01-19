@@ -8,7 +8,7 @@
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w ",
-    "publish": "npm publish --access public",
+    "echo-publish": "npm publish --access public",
     "patch": "npm version patch",
     "major": "npm version major",
     "minor": "npm version minor",
