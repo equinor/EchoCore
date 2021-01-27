@@ -3,9 +3,30 @@ import { getCoreContext } from '../state/globalState';
 import { Settings } from '../types/settings';
 import { GlobalState, GlobalStateContext } from '../types/state';
 import persistEchoSetting from './persistEchoSetting';
+/**
+ * Function Used for updating specific settings value in the global state.
+ *
+ * @export
+ * @param {K} key is keyof Settings
+ * @param {Settings[K]} data associated with the key
+ * @param {GlobalStateContext} [context=getCoreContext()]
+ */
+export function updateSettingByKey<K extends keyof Settings>(
+    key: K,
+    data: Settings[K],
+    context: GlobalStateContext = getCoreContext()
+): void {
+    const settings = { ...getSetting() };
+    settings[key] = data;
+    dispatch(context, (state: GlobalState) => {
+        persistEchoSetting.persistSettingInLocalStorage(settings);
+        const newState = { ...state, settings };
+        return newState;
+    });
+}
 
 /**
- * Function Used for updating the settings in the global state.
+ * Function Used for updating one ore more items in the settings at the global state.
  * @export
  * @param {Settings} settings
  * @param {*} [context=getCoreContext()]  Optional parameter used for testing.

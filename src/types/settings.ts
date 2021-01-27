@@ -1,6 +1,7 @@
 export interface Settings extends PlantSettings {
     hasAcceptedTerms: boolean;
     hasDoneOnboarding: boolean;
+    isTextHighlighting: boolean;
     settingsItems: SettingsItem[];
 }
 

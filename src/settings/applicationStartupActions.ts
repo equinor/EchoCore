@@ -1,5 +1,5 @@
-import { setSetting } from '../settings/globalSettingsActions';
 import { ApplicationStartup } from '../types/applicationStartup';
+import { setSetting } from './globalSettingsActions';
 
 const applicationStartup: ApplicationStartup = {
     setHasAcceptedTerms(hasAcceptedTerms: boolean): void {
