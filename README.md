@@ -1,3 +1,4 @@
+![logo](./doc/ee.png)
 # EchoCore
 
 Everything a Echo app needs to communicate with the core.
@@ -10,12 +11,15 @@ Everything a Echo app needs to communicate with the core.
 ![@equinor/echo-core](https://badgen.net/bundlephobia/minzip/@equinor/echo-core) ![@equinor/echo-core](https://badgen.net/bundlephobia/min/@equinor/echo-core)
 ![@equinor/echo-core](https://badgen.net/bundlephobia/dependency-count/@equinor/echo-core)
 
--   [EchoCore](#echocore)
--   [Install](#install)
--   [Development](#development)
--   [Writing and running tests](#Writing-and-running-tests)
--   [Link echo-core](#Link-echo-core)
--   [Unlinking echo-core](#Unlinking-echo-core)
+- [EchoCore](#echocore)
+- [Install](#install)
+    - [NPM](#npm)
+- [Development](#development)
+    - [NPM build](#npm-build)
+    - [NPM build watch](#npm-build-watch)
+- [Writing and running tests](#writing-and-running-tests)
+- [Link echo-core](#link-echo-core)
+- [Unlinking echo-core](#unlinking-echo-core)
 
 # Install
 
