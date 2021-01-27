@@ -2,7 +2,7 @@ export interface Settings extends PlantSettings {
     hasAcceptedTerms: boolean;
     hasDoneOnboarding: boolean;
     isTextHighlighting: boolean;
-    settingsItems: SettingsItem[];
+    offlineSettings: OfflineSetting[];
 }
 
 export interface PlantSettings {
@@ -12,7 +12,7 @@ export interface PlantSettings {
     selectedPlantName: string;
 }
 
-export interface SettingsItem {
+export interface OfflineSetting {
     settingsKey: string;
     isDefault: boolean;
     syncOffline: boolean;

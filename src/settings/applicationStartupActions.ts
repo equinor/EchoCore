@@ -1,7 +1,7 @@
 import { ApplicationStartup } from '../types/applicationStartup';
 import { setSetting } from './globalSettingsActions';
 
-const applicationStartup: ApplicationStartup = {
+const onboarding: ApplicationStartup = {
     setHasAcceptedTerms(hasAcceptedTerms: boolean): void {
         setSetting({ hasAcceptedTerms });
     },
@@ -11,4 +11,4 @@ const applicationStartup: ApplicationStartup = {
     }
 };
 
-export default applicationStartup;
+export default onboarding;

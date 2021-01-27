@@ -1,59 +1,64 @@
 import { readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
-import { SettingsItem } from '../types/settings';
+import { OfflineSetting } from '../types/settings';
 import { getSetting, setSetting } from './globalSettingsActions';
 
+//Todo clean me up :P
+
 /**
- *
+ * Updates or ads offlineSetting item to the offlineSettings.
  *
  * @export
- * @param {SettingsItem} settingsItem
+ * @param {OfflineSetting} offlineSetting
  */
-export function setOfflineStatus(settingsItem: SettingsItem): void {
+export function setOfflineStatus(offlineSetting: OfflineSetting): void {
     const settings = getSetting();
-    setSetting({ settingsItems: setSettingsItems(settings.settingsItems, settingsItem) });
+    setSetting({ offlineSettings: setOfflineSettings(settings.offlineSettings, offlineSetting) });
 }
 
 /**
  * Helper function for adding new  or updating the settings items.
  *
- * @param {SettingsItem[]} settingsItems
- * @param {SettingsItem} settingsItem
- * @return {*}  {SettingsItem[]}
+ * @param {OfflineSetting[]} offlineSettings
+ * @param {OfflineSetting} offlineSetting
+ * @return {*}  {offlineSetting[]}
  */
-export function setSettingsItems(settingsItems: SettingsItem[], settingsItem: SettingsItem): SettingsItem[] {
-    const index = settingsItems.findIndex((x) => x.settingsKey === settingsItem.settingsKey);
+export function setOfflineSettings(
+    offlineSettings: OfflineSetting[],
+    offlineSetting: OfflineSetting
+): OfflineSetting[] {
+    const index = offlineSettings.findIndex((x) => x.settingsKey === offlineSetting.settingsKey);
     if (index === -1) {
-        return [...settingsItems, settingsItem];
+        return [...offlineSettings, offlineSetting];
     }
-    settingsItems[index] = settingsItem;
-    return [...settingsItems];
+    offlineSettings[index] = offlineSetting;
+    return [...offlineSettings];
 }
 
 /**
- *
+ * This function wil retrieve all offline settings.
  *
  * @export
- * @return {*}  {Readonly<SettingsItem[]>}
+ * @return {*}  {Readonly<offlineSetting[]>}
  */
-export function getAllOfflineStatus(): Readonly<SettingsItem[]> {
+export function getAllOfflineStatus(): Readonly<OfflineSetting[]> {
     return readState(getCoreContext(), (state) => {
-        return state.settings.settingsItems as Readonly<SettingsItem[]>;
+        return state.settings.offlineSettings as Readonly<OfflineSetting[]>;
     });
 }
 
 /**
- *
+ * Get offline status of specific data by key.
  *
  * @export
  * @param {string} key
- * @return {*}  {(Readonly<SettingsItem> | undefined)}
+ * @return {*}  {(Readonly<offlineSetting> | undefined)}
  */
-export function getOfflineStatus(key: string): Readonly<SettingsItem> | undefined {
-    const settingsItem: Readonly<SettingsItem> | undefined = getAllOfflineStatus().find(
-        (item: SettingsItem) => item.settingsKey === key
+export function getOfflineStatus(key: string): Readonly<OfflineSetting> | undefined {
+    const offlineSetting: Readonly<OfflineSetting> | undefined = getAllOfflineStatus().find(
+        (item: OfflineSetting) => item.settingsKey === key
     );
 
-    if (settingsItem) return settingsItem;
+    if (offlineSetting) return offlineSetting;
     throw new Error('Invalid Settings key.');
 }

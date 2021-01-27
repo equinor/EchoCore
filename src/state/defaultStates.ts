@@ -1,9 +1,9 @@
-import { LegendOptions } from "../types";
-import { Settings } from "../types/settings";
+import { LegendOptions } from '../types';
+import { Settings } from '../types/settings';
 
 export const legendOptions: LegendOptions = {
     isActive: true,
-    selectedLegendType: "Stid",
+    selectedLegendType: 'Stid'
 };
 
 export const settings: Settings = {
@@ -13,5 +13,6 @@ export const settings: Settings = {
     selectedSapPlantId: '',
     selectedProCoSysPlantId: '',
     selectedPlantName: '',
-    settingsItems: [],
+    offlineSettings: [],
+    isTextHighlighting: true
 };

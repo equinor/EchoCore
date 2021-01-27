@@ -22,7 +22,7 @@ const mockSettings: Settings = {
     ...settings,
     hasAcceptedTerms: false,
     hasDoneOnboarding: false,
-    settingsItems: [],
+    offlineSettings: [],
     selectedInstCode: '',
     selectedSapPlantId: '',
     selectedProCoSysPlantId: '',

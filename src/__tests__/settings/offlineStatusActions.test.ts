@@ -1,8 +1,8 @@
 import {
     getAllOfflineStatus,
     getOfflineStatus,
-    setOfflineStatus,
-    setSettingsItems
+
+    setOfflineSettings, setOfflineStatus
 } from '../../settings/offlineStatusActions';
 import { legendOptions, settings } from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
@@ -43,18 +43,18 @@ describe('offlineStatusActions', () => {
             expect([settingsItem]).toEqual(getAllOfflineStatus());
         });
     });
-    describe('setSettingsItems', () => {
+    describe('setOfflineSettings', () => {
         it('should add settingsItem', () => {
             const items = [];
             const expected = [settingsItem];
-            const newSettingsItems = setSettingsItems(items, settingsItem);
+            const newSettingsItems = setOfflineSettings(items, settingsItem);
             expect(expected).toEqual(newSettingsItems);
         });
 
         it('should return updated settingsItem', () => {
             const items = [settingsItem];
             settingsItem.isDefault = true;
-            const newSettingsItem = setSettingsItems(items, settingsItem);
+            const newSettingsItem = setOfflineSettings(items, settingsItem);
             expect([settingsItem]).toEqual(newSettingsItem);
             settingsItem.isDefault = false;
         });

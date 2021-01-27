@@ -1,4 +1,4 @@
-import applicationStartup from '../../settings/applicationStartupActions';
+import onboarding from '../../settings/applicationStartupActions';
 import { getSetting } from '../../settings/globalSettingsActions';
 import { legendOptions, settings } from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
@@ -28,7 +28,7 @@ function initialize(): void {
 describe('applicationStartupActions', () => {
     describe('setHasAcceptedTerms', () => {
         it('hasAcceptedTerms should equal true', () => {
-            applicationStartup.setHasAcceptedTerms(true);
+            onboarding.setHasAcceptedTerms(true);
             const result = getSetting();
             expect(result.hasAcceptedTerms).toBe(true);
         });
@@ -36,7 +36,7 @@ describe('applicationStartupActions', () => {
 
     describe('setHasDoneOnboarding', () => {
         it('hasDoneOnboarding should equal true', () => {
-            applicationStartup.setHasDoneOnboarding(true);
+            onboarding.setHasDoneOnboarding(true);
             const result = getSetting();
             expect(result.hasDoneOnboarding).toBe(true);
         });
