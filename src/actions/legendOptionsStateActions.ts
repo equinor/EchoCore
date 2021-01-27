@@ -10,7 +10,7 @@ import { GlobalState } from '../types/state';
  * @param {string} selectedLegendType
  * @param {*} [context=getCoreContext()]
  */
-export function setLegendOptions(isActive: boolean, selectedLegendType: string, context = getCoreContext()): void {
+export function setLegendOption(isActive: boolean, selectedLegendType: string, context = getCoreContext()): void {
     dispatch(context, (state: GlobalState) => {
         const legendOptions: LegendOptions = {
             isActive,
@@ -30,7 +30,7 @@ export function setLegendOptions(isActive: boolean, selectedLegendType: string, 
  * @export
  * @return {*}  {LegendOptions}
  */
-export function getLegendOptions(context = getCoreContext()): LegendOptions {
+export function getLegendOption(context = getCoreContext()): LegendOptions {
     return readState(context, (state) => {
         return { ...state.legendOptions } as Readonly<LegendOptions>;
     });

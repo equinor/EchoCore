@@ -21,7 +21,8 @@ export class BaseClient {
         headerOptions: unknown = {},
         method = 'GET',
         body?: unknown,
-        handleClientError?: (ex: unknown, statusCode: number, endpoint: string) => void,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        handleClientError?: (ex: unknown, statusCode: number, endpoint: string) => any,
         signal?: AbortSignal
     ): Promise<Response> => {
         let response = {} as Response;
@@ -45,7 +46,7 @@ export class BaseClient {
                     );
                 }
             });
-        return response as Response;
+        return response;
     };
 
     fetchFromUrl = async (
@@ -56,7 +57,8 @@ export class BaseClient {
         method = 'GET',
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         body?: any,
-        handleClientError?: (ex: unknown, statusCode: number, endpoint: string) => void,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        handleClientError?: (ex: unknown, statusCode: number, endpoint: string) => any,
         signal?: AbortSignal
     ): Promise<Response> => {
         let statusCode = 0;
