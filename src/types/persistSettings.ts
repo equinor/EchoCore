@@ -2,7 +2,7 @@ import { Settings } from './settings';
 
 export interface PersistSettings {
     /**
-     * Persist setting data In LocalStorage for later use.
+     * Persist setting data in LocalStorage for later use.
      * @export
      * @param {Settings} settings
      */

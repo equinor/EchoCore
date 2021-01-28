@@ -1,5 +1,5 @@
 /**
- * EchoStorage is a way to store key Value pairs in Local Storage.
+ * EchoStorage is a way to store key value pairs in Local Storage.
  *
  * @export
  * @interface EchoStorage
@@ -7,7 +7,7 @@
 export interface EchoLocalStorage {
     /**
      *
-     * @param {string} key of item to store
+     * @param {string} key identifying key of item to store
      * @param {string} data to add to storage
      * @memberof EchoStorage
      */
