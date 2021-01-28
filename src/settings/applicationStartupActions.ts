@@ -1,5 +1,5 @@
-import { ApplicationStartup } from '../types/applicationStartup';
-import { setSetting } from './globalSettingsActions';
+import { ApplicationStartup, GetStartup } from '../types/applicationStartup';
+import { getSettings, setSetting } from './globalSettingsActions';
 
 const onboarding: ApplicationStartup = {
     setHasAcceptedTerms(hasAcceptedTerms: boolean): void {
@@ -8,6 +8,10 @@ const onboarding: ApplicationStartup = {
 
     setHasDoneOnboarding(hasDoneOnboarding: boolean): void {
         setSetting({ hasDoneOnboarding });
+    },
+    get(): GetStartup {
+        const { hasDoneOnboarding, hasAcceptedTerms } = getSettings();
+        return { hasDoneOnboarding, hasAcceptedTerms };
     }
 };
 
