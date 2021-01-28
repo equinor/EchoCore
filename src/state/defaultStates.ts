@@ -14,5 +14,5 @@ export const settings: Settings = {
     proCoSysPlantId: '',
     plantName: '',
     offlineSettings: [],
-    isTextHighlighting: true
+    useTextHighlighting: true
 };
