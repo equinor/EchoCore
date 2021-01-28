@@ -17,8 +17,9 @@ export default function useSettings(): Settings {
 
 /**
  * Echo Core hook function for getting the plant settings form echo core state.
- * @export
- * @return {*}  {PlantSettings}
+ * and functions gor get and set if needed.
+ * @export Function fom Echo Core
+ * @return {*}  {UsePlantSettings}
  */
 export function usePlantSettings(): UsePlantSettings {
     const { instCode, sapPlantId, plantName, proCoSysPlantId } = useSettings();
