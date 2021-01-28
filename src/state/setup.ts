@@ -2,13 +2,15 @@ import { setUserInformation } from '../actions/userInformationActions';
 import PanelHandler from '../panels/corePanels';
 import EchoAuthProvider from '../services/authentication/echoProvider';
 import { graphGetProfile, graphGetProfilePicture } from '../services/graph/graphUtils';
+import { setSetting } from '../settings/globalSettingsActions';
+import persistEchoSetting from '../settings/persistEchoSetting';
 import { CoreConfig } from '../types/coreConfig';
 
 /**
  * Method for setting up the echo core basics:
  * - authenticate user
  * - registerer panels based on config element
- * - TODO: get user settings from local storage
+ * - retrieving the settings form local storage.
  * @param coreConfig object that defines application configurations.
  * Which panels should be on the left, and which should be on the right
  * logger function to be used for authentication
@@ -16,9 +18,7 @@ import { CoreConfig } from '../types/coreConfig';
 export async function setup(coreConfig: CoreConfig): Promise<void> {
     await authenticate(coreConfig);
     PanelHandler.registerCorePanels(coreConfig.leftPanel, coreConfig.rightPanel);
-
-    // Get user settings from local storage
-    // ++
+    setSetting(persistEchoSetting.getSettingFromLocalStorage());
 }
 
 /**

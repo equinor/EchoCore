@@ -6,7 +6,7 @@ import persistEchoSetting from './persistEchoSetting';
 /**
  * Function Used for updating specific settings value in the global state.
  *
- * @export
+ * @export Function Echo Core.
  * @param {K} key is keyof Settings
  * @param {Settings[K]} data associated with the key
  * @param {GlobalStateContext} [context=getCoreContext()]
@@ -27,7 +27,7 @@ export function updateSettingByKey<K extends keyof Settings>(
 
 /**
  * Function Used for updating one ore more items in the settings at the global state.
- * @export
+ * @export Function Echo Core.
  * @param {Settings} settings
  * @param {*} [context=getCoreContext()]  Optional parameter used for testing.
  */
@@ -42,7 +42,7 @@ export function setSetting(partialSettings: Partial<Settings>, context: GlobalSt
 }
 /**
  *
- * @export
+ * @export Function Echo Core.
  * @param {*} [context=getCoreContext()] Optional parameter used for testing.
  * @return {*}  {Settings}
  */

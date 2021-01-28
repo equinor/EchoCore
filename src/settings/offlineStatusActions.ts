@@ -3,12 +3,10 @@ import { getCoreContext } from '../state/globalState';
 import { OfflineSetting } from '../types/settings';
 import { getSetting, setSetting } from './globalSettingsActions';
 
-//Todo clean me up :P
-
 /**
  * Updates or ads offlineSetting item to the offlineSettings.
  *
- * @export
+ * @export Function from Echo Core
  * @param {OfflineSetting} offlineSetting
  */
 export function setOfflineStatus(offlineSetting: OfflineSetting): void {
@@ -19,6 +17,7 @@ export function setOfflineStatus(offlineSetting: OfflineSetting): void {
 /**
  * Helper function for adding new  or updating the settings items.
  *
+ * @export Function from Echo Core
  * @param {OfflineSetting[]} offlineSettings
  * @param {OfflineSetting} offlineSetting
  * @return {*}  {offlineSetting[]}
@@ -36,9 +35,9 @@ export function setOfflineSettings(
 }
 
 /**
- * This function wil retrieve all offline settings.
+ * This function will retrieve all offline settings.
  *
- * @export
+ * @export Function from Echo Core
  * @return {*}  {Readonly<offlineSetting[]>}
  */
 export function getAllOfflineStatus(): Readonly<OfflineSetting[]> {
@@ -50,7 +49,7 @@ export function getAllOfflineStatus(): Readonly<OfflineSetting[]> {
 /**
  * Get offline status of specific data by key.
  *
- * @export
+ * @export Function from Echo Core
  * @param {string} key
  * @return {*}  {(Readonly<offlineSetting> | undefined)}
  */
@@ -60,5 +59,5 @@ export function getOfflineStatus(key: string): Readonly<OfflineSetting> | undefi
     );
 
     if (offlineSetting) return offlineSetting;
-    throw new Error('Invalid Settings key.');
+    return undefined;
 }

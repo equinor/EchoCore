@@ -1,4 +1,4 @@
-import { Panel } from '.';
+import { Panel } from './panel';
 
 export interface CoreConfig {
     leftPanel: Panel;
