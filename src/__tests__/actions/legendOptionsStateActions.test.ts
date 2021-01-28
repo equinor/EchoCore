@@ -1,41 +1,61 @@
-import { getLegendOptions, setLegendOptions } from '../../actions/legendOptionsStateActions';
-import { readState } from '../../state/globalActions';
-import { createGlobalApplicationContext, createGlobalState } from '../../state/globalState';
-import { GlobalState, GlobalStateContext } from '../../types';
+import { getLegendOption, setLegendOption } from '../../actions/legendOptionsStateActions';
+import { legendOptions, settings } from '../../state/defaultStates';
+import { dispatch, readState } from '../../state/globalActions';
+import { getCoreContext } from '../../state/globalState';
+import { ActivePanel, GlobalState } from '../../types';
+
+beforeEach(() => {
+    initialize();
+});
+
+const globalInit = {
+    modules: [],
+    panels: [],
+    activePanel: ActivePanel.None,
+    activeModule: '',
+    moduleState: {},
+    userProfile: undefined,
+    userPhotoUrl: undefined,
+    legendOptions,
+    settings
+};
+
+function initialize(): void {
+    dispatch(getCoreContext(), () => globalInit);
+}
 
 describe('legendOptionsStateActions', () => {
     const expectedLegendOptions = {
         isActive: false,
         selectedLegendType: 'test'
     };
-    const globalState = createGlobalState();
-    const context: GlobalStateContext = {
-        state: globalState
-    };
 
     describe('setLegendOption', () => {
         it('should set legend option state', () => {
-            setLegendOptions(false, 'test', context);
-            expect(expectedLegendOptions).toEqual(readState(context, (state: GlobalState) => state.legendOptions));
+            setLegendOption(false, 'test');
+            expect(expectedLegendOptions).toEqual(
+                readState(getCoreContext(), (state: GlobalState) => state.legendOptions)
+            );
         });
 
         it('should show default global state', () => {
-            setLegendOptions(true, 'Stid');
-            expect(expectedLegendOptions).toEqual(readState(context, (state: GlobalState) => state.legendOptions));
+            expectedLegendOptions.isActive = true;
+            expectedLegendOptions.selectedLegendType = 'Stid';
+            expect(expectedLegendOptions).toEqual(
+                readState(getCoreContext(), (state: GlobalState) => state.legendOptions)
+            );
         });
     });
 
     describe('getLegendOptions', () => {
         it('should get legend option state', () => {
-            const result = getLegendOptions(context);
+            const result = getLegendOption();
             expect(expectedLegendOptions).toEqual(result);
         });
 
         it('should get default legend from global state', () => {
-            const result = getLegendOptions();
-            const scopedGlobalState = createGlobalState();
-            const context = createGlobalApplicationContext(scopedGlobalState);
-            expect(readState(context, (state: GlobalState) => state.legendOptions)).toEqual(result);
+            const result = getLegendOption();
+            expect(readState(getCoreContext(), (state: GlobalState) => state.legendOptions)).toEqual(result);
         });
     });
 });

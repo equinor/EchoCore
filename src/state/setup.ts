@@ -18,7 +18,7 @@ import { CoreConfig } from '../types/coreConfig';
 export async function setup(coreConfig: CoreConfig): Promise<void> {
     await authenticate(coreConfig);
     PanelHandler.registerCorePanels(coreConfig.leftPanel, coreConfig.rightPanel);
-    setSetting(persistEchoSetting.getSettingFromLocalStorage());
+    setSetting(persistEchoSetting.getSettingsFromLocalStorage());
 }
 
 /**

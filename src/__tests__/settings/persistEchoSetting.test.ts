@@ -6,7 +6,7 @@ import { storage } from '../../utils/storage';
 const localStore = new PersistEchoSetting();
 
 beforeEach(() => {
-    localStore.persistSettingInLocalStorage(settings);
+    localStore.persistSettingsInLocalStorage(settings);
     initialize();
 });
 
@@ -32,25 +32,25 @@ const mockSettings: Settings = {
 describe('PersistEchoSetting', () => {
     describe('persistSettingInLocalStorage', () => {
         it('should be called 7 times', () => {
-            localStore.persistSettingInLocalStorage(mockSettings);
+            localStore.persistSettingsInLocalStorage(mockSettings);
             expect(setItem).toBeCalledTimes(Object.keys(settings).length);
         });
     });
 
     describe('getSettingFromLocalStorage', () => {
         it('should all return default settings', () => {
-            const result = localStore.getSettingFromLocalStorage();
+            const result = localStore.getSettingsFromLocalStorage();
             expect(settings).toEqual(result);
         });
         it('should all return default new settings', () => {
-            localStore.persistSettingInLocalStorage(mockSettings);
-            const result = localStore.getSettingFromLocalStorage();
+            localStore.persistSettingsInLocalStorage(mockSettings);
+            const result = localStore.getSettingsFromLocalStorage();
             expect(settings).toEqual(result);
         });
     });
     describe('removeAllSettingFromLocalStorage', () => {
         it('removeItem should be called 7 times', () => {
-            localStore.removeAllSettingFromLocalStorage();
+            localStore.removeAllSettingsFromLocalStorage();
             expect(removeItem).toBeCalledTimes(Object.keys(settings).length);
         });
     });

@@ -1,41 +1,34 @@
 import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { Settings } from '../types/settings';
-import { GlobalState, GlobalStateContext } from '../types/state';
+import { GlobalState } from '../types/state';
 import persistEchoSetting from './persistEchoSetting';
 /**
- * Function Used for updating specific settings value in the global state.
+ * Function used for updating specific settings value in the global state.
  *
  * @export Function Echo Core.
  * @param {K} key is keyof Settings
  * @param {Settings[K]} data associated with the key
- * @param {GlobalStateContext} [context=getCoreContext()]
  */
-export function updateSettingByKey<K extends keyof Settings>(
-    key: K,
-    data: Settings[K],
-    context: GlobalStateContext = getCoreContext()
-): void {
-    const settings = { ...getSetting() };
+export function updateSettingByKey<K extends keyof Settings>(key: K, data: Settings[K]): void {
+    const settings = { ...getSettings() };
     settings[key] = data;
-    dispatch(context, (state: GlobalState) => {
-        persistEchoSetting.persistSettingInLocalStorage(settings);
+    dispatch(getCoreContext(), (state: GlobalState) => {
+        persistEchoSetting.persistSettingsInLocalStorage(settings);
         const newState = { ...state, settings };
         return newState;
     });
 }
 
 /**
- * Function Used for updating one ore more items in the settings at the global state.
+ * Function used for updating one ore more items in the settings at the global state.
  * @export Function Echo Core.
  * @param {Settings} settings
- * @param {*} [context=getCoreContext()]  Optional parameter used for testing.
  */
-
-export function setSetting(partialSettings: Partial<Settings>, context: GlobalStateContext = getCoreContext()): void {
-    const settings = { ...getSetting(), ...partialSettings };
-    dispatch(context, (state: GlobalState) => {
-        persistEchoSetting.persistSettingInLocalStorage(settings);
+export function setSetting(partialSettings: Partial<Settings>): void {
+    const settings = { ...getSettings(), ...partialSettings };
+    dispatch(getCoreContext(), (state: GlobalState) => {
+        persistEchoSetting.persistSettingsInLocalStorage(settings);
         const newState = { ...state, settings };
         return newState;
     });
@@ -43,9 +36,20 @@ export function setSetting(partialSettings: Partial<Settings>, context: GlobalSt
 /**
  *
  * @export Function Echo Core.
- * @param {*} [context=getCoreContext()] Optional parameter used for testing.
  * @return {*}  {Settings}
  */
-export function getSetting(context = getCoreContext()): Settings {
-    return readState(context, (state: GlobalState) => state.settings);
+export function getSettings(): Settings {
+    return readState(getCoreContext(), (state: GlobalState) => state.settings);
+}
+
+/**
+ *
+ *
+ * @export
+ * @template K
+ * @param {K} key
+ * @return {*}  {Readonly<Settings[K]>}
+ */
+export function getSettingsByKey<K extends keyof Settings>(key: K): Readonly<Settings[K]> {
+    return getSettings()[key];
 }

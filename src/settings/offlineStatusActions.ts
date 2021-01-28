@@ -1,7 +1,7 @@
 import { readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { OfflineSetting } from '../types/settings';
-import { getSetting, setSetting } from './globalSettingsActions';
+import { getSettings, setSetting } from './globalSettingsActions';
 
 /**
  * Updates or ads offlineSetting item to the offlineSettings.
@@ -10,7 +10,7 @@ import { getSetting, setSetting } from './globalSettingsActions';
  * @param {OfflineSetting} offlineSetting
  */
 export function setOfflineStatus(offlineSetting: OfflineSetting): void {
-    const settings = getSetting();
+    const settings = getSettings();
     setSetting({ offlineSettings: setOfflineSettings(settings.offlineSettings, offlineSetting) });
 }
 

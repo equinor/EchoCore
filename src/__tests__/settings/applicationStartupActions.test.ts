@@ -1,5 +1,5 @@
 import onboarding from '../../settings/applicationStartupActions';
-import { getSetting } from '../../settings/globalSettingsActions';
+import { getSettings } from '../../settings/globalSettingsActions';
 import { legendOptions, settings } from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
@@ -29,7 +29,7 @@ describe('applicationStartupActions', () => {
     describe('setHasAcceptedTerms', () => {
         it('hasAcceptedTerms should equal true', () => {
             onboarding.setHasAcceptedTerms(true);
-            const result = getSetting();
+            const result = getSettings();
             expect(result.hasAcceptedTerms).toBe(true);
         });
     });
@@ -37,7 +37,7 @@ describe('applicationStartupActions', () => {
     describe('setHasDoneOnboarding', () => {
         it('hasDoneOnboarding should equal true', () => {
             onboarding.setHasDoneOnboarding(true);
-            const result = getSetting();
+            const result = getSettings();
             expect(result.hasDoneOnboarding).toBe(true);
         });
     });

@@ -4,7 +4,7 @@ import { PlantSettings } from '../types/settings';
 import { setSetting } from './globalSettingsActions';
 
 /**
- * Used for setting/updating the plantSelected.
+ * Used for setting or updating the selected plant.
  *
  * @export Function from Echo Core.
  * @param {PlantSettings} plantSettings selected plant data object.
@@ -14,21 +14,16 @@ export function setSelectedPlant(plantSettings: PlantSettings): void {
 }
 
 /**
- * Used fro retrieving the selected PlantData.
+ * Used from retrieving the selected PlantData.
  *
  * @export Function from Echo Core.
  * @return {*}  {PlantSettings}
  */
 export function getSelectedPlant(): PlantSettings {
-    const {
-        instCode: selectedInstCode,
-        sapPlantId: selectedSapPlantId,
-        proCoSysPlantId: selectedProCoSysPlantId,
-        plantName: selectedPlantName
-    } = readState(getCoreContext(), (state) => {
+    const { instCode, sapPlantId, proCoSysPlantId, plantName } = readState(getCoreContext(), (state) => {
         return state.settings;
     });
 
-    const selectedPlant = { selectedInstCode, selectedSapPlantId, selectedProCoSysPlantId, selectedPlantName };
+    const selectedPlant = { instCode, sapPlantId, proCoSysPlantId, plantName };
     return selectedPlant;
 }

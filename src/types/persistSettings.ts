@@ -6,7 +6,7 @@ export interface PersistSettings {
      * @export
      * @param {Settings} settings
      */
-    persistSettingInLocalStorage: (settings: Settings) => void;
+    persistSettingsInLocalStorage: (settings: Settings) => void;
 
     /**
      * Core function returning application setting from LocalStorage
@@ -14,13 +14,13 @@ export interface PersistSettings {
      * @export
      * @return {*}  {Settings} localStorage or defaultSettings
      */
-    getSettingFromLocalStorage: () => Settings;
+    getSettingsFromLocalStorage: () => Settings;
 
     /**
      * Core function removing all user settings form localStorage
      * @export
      */
-    removeAllSettingFromLocalStorage: () => void;
+    removeAllSettingsFromLocalStorage: () => void;
 
     /**
      * Core function removing user settings form localStorage by key

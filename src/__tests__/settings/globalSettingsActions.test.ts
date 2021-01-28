@@ -1,4 +1,4 @@
-import { getSetting, setSetting, updateSettingByKey } from '../../settings/globalSettingsActions';
+import { getSettings, setSetting, updateSettingByKey } from '../../settings/globalSettingsActions';
 import { legendOptions, settings } from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
@@ -28,7 +28,7 @@ describe('globalSettingsActions', () => {
     describe('updateSettingByKey', () => {
         it('hasAcceptedTerms should equal true', () => {
             updateSettingByKey('hasAcceptedTerms', true);
-            const result = getSetting();
+            const result = getSettings();
             expect(result.hasAcceptedTerms).toBe(true);
         });
     });
@@ -36,7 +36,7 @@ describe('globalSettingsActions', () => {
     describe('updateSettingByKey', () => {
         it('hasAcceptedTerms should equal true', () => {
             setSetting({ hasAcceptedTerms: true });
-            const result = getSetting();
+            const result = getSettings();
             expect(result.hasAcceptedTerms).toBe(true);
         });
     });
@@ -44,7 +44,7 @@ describe('globalSettingsActions', () => {
     describe('updateSettingByKey', () => {
         it('hasAcceptedTerms and selectedInstCode should equal true and JSV', () => {
             setSetting({ hasAcceptedTerms: true, instCode: 'JSV' });
-            const result = getSetting();
+            const result = getSettings();
             expect(result.hasAcceptedTerms).toBe(true);
             expect(result.instCode).toBe('JSV');
         });

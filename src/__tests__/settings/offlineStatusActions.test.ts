@@ -1,8 +1,8 @@
 import {
     getAllOfflineStatus,
     getOfflineStatus,
-
-    setOfflineSettings, setOfflineStatus
+    setOfflineSettings,
+    setOfflineStatus
 } from '../../settings/offlineStatusActions';
 import { legendOptions, settings } from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
@@ -70,9 +70,7 @@ describe('offlineStatusActions', () => {
             expect(newItem.settingsKey).toEqual(result?.settingsKey);
         });
         it('should trow Error', () => {
-            expect(() => {
-                getOfflineStatus('key3');
-            }).toThrow('Invalid Settings key.');
+            expect(getOfflineStatus('key3')).toEqual(undefined);
         });
     });
 });

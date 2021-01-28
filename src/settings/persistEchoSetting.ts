@@ -13,13 +13,13 @@ export class PersistEchoSetting implements PersistSettings {
         this.defaultSettings = defaultSettings;
     }
 
-    persistSettingInLocalStorage(settings: Settings): void {
+    persistSettingsInLocalStorage(settings: Settings): void {
         Object.keys(settings).forEach((key: string) => {
             this.echoStorage.setItem(key, settings[key]);
         });
     }
 
-    getSettingFromLocalStorage(): Settings {
+    getSettingsFromLocalStorage(): Settings {
         const newSettings = this.defaultSettings;
         Object.keys(this.defaultSettings).forEach((key: string) => {
             const data = this.echoStorage.getItem<Settings>(key);
@@ -30,7 +30,7 @@ export class PersistEchoSetting implements PersistSettings {
         return newSettings;
     }
 
-    removeAllSettingFromLocalStorage(): void {
+    removeAllSettingsFromLocalStorage(): void {
         Object.keys(this.defaultSettings).forEach((key: string) => {
             this.echoStorage.removeItem(key);
         });
