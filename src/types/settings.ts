@@ -6,10 +6,10 @@ export interface Settings extends PlantSettings {
 }
 
 export interface PlantSettings {
-    selectedInstCode: string;
-    selectedSapPlantId: string;
-    selectedProCoSysPlantId: string;
-    selectedPlantName: string;
+    instCode: string;
+    sapPlantId: string;
+    proCoSysPlantId: string;
+    plantName: string;
 }
 
 export interface OfflineSetting {

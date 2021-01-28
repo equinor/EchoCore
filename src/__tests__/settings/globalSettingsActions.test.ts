@@ -43,10 +43,10 @@ describe('globalSettingsActions', () => {
 
     describe('updateSettingByKey', () => {
         it('hasAcceptedTerms and selectedInstCode should equal true and JSV', () => {
-            setSetting({ hasAcceptedTerms: true, selectedInstCode: 'JSV' });
+            setSetting({ hasAcceptedTerms: true, instCode: 'JSV' });
             const result = getSetting();
             expect(result.hasAcceptedTerms).toBe(true);
-            expect(result.selectedInstCode).toBe('JSV');
+            expect(result.instCode).toBe('JSV');
         });
     });
 });

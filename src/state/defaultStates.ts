@@ -9,10 +9,10 @@ export const legendOptions: LegendOptions = {
 export const settings: Settings = {
     hasAcceptedTerms: false,
     hasDoneOnboarding: false,
-    selectedInstCode: '',
-    selectedSapPlantId: '',
-    selectedProCoSysPlantId: '',
-    selectedPlantName: '',
+    instCode: '',
+    sapPlantId: '',
+    proCoSysPlantId: '',
+    plantName: '',
     offlineSettings: [],
     isTextHighlighting: true
 };

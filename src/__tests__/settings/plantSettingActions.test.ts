@@ -27,10 +27,10 @@ function initialize(): void {
 
 describe('plantSettingActions', () => {
     const plantSettings: PlantSettings = {
-        selectedInstCode: 'JSV',
-        selectedSapPlantId: 'JSV',
-        selectedProCoSysPlantId: 'JSV',
-        selectedPlantName: 'Johann Sverdrup'
+        instCode: 'JSV',
+        sapPlantId: 'JSV',
+        proCoSysPlantId: 'JSV',
+        plantName: 'Johann Sverdrup'
     };
 
     describe('setSelectedPlant', () => {

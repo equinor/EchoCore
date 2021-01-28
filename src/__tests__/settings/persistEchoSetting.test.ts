@@ -23,10 +23,10 @@ const mockSettings: Settings = {
     hasAcceptedTerms: false,
     hasDoneOnboarding: false,
     offlineSettings: [],
-    selectedInstCode: '',
-    selectedSapPlantId: '',
-    selectedProCoSysPlantId: '',
-    selectedPlantName: ''
+    instCode: '',
+    sapPlantId: '',
+    proCoSysPlantId: '',
+    plantName: ''
 };
 
 describe('PersistEchoSetting', () => {
