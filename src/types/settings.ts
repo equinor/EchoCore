@@ -18,3 +18,8 @@ export interface OfflineSetting {
     syncOffline: boolean;
     enable: boolean;
 }
+
+export interface UsePlantSettings extends PlantSettings {
+    setPlantSettings: (plantSettings: PlantSettings) => void;
+    getPlantSettings: () => PlantSettings;
+}
