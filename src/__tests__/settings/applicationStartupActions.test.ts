@@ -41,4 +41,13 @@ describe('applicationStartupActions', () => {
             expect(result.hasDoneOnboarding).toBe(true);
         });
     });
+
+    describe('get', () => {
+        it('should return hasDoneOnboarding and hasAcceptedTerms', () => {
+            onboarding.setHasDoneOnboarding(true);
+            onboarding.setHasAcceptedTerms(false);
+            const result = onboarding.get();
+            expect(result).toEqual({ hasDoneOnboarding: true, hasAcceptedTerms: false });
+        });
+    });
 });
