@@ -23,7 +23,7 @@ export { default as PanelHandler } from './panels/corePanels';
 export * from './types';
 export { makeUniqBy } from './utils/uniq';
 
-class Core implements CoreInterface {
+class Core {
     useEchoSetup = useEchoSetup;
     registerPanels = registerPanels;
     useAppModuleState = useAppModuleState;
@@ -38,10 +38,6 @@ class Core implements CoreInterface {
     AuthProvider = AuthenticationProvider;
     EchoClient = echoClient;
     BaseClient = BaseClient;
-}
-
-export interface CoreInterface {
-    AuthProvider: typeof AuthenticationProvider;
 }
 
 class Env {
