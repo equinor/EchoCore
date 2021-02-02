@@ -24,7 +24,7 @@ import { defaultLoginRequest, loginSilentlyRequest, logoutRequest } from './auth
 export class AuthenticationProvider {
     userProperties = {} as UserProperties;
     publicClient: PublicClientApplication;
-    loginRequest;
+    loginRequest: RedirectRequest;
     isAuthenticated: boolean;
 
     constructor(configuration: Configuration, loginRequest = defaultLoginRequest) {
@@ -131,8 +131,8 @@ export class AuthenticationProvider {
      * Based on the @azure/msal-browser package
      * @returns valid access token if request was successful, undefined if not.
      */
-    getAccessToken = async (redirectRequest: RedirectRequest): Promise<string | undefined> => {
-        const adResult = await this.aquireTokenSilentOrRedirectToAuthenticate(this.loginRequest, redirectRequest);
+    getAccessToken = async (silentRequest: SilentRequest): Promise<string | undefined> => {
+        const adResult = await this.aquireTokenSilentOrRedirectToAuthenticate(silentRequest, this.loginRequest);
         return adResult ? adResult.accessToken : undefined;
     };
 }
