@@ -6,7 +6,6 @@ import {
     RedirectRequest,
     SilentRequest
 } from '@azure/msal-browser';
-import { AuthenticationProviderInterface } from '../../types/authenticationProviderInterface';
 import UserProperties from '../../types/userProperties';
 import { defaultLoginRequest, loginSilentlyRequest, logoutRequest } from './authProviderConfig';
 
@@ -22,7 +21,7 @@ import { defaultLoginRequest, loginSilentlyRequest, logoutRequest } from './auth
         scopes: ['openid', 'profile', 'User.Read', 'offline_access']
     };
  */
-export class AuthenticationProvider implements AuthenticationProviderInterface {
+export class AuthenticationProvider {
     userProperties = {} as UserProperties;
     publicClient: PublicClientApplication;
     loginRequest;
