@@ -1,6 +1,6 @@
 {
   "name": "@equinor/echo-core",
-  "version": "0.1.1",
+  "version": "0.1.10",
   "description": "Echo Core - Core functionality for the echo.equinor.com",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -8,7 +8,7 @@
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w ",
-    "publish": "npm publish --access public",
+    "echo-publish": "npm publish --access public",
     "patch": "npm version patch",
     "major": "npm version major",
     "minor": "npm version minor",

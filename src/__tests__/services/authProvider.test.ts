@@ -1,4 +1,4 @@
-import { AccountInfo, InteractionRequiredAuthError, RedirectRequest } from '@azure/msal-browser';
+import { AccountInfo, InteractionRequiredAuthError, SilentRequest } from '@azure/msal-browser';
 import { AuthenticationProvider } from '../../services/authentication/authProvider';
 import { echoConfig } from '../../services/authentication/echoProvider';
 import { echoRequest } from '../../services/echoClient/echoClientConfig';
@@ -287,9 +287,9 @@ describe('getAccessToken', () => {
         (AuthProvider.aquireTokenSilentOrRedirectToAuthenticate as jest.Mock).mockReturnValue(
             Promise.resolve({ accessToken })
         );
-        const redirectRequest = {} as RedirectRequest;
+        const silentRequest = {} as SilentRequest;
 
-        const tokenReturned = await AuthProvider.getAccessToken(redirectRequest);
+        const tokenReturned = await AuthProvider.getAccessToken(silentRequest);
         expect(AuthProvider.aquireTokenSilentOrRedirectToAuthenticate).toBeCalled();
         expect(tokenReturned).toBe(accessToken);
 
@@ -302,8 +302,8 @@ describe('getAccessToken', () => {
         AuthProvider.aquireTokenSilentOrRedirectToAuthenticate = jest.fn();
         (AuthProvider.aquireTokenSilentOrRedirectToAuthenticate as jest.Mock).mockReturnValue(Promise.resolve(null));
 
-        const redirectRequest = {} as RedirectRequest;
-        const tokenReturned = await AuthProvider.getAccessToken(redirectRequest);
+        const silentRequest = {} as SilentRequest;
+        const tokenReturned = await AuthProvider.getAccessToken(silentRequest);
         expect(AuthProvider.aquireTokenSilentOrRedirectToAuthenticate).toBeCalled();
         expect(tokenReturned).toBe(undefined);
 
