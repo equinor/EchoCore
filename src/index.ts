@@ -8,6 +8,7 @@ import useEchoSetup from './hooks/useSetup';
 import useUserPhoto from './hooks/useUserPhoto';
 import useUserProfile from './hooks/useUserProfile';
 import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './panels/corePanels';
+import { setActivePanel } from './panels/setActivePanels';
 import EchoAuthProvider from './services/authentication/echoProvider';
 import echoClient from './services/echoClient/echoClient';
 
@@ -32,6 +33,7 @@ class Core {
     useUserPhoto = useUserPhoto;
     useAuthenticate = useAuthenticate;
     setLegendOption = setLegendOption;
+    setActivePanel = setActivePanel;
     ECHO_CORE_MAIN = ECHO_CORE_MAIN;
     ECHO_CORE_SEARCH = ECHO_CORE_SEARCH;
     EchoAuthProvider = EchoAuthProvider;
