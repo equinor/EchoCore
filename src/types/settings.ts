@@ -21,5 +21,4 @@ export interface OfflineSetting {
 
 export interface UsePlantSettings extends PlantSettings {
     setPlantSettings: (plantSettings: PlantSettings) => void;
-    getPlantSettings: () => PlantSettings;
 }

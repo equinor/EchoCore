@@ -9,14 +9,13 @@ export interface GlobalState {
     modules: Array<ApplicationManifest>;
     panels: Array<Panel>;
     activePanel: string;
-    moduleState: EchoCustomState<unknown>;
     activeModule: string;
     userProfile?: User;
     userPhotoUrl?: string;
     legendOptions: LegendOptions;
     settings: Settings;
+    moduleState: EchoCustomState<unknown>;
 }
-
 export interface GlobalStateContext {
     state: Atom<GlobalState>;
 }

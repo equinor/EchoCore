@@ -1,13 +1,13 @@
 type Dict = { [key: string]: unknown };
 
-class Store {
-    public dict: Dict = {};
+class SettingStore {
+    public moduleSettings: Dict = {};
 }
 
-const store = new Store();
+export const store = new SettingStore();
 
 export class ModuleSettings<T> {
-    protected store: Store;
+    protected store: SettingStore;
     public key: string;
 
     constructor(key: string, initialState: T) {
@@ -17,27 +17,30 @@ export class ModuleSettings<T> {
     }
 
     set = (value: Partial<T>): void => {
-        if (typeof this.store.dict[this.key] === 'object')
-            this.store.dict[this.key] = { ...(this.store.dict[this.key] as Record<string, unknown>), ...value };
-        else this.store.dict[this.key] = value;
+        if (typeof this.store.moduleSettings[this.key] === 'object')
+            this.store.moduleSettings[this.key] = {
+                ...(this.store.moduleSettings[this.key] as Record<string, unknown>),
+                ...value
+            };
+        else this.store.moduleSettings[this.key] = value;
     };
 
     get = (): T => {
-        return this.store.dict[this.key] as T;
+        return this.store.moduleSettings[this.key] as T;
     };
 
     Clear = (): void => {
-        this.store.dict[this.key] = {};
+        this.store.moduleSettings[this.key] = {};
     };
 
     private isKeyUnique(key: string): boolean {
         if (key.length === 0) throw TypeError('Please enter a key!');
-        return !this.store.dict.hasOwnProperty(key);
+        return !this.store.moduleSettings.hasOwnProperty(key);
     }
 
     protected setup<T>(key: string, initialState: Partial<T>): void {
         if (this.isKeyUnique(key)) {
-            this.store.dict[key] = initialState;
+            this.store.moduleSettings[key] = initialState;
             this.key = key;
         } else {
             throw TypeError('Key needs to be uniq!');
@@ -55,17 +58,17 @@ export class EchoModuleSettings<T> extends ModuleSettings<T> {
     }
 
     private clearStore(): void {
-        Object.keys(this.store.dict).forEach((key) => delete this.store.dict[key]);
+        Object.keys(this.store.moduleSettings).forEach((key) => delete this.store.moduleSettings[key]);
     }
 
     getAll(): unknown {
-        return this.store.dict;
+        return this.store.moduleSettings;
     }
 
     getByKey = (key: string): Partial<T> | undefined => {
-        const index = Object.keys(this.store.dict).findIndex((objectKey: string) => objectKey === key);
+        const index = Object.keys(this.store.moduleSettings).findIndex((objectKey: string) => objectKey === key);
         if (index > -1) {
-            return this.store.dict[key] as T;
+            return this.store.moduleSettings[key] as T;
         }
         return undefined;
     };
