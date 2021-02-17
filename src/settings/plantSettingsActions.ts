@@ -24,6 +24,33 @@ export function getSelectedPlant(): PlantSettings {
         return state.settings;
     });
 
-    const selectedPlant = { instCode, sapPlantId, proCoSysPlantId, plantName };
-    return selectedPlant;
+    return { instCode, sapPlantId, proCoSysPlantId, plantName };
+}
+
+/**
+ * Used from retrieving the selected instCode.
+ *
+ * @export Function from Echo Core.
+ * @return {*}  {PlantSettings}
+ */
+export function getInstCode(): string {
+    return getSelectedPlant().instCode;
+}
+/**
+ * Used from retrieving the selected sapPlantId.
+ *
+ * @export Function from Echo Core.
+ * @return {*}  {PlantSettings}
+ */
+export function getSapPlantId(): string {
+    return getSelectedPlant().sapPlantId;
+}
+/**
+ * Used from retrieving the selected proCoSysPlantId.
+ *
+ * @export Function from Echo Core.
+ * @return {*}  {PlantSettings}
+ */
+export function getProCoSysPlantId(): string {
+    return getSelectedPlant().proCoSysPlantId;
 }

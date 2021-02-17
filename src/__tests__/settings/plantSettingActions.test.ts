@@ -1,4 +1,4 @@
-import { getSelectedPlant, setSelectedPlant } from '../../settings/plantSettingsActions';
+import { getInstCode, getProCoSysPlantId, getSapPlantId, setSelectedPlant } from '../../settings/plantSettingsActions';
 import { legendOptions, settings } from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
@@ -39,11 +39,25 @@ describe('plantSettingActions', () => {
         });
     });
 
-    describe('getSelectedPlant', () => {
-        it('should get the PlantSettings', () => {
+    describe('getInstCode', () => {
+        it('should get the instCode', () => {
             setSelectedPlant(plantSettings);
-            const result = getSelectedPlant();
-            expect(plantSettings).toEqual(result);
+            const result = getInstCode();
+            expect(plantSettings.instCode).toEqual(result);
+        });
+    });
+    describe('getSapPlantId', () => {
+        it('should get the sapPlantId', () => {
+            setSelectedPlant(plantSettings);
+            const result = getSapPlantId();
+            expect(plantSettings.sapPlantId).toEqual(result);
+        });
+    });
+    describe('getProCoSysPlantId', () => {
+        it('should get the proCoSysPlantId', () => {
+            setSelectedPlant(plantSettings);
+            const result = getProCoSysPlantId();
+            expect(plantSettings.proCoSysPlantId).toEqual(result);
         });
     });
 });
