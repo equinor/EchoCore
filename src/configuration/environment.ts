@@ -26,7 +26,7 @@ export interface EnvironmentVariables {
 //setupTests.js mocks this variable, if changed, be sure to update here as well
 export const env = (): EnvironmentVariables => {
     if (!environmentVariableInstance) {
-        environmentVariableInstance = window?._env_;
+        environmentVariableInstance = window?._env_ ?? process.env;
     }
     return environmentVariableInstance;
 };
