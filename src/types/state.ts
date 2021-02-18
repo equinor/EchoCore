@@ -3,6 +3,7 @@ import { User } from '@microsoft/microsoft-graph-types';
 import { ApplicationManifest } from './appModule';
 import { LegendOptions } from './legend';
 import { Panel } from './panel';
+import { UI } from './ui';
 
 export interface GlobalState {
     modules: Array<ApplicationManifest>;
@@ -16,9 +17,6 @@ export interface GlobalState {
     legendOptions: LegendOptions;
 }
 
-export interface UI {
-    paddingTop?: number;
-}
 export interface GlobalStateContext {
     state: Atom<GlobalState>;
 }
