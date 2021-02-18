@@ -4,29 +4,24 @@ import { LegendOptions } from '../types/legend';
 import { GlobalState } from '../types/state';
 /**
  * Echo core function for updating the legend State.
- *
- * @export
- * @param {boolean} isActive
- * @param {string} selectedLegendType
+ * @export Function from Echo Core
+ * @param {Partial<LegendOptions>} { isActive: boolean; selectedLegendType: string; }
  */
-export function setLegendOption(isActive: boolean, selectedLegendType: string): void {
+export function setLegendOption(legendOptions: Partial<LegendOptions>): void {
     dispatch(getCoreContext(), (state: GlobalState) => {
-        const legendOptions: LegendOptions = {
-            isActive,
-            selectedLegendType
-        };
         return {
             ...state,
-            legendOptions
+            legendOptions: {
+                ...state.legendOptions,
+                legendOptions
+            }
         };
     });
 }
 
 /**
- *
  *  Echo core function for retrieving LegendOptions
- *
- * @export
+ * @export Function from Echo Core
  * @return {*}  {LegendOptions}
  */
 export function getLegendOption(): LegendOptions {

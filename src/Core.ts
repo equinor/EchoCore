@@ -1,10 +1,10 @@
-import { setLegendOption } from './actions/legendOptionsStateActions';
 import useAppModuleState from './hooks/useAppModuleState';
 import useAuthenticate from './hooks/useAuthenticate';
 import useLegendOptions from './hooks/useLegendOptions';
 import useEchoSetup from './hooks/useSetup';
 import useUserPhoto from './hooks/useUserPhoto';
 import useUserProfile from './hooks/useUserProfile';
+import { setLegendOption } from './legend/legendOptionsStateActions';
 import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './panels/corePanels';
 import registerPanels from './panels/registerPanel';
 import EchoAuthProvider from './services/authentication/echoProvider';
