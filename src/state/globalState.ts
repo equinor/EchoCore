@@ -13,6 +13,7 @@ export function createGlobalState(): Atom<GlobalState> {
     const defaultState: GlobalState = {
         modules: [],
         panels: [],
+        ui: {},
         activePanel: ActivePanel.None,
         activeModule: '',
         moduleState: {},

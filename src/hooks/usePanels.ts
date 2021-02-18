@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import PanelHandler, { ACTIVE_PANEL_KEY, PANEL_KEY } from '../panels/corePanels';
 import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
-import { GlobalState, Panel, PanelType } from '../types';
+import { GlobalState, Panel, PanelType, UI } from '../types';
+import useUI from './useUI';
 
 interface UsePanels {
     modulePanels: Panel[];
     activePanel: string;
     isPanelActive: boolean;
     setActivePanel: (key: string) => void;
+    panelUI: UI;
 }
 
 /**
@@ -21,6 +23,7 @@ interface UsePanels {
 function usePanels(panelType = String(PanelType.left)): UsePanels {
     const [modulePanels, setModulePanels] = useState<Panel[]>([]);
     const [activePanel, setPanel] = useState<string>(readState(getCoreContext(), (state): string => state.activePanel));
+    const { paddingTop } = useUI();
     const [isPanelActive, setIsPanelActive] = useState<boolean>(false);
 
     useEffect(() => {
@@ -61,7 +64,7 @@ function usePanels(panelType = String(PanelType.left)): UsePanels {
         );
     }
 
-    return { modulePanels, setActivePanel, activePanel, isPanelActive };
+    return { modulePanels, setActivePanel, activePanel, isPanelActive, panelUI: { paddingTop } };
 }
 
 export default usePanels;

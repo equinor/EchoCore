@@ -9,9 +9,10 @@ export interface EchoPanelRegister {
 }
 
 export interface EchoPanelOptions {
-    searchActive?: boolean;
-    customPanelActive?: string;
+    searchActive: boolean;
+    customPanelActive: string;
     addSearch: boolean;
+    paddingTop: number;
 }
 
 /**
@@ -19,16 +20,21 @@ export interface EchoPanelOptions {
  * @param panels
  * @param options
  */
-function registerPanels(panels: Panel[] = [], options: EchoPanelOptions = { addSearch: true }): void {
-    const { addSearch, searchActive, customPanelActive } = options;
+function registerPanels(panels: Panel[] = [], options: Partial<EchoPanelOptions> = {}): void {
+    const { addSearch, searchActive, customPanelActive, paddingTop } = options;
 
-    const newPanels = PanelHandler.combinePanels(panels, addSearch, PanelHandler.getCorePanels);
+    const newPanels = PanelHandler.combinePanels(
+        panels,
+        addSearch === undefined ? true : addSearch,
+        PanelHandler.getCorePanels
+    );
 
     const activePanel = customPanelActive ? customPanelActive : searchActive ? ECHO_CORE_SEARCH : '';
 
     dispatch(getCoreContext(), (s: GlobalState) => ({
         ...s,
         panels: newPanels,
+        ui: { ...s.ui, paddingTop },
         activePanel
     }));
 

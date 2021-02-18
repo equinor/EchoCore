@@ -7,6 +7,7 @@ import { Panel } from './panel';
 export interface GlobalState {
     modules: Array<ApplicationManifest>;
     panels: Array<Panel>;
+    ui: UI;
     activePanel: string;
     moduleState: EchoCustomState<unknown>;
     activeModule: string;
@@ -15,6 +16,9 @@ export interface GlobalState {
     legendOptions: LegendOptions;
 }
 
+export interface UI {
+    paddingTop?: number;
+}
 export interface GlobalStateContext {
     state: Atom<GlobalState>;
 }
