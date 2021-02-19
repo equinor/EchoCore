@@ -3,24 +3,28 @@ import PanelHandler, { ACTIVE_PANEL_KEY, PANEL_KEY } from '../panels/corePanels'
 import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { GlobalState, Panel, PanelType } from '../types';
+import { PanelUI } from '../types/ui';
+import usePanelUI from './usePanelUI';
 
 interface UsePanels {
     modulePanels: Panel[];
     activePanel: string;
     isPanelActive: boolean;
     setActivePanel: (key: string) => void;
+    panelUI: PanelUI;
 }
 
 /**
  * Echo Core hook for for handling panels defaults to left panel.
  * @param panelType can be set to `left`, `right` og `all`.
  * @returns {UsePanels} Returns and object `modulePanel`
- * , `setActivePanel`, `activePanel` and `isPanelActive`.
+ * , `setActivePanel`, `activePanel`, `isPanelActive` and `panelUI`.
  */
 
 function usePanels(panelType = String(PanelType.left)): UsePanels {
     const [modulePanels, setModulePanels] = useState<Panel[]>([]);
     const [activePanel, setPanel] = useState<string>(readState(getCoreContext(), (state): string => state.activePanel));
+    const panelUI = usePanelUI();
     const [isPanelActive, setIsPanelActive] = useState<boolean>(false);
 
     useEffect(() => {
@@ -61,7 +65,7 @@ function usePanels(panelType = String(PanelType.left)): UsePanels {
         );
     }, []);
 
-    return { modulePanels, setActivePanel, activePanel, isPanelActive };
+    return { modulePanels, setActivePanel, activePanel, isPanelActive, panelUI };
 }
 
 export default usePanels;
