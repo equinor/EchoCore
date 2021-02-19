@@ -38,13 +38,13 @@ export class EchoModuleSettings<T> extends ModuleSettings<T> {
      * get specific settings by key and returns Partial of T
      *
      * @param {string} key
-     * @return {*}  {Partial<T>}
+     * @return {*}  {Partial}
      * @memberof EchoModuleSettings
      */
     getByKey = <T>(key: string): Partial<T> | undefined => {
         const index = Object.keys(this.store.moduleSettings).findIndex((objectKey: string) => objectKey === key);
         if (index > -1) {
             return this.store.moduleSettings[key] as Partial<T>;
-
+        }
     };
 }
