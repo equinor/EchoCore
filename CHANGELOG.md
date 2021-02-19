@@ -7,7 +7,7 @@ The changelog is valid starting with EchoCore v0.1.1.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/#how),
 this project does not follow semantic versioning. Version numbers are bumped based on a subjective feeling of "change impact".
 
-## [Released] Echo Settings v0.1.2
+## [Released] Echo Settings v0.1.20
 
 This new release of Echo core adds the functionality for specifying custom css for panels.
 
@@ -48,3 +48,10 @@ Some minor name changes and minor refactor of old code
 ### Fix
 
 -   None
+
+## [Released] Echo Settings v0.1.1 to v0.1.16
+
+-   Globals state management.
+-   Panels and panel handlers.
+-   Authentication.
+-   Fetch and Http.
