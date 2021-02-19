@@ -15,8 +15,7 @@
     "test-wo-install": "jest --watchAll",
     "test": "npm ci & jest --watchAll",
     "test-coverage": "npm ci & jest --coverage --watchAll",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
-
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color"
   },
   "author": "Echo Core",
   "license": "MIT",
