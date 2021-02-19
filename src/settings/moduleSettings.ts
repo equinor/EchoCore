@@ -1,6 +1,8 @@
 import store, { SettingStore } from './settingsStore';
+
 /**
- *
+ * Class used for light module settings implementation. For registering proper module setting
+ * new functionality wil come when echo is fully prepared for modularity.
  *
  * @export
  * @class ModuleSettings
