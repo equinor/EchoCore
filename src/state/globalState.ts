@@ -5,7 +5,7 @@ import { ActivePanel, GlobalState, GlobalStateContext } from '../types';
 /**
  * Echo Core function for creating the GlobalState object.
  * @returns Atom<GlobalState>
- * Too read read this state use getCoreContext
+ * Too read this state use getCoreContext
  *
  * `Echo Core only`
  */

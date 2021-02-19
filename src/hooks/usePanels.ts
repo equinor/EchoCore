@@ -18,7 +18,7 @@ interface UsePanels {
  * Echo Core hook for for handling panels defaults to left panel.
  * @param panelType can be set to `left`, `right` og `all`.
  * @returns {UsePanels} Returns and object `modulePanel`
- * , `setActivePanel`, `activePanel` and `isPanelActive`.
+ * , `setActivePanel`, `activePanel`, `isPanelActive` and `panelUI`.
  */
 
 function usePanels(panelType = String(PanelType.left)): UsePanels {
@@ -27,7 +27,6 @@ function usePanels(panelType = String(PanelType.left)): UsePanels {
     const panelUI = usePanelUI();
     const [isPanelActive, setIsPanelActive] = useState<boolean>(false);
 
-    console.log(panelUI);
     useEffect(() => {
         function handleUpdatePanels(panels: Panel[]): void {
             const data = panelType === PanelType.all ? panels : panels.filter((panel) => panel.panelType === panelType);
