@@ -3,10 +3,12 @@ import { User } from '@microsoft/microsoft-graph-types';
 import { ApplicationManifest } from './appModule';
 import { LegendOptions } from './legend';
 import { Panel } from './panel';
+import { UI } from './ui';
 
 export interface GlobalState {
     modules: Array<ApplicationManifest>;
     panels: Array<Panel>;
+    ui: UI;
     activePanel: string;
     moduleState: EchoCustomState<unknown>;
     activeModule: string;
