@@ -21,7 +21,7 @@ export interface EchoPanelOptions extends PanelUI {
  * @param options
  */
 function registerPanels(panels: Panel[] = [], options: Partial<EchoPanelOptions> = {}): void {
-    const { addSearch, searchActive, customPanelActive, panelTop } = options;
+    const { addSearch, searchActive, customPanelActive, panelWrapper, panel, panelButton } = options;
 
     const newPanels = PanelHandler.combinePanels(
         panels,
@@ -34,7 +34,7 @@ function registerPanels(panels: Panel[] = [], options: Partial<EchoPanelOptions>
     dispatch(getCoreContext(), (s: GlobalState) => ({
         ...s,
         panels: newPanels,
-        ui: { panelTop },
+        ui: { ...s.ui, panelWrapper, panel, panelButton },
         activePanel
     }));
 

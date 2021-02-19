@@ -1,10 +1,9 @@
 export interface PanelUI {
-    panelTop?: React.CSSProperties;
+    panelWrapper?: React.CSSProperties;
+    panel?: React.CSSProperties;
+    panelButton?: React.CSSProperties;
 }
 
 export type UI = {
     [key: string]: React.CSSProperties | undefined;
 };
-export interface UIItem {
-    [key: string]: React.CSSProperties;
-}
