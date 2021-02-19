@@ -5,7 +5,7 @@ import { getCoreState } from '../state/globalState';
 import { Settings, UsePlantSettings } from '../types/settings';
 
 /**
- * Internal Echo Core hook function for getting the settings form echo core state.
+ * Internal Echo Core hook function for getting the settings from echo core state.
  * @return {*}  {Settings}
  */
 function useSettings(): Settings {
@@ -14,7 +14,7 @@ function useSettings(): Settings {
 }
 
 /**
- * Echo Core hook function for getting the plant settings form echo core state.
+ * Echo Core hook function for getting the plant settings from echo core state.
  * and function updating the plantSettings.
  * @export Hook fom Echo Core
  * @return {*}  {UsePlantSettings}
