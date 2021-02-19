@@ -2,14 +2,14 @@ import { setLegendOption } from './actions/legendOptionsStateActions';
 import registerPanels from './actions/registerPanel';
 import { env, EnvironmentVariables, isDevelopment, isProduction, setEnv } from './configuration/environment';
 import useAppModuleState from './hooks/useAppModuleState';
+import useAuthenticate from './hooks/useAuthenticate';
 import useLegendOptions from './hooks/useLegendOptions';
 import useEchoSetup from './hooks/useSetup';
 import useUserPhoto from './hooks/useUserPhoto';
 import useUserProfile from './hooks/useUserProfile';
 import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './panels/corePanels';
-import { AuthenticationProvider } from './services/authentication/authProvider';
+import { setActivePanel } from './panels/setActivePanels';
 import EchoAuthProvider from './services/authentication/echoProvider';
-import { BaseClient } from './services/baseClient.ts/baseClient';
 import echoClient from './services/echoClient/echoClient';
 
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
@@ -19,6 +19,8 @@ export { default as useInitial } from './hooks/useInitial';
 export { default as usePanels } from './hooks/usePanels';
 export * from './observers/classObserver';
 export { default as PanelHandler } from './panels/corePanels';
+export { AuthenticationProvider } from './services/authentication/authProvider';
+export { BaseClient } from './services/baseClient.ts/baseClient';
 export * from './types';
 export { makeUniqBy } from './utils/uniq';
 
@@ -29,13 +31,13 @@ class Core {
     useLegendOptions = useLegendOptions;
     useUserProfile = useUserProfile;
     useUserPhoto = useUserPhoto;
+    useAuthenticate = useAuthenticate;
     setLegendOption = setLegendOption;
+    setActivePanel = setActivePanel;
     ECHO_CORE_MAIN = ECHO_CORE_MAIN;
     ECHO_CORE_SEARCH = ECHO_CORE_SEARCH;
     EchoAuthProvider = EchoAuthProvider;
-    AuthProvider = AuthenticationProvider;
     EchoClient = echoClient;
-    BaseClient = BaseClient;
 }
 
 class Env {
