@@ -1,6 +1,5 @@
 import onboarding from './applicationStartupActions';
 import { getSettings, getSettingsByKey, setSetting, updateSettingByKey } from './globalSettingsActions';
-import { getAllOfflineStatus, getOfflineStatus, setOfflineSettings, setOfflineStatus } from './offlineStatusActions';
 import persistEchoSetting from './persistEchoSetting';
 import { getSelectedPlant, setSelectedPlant } from './plantSettingsActions';
 
@@ -13,12 +12,6 @@ class CoreSettings {
     setSetting = setSetting;
     getSettings = getSettings;
     getSettingsByKey = getSettingsByKey;
-
-    // Offline Status Actions
-    setOfflineStatus = setOfflineStatus;
-    setOfflineSettings = setOfflineSettings;
-    getAllOfflineStatus = getAllOfflineStatus;
-    getOfflineStatus = getOfflineStatus;
 
     /**
      * Plant specific actions to Get and Set Plant date
