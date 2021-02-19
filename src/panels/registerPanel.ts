@@ -1,6 +1,7 @@
 import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { GlobalState, Panel } from '../types';
+import { PanelUI } from '../types/ui';
 import PanelHandler, { ACTIVE_PANEL_KEY, ECHO_CORE_SEARCH, PANEL_KEY } from './corePanels';
 
 export interface EchoPanelRegister {
@@ -8,9 +9,9 @@ export interface EchoPanelRegister {
     options: EchoPanelOptions;
 }
 
-export interface EchoPanelOptions {
-    searchActive?: boolean;
-    customPanelActive?: string;
+export interface EchoPanelOptions extends PanelUI {
+    searchActive: boolean;
+    customPanelActive: string;
     addSearch: boolean;
 }
 
@@ -19,16 +20,21 @@ export interface EchoPanelOptions {
  * @param panels
  * @param options
  */
-function registerPanels(panels: Panel[] = [], options: EchoPanelOptions = { addSearch: true }): void {
-    const { addSearch, searchActive, customPanelActive } = options;
+function registerPanels(panels: Panel[] = [], options: Partial<EchoPanelOptions> = {}): void {
+    const { addSearch, searchActive, customPanelActive, panelWrapper, panel, panelButton } = options;
 
-    const newPanels = PanelHandler.combinePanels(panels, addSearch, PanelHandler.getCorePanels);
+    const newPanels = PanelHandler.combinePanels(
+        panels,
+        addSearch === undefined ? true : addSearch,
+        PanelHandler.getCorePanels
+    );
 
     const activePanel = customPanelActive ? customPanelActive : searchActive ? ECHO_CORE_SEARCH : '';
 
     dispatch(getCoreContext(), (s: GlobalState) => ({
         ...s,
         panels: newPanels,
+        ui: { ...s.ui, panelWrapper, panel, panelButton },
         activePanel
     }));
 

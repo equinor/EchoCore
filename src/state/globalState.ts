@@ -6,7 +6,7 @@ import { legendOptions, settings } from './defaultStates';
 /**
  * Echo Core function for creating the GlobalState object.
  * @returns Atom<GlobalState>
- * Too read read this state use getCoreContext
+ * Too read this state use getCoreContext
  *
  * `Echo Core only`
  */
@@ -14,6 +14,7 @@ export function createGlobalState(): Atom<GlobalState> {
     const defaultState: GlobalState = {
         modules: [],
         panels: [],
+        ui: {},
         activePanel: ActivePanel.None,
         activeModule: '',
         moduleState: {},

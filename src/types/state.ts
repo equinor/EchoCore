@@ -4,10 +4,12 @@ import { ApplicationManifest } from './appModule';
 import { LegendOptions } from './legend';
 import { Panel } from './panel';
 import { Settings } from './settings';
+import { UI } from './ui';
 
 export interface GlobalState {
     modules: Array<ApplicationManifest>;
     panels: Array<Panel>;
+    ui: UI;
     activePanel: string;
     activeModule: string;
     userProfile?: User;
