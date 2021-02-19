@@ -29,7 +29,7 @@ export class ModuleSettings<T> {
         return this.store.moduleSettings[this.key] as T;
     };
 
-    Clear = (): void => {
+    clear = (): void => {
         this.store.moduleSettings[this.key] = {};
     };
 

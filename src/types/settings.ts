@@ -2,7 +2,6 @@ export interface Settings extends PlantSettings {
     hasAcceptedTerms: boolean;
     hasDoneOnboarding: boolean;
     showTextHighlighting: boolean;
-    offlineSettings: OfflineSetting[];
 }
 
 export interface PlantSettings {
@@ -10,13 +9,6 @@ export interface PlantSettings {
     sapPlantId: string;
     proCoSysPlantId: string;
     plantName: string;
-}
-
-export interface OfflineSetting {
-    settingsKey: string;
-    isDefault: boolean;
-    syncOffline: boolean;
-    enable: boolean;
 }
 
 export interface UsePlantSettings extends PlantSettings {

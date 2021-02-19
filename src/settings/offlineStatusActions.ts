@@ -58,6 +58,5 @@ export function getOfflineStatus(key: string): Readonly<OfflineSetting> | undefi
         (item: OfflineSetting) => item.settingsKey === key
     );
 
-    if (offlineSetting) return offlineSetting;
-    return undefined;
+    return offlineSetting;
 }
