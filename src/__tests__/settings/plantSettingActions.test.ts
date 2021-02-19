@@ -1,0 +1,63 @@
+import { getInstCode, getProCoSysPlantId, getSapPlantId, setSelectedPlant } from '../../settings/plantSettingsActions';
+import { legendOptions, settings } from '../../state/defaultStates';
+import { dispatch } from '../../state/globalActions';
+import { getCoreContext } from '../../state/globalState';
+import { ActivePanel } from '../../types/panel';
+import { PlantSettings } from '../../types/settings';
+
+beforeEach(() => {
+    initialize();
+});
+
+const globalInit = {
+    modules: [],
+    panels: [],
+    activePanel: ActivePanel.None,
+    activeModule: '',
+    moduleState: {},
+    userProfile: undefined,
+    userPhotoUrl: undefined,
+    legendOptions,
+    settings
+};
+
+function initialize(): void {
+    dispatch(getCoreContext(), () => globalInit);
+}
+
+describe('plantSettingActions', () => {
+    const plantSettings: PlantSettings = {
+        instCode: 'JSV',
+        sapPlantId: 'JSV',
+        proCoSysPlantId: 'JSV',
+        plantName: 'Johann Sverdrup'
+    };
+
+    describe('setSelectedPlant', () => {
+        it('should update or set the PlantSettings', () => {
+            setSelectedPlant(plantSettings);
+        });
+    });
+
+    describe('getInstCode', () => {
+        it('should get the instCode', () => {
+            setSelectedPlant(plantSettings);
+            const result = getInstCode();
+            expect(plantSettings.instCode).toEqual(result);
+        });
+    });
+    describe('getSapPlantId', () => {
+        it('should get the sapPlantId', () => {
+            setSelectedPlant(plantSettings);
+            const result = getSapPlantId();
+            expect(plantSettings.sapPlantId).toEqual(result);
+        });
+    });
+    describe('getProCoSysPlantId', () => {
+        it('should get the proCoSysPlantId', () => {
+            setSelectedPlant(plantSettings);
+            const result = getProCoSysPlantId();
+            expect(plantSettings.proCoSysPlantId).toEqual(result);
+        });
+    });
+});

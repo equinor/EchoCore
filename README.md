@@ -1,3 +1,5 @@
+![logo](./doc/ee.png)
+
 # EchoCore
 
 Everything a Echo app needs to communicate with the core.
@@ -10,12 +12,15 @@ Everything a Echo app needs to communicate with the core.
 ![@equinor/echo-core](https://badgen.net/bundlephobia/minzip/@equinor/echo-core) ![@equinor/echo-core](https://badgen.net/bundlephobia/min/@equinor/echo-core)
 ![@equinor/echo-core](https://badgen.net/bundlephobia/dependency-count/@equinor/echo-core)
 
--   [EchoCore](#echocore)
--   [Install](#install)
--   [Development](#development)
--   [Writing and running tests](#Writing-and-running-tests)
--   [Link echo-core](#Link-echo-core)
--   [Unlinking echo-core](#Unlinking-echo-core)
+- [EchoCore](#echocore)
+- [Install](#install)
+    - [NPM](#npm)
+- [Development](#development)
+    - [NPM build](#npm-build)
+    - [NPM build watch](#npm-build-watch)
+- [Writing and running tests](#writing-and-running-tests)
+- [Link echo-core](#link-echo-core)
+- [Unlinking echo-core](#unlinking-echo-core)
 
 # Install
 
@@ -94,7 +99,25 @@ npm link @equinor/echo-core
 
     my-app-to-link-to must have a links.json file with link to react (and other peerDependencies in use), if not you will experience multiple versions of react when running my-app-to-link-to
 
-4. Run `npm-local-development ../EchoCore`
+4. Navigate to cloned echo-core repository and then run `npm install` and `npm start`
+
+```sh-session
+cd ~/repos/EchoCore
+npm install
+npm start
+```
+
+5. In link repository run following, `npm-local-development ../EchoCore` should be run in background. open new terminal and run `npm start`
+
+```sh-session
+cd ~/repo/my-app-to-link-to
+npm-local-development ../EchoCore
+```
+
+```sh-session
+cd ~/repo/my-app-to-link-to
+npm start
+```
 
 **Linking of echo-core should now be set up and you can run both builds with watch**
 
