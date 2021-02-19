@@ -13,6 +13,5 @@ export const settings: Settings = {
     sapPlantId: '',
     proCoSysPlantId: '',
     plantName: '',
-    offlineSettings: [],
     showTextHighlighting: true
 };
