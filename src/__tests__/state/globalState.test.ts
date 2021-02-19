@@ -1,5 +1,6 @@
 import { deref } from '@dbeining/react-atom';
 import { createContext } from 'react';
+import { legendOptions, settings } from '../../state/defaultStates';
 import {
     createGlobalApplicationContext,
     createGlobalState,
@@ -20,13 +21,12 @@ describe('createGlobalState', () => {
             moduleState: {},
             userProfile: undefined,
             userPhotoUrl: undefined,
-            legendOptions: {
-                isActive: true
-            }
+            legendOptions,
+            settings
         };
 
-        const result = createGlobalState();
-        expect(deref(result)).toStrictEqual(expected);
+        const result = deref(createGlobalState());
+        expect(result).toStrictEqual(expected);
     });
 });
 
@@ -60,9 +60,8 @@ describe('getCoreState', () => {
             moduleState: {},
             userProfile: undefined,
             userPhotoUrl: undefined,
-            legendOptions: {
-                isActive: true
-            }
+            legendOptions,
+            settings
         };
         const result = getCoreState();
         expect(deref(result)).toStrictEqual(expected);

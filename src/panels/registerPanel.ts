@@ -1,8 +1,8 @@
-import PanelHandler, { ACTIVE_PANEL_KEY, ECHO_CORE_SEARCH, PANEL_KEY } from '../panels/corePanels';
 import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { GlobalState, Panel } from '../types';
 import { PanelUI } from '../types/ui';
+import PanelHandler, { ACTIVE_PANEL_KEY, ECHO_CORE_SEARCH, PANEL_KEY } from './corePanels';
 
 export interface EchoPanelRegister {
     panels: Panel[];

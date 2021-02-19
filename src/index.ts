@@ -1,14 +1,14 @@
-import { setLegendOption } from './actions/legendOptionsStateActions';
-import registerPanels from './actions/registerPanel';
-import { env, EnvironmentVariables, isDevelopment, isProduction, setEnv } from './configuration/environment';
+import { EnvironmentVariables } from './configuration/environment';
+import Env from './Env';
 import useAppModuleState from './hooks/useAppModuleState';
 import useAuthenticate from './hooks/useAuthenticate';
 import useLegendOptions from './hooks/useLegendOptions';
 import useEchoSetup from './hooks/useSetup';
 import useUserPhoto from './hooks/useUserPhoto';
 import useUserProfile from './hooks/useUserProfile';
+import { setLegendOption } from './legend/legendOptionsStateActions';
 import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './panels/corePanels';
-import { setActivePanel } from './panels/setActivePanels';
+import registerPanels from './panels/registerPanel';
 import EchoAuthProvider from './services/authentication/echoProvider';
 import echoClient from './services/echoClient/echoClient';
 
@@ -21,10 +21,13 @@ export * from './observers/classObserver';
 export { default as PanelHandler } from './panels/corePanels';
 export { AuthenticationProvider } from './services/authentication/authProvider';
 export { BaseClient } from './services/baseClient.ts/baseClient';
+export * from './settings';
 export * from './types';
 export { makeUniqBy } from './utils/uniq';
 
-class Core {
+export const EchoEnv = new Env();
+
+export class Core {
     useEchoSetup = useEchoSetup;
     registerPanels = registerPanels;
     useAppModuleState = useAppModuleState;
@@ -33,23 +36,13 @@ class Core {
     useUserPhoto = useUserPhoto;
     useAuthenticate = useAuthenticate;
     setLegendOption = setLegendOption;
-    setActivePanel = setActivePanel;
     ECHO_CORE_MAIN = ECHO_CORE_MAIN;
     ECHO_CORE_SEARCH = ECHO_CORE_SEARCH;
     EchoAuthProvider = EchoAuthProvider;
     EchoClient = echoClient;
 }
 
-class Env {
-    isDevelopment = isDevelopment;
-    isProduction = isProduction;
-    env = env;
-    setEnv = setEnv;
-}
-
-export const EchoEnv = new Env();
 const EchoCore = new Core();
-
 export default EchoCore;
 
 declare global {
