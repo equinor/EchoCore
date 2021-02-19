@@ -7,7 +7,24 @@ The changelog is valid starting with EchoCore v0.1.1.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/#how),
 this project does not follow semantic versioning. Version numbers are bumped based on a subjective feeling of "change impact".
 
-## [Unreleased] Echo Settings v0.1.13
+## [Released] Echo Settings v0.1.2
+
+This new release of Echo core adds the functionality for specifying custom css for panels.
+
+### Add
+
+Added ui to global state.
+
+### Change
+
+Added ui customizations to ui panels in register panels.
+usePanelsHook now returns custom ui.
+
+### Fix
+
+-   None
+
+## [Released] Echo Settings v0.1.17
 
 This new release of Echo core consist of the global setting. And functionality to
 maintain and retrieve settings.
