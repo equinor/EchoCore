@@ -21,7 +21,7 @@ export function updateSettingByKey<K extends keyof Settings>(key: K, data: Setti
 }
 
 /**
- * Function used for updating one ore more items in the settings at the global state.
+ * Function used for updating one or more items in the settings at the global state.
  * @export Function Echo Core.
  * @param {Settings} settings
  */
@@ -34,19 +34,18 @@ export function setSetting(partialSettings: Partial<Settings>): void {
     });
 }
 /**
- *
+ * Function for getting the settings form the global state.
  * @export Function Echo Core.
- * @return {*}  {Settings}
+ * @return {*}  {Readonly<Settings>}
  */
-export function getSettings(): Settings {
+export function getSettings(): Readonly<Settings> {
     return readState(getCoreContext(), (state: GlobalState) => state.settings);
 }
 
 /**
- *
- *
- * @export
- * @template K
+ * Function for returning settings by key form the global state. The return object is Readonly.
+ * @export Function from Echo Core
+ * @template K is in key of `Settings`
  * @param {K} key
  * @return {*}  {Readonly<Settings[K]>}
  */

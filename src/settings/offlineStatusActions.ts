@@ -4,7 +4,7 @@ import { OfflineSetting } from '../types/settings';
 import { getSettings, setSetting } from './globalSettingsActions';
 
 /**
- * Updates or ads offlineSetting item to the offlineSettings.
+ * Updates or adds offlineSetting item to the offlineSettings.
  *
  * @export Function from Echo Core
  * @param {OfflineSetting} offlineSetting

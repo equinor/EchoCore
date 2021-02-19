@@ -1,5 +1,5 @@
 import onboarding from './applicationStartupActions';
-import { getSettings, setSetting, updateSettingByKey } from './globalSettingsActions';
+import { getSettings, getSettingsByKey, setSetting, updateSettingByKey } from './globalSettingsActions';
 import { getAllOfflineStatus, getOfflineStatus, setOfflineSettings, setOfflineStatus } from './offlineStatusActions';
 import persistEchoSetting from './persistEchoSetting';
 import { getSelectedPlant, setSelectedPlant } from './plantSettingsActions';
@@ -11,7 +11,8 @@ class CoreSettings {
     // Global Settings Actions
     updateSettingByKey = updateSettingByKey;
     setSetting = setSetting;
-    getSettings = getSettings; // Todo Get by key and ad s to setting
+    getSettings = getSettings;
+    getSettingsByKey = getSettingsByKey;
 
     // Offline Status Actions
     setOfflineStatus = setOfflineStatus;
