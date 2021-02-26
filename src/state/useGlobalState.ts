@@ -1,14 +1,14 @@
 import { useAtom } from '@dbeining/react-atom';
 import { setModuleState } from '../actions/globalStateActions';
-import { getCoreState } from '../state/globalState';
-import useInitial from './useInitial';
+import useInitial from '../hooks/useInitial';
+import { getCoreState } from './globalState';
 
 /**
  * Hook for handling the application module state object.
  * @param initialState The initial state object used for registering.
  * this parameter is default undefined for preventing initialization on every render.
  */
-export default function useAppModuleState<T>(initialState: T | undefined = undefined): T {
+export default function useGlobalState<T>(initialState: T | undefined = undefined): T {
     const state = useAtom(getCoreState());
 
     useInitial(() => {

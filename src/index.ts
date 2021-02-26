@@ -1,6 +1,5 @@
 import { EnvironmentVariables } from './configuration/environment';
 import Env from './Env';
-import useAppModuleState from './hooks/useAppModuleState';
 import useAuthenticate from './hooks/useAuthenticate';
 import useLegendOptions from './hooks/useLegendOptions';
 import useEchoSetup from './hooks/useSetup';
@@ -11,13 +10,12 @@ import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './panels/corePanels';
 import registerPanels from './panels/registerPanel';
 import EchoAuthProvider from './services/authentication/echoProvider';
 import echoClient from './services/echoClient/echoClient';
+import useAppModuleState from './state/useGlobalState';
 
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
-export { default as useAppModuleState } from './hooks/useAppModuleState';
 export { default as useCleanup } from './hooks/useCleanup';
 export { default as useInitial } from './hooks/useInitial';
 export { default as usePanels } from './hooks/usePanels';
-export { default as usePlantSettings } from './hooks/useSetting';
 export * from './observers/classObserver';
 export { default as PanelHandler } from './panels/corePanels';
 export { AuthenticationProvider } from './services/authentication/authProvider';
@@ -30,6 +28,8 @@ export {
     getSelectedPlant,
     setSelectedPlant
 } from './settings/plantSettingsActions';
+export { default as usePlantSettings } from './settings/useSetting';
+export { default as useAppModuleState } from './state/useGlobalState';
 export * from './types';
 export { storage } from './utils/storage';
 export { makeUniqBy } from './utils/uniq';

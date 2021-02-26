@@ -1,5 +1,4 @@
-import { useAtom } from '@dbeining/react-atom';
-import { getCoreState } from '../state/globalState';
+import useGlobalState from '../state/useGlobalState';
 import { PlantSettings, Settings } from '../types/settings';
 
 /**
@@ -7,7 +6,7 @@ import { PlantSettings, Settings } from '../types/settings';
  * @return {*}  {Settings}
  */
 function useSettings(): Settings {
-    const { settings } = useAtom(getCoreState());
+    const { settings } = useGlobalState();
     return settings;
 }
 
