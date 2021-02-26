@@ -13,16 +13,27 @@ export class PersistEchoSetting implements PersistSettings {
         this.defaultSettings = defaultSettings;
     }
 
-    persistSettingsInLocalStorage(settings: Settings): void {
+    persistSettingsInLocalStorage(settings: Partial<Settings>): void {
         Object.keys(settings).forEach((key: string) => {
             this.echoStorage.setItem(key, settings[key]);
         });
     }
 
-    getSettingsFromLocalStorage(): Settings {
+    getSettingsFromLocalStorage(): Readonly<Settings> {
         const newSettings = this.defaultSettings;
         Object.keys(this.defaultSettings).forEach((key: string) => {
             const data = this.echoStorage.getItem<Settings>(key);
+            if (data) {
+                newSettings[key] = data;
+            }
+        });
+        return newSettings;
+    }
+
+    getSettingsFormLocalStorageByType<T>(): Partial<Readonly<T>> {
+        const newSettings = {};
+        Object.keys(this.defaultSettings).forEach((key: string) => {
+            const data = this.echoStorage.getItem<Partial<T>>(key);
             if (data) {
                 newSettings[key] = data;
             }

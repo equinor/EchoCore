@@ -1,17 +1,19 @@
 import { LegendOptions } from '../types';
-import { Settings } from '../types/settings';
+import { PlantSettings, Settings } from '../types/settings';
 
 export const legendOptions: LegendOptions = {
     isActive: true,
     selectedLegendType: 'Stid'
 };
 
-export const settings: Settings = {
-    hasAcceptedTerms: false,
-    hasDoneOnboarding: false,
+const plantSettings: PlantSettings = {
     instCode: '',
     sapPlantId: '',
     proCoSysPlantId: '',
-    plantName: '',
-    showTextHighlighting: true
+    plantName: ''
+};
+
+export const settings: Settings = {
+    showTextHighlighting: true,
+    plantSettings
 };

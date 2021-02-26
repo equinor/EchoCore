@@ -2,6 +2,7 @@ import { readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { PlantSettings } from '../types/settings';
 import { setSetting } from './globalSettingsActions';
+import persistEchoSetting from './persistEchoSetting';
 
 /**
  * Used for setting or updating the selected plant.
@@ -10,7 +11,8 @@ import { setSetting } from './globalSettingsActions';
  * @param {PlantSettings} plantSettings selected plant data object.
  */
 export function setSelectedPlant(plantSettings: PlantSettings): void {
-    setSetting(plantSettings);
+    setSetting({ plantSettings });
+    persistEchoSetting.persistSettingsInLocalStorage({ plantSettings });
 }
 
 /**
@@ -21,7 +23,7 @@ export function setSelectedPlant(plantSettings: PlantSettings): void {
  */
 export function getSelectedPlant(): PlantSettings {
     const { instCode, sapPlantId, proCoSysPlantId, plantName } = readState(getCoreContext(), (state) => {
-        return state.settings;
+        return state.settings.plantSettings;
     });
 
     return { instCode, sapPlantId, proCoSysPlantId, plantName };

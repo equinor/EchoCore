@@ -17,12 +17,21 @@ export { default as useAppModuleState } from './hooks/useAppModuleState';
 export { default as useCleanup } from './hooks/useCleanup';
 export { default as useInitial } from './hooks/useInitial';
 export { default as usePanels } from './hooks/usePanels';
+export { default as usePlantSettings } from './hooks/useSetting';
 export * from './observers/classObserver';
 export { default as PanelHandler } from './panels/corePanels';
 export { AuthenticationProvider } from './services/authentication/authProvider';
 export { BaseClient } from './services/baseClient.ts/baseClient';
-export * from './settings';
+export { default as EchoSettings } from './settings';
+export {
+    getInstCode,
+    getProCoSysPlantId,
+    getSapPlantId,
+    getSelectedPlant,
+    setSelectedPlant
+} from './settings/plantSettingsActions';
 export * from './types';
+export { storage } from './utils/storage';
 export { makeUniqBy } from './utils/uniq';
 
 export const EchoEnv = new Env();

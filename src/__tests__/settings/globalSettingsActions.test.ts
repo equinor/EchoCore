@@ -2,15 +2,17 @@ import { getSettings, getSettingsByKey, setSetting, updateSettingByKey } from '.
 import { legendOptions, settings } from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
+import { GlobalState } from '../../types';
 import { ActivePanel } from '../../types/panel';
 
 beforeEach(() => {
     initialize();
 });
 
-const globalInit = {
+const globalInit: GlobalState = {
     modules: [],
     panels: [],
+    ui: {},
     activePanel: ActivePanel.None,
     activeModule: '',
     moduleState: {},
@@ -26,41 +28,44 @@ function initialize(): void {
 
 describe('globalSettingsActions', () => {
     describe('updateSettingByKey', () => {
-        it('hasAcceptedTerms should equal true', () => {
-            updateSettingByKey('hasAcceptedTerms', true);
+        it('showTextHighlighting should equal true', () => {
+            updateSettingByKey('showTextHighlighting', true);
             const result = getSettings();
-            expect(result.hasAcceptedTerms).toBe(true);
+            expect(result.showTextHighlighting).toBe(true);
         });
     });
 
     describe('updateSettingByKey', () => {
-        it('hasAcceptedTerms should equal true', () => {
-            setSetting({ hasAcceptedTerms: true });
+        it('showTextHighlighting should equal true', () => {
+            setSetting({ showTextHighlighting: true });
             const result = getSettings();
-            expect(result.hasAcceptedTerms).toBe(true);
+            expect(result.showTextHighlighting).toBe(true);
         });
     });
     describe('updateSettingByKey', () => {
-        it('hasAcceptedTerms should equal true', () => {
-            setSetting({ hasAcceptedTerms: true });
+        it('showTextHighlighting should equal true', () => {
+            setSetting({ showTextHighlighting: true });
             const result = getSettings();
-            expect(result.hasAcceptedTerms).toBe(true);
+            expect(result.showTextHighlighting).toBe(true);
         });
     });
 
     describe('updateSettingByKey', () => {
-        it('hasAcceptedTerms and selectedInstCode should equal true and JSV', () => {
-            setSetting({ hasAcceptedTerms: true, instCode: 'JSV' });
+        it('showTextHighlighting and selectedInstCode should equal true and JSV', () => {
+            setSetting({
+                showTextHighlighting: true,
+                plantSettings: { instCode: 'JSV', sapPlantId: 'JSV', plantName: 'JSV', proCoSysPlantId: 'JSV' }
+            });
             const result = getSettings();
-            expect(result.hasAcceptedTerms).toBe(true);
-            expect(result.instCode).toBe('JSV');
+            expect(result.showTextHighlighting).toBe(true);
+            expect(result.plantSettings.instCode).toBe('JSV');
         });
     });
 
     describe('getSettingsByKey', () => {
         it('should return settings by key', () => {
-            setSetting({ hasAcceptedTerms: true });
-            const result = getSettingsByKey('hasAcceptedTerms');
+            setSetting({ showTextHighlighting: true });
+            const result = getSettingsByKey('showTextHighlighting');
             expect(result).toBe(true);
         });
     });

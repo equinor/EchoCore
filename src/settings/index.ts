@@ -1,12 +1,8 @@
-import onboarding from './applicationStartupActions';
 import { getSettings, getSettingsByKey, setSetting, updateSettingByKey } from './globalSettingsActions';
 import persistEchoSetting from './persistEchoSetting';
 import { getSelectedPlant, setSelectedPlant } from './plantSettingsActions';
 
 class CoreSettings {
-    // Onboarding
-    onboarding = onboarding;
-
     // Global Settings Actions
     updateSettingByKey = updateSettingByKey;
     setSetting = setSetting;

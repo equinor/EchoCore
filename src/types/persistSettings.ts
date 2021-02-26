@@ -6,7 +6,7 @@ export interface PersistSettings {
      * @export
      * @param {Settings} settings
      */
-    persistSettingsInLocalStorage: (settings: Settings) => void;
+    persistSettingsInLocalStorage: (settings: Partial<Settings>) => void;
 
     /**
      * Core function returning application setting from LocalStorage
@@ -14,8 +14,14 @@ export interface PersistSettings {
      * @export
      * @return {*}  {Settings} localStorage or defaultSettings
      */
-    getSettingsFromLocalStorage: () => Settings;
+    getSettingsFromLocalStorage: () => Readonly<Settings>;
 
+    /**
+     * Core function returning partial of the global setting from LocalStorage,
+     * @export
+     * @return {*}  {Partial<Readonly<T>} localStorage or defaultSettings
+     */
+    getSettingsFormLocalStorageByType: <T>() => Partial<Readonly<T>>;
     /**
      * Core function removing all user settings form localStorage
      * @export
