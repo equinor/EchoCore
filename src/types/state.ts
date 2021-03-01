@@ -3,6 +3,7 @@ import { User } from '@microsoft/microsoft-graph-types';
 import { ApplicationManifest } from './appModule';
 import { LegendOptions } from './legend';
 import { Panel } from './panel';
+import { PlantsData } from './plants';
 import { Settings } from './settings';
 import { UI } from './ui';
 
@@ -16,6 +17,7 @@ export interface GlobalState {
     userPhotoUrl?: string;
     legendOptions: LegendOptions;
     settings: Settings;
+    plantsData: PlantsData;
     moduleState: EchoCustomState<unknown>;
 }
 export interface GlobalStateContext {
