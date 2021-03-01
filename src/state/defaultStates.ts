@@ -1,4 +1,5 @@
 import { ActivePanel, GlobalState, LegendOptions } from '../types';
+import { PlantsData } from '../types/plants';
 import { PlantSettings, Settings } from '../types/settings';
 
 export const legendOptions: LegendOptions = {
@@ -18,6 +19,10 @@ export const settings: Settings = {
     plantSettings
 };
 
+export const plantsData: PlantsData = {
+    plants: []
+};
+
 const defaultGlobalState: GlobalState = {
     modules: [],
     panels: [],
@@ -28,6 +33,7 @@ const defaultGlobalState: GlobalState = {
     userProfile: undefined,
     userPhotoUrl: undefined,
     settings,
+    plantsData,
     legendOptions
 };
 
