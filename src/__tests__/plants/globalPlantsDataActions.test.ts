@@ -1,30 +1,15 @@
 import { getPlants, getPlantsData, setPlantsData } from '../../plants/globalPlantsDataActions';
-import { legendOptions, plantsData, settings } from '../../state/defaultStates';
+import defaultGlobalState, { plantsData } from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
-import { ActivePanel } from '../../types/panel';
 import { PlantsData } from '../../types/plants';
 
 beforeEach(() => {
     initialize();
 });
 
-const globalInit = {
-    modules: [],
-    panels: [],
-    ui: {},
-    activePanel: ActivePanel.None,
-    activeModule: '',
-    moduleState: {},
-    userProfile: undefined,
-    userPhotoUrl: undefined,
-    legendOptions,
-    plantsData,
-    settings
-};
-
 function initialize(): void {
-    dispatch(getCoreContext(), () => globalInit);
+    dispatch(getCoreContext(), () => defaultGlobalState);
 }
 
 const mockPlantsData: PlantsData = {
