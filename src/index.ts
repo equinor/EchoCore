@@ -18,6 +18,8 @@ export { default as useInitial } from './hooks/useInitial';
 export { default as usePanels } from './hooks/usePanels';
 export * from './observers/classObserver';
 export { default as PanelHandler } from './panels/corePanels';
+export { getPlants, getPlantsData, setPlantsData } from './plants/globalPlantsDataActions';
+export { usePlants, usePlantsData } from './plants/usePlants';
 export { AuthenticationProvider } from './services/authentication/authProvider';
 export { BaseClient } from './services/baseClient.ts/baseClient';
 export { default as EchoSettings } from './settings';
@@ -29,8 +31,10 @@ export {
     setSelectedPlant
 } from './settings/plantSettingsActions';
 export { default as usePlantSettings } from './settings/useSetting';
-export { default as useAppModuleState } from './state/useGlobalState';
+export { default as useAppModuleState } from './state/useAppModuleState';
+export { default as useGlobalState } from './state/useGlobalState';
 export * from './types';
+export { default as eventHub } from './utils/eventHub';
 export { storage } from './utils/storage';
 export { makeUniqBy } from './utils/uniq';
 
