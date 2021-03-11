@@ -9,6 +9,7 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "echo-publish": "npm publish --access public",
+    "echo-publish-beta": "npm publish --access public --tag beta",
     "patch": "npm version patch",
     "major": "npm version major",
     "minor": "npm version minor",
