@@ -1,28 +1,15 @@
 import { getInstCode, getProCoSysPlantId, getSapPlantId, setSelectedPlant } from '../../settings/plantSettingsActions';
-import { legendOptions, settings } from '../../state/defaultStates';
+import defaultGlobalState from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
-import { ActivePanel } from '../../types/panel';
 import { PlantSettings } from '../../types/settings';
 
 beforeEach(() => {
     initialize();
 });
 
-const globalInit = {
-    modules: [],
-    panels: [],
-    activePanel: ActivePanel.None,
-    activeModule: '',
-    moduleState: {},
-    userProfile: undefined,
-    userPhotoUrl: undefined,
-    legendOptions,
-    settings
-};
-
 function initialize(): void {
-    dispatch(getCoreContext(), () => globalInit);
+    dispatch(getCoreContext(), () => defaultGlobalState);
 }
 
 describe('plantSettingActions', () => {

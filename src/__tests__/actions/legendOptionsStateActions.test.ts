@@ -1,27 +1,15 @@
 import { getLegendOption, setLegendOption } from '../../legend/legendOptionsStateActions';
-import { legendOptions, settings } from '../../state/defaultStates';
+import defaultGlobalState from '../../state/defaultStates';
 import { dispatch, readState } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
-import { ActivePanel, GlobalState } from '../../types';
+import { GlobalState } from '../../types';
 
 beforeEach(() => {
     initialize();
 });
 
-const globalInit = {
-    modules: [],
-    panels: [],
-    activePanel: ActivePanel.None,
-    activeModule: '',
-    moduleState: {},
-    userProfile: undefined,
-    userPhotoUrl: undefined,
-    legendOptions,
-    settings
-};
-
 function initialize(): void {
-    dispatch(getCoreContext(), () => globalInit);
+    dispatch(getCoreContext(), () => defaultGlobalState);
 }
 
 describe('legendOptionsStateActions', () => {
@@ -32,7 +20,7 @@ describe('legendOptionsStateActions', () => {
 
     describe('setLegendOption', () => {
         it('should set legend option state', () => {
-            setLegendOption(false, 'test');
+            setLegendOption({ isActive: false, selectedLegendType: 'test' });
             expect(expectedLegendOptions).toEqual(
                 readState(getCoreContext(), (state: GlobalState) => state.legendOptions)
             );

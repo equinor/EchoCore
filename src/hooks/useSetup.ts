@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import EchoAuthProvider from '../services/authentication/echoProvider';
+import { setSetting } from '../settings/globalSettingsActions';
+import persistEchoSetting from '../settings/persistEchoSetting';
 import { setup } from '../state/setup';
 import { CoreConfig } from '../types/coreConfig';
 import useInitial from './useInitial';
@@ -18,6 +20,7 @@ const useEchoSetup = (config: CoreConfig): boolean => {
         rootLoadingElement && rootLoadingElement.remove();
         await setup(config);
         setIsAuthenticated(EchoAuthProvider.isAuthenticated);
+        setSetting(persistEchoSetting.getSettingsFromLocalStorage());
     });
 
     return isAuthenticated;

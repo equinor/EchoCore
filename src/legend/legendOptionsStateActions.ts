@@ -13,7 +13,7 @@ export function setLegendOption(legendOptions: Partial<LegendOptions>): void {
             ...state,
             legendOptions: {
                 ...state.legendOptions,
-                legendOptions
+                ...legendOptions
             }
         };
     });
