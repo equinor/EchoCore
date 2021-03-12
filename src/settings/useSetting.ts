@@ -1,15 +1,12 @@
-import { useAtom } from '@dbeining/react-atom';
-import { useCallback } from 'react';
-import { setSelectedPlant } from '../settings/plantSettingsActions';
-import { getCoreState } from '../state/globalState';
-import { Settings, UsePlantSettings } from '../types/settings';
+import useGlobalState from '../state/useGlobalState';
+import { PlantSettings, Settings } from '../types/settings';
 
 /**
  * Internal Echo Core hook function for getting the settings from echo core state.
  * @return {*}  {Settings}
  */
 function useSettings(): Settings {
-    const { settings } = useAtom(getCoreState());
+    const { settings } = useGlobalState();
     return settings;
 }
 
@@ -19,15 +16,13 @@ function useSettings(): Settings {
  * @export Hook fom Echo Core
  * @return {*}  {UsePlantSettings}
  */
-export function usePlantSettings(): UsePlantSettings {
-    const { instCode, sapPlantId, plantName, proCoSysPlantId } = useSettings();
-    const setPlantSettings = useCallback(setSelectedPlant, []);
+export default function usePlantSettings(): PlantSettings {
+    const { instCode, sapPlantId, plantName, proCoSysPlantId } = useSettings().plantSettings;
     return {
         instCode,
         sapPlantId,
         plantName,
-        proCoSysPlantId,
-        setPlantSettings
+        proCoSysPlantId
     };
 }
 /**
@@ -36,7 +31,7 @@ export function usePlantSettings(): UsePlantSettings {
  * @return {*}  instCode
  */
 export function useInstCode(): string {
-    const { instCode } = useSettings();
+    const { instCode } = usePlantSettings();
     return instCode;
 }
 
@@ -46,7 +41,7 @@ export function useInstCode(): string {
  * @return {*}  sapPlantId
  */
 export function useSapPlantIdInstCode(): string {
-    const { sapPlantId } = useSettings();
+    const { sapPlantId } = usePlantSettings();
     return sapPlantId;
 }
 
@@ -56,6 +51,6 @@ export function useSapPlantIdInstCode(): string {
  * @return {*}  {string}
  */
 export function useProCoSysPlantId(): string {
-    const { proCoSysPlantId } = useSettings();
+    const { proCoSysPlantId } = usePlantSettings();
     return proCoSysPlantId;
 }

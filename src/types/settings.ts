@@ -1,7 +1,6 @@
-export interface Settings extends PlantSettings {
-    hasAcceptedTerms: boolean;
-    hasDoneOnboarding: boolean;
+export interface Settings {
     showTextHighlighting: boolean;
+    plantSettings: PlantSettings;
 }
 
 export interface PlantSettings {
@@ -9,8 +8,4 @@ export interface PlantSettings {
     sapPlantId: string;
     proCoSysPlantId: string;
     plantName: string;
-}
-
-export interface UsePlantSettings extends PlantSettings {
-    setPlantSettings: (plantSettings: PlantSettings) => void;
 }

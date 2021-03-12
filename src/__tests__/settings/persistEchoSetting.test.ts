@@ -19,14 +19,7 @@ const setItem = jest.spyOn(storage, 'setItem');
 const removeItem = jest.spyOn(storage, 'removeItem');
 
 const mockSettings: Settings = {
-    ...settings,
-    hasAcceptedTerms: false,
-    hasDoneOnboarding: false,
-    offlineSettings: [],
-    instCode: '',
-    sapPlantId: '',
-    proCoSysPlantId: '',
-    plantName: ''
+    ...settings
 };
 
 describe('PersistEchoSetting', () => {

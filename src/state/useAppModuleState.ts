@@ -1,7 +1,7 @@
 import { useAtom } from '@dbeining/react-atom';
 import { setModuleState } from '../actions/globalStateActions';
-import { getCoreState } from '../state/globalState';
-import useInitial from './useInitial';
+import useInitial from '../hooks/useInitial';
+import { getCoreState } from './globalState';
 
 /**
  * Hook for handling the application module state object.

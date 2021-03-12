@@ -1,22 +1,40 @@
-import { LegendOptions } from '../types';
+import { ActivePanel, GlobalState, LegendOptions } from '../types';
 import { PlantsData } from '../types/plants';
-import { Settings } from '../types/settings';
+import { PlantSettings, Settings } from '../types/settings';
 
 export const legendOptions: LegendOptions = {
     isActive: true,
     selectedLegendType: 'Stid'
 };
 
-export const settings: Settings = {
-    hasAcceptedTerms: false,
-    hasDoneOnboarding: false,
+const plantSettings: PlantSettings = {
     instCode: '',
     sapPlantId: '',
     proCoSysPlantId: '',
-    plantName: '',
-    showTextHighlighting: true
+    plantName: ''
+};
+
+export const settings: Settings = {
+    showTextHighlighting: true,
+    plantSettings
 };
 
 export const plantsData: PlantsData = {
     plants: []
 };
+
+const defaultGlobalState: GlobalState = {
+    modules: [],
+    panels: [],
+    ui: {},
+    activePanel: ActivePanel.None,
+    activeModule: '',
+    moduleState: {},
+    userProfile: undefined,
+    userPhotoUrl: undefined,
+    settings,
+    plantsData,
+    legendOptions
+};
+
+export default defaultGlobalState;
