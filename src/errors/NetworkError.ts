@@ -14,14 +14,11 @@ import BaseError from './BaseError';
 export default class NetworkError extends BaseError {
     constructor(message: string, httpStatusCode: number, url: string, exception: Record<string, unknown>) {
         super(message, exception);
-
         this.addProperties({ url, httpStatusCode });
-        if (isNullOrEmpty(message)) {
-            this.message = `${this.name} ${httpStatusCode} ${url}`;
-        }
+        isNullOrEmpty(message) && (this.message = `${this.name} ${httpStatusCode} ${url}`);
     }
 
     getUrl = (): string => {
-        return this.properties.url;
+        return this.properties.url as string;
     };
 }

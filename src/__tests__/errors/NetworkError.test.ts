@@ -25,4 +25,14 @@ describe('NetworkError', () => {
     it('check properties getUrl method', () => {
         expect(nwError.getUrl()).toEqual(url);
     });
+
+    it('check BaseError name when message is empty', () => {
+        const ne = new NetworkError('', httpStatusCode, url, exception);
+        expect(ne.message).toEqual(`${ne.name} ${httpStatusCode} ${url}`);
+    });
+
+    it('check BaseError name when message is not empty', () => {
+        const ne = new NetworkError(message, httpStatusCode, url, exception);
+        expect(ne.message).not.toEqual(ne.name);
+    });
 });
