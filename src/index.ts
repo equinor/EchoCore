@@ -13,6 +13,9 @@ import echoClient from './services/echoClient/echoClient';
 import useAppModuleState from './state/useGlobalState';
 
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
+export { default as BaseError } from './errors/BaseError';
+export { default as NetworkError } from './errors/NetworkError';
+export type { ErrorProperties } from './errors/types';
 export { default as useCleanup } from './hooks/useCleanup';
 export { default as useInitial } from './hooks/useInitial';
 export { default as usePanels } from './hooks/usePanels';
