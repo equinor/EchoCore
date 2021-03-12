@@ -11,17 +11,13 @@ import { ErrorProperties } from './types';
  */
 export default class BaseError extends Error {
     protected properties: ErrorProperties;
-    hasBeenLogged: boolean;
+    hasBeenLogged: boolean = false;
 
-    constructor(message: string, exception: Record<string, unknown>) {
+    constructor(message: string, exception?: Record<string, unknown>) {
         super(message);
-        this.properties = { ...exception };
+        this.properties = exception ? { ...exception } : {};
         this.name = this.constructor.name;
-        this.hasBeenLogged = false;
-
-        if (isNullOrEmpty(message)) {
-            this.message = this.name;
-        }
+        isNullOrEmpty(message) && (this.message = this.name);
     }
 
     getProperties = (): ErrorProperties => this.properties;

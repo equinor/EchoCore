@@ -18,4 +18,14 @@ describe('BaseError', () => {
         baseError.addProperties({ extra: 123 });
         expect(baseError.getProperties()).toEqual(properties);
     });
+
+    it('check BaseError name when message is empty', () => {
+        const be = new BaseError('', exception);
+        expect(be.message).toEqual(be.name);
+    });
+
+    it('check BaseError name when message is not empty', () => {
+        const be = new BaseError(message, exception);
+        expect(be.message).not.toEqual(be.name);
+    });
 });

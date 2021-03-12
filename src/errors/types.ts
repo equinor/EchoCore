@@ -5,8 +5,6 @@
  * @interface ErrorProperties
  */
 export interface ErrorProperties {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    errors?: any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any; //support any properties in exception/error
+    errors?: string | Record<string, unknown>;
+    [key: string]: unknown; //support any properties in exception/error
 }
