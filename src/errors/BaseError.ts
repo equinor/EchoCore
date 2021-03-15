@@ -1,5 +1,5 @@
 import { isNullOrEmpty } from '../utils/stringUtils';
-import { ErrorProperties } from './types';
+import { BaseErrorArgs, ErrorProperties } from './types';
 
 /**
  * Base Error class is intended to be used as a base class for every type of Error generated
@@ -13,7 +13,7 @@ export default class BaseError extends Error {
     protected properties: ErrorProperties;
     hasBeenLogged: boolean = false;
 
-    constructor(message: string, exception?: Record<string, unknown>) {
+    constructor({ message, exception }: BaseErrorArgs) {
         super(message);
         this.properties = exception ? { ...exception } : {};
         this.name = this.constructor.name;

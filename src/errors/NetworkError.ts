@@ -1,5 +1,6 @@
 import { isNullOrEmpty } from '../utils/stringUtils';
 import BaseError from './BaseError';
+import { NetworkErrorArgs } from './types';
 
 /**
  * Network Error class represent a Network error ocurred during any given HTTP request
@@ -12,8 +13,8 @@ import BaseError from './BaseError';
  * @extends {BaseError}
  */
 export default class NetworkError extends BaseError {
-    constructor(message: string, httpStatusCode: number, url: string, exception: Record<string, unknown>) {
-        super(message, exception);
+    constructor({ message, httpStatusCode, url, exception }: NetworkErrorArgs) {
+        super({ message, exception });
         this.addProperties({ url, httpStatusCode });
         isNullOrEmpty(message) && (this.message = `${this.name} ${httpStatusCode} ${url}`);
     }
