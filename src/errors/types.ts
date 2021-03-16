@@ -12,7 +12,7 @@ export interface ErrorProperties {
 }
 
 export interface ErrorInitializerFunction<T extends BaseError, U extends CommonErrorArgs> {
-    (ErrorType: { new (args): T }, args: U, extentionFunction?: () => BaseError): BaseError;
+    (ErrorType: { new (args): T }, args: U, extendedInitializerFunction?: () => BaseError): BaseError;
 }
 
 export interface BaseErrorArgs {
