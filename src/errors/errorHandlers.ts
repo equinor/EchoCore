@@ -61,7 +61,7 @@ export const handleClientError = (
         exception
     };
     const errorInstance = initializeError(NetworkError, args, extendedInitializerFunction);
-    customHandler?.(errorInstance) || handleError(errorInstance);
+    customHandler ? customHandler(errorInstance) : handleError(errorInstance);
 
     return errorInstance;
 };
