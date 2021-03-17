@@ -4,5 +4,5 @@ export interface EchoEventHub {
 }
 
 export enum EchoEvents {
-    ChangePlant = 'changePlant'
+    PlantChanged = 'plantChanged'
 }
