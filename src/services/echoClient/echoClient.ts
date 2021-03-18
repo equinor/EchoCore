@@ -1,7 +1,7 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
 import { AuthenticationProvider } from '../authentication/authProvider';
 import EchoAuthProvider from '../authentication/echoProvider';
-import { BaseClient } from '../baseClient.ts/baseClient';
+import BaseClient from '../baseClient/baseClient';
 import { echoRequest } from './echoClientConfig';
 
 /**

@@ -1,6 +1,6 @@
-import { isNullOrEmpty } from '../utils/stringUtils';
-import BaseError from './BaseError';
-import { NetworkErrorArgs } from './types';
+import { isNullOrEmpty } from '../../utils/stringUtils';
+import BaseError from '../BaseError';
+import { NetworkErrorArgs } from '../types';
 
 /**
  * Network Error class represent a Network error ocurred during any given HTTP request
