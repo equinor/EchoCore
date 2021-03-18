@@ -1,5 +1,5 @@
 import { handleClientError } from '../../errors/errorHandlers';
-import { BackendError, NotFoundError, ValidationError } from '../../errors/NetworkErrors';
+import { BackendError, NotFoundError, ValidationError } from '../../errors/network';
 
 describe('handleClientError', () => {
     const url = 'http://localhost:3000';

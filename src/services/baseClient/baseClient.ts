@@ -1,7 +1,7 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
 import { env, isDevelopment } from '../../configuration/environment';
-import BaseError from '../../errors/BaseError';
 import { handleClientError } from '../../errors/errorHandlers';
+import { NetworkError } from '../../errors/network';
 import { AuthenticationProvider } from '../authentication/authProvider';
 
 /**
@@ -22,7 +22,7 @@ export default class BaseClient {
         url: string,
         headerOptions: Record<string, unknown> = {},
         method = 'GET',
-        body?: BodyInit,
+        body?: unknown,
         signal?: AbortSignal
     ): Promise<Response> | never => {
         let response = {} as Response;
@@ -57,7 +57,7 @@ export default class BaseClient {
         token: string,
         headerOptions: Record<string, unknown>,
         method = 'GET',
-        body?: BodyInit,
+        body?: any, // eslint-disable-line @typescript-eslint/no-explicit-any
         signal?: AbortSignal
     ): Promise<Response> | never => {
         let statusCode = 0;
@@ -91,7 +91,7 @@ export default class BaseClient {
             }
             return response;
         } catch (ex) {
-            const errorInstance: BaseError = handleClientError(ex, statusCode, endpoint);
+            const errorInstance: NetworkError = handleClientError(ex, statusCode, endpoint);
             throw errorInstance;
         }
     };
