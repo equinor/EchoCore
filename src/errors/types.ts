@@ -23,9 +23,3 @@ export interface BaseErrorArgs {
 export interface CommonErrorArgs extends BaseErrorArgs {
     [key: string]: unknown;
 }
-
-export interface NetworkErrorArgs extends CommonErrorArgs {
-    exception: Record<string, unknown>;
-    httpStatusCode: number;
-    url: string;
-}

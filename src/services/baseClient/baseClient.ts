@@ -1,6 +1,6 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
 import { env, isDevelopment } from '../../configuration/environment';
-import { handleClientError } from '../../errors/errorHandlers';
+import { initializeError } from '../../errors/errorHandlers';
 import { NetworkError } from '../../errors/network';
 import { AuthenticationProvider } from '../authentication/authProvider';
 
@@ -86,8 +86,13 @@ export default class BaseClient {
                 }
             }
             return response;
-        } catch (ex) {
-            const errorInstance: NetworkError = handleClientError(ex, statusCode, endpoint);
+        } catch (exception) {
+            const errorInstance = initializeError(NetworkError, {
+                message: '',
+                httpStatusCode: statusCode,
+                url: endpoint,
+                exception
+            });
             throw errorInstance;
         }
     };

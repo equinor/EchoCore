@@ -1,6 +1,7 @@
 import BaseError from './BaseError';
 import { BackendError, ForbiddenError, NetworkError, NotFoundError, ValidationError } from './network';
-import { ErrorInitializerFunction, NetworkErrorArgs } from './types';
+import { NetworkErrorArgs } from './network/NetworkError';
+import { ErrorInitializerFunction } from './types';
 
 export const initializeError: ErrorInitializerFunction<NetworkError, NetworkErrorArgs> = (
     ErrorType,
@@ -30,20 +31,4 @@ export const initializeError: ErrorInitializerFunction<NetworkError, NetworkErro
         errorInstance = new ErrorType(args);
     }
     return errorInstance;
-};
-
-export const handleClientError = (
-    exception: Record<string, unknown>,
-    statusCode: number,
-    endpoint: string
-): NetworkError => {
-    const args: NetworkErrorArgs = {
-        message: '',
-        httpStatusCode: statusCode,
-        url: endpoint,
-        exception
-    };
-    const errorInstance = initializeError(NetworkError, args);
-
-    return errorInstance as NetworkError;
 };

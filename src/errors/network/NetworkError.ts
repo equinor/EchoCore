@@ -1,10 +1,16 @@
 import { isNullOrEmpty } from '../../utils/stringUtils';
 import BaseError from '../BaseError';
-import { NetworkErrorArgs } from '../types';
+import { CommonErrorArgs } from '../types';
+
+export interface NetworkErrorArgs extends CommonErrorArgs {
+    exception: Record<string, unknown>;
+    httpStatusCode: number;
+    url: string;
+}
 
 /**
  * Network Error class represent a Network error ocurred during any given HTTP request
- * @param message an error message in human readible format
+ * @param message an error message in human readable format
  * @param httpStatusCode HTTP error code
  * @param url A URL endpoint where the connection was initiated
  * @param exception a generated exception
