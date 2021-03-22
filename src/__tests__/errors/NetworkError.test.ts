@@ -1,10 +1,10 @@
-import NetworkError from '../../errors/NetworkErrors/NetworkError';
+import NetworkError from '../../errors/network/NetworkError';
 
 describe('NetworkError', () => {
     const message = 'Network Error Testing';
     const httpStatusCode = 500;
     const url = 'http://localhost:3000';
-    const exception = { NetworkException: 'enpoint is unreachable' };
+    const exception = { NetworkException: 'endpoint is unreachable' };
 
     const nwError = new NetworkError({ message, httpStatusCode, url, exception });
 

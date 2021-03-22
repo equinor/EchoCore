@@ -2,7 +2,7 @@ import BaseError from './BaseError';
 
 /**
  * ErrorProperties provides a general purpose object
- * for extending the number error porperties available
+ * for extending the number error properties available
  * @export
  * @interface ErrorProperties
  */

@@ -14,7 +14,7 @@ import useAppModuleState from './state/useGlobalState';
 
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
 export { default as BaseError } from './errors/BaseError';
-export { default as NetworkError } from './errors/NetworkErrors/NetworkError';
+export { BackendError, ForbiddenError, NetworkError, NotFoundError, ValidationError } from './errors/network';
 export type { ErrorProperties } from './errors/types';
 export { default as useCleanup } from './hooks/useCleanup';
 export { default as useInitial } from './hooks/useInitial';

@@ -3,7 +3,7 @@ import { BaseErrorArgs, ErrorProperties } from './types';
 
 /**
  * Base Error class is intended to be used as a base class for every type of Error generated
- * @param message an error message in human readible format
+ * @param message an error message in human readable format
  * @param exception a generated exception provided as a {Record<string, unknown>} type
  * @export
  * @class BaseError

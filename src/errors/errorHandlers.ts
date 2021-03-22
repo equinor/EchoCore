@@ -13,21 +13,21 @@ export const initializeError: ErrorInitializerFunction<NetworkError, NetworkErro
             case 400:
                 errorInstance =
                     exception.title && (exception.title as string).toLowerCase().includes('validation')
-                        ? new ValidationError({ ...args, message: 'ValidationError' })
-                        : new BackendError({ ...args, message: 'BackendError' });
+                        ? new ValidationError(args)
+                        : new BackendError(args);
                 break;
             case 403:
-                errorInstance = new ForbiddenError({ ...args, message: 'ForbiddenError' });
+                errorInstance = new ForbiddenError(args);
                 break;
             case 404:
-                errorInstance = new NotFoundError({ ...args, message: 'NotFoundError' });
+                errorInstance = new NotFoundError(args);
                 break;
             default:
-                errorInstance = new BackendError({ ...args, message: 'BackendError' });
+                errorInstance = new BackendError(args);
                 break;
         }
     } else {
-        errorInstance = new ErrorType({ args, message: 'NetworkError' });
+        errorInstance = new ErrorType(args);
     }
     return errorInstance;
 };

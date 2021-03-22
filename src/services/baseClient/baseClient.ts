@@ -35,18 +35,14 @@ export default class BaseClient {
             )
             .then(async (authenticationResult) => {
                 if (authenticationResult) {
-                    try {
-                        response = await this.fetchFromUrl(
-                            url,
-                            authenticationResult.accessToken,
-                            headerOptions,
-                            method,
-                            body,
-                            signal
-                        );
-                    } catch (exception) {
-                        throw exception;
-                    }
+                    response = await this.fetchFromUrl(
+                        url,
+                        authenticationResult.accessToken,
+                        headerOptions,
+                        method,
+                        body,
+                        signal
+                    );
                 }
             });
         return response;
