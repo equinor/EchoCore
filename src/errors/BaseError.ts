@@ -1,4 +1,3 @@
-import { isNullOrEmpty } from '../utils/stringUtils';
 import { BaseErrorArgs, ErrorProperties } from './types';
 
 /**
@@ -11,13 +10,13 @@ import { BaseErrorArgs, ErrorProperties } from './types';
  */
 export default class BaseError extends Error {
     protected properties: ErrorProperties;
-    hasBeenLogged: boolean = false;
+    hasBeenLogged = false;
 
     constructor({ message, exception }: BaseErrorArgs) {
         super(message);
         this.properties = exception ? { ...exception } : {};
         this.name = this.constructor.name;
-        isNullOrEmpty(message) && (this.message = this.name);
+        !message && (this.message = this.name);
     }
 
     getProperties = (): ErrorProperties => this.properties;

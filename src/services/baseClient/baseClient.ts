@@ -1,5 +1,6 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
 import { env, isDevelopment } from '../../configuration/environment';
+import ArgumentError from '../../errors/ArgumentError';
 import { initializeError } from '../../errors/errorHandlers';
 import { NetworkError } from '../../errors/network';
 import { AuthenticationProvider } from '../authentication/authProvider';
@@ -24,28 +25,26 @@ export default class BaseClient {
         method = 'GET',
         body?: unknown,
         signal?: AbortSignal
-    ): Promise<Response> | never => {
-        let response = {} as Response;
-        if (!this.authProvider.userProperties.account) return response;
+    ): Promise<Response> => {
+        if (!this.authProvider.userProperties.account) throw new ArgumentError({ message: 'Missing argument' });
 
-        await this.authProvider
+        return await this.authProvider
             .aquireTokenSilentOrRedirectToAuthenticate(
                 this.getSilentRequest(this.authProvider.userProperties.account),
                 this.authProvider.loginRequest
             )
             .then(async (authenticationResult) => {
-                if (authenticationResult) {
-                    response = await this.fetchFromUrl(
-                        url,
-                        authenticationResult.accessToken,
-                        headerOptions,
-                        method,
-                        body,
-                        signal
-                    );
-                }
+                return authenticationResult
+                    ? await this.fetchFromUrl(
+                          url,
+                          authenticationResult.accessToken,
+                          headerOptions,
+                          method,
+                          body,
+                          signal
+                      )
+                    : ({} as Response);
             });
-        return response;
     };
 
     fetchFromUrl = async (
@@ -55,7 +54,7 @@ export default class BaseClient {
         method = 'GET',
         body?: any, // eslint-disable-line @typescript-eslint/no-explicit-any
         signal?: AbortSignal
-    ): Promise<Response> | never => {
+    ): Promise<Response> => {
         let statusCode = 0;
         try {
             if (isDevelopment() || env().REACT_APP_LOGGER_ACTIVE) console.log('Fetch:', endpoint);
@@ -88,7 +87,6 @@ export default class BaseClient {
             return response;
         } catch (exception) {
             const errorInstance = initializeError(NetworkError, {
-                message: '',
                 httpStatusCode: statusCode,
                 url: endpoint,
                 exception

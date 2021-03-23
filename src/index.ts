@@ -13,6 +13,7 @@ import echoClient from './services/echoClient/echoClient';
 import useAppModuleState from './state/useGlobalState';
 
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
+export { default as ArgumentError } from './errors/ArgumentError';
 export { default as BaseError } from './errors/BaseError';
 export { BackendError, ForbiddenError, NetworkError, NotFoundError, ValidationError } from './errors/network';
 export type { ErrorProperties } from './errors/types';

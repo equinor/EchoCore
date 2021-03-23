@@ -4,7 +4,6 @@ import { NetworkErrorArgs } from '../../errors/network/NetworkError';
 
 describe('handleClientError', () => {
     const args = {
-        message: '',
         exception: {
             errors: { NetworkException: 'endpoint is unreachable' },
             dummyProperty: true
