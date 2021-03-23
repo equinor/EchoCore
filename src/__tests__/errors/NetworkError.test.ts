@@ -27,7 +27,7 @@ describe('NetworkError', () => {
     });
 
     it('check BaseError name when message is empty', () => {
-        const ne = new NetworkError({ message: '', httpStatusCode, url, exception });
+        const ne = new NetworkError({ httpStatusCode, url, exception });
         expect(ne.message).toEqual(`${ne.name} ${httpStatusCode} ${url}`);
     });
 
