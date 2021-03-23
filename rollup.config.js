@@ -16,7 +16,7 @@ export default [
             format: 'cjs',
             exports: 'named'
         },
-        external: ['react', 'react-dom'],
+        external: ['react', 'react-dom', 'react-router'],
         plugins: [
             del({ targets: 'dist/*', runOnce: true }),
             ts2(),
