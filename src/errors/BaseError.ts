@@ -11,7 +11,7 @@ import { BaseErrorArgs, ErrorProperties } from './types';
  */
 export default class BaseError extends Error {
     protected properties: ErrorProperties;
-    hasBeenLogged: boolean = false;
+    hasBeenLogged = false;
 
     constructor({ message, exception }: BaseErrorArgs) {
         super(message);
