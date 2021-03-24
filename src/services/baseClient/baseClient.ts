@@ -26,8 +26,8 @@ export default class BaseClient {
         body?: unknown,
         signal?: AbortSignal
     ): Promise<Response> => {
-        if (!this.authProvider.userProperties.account) throw new ArgumentError({ message: 'Missing argument' });
-
+        if (!this.authProvider.userProperties.account)
+            throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
         return await this.authProvider
             .aquireTokenSilentOrRedirectToAuthenticate(
                 this.getSilentRequest(this.authProvider.userProperties.account),

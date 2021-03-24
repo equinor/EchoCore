@@ -1,3 +1,11 @@
 import BaseError from './BaseError';
 
-export default class ArgumentError extends BaseError {}
+interface ArgumentErrorArgs {
+    argumentName: string;
+}
+
+export default class ArgumentError extends BaseError {
+    constructor({ argumentName }: ArgumentErrorArgs) {
+        super({ message: argumentName });
+    }
+}

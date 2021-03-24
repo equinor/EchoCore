@@ -5,6 +5,7 @@ export interface NetworkErrorArgs extends CommonErrorArgs {
     exception: Record<string, unknown>;
     httpStatusCode: number;
     url: string;
+    message?: string;
 }
 
 /**
@@ -19,7 +20,7 @@ export interface NetworkErrorArgs extends CommonErrorArgs {
  */
 export default class NetworkError extends BaseError {
     constructor({ message, httpStatusCode, url, exception }: NetworkErrorArgs) {
-        super({ message, exception });
+        super({ message: message || '', exception });
         this.addProperties({ url, httpStatusCode });
         !message && (this.message = `${this.name} ${httpStatusCode} ${url}`);
     }

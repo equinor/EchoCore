@@ -20,7 +20,7 @@ describe('BaseError', () => {
     });
 
     it('check BaseError name when message is empty', () => {
-        const be = new BaseError({ exception });
+        const be = new BaseError({ message: '', exception });
         expect(be.message).toEqual(be.name);
     });
 
