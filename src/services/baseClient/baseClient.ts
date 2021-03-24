@@ -1,5 +1,8 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
 import { env, isDevelopment } from '../../configuration/environment';
+import ArgumentError from '../../errors/ArgumentError';
+import { initializeError } from '../../errors/errorHandlers';
+import { NetworkError } from '../../errors/network';
 import { AuthenticationProvider } from '../authentication/authProvider';
 
 /**
@@ -7,7 +10,7 @@ import { AuthenticationProvider } from '../authentication/authProvider';
  * @param authProvider used for fetching token to be used in fetch
  * @getSilentRequest returns the silent request used to perform the action of fetching the authentication provider token
  */
-export class BaseClient {
+export default class BaseClient {
     private authProvider: AuthenticationProvider;
     private getSilentRequest: (account: AccountInfo) => SilentRequest;
 
@@ -18,69 +21,53 @@ export class BaseClient {
 
     fetch = async (
         url: string,
-        headerOptions: unknown = {},
+        headerOptions: Record<string, unknown> = {},
         method = 'GET',
         body?: unknown,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        handleClientError?: (ex: unknown, statusCode: number, endpoint: string) => any,
         signal?: AbortSignal
     ): Promise<Response> => {
-        let response = {} as Response;
-        if (!this.authProvider.userProperties.account) return response;
-
-        await this.authProvider
+        if (!this.authProvider.userProperties.account)
+            throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
+        return await this.authProvider
             .aquireTokenSilentOrRedirectToAuthenticate(
                 this.getSilentRequest(this.authProvider.userProperties.account),
                 this.authProvider.loginRequest
             )
             .then(async (authenticationResult) => {
-                if (authenticationResult) {
-                    response = await this.fetchFromUrl(
-                        url,
-                        authenticationResult.accessToken,
-                        headerOptions,
-                        method,
-                        body,
-                        handleClientError,
-                        signal
-                    );
-                }
+                return authenticationResult
+                    ? await this.fetchFromUrl(
+                          url,
+                          authenticationResult.accessToken,
+                          headerOptions,
+                          method,
+                          body,
+                          signal
+                      )
+                    : ({} as Response);
             });
-        return response;
     };
 
     fetchFromUrl = async (
         endpoint: string,
         token: string,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        headerOptions: any = {},
+        headerOptions: Record<string, unknown>,
         method = 'GET',
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        body?: any,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        handleClientError?: (ex: unknown, statusCode: number, endpoint: string) => any,
+        body?: any, // eslint-disable-line @typescript-eslint/no-explicit-any
         signal?: AbortSignal
     ): Promise<Response> => {
         let statusCode = 0;
-
         try {
             if (isDevelopment() || env().REACT_APP_LOGGER_ACTIVE) console.log('Fetch:', endpoint);
-
-            const headers = body
-                ? {
-                      Authorization: 'Bearer ' + token,
-                      ...headerOptions
-                  }
-                : {
-                      Authorization: 'Bearer ' + token,
-                      'Content-Type': 'application/json',
-                      ...headerOptions
-                  };
+            const headers = {
+                Authorization: 'Bearer ' + token,
+                ...headerOptions,
+                ...(body && { 'Content-Type': 'application/json' })
+            };
 
             const response: Response = await fetch(endpoint, {
                 method,
-                headers: headers,
-                body: body,
+                headers,
+                body,
                 signal
             });
 
@@ -98,13 +85,13 @@ export class BaseClient {
                 }
             }
             return response;
-        } catch (ex) {
-            if (handleClientError) {
-                const handledError = handleClientError(ex, statusCode, endpoint);
-                throw handledError;
-            } else {
-                throw ex;
-            }
+        } catch (exception) {
+            const errorInstance = initializeError(NetworkError, {
+                httpStatusCode: statusCode,
+                url: endpoint,
+                exception
+            });
+            throw errorInstance;
         }
     };
 }
