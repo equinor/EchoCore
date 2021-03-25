@@ -2,7 +2,7 @@
 
 Please make sure you can check the following boxes:
 
--   [ ] BugFix or Feature #UserStoryNumber: One sentence explaining **to the user** what's new/fixed.
+-   [ ] Pull request title = BugFix or Feature #UserStoryNumber: One sentence explaining **to the user** what's new/fixed.
 -   [ ] My code follows the code style of this project
 -   [ ] All new and existing tests passed
 -   [ ] Fix any eslint/prettier warnings/errors: npm run lint
