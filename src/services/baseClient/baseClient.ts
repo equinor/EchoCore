@@ -19,6 +19,17 @@ export default class BaseClient {
         this.getSilentRequest = getSilentRequest;
     }
 
+    async getAccessToken(): Promise<string | undefined> {
+        if (!this.authProvider.userProperties.account) {
+            throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
+        }
+        return await this.authProvider.getAccessToken(this.getSilentRequest(this.authProvider.userProperties.account));
+    }
+
+    isAuthenticated(): boolean {
+        return this.authProvider.isAuthenticated;
+    }
+
     fetch = async (
         url: string,
         headerOptions: Record<string, unknown> = {},
