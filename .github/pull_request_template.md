@@ -1,7 +1,3 @@
-# New Pull Request
-
-Commit message should talk about WHAT changed, and WHY. Not HOW – how is the diff, and you don't need to repeat it. If you rename title, make sure to update commit message when you click squash and merge.
-
 ## Prerequisites
 
 Please make sure you can check the following boxes:
