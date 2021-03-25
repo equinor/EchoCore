@@ -1,5 +1,5 @@
 import { ComponentType } from 'react';
-import { BaseComponentProps } from './api';
+import { BaseAppComponentProps } from './api';
 import { Without } from './common';
 
 /**
@@ -7,4 +7,4 @@ import { Without } from './common';
  */
 export type AnyComponent<T> = ComponentType<T>;
 
-export type WrappedComponent<TProps> = ComponentType<Without<TProps, keyof BaseComponentProps>>;
+export type WrappedComponent<TProps> = ComponentType<Without<TProps, keyof BaseAppComponentProps>>;
