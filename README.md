@@ -1,4 +1,4 @@
-![logo](./doc/ee.png)
+![logo](/doc/ee.png)
 
 # EchoCore
 
