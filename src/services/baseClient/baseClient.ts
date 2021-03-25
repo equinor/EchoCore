@@ -6,7 +6,7 @@ import { NetworkError } from '../../errors/network';
 import { AuthenticationProvider } from '../authentication/authProvider';
 
 /**
- * Base Client class providing basic methods for performing a fetch with authentication
+ * Base Client class providing methods for performing a fetch with authentication and acquiring AccessToken.
  * @param authProvider used for fetching token to be used in fetch
  * @getSilentRequest returns the silent request used to perform the action of fetching the authentication provider token
  */
@@ -18,14 +18,24 @@ export default class BaseClient {
         this.authProvider = authProvider;
         this.getSilentRequest = getSilentRequest;
     }
-
+    /**
+     * Function for silently acquiring AccessToken.
+     *
+     * @return {*}  {(Promise<string | undefined>)}
+     * @memberof BaseClient
+     */
     async getAccessToken(): Promise<string | undefined> {
         if (!this.authProvider.userProperties.account) {
             throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
         }
         return await this.authProvider.getAccessToken(this.getSilentRequest(this.authProvider.userProperties.account));
     }
-
+    /**
+     * Function witch returns true if user is authenticated
+     *
+     * @return {*}  {boolean}
+     * @memberof BaseClient
+     */
     isAuthenticated(): boolean {
         return this.authProvider.isAuthenticated;
     }
