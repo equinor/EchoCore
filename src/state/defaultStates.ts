@@ -27,6 +27,10 @@ const defaultGlobalState: GlobalState = {
     modules: [],
     panels: [],
     ui: {},
+    registry: {
+        panels: {},
+        apps: {}
+    },
     activePanel: ActivePanel.None,
     activeModule: '',
     moduleState: {},
