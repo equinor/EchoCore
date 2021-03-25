@@ -30,13 +30,13 @@ export default class BaseClient {
         return this.authProvider.isAuthenticated;
     }
 
-    fetch = async (
+    async fetch(
         url: string,
         headerOptions: Record<string, unknown> = {},
         method = 'GET',
         body?: unknown,
         signal?: AbortSignal
-    ): Promise<Response> => {
+    ): Promise<Response> {
         if (!this.authProvider.userProperties.account)
             throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
         return await this.authProvider
@@ -56,16 +56,16 @@ export default class BaseClient {
                       )
                     : ({} as Response);
             });
-    };
+    }
 
-    fetchFromUrl = async (
+    async fetchFromUrl(
         endpoint: string,
         token: string,
         headerOptions: Record<string, unknown>,
         method = 'GET',
         body?: any, // eslint-disable-line @typescript-eslint/no-explicit-any
         signal?: AbortSignal
-    ): Promise<Response> => {
+    ): Promise<Response> {
         let statusCode = 0;
         try {
             if (isDevelopment() || env().REACT_APP_LOGGER_ACTIVE) console.log('Fetch:', endpoint);
@@ -104,5 +104,5 @@ export default class BaseClient {
             });
             throw errorInstance;
         }
-    };
+    }
 }
