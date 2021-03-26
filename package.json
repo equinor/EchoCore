@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-core",
-    "version": "0.1.23",
+    "version": "0.1.24",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "dist/index.js",
     "types": "dist/types/index.d.ts",
@@ -22,8 +22,8 @@
     "author": "Echo Core",
     "license": "MIT",
     "peerDependencies": {
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1"
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
     },
     "dependencies": {
         "@azure/msal-browser": "^2.8.0",
@@ -38,7 +38,7 @@
         "@rollup/plugin-node-resolve": "^11.0.1",
         "@rollup/plugin-typescript": "^8.0.0",
         "@types/jest": "^26.0.20",
-        "@types/react": "^16.9.46",
+        "@types/react": "^17.0.3",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
         "babel-jest": "^26.6.3",
@@ -50,7 +50,7 @@
         "jest": "^26.6.3",
         "jest-expo": "^40.0.1",
         "prettier": "^2.0.5",
-        "react": "^16.13.1",
+        "react": "^17.0.2",
         "react-test-renderer": "^17.0.1",
         "rollup": "^2.34.1",
         "rollup-plugin-babel": "^4.4.0",
