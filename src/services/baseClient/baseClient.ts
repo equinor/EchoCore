@@ -1,12 +1,14 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
-import { env, isDevelopment } from '../../configuration/environment';
+import { BaseError } from '../..';
 import ArgumentError from '../../errors/ArgumentError';
 import { initializeError } from '../../errors/errorHandlers';
 import { NetworkError } from '../../errors/network';
 import { AuthenticationProvider } from '../authentication/authProvider';
 
+class AuthenticationError extends BaseError {}
+
 /**
- * Base Client class providing basic methods for performing a fetch with authentication
+ * Base Client class providing methods for performing a fetch with authentication and acquiring AccessToken.
  * @param authProvider used for fetching token to be used in fetch
  * @getSilentRequest returns the silent request used to perform the action of fetching the authentication provider token
  */
@@ -18,46 +20,72 @@ export default class BaseClient {
         this.authProvider = authProvider;
         this.getSilentRequest = getSilentRequest;
     }
+    /**
+     * Function for silently acquiring AccessToken.
+     *
+     * @return {*}  {(Promise<string | undefined>)}
+     * @memberof BaseClient
+     */
+    async getAccessToken(): Promise<string> {
+        if (!this.authProvider.userProperties.account)
+            throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
 
-    fetch = async (
+        try {
+            const authenticationResult = await this.authProvider.aquireTokenSilentOrRedirectToAuthenticate(
+                this.getSilentRequest(this.authProvider.userProperties.account),
+                this.authProvider.loginRequest
+            );
+            return authenticationResult ? authenticationResult.accessToken : '';
+        } catch (exception) {
+            throw new AuthenticationError({ message: 'failed to authenticate', exception });
+        }
+    }
+
+    /**
+     * Returns true if user is authenticated
+     *
+     * @return {*}  {boolean}
+     * @memberof BaseClient
+     */
+    isAuthenticated(): boolean {
+        return this.authProvider.isAuthenticated;
+    }
+
+    /**
+     * Fetch with accessToken from authProvider.
+     *
+     * @return {*}  {Promise<Response>}
+     * @memberof BaseClient
+     */
+    async fetch(
         url: string,
         headerOptions: Record<string, unknown> = {},
         method = 'GET',
-        body?: unknown,
+        body?: BodyInit,
         signal?: AbortSignal
-    ): Promise<Response> => {
+    ): Promise<Response> {
         if (!this.authProvider.userProperties.account)
             throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
-        return await this.authProvider
-            .aquireTokenSilentOrRedirectToAuthenticate(
-                this.getSilentRequest(this.authProvider.userProperties.account),
-                this.authProvider.loginRequest
-            )
-            .then(async (authenticationResult) => {
-                return authenticationResult
-                    ? await this.fetchFromUrl(
-                          url,
-                          authenticationResult.accessToken,
-                          headerOptions,
-                          method,
-                          body,
-                          signal
-                      )
-                    : ({} as Response);
-            });
-    };
+        const accessToken = await this.getAccessToken();
+        return await this.fetchWithToken(url, accessToken, headerOptions, method, body, signal);
+    }
 
-    fetchFromUrl = async (
+    /**
+     * Fetch with specific accessToken.
+     *
+     * @return {*}  {Promise<Response>}
+     * @memberof BaseClient
+     */
+    async fetchWithToken(
         endpoint: string,
         token: string,
-        headerOptions: Record<string, unknown>,
+        headerOptions: Record<string, unknown> = {},
         method = 'GET',
-        body?: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+        body?: BodyInit,
         signal?: AbortSignal
-    ): Promise<Response> => {
+    ): Promise<Response> {
         let statusCode = 0;
         try {
-            if (isDevelopment() || env().REACT_APP_LOGGER_ACTIVE) console.log('Fetch:', endpoint);
             const headers = {
                 Authorization: 'Bearer ' + token,
                 ...headerOptions,
@@ -72,9 +100,6 @@ export default class BaseClient {
             });
 
             if (response.status) statusCode = response.status;
-            if (isDevelopment() || env().REACT_APP_LOGGER_ACTIVE) {
-                console.log('Done:', statusCode, endpoint);
-            }
 
             if (response && !response.ok) {
                 const contentType = response.headers.get('content-type');
@@ -93,5 +118,20 @@ export default class BaseClient {
             });
             throw errorInstance;
         }
-    };
+    }
+
+    /**
+     * use fetchWithToken instead
+     * @deprecated
+     */
+    async fetchFromUrl(
+        url: string,
+        accessToken: string,
+        headerOptions: Record<string, unknown>,
+        method = 'GET',
+        body?: BodyInit,
+        signal?: AbortSignal
+    ): Promise<Response> {
+        return await this.fetchWithToken(url, accessToken, headerOptions, method, body, signal);
+    }
 }
