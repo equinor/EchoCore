@@ -1,5 +1,5 @@
 import { User } from '@microsoft/microsoft-graph-types';
-import { env, isDevelopment } from '../../../configuration/environment';
+import { env, isDevelopment } from '../../configuration/environment';
 import EchoAuthProvider from '../authentication/echoProvider';
 import { graphApiRequest, graphConfig } from './graphConfig';
 

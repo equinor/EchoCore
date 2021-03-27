@@ -1,6 +1,4 @@
 import { EnvironmentVariables } from './configuration/environment';
-import EchoAuthProvider from './echo-base/services/authentication/echoProvider';
-import echoClient from './echo-base/services/echoClient/echoClient';
 import Env from './Env';
 import useAuthenticate from './hooks/useAuthenticate';
 import useLegendOptions from './hooks/useLegendOptions';
@@ -10,15 +8,15 @@ import useUserProfile from './hooks/useUserProfile';
 import { setLegendOption } from './legend/legendOptionsStateActions';
 import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './panels/corePanels';
 import registerPanels from './panels/registerPanel';
+import EchoAuthProvider from './services/authentication/echoProvider';
+import echoClient from './services/echoClient/echoClient';
 import useAppModuleState from './state/useGlobalState';
 
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
 export { default as ArgumentError } from './echo-base/errors/ArgumentError';
 export { default as BaseError } from './echo-base/errors/BaseError';
 export { BackendError, ForbiddenError, NetworkError, NotFoundError, ValidationError } from './echo-base/errors/network';
-export type { ErrorProperties } from './echo-base/errors/types';
-export { AuthenticationProvider } from './echo-base/services/authentication/authProvider';
-export { default as BaseClient } from './echo-base/services/baseClient/baseClient';
+export type { ErrorProperties } from './echo-base/types/error';
 export { default as eventHub } from './echo-base/utils/eventHub';
 export { storage } from './echo-base/utils/storage';
 export { default as useCleanup } from './hooks/useCleanup';
@@ -28,6 +26,8 @@ export * from './observers/classObserver';
 export { default as PanelHandler } from './panels/corePanels';
 export { getPlants, getPlantsData, setPlantsData } from './plants/globalPlantsDataActions';
 export { usePlants, usePlantsData } from './plants/usePlants';
+export { AuthenticationProvider } from './services/authentication/authProvider';
+export { default as BaseClient } from './services/baseClient/baseClient';
 export { default as EchoSettings } from './settings';
 export {
     getInstCode,

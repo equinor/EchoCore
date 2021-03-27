@@ -1,5 +1,5 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
-import { env } from '../../../configuration/environment';
+import { env } from '../../configuration/environment';
 
 export const echoClientId = env().REACT_APP_API_CLIENT_ID;
 

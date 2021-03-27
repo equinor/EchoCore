@@ -1,4 +1,5 @@
-import { EquinorModule, EquinorModuleMeta } from '../echo-setup/echoSetup';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { EquinorModule, EquinorModuleMeta } from '../types/module';
 
 export function removeElementById(id: string): void {
     document.getElementById(id)?.remove();

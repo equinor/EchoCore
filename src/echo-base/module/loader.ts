@@ -1,4 +1,4 @@
-import { EquinorModule, EquinorModuleData, EquinorModuleMeta } from './types';
+import { EquinorModule, EquinorModuleData, EquinorModuleMeta } from '../types/module';
 
 export function loadModule(
     meta: EquinorModuleMeta,

@@ -1,11 +1,9 @@
-import { ModuleApi } from '../types/api';
-
 export interface EquinorModuleMeta {
     name: string;
 }
 
 export interface EquinorModuleData {
-    setup: (api: ModuleApi) => void | Promise<void>;
+    setup: () => void | Promise<void>;
 }
 
 export type EquinorModule = EquinorModuleData & EquinorModuleMeta;

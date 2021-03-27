@@ -1,5 +1,5 @@
 import { Configuration } from '@azure/msal-browser';
-import { env } from '../../../configuration/environment';
+import { env } from '../../configuration/environment';
 import { AuthenticationProvider } from './authProvider';
 
 const webClientId = env().REACT_APP_AZURE_AD_CLIENT_ID;

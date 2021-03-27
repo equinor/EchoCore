@@ -1,7 +1,7 @@
 import { AccountInfo, InteractionRequiredAuthError, SilentRequest } from '@azure/msal-browser';
-import { AuthenticationProvider } from '../../echo-base/services/authentication/authProvider';
-import { echoConfig } from '../../echo-base/services/authentication/echoProvider';
-import { echoRequest } from '../../echo-base/services/echoClient/echoClientConfig';
+import { AuthenticationProvider } from '../../services/authentication/authProvider';
+import { echoConfig } from '../../services/authentication/echoProvider';
+import { echoRequest } from '../../services/echoClient/echoClientConfig';
 
 jest.mock('../../configuration/environment');
 jest.mock('../../configuration/environment', () => {

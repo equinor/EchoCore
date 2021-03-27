@@ -1,5 +1,4 @@
 export * from './common';
-export * from './eventHub';
 export * from './legend';
 export * from './modules';
 export * from './panel';

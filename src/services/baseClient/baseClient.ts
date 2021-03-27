@@ -1,11 +1,11 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
-import { BaseError } from '../../..';
-import ArgumentError from '../../errors/ArgumentError';
-import { initializeError } from '../../errors/errorHandlers';
-import { NetworkError } from '../../errors/network';
+import ArgumentError from '../../echo-base/errors/ArgumentError';
+import BaseError from '../../echo-base/errors/BaseError';
+import { initializeError } from '../../echo-base/errors/errorHandlers';
+import NetworkError from '../../echo-base/errors/network/NetworkError';
 import { AuthenticationProvider } from '../authentication/authProvider';
 
-class AuthenticationError extends BaseError {}
+export class AuthenticationError extends BaseError {}
 
 /**
  * Base Client class providing methods for performing a fetch with authentication and acquiring AccessToken.

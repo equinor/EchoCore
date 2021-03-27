@@ -1,5 +1,5 @@
 import { getModulesMeta } from '../echo-base/module/fetchModules';
-import { EchoPortal, ModulesMetaFetch } from '../echo-base/module/types';
+import { EchoPortal, ModulesMetaFetch } from '../echo-base/types/module';
 import { setSetting } from '../settings/globalSettingsActions';
 import persistEchoSetting from '../settings/persistEchoSetting';
 import { Panel } from '../types/panel';

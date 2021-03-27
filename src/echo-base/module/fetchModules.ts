@@ -1,5 +1,5 @@
 import BaseError from '../errors/BaseError';
-import { EquinorModuleMeta, ModulesMetaFetch } from './types';
+import { EquinorModuleMeta, ModulesMetaFetch } from '../types/module';
 import { verifyModulesMeta } from './verify';
 
 class ModulesMetaError extends BaseError {}

@@ -1,4 +1,8 @@
-import BaseError from './BaseError';
+export interface BaseError {
+    hasBeenLogged: boolean;
+    getProperties: () => ErrorProperties;
+    addProperties: (values: ErrorProperties) => void;
+}
 
 /**
  * ErrorProperties provides a general purpose object

@@ -1,4 +1,4 @@
-import { BaseErrorArgs, ErrorProperties } from './types';
+import { BaseErrorArgs, ErrorProperties } from '../types/error';
 
 /**
  * Base Error class is intended to be used as a base class for every type of Error generated
