@@ -1,9 +1,6 @@
 import { EchoEventHub, EchoEvents } from '../types/eventHub';
 
-// TODO: Write tests
-
 /**
- *
  * Class for creating an eventHub to be used for emitting and subscribing to either
  * custom events or a predefined EchoEvent.
  * @class EventHub
