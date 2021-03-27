@@ -1,4 +1,4 @@
-import { storage } from '../../echo-base/utils/storage';
+import { storage } from '../../../echo-base/utils/storage';
 
 describe('Storage', () => {
     function mockLocalStorage<T>(mockObj: T): T {

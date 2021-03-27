@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { setup } from '../echo-setup/setup';
+import { setup } from '../../echo-setup/setup';
 import EchoAuthProvider from '../services/authentication/echoProvider';
 import { setSetting } from '../settings/globalSettingsActions';
 import persistEchoSetting from '../settings/persistEchoSetting';
