@@ -2,7 +2,7 @@ import { Atom } from '@dbeining/react-atom';
 import { User } from '@microsoft/microsoft-graph-types';
 import { AppComponentProps } from './api';
 import { Dict } from './common';
-import { WrappedComponent } from './components';
+import { AnyComponent, WrappedComponent } from './components';
 import { LegendOptions } from './legend';
 import { Module } from './modules';
 import { Panel } from './panel';
@@ -54,4 +54,15 @@ export interface AppMetaData {
     name: string;
     icon: string;
     homeScreen?: boolean;
+}
+
+export interface ModuleApi {
+    registerApp: <Key extends string>(
+        name: Key,
+        Component: AnyComponent<AppComponentProps>,
+        meta?: AppMetaData
+    ) => void;
+    unRegisterApp: <Key extends string>(name: Key) => void;
+    registerPanels: <Key extends string>(key: Key, panels: Panel | Array<Panel>) => void;
+    unRegisterPanes: <Key extends string>(key: Key) => void;
 }

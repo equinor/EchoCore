@@ -1,5 +1,5 @@
-import { EchoLocalStorage } from '../echo-base/types/storage';
-import { storage } from '../echo-base/utils/storage';
+import { EchoLocalStorage } from '../../echo-base/types/storage';
+import { storage } from '../../echo-base/utils/storage';
 import { plantsData } from '../state/defaultStates';
 import { PlantsData } from '../types/plants';
 

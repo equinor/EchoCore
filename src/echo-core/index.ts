@@ -10,15 +10,20 @@ import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './panels/corePanels';
 import registerPanels from './panels/registerPanel';
 import EchoAuthProvider from './services/authentication/echoProvider';
 import echoClient from './services/echoClient/echoClient';
-import useAppModuleState from './state/useGlobalState';
-
+import useAppModuleState from './state/useAppModuleState';
+export { default as ArgumentError } from '../echo-base/errors/ArgumentError';
+export { default as BaseError } from '../echo-base/errors/BaseError';
+export {
+    BackendError,
+    ForbiddenError,
+    NetworkError,
+    NotFoundError,
+    ValidationError
+} from '../echo-base/errors/network';
+export type { ErrorProperties } from '../echo-base/types/error';
+export { default as eventHub } from '../echo-base/utils/eventHub';
+export { storage } from '../echo-base/utils/storage';
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
-export { default as ArgumentError } from './echo-base/errors/ArgumentError';
-export { default as BaseError } from './echo-base/errors/BaseError';
-export { BackendError, ForbiddenError, NetworkError, NotFoundError, ValidationError } from './echo-base/errors/network';
-export type { ErrorProperties } from './echo-base/types/error';
-export { default as eventHub } from './echo-base/utils/eventHub';
-export { storage } from './echo-base/utils/storage';
 export { default as useCleanup } from './hooks/useCleanup';
 export { default as useInitial } from './hooks/useInitial';
 export { default as usePanels } from './hooks/usePanels';
@@ -38,7 +43,7 @@ export {
 } from './settings/plantSettingsActions';
 export { default as usePlantSettings } from './settings/useSetting';
 export { default as useAppModuleState } from './state/useAppModuleState';
-export { default as useGlobalState } from './state/useGlobalState';
+export * from './state/useGlobalState';
 export * from './types';
 export { makeUniqBy } from './utils/uniq';
 

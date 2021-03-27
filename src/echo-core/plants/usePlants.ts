@@ -1,4 +1,4 @@
-import useGlobalState from '../state/useGlobalState';
+import { useGlobalState } from '../state/useGlobalState';
 import { Plant, PlantsData } from '../types/plants';
 
 /**

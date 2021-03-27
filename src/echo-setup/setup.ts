@@ -1,5 +1,5 @@
-import { PanelHandler } from '../echo-core';
 import { setUserInformation } from '../echo-core/actions/userInformationActions';
+import PanelHandler from '../echo-core/panels/corePanels';
 import EchoAuthProvider from '../echo-core/services/authentication/echoProvider';
 import { graphGetProfile, graphGetProfilePicture } from '../echo-core/services/graph/graphUtils';
 import { setSetting } from '../echo-core/settings/globalSettingsActions';

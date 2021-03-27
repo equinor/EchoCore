@@ -1,8 +1,8 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
-import ArgumentError from '../../echo-base/errors/ArgumentError';
-import BaseError from '../../echo-base/errors/BaseError';
-import { initializeError } from '../../echo-base/errors/errorHandlers';
-import NetworkError from '../../echo-base/errors/network/NetworkError';
+import ArgumentError from '../../../echo-base/errors/ArgumentError';
+import BaseError from '../../../echo-base/errors/BaseError';
+import { initializeError } from '../../../echo-base/errors/errorHandlers';
+import NetworkError from '../../../echo-base/errors/network/NetworkError';
 import { AuthenticationProvider } from '../authentication/authProvider';
 
 export class AuthenticationError extends BaseError {}
