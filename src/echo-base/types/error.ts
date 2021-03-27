@@ -1,9 +1,3 @@
-export interface BaseError {
-    hasBeenLogged: boolean;
-    getProperties: () => ErrorProperties;
-    addProperties: (values: ErrorProperties) => void;
-}
-
 /**
  * ErrorProperties provides a general purpose object
  * for extending the number error properties available
@@ -15,8 +9,8 @@ export interface ErrorProperties {
     [key: string]: unknown; //support any properties in exception/error
 }
 
-export interface ErrorInitializerFunction<T extends BaseError, U extends CommonErrorArgs> {
-    (ErrorType: { new (args): T }, args: U): BaseError;
+export interface ErrorInitializerFunction<T extends BaseErrorProps, U extends CommonErrorArgs> {
+    (ErrorType: { new (args): T }, args: U): BaseErrorProps;
 }
 
 export interface BaseErrorArgs {
@@ -26,4 +20,10 @@ export interface BaseErrorArgs {
 
 export interface CommonErrorArgs {
     [key: string]: unknown;
+}
+
+export interface BaseErrorProps extends Error {
+    hasBeenLogged: boolean;
+    getProperties: () => ErrorProperties;
+    addProperties: (values: ErrorProperties) => void;
 }
