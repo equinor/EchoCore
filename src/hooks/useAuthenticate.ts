@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AuthenticationProvider } from '../services/authentication/authProvider';
+import { AuthenticationProvider } from '../echo-base/services/authentication/authProvider';
 
 const useAuthenticate = (authProvider: AuthenticationProvider, logRequest?: (...args: unknown[]) => void): boolean => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);

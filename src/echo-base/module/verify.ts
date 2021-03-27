@@ -1,4 +1,4 @@
-import ArgumentError from '../errors/ArgumentError';
+import ArgumentError from '../../errors/ArgumentError';
 import { persistLocalModuleMeta } from './persist';
 import { EquinorModuleMeta } from './types';
 

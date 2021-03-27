@@ -1,5 +1,5 @@
-import { getModulesMeta } from '../echo-base/fetchModules';
-import { EchoPortal, ModulesMetaFetch } from '../echo-base/types';
+import { getModulesMeta } from '../echo-base/module/fetchModules';
+import { EchoPortal, ModulesMetaFetch } from '../echo-base/module/types';
 import { setSetting } from '../settings/globalSettingsActions';
 import persistEchoSetting from '../settings/persistEchoSetting';
 import { authenticate } from '../state/setup';

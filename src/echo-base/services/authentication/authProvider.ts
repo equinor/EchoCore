@@ -6,7 +6,7 @@ import {
     RedirectRequest,
     SilentRequest
 } from '@azure/msal-browser';
-import { UserProperties } from '../../types/userProperties';
+import { UserProperties } from '../../../types/userProperties';
 import { defaultLoginRequest, loginSilentlyRequest, logoutRequest } from './authProviderConfig';
 
 /**
