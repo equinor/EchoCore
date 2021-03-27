@@ -1,8 +1,8 @@
 import { getModulesMeta } from '../echo-base/module/fetchModules';
 import { EchoPortal, ModulesMetaFetch } from '../echo-base/types/module';
-import { setSetting } from '../settings/globalSettingsActions';
-import persistEchoSetting from '../settings/persistEchoSetting';
-import { Panel } from '../types/panel';
+import { setSetting } from '../echo-core/settings/globalSettingsActions';
+import persistEchoSetting from '../echo-core/settings/persistEchoSetting';
+import { Panel } from '../echo-core/types/panel';
 import { authenticate } from './setup';
 
 export interface EchoSetupOptions {

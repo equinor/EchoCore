@@ -4,7 +4,7 @@
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "dist/index.js",
     "types": "dist/types/index.d.ts",
-    "source": "src/index.ts",
+    "source": "src/echo-core/index.ts",
     "scripts": {
         "build": "rollup -c",
         "start": "rollup -c -w",
