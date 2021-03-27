@@ -1,6 +1,6 @@
-import { initializeError } from '../../errors/errorHandlers';
-import { BackendError, ForbiddenError, NetworkError, NotFoundError, ValidationError } from '../../errors/network';
-import { NetworkErrorArgs } from '../../errors/network/NetworkError';
+import { initializeError } from '../../echo-base/errors/errorHandlers';
+import { BackendError, ForbiddenError, NotFoundError, ValidationError } from '../../echo-base/errors/network';
+import NetworkError, { NetworkErrorArgs } from '../../echo-base/errors/network/NetworkError';
 
 describe('handleClientError', () => {
     const args = {

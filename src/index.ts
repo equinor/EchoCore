@@ -13,12 +13,12 @@ import registerPanels from './panels/registerPanel';
 import useAppModuleState from './state/useGlobalState';
 
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
+export { default as ArgumentError } from './echo-base/errors/ArgumentError';
+export { default as BaseError } from './echo-base/errors/BaseError';
+export { BackendError, ForbiddenError, NetworkError, NotFoundError, ValidationError } from './echo-base/errors/network';
+export type { ErrorProperties } from './echo-base/errors/types';
 export { AuthenticationProvider } from './echo-base/services/authentication/authProvider';
 export { default as BaseClient } from './echo-base/services/baseClient/baseClient';
-export { default as ArgumentError } from './errors/ArgumentError';
-export { default as BaseError } from './errors/BaseError';
-export { BackendError, ForbiddenError, NetworkError, NotFoundError, ValidationError } from './errors/network';
-export type { ErrorProperties } from './errors/types';
 export { default as useCleanup } from './hooks/useCleanup';
 export { default as useInitial } from './hooks/useInitial';
 export { default as usePanels } from './hooks/usePanels';

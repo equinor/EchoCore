@@ -1,4 +1,4 @@
-import { dispatch } from '../state/globalActions';
+import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { useGlobalState } from '../state/useGlobalState';
 import { AppRegistration, GlobalState } from '../types/state';
@@ -22,6 +22,11 @@ export function unnRegisterApp<TKey extends string>(key: TKey): void {
             apps: removeWithKey(s.registry.apps, key)
         }
     }));
+}
+
+export function getAppsData(): Readonly<AppRegistration[]> {
+    const appsData = readState(getCoreContext(), (state: GlobalState) => state.registry.apps);
+    return Object.keys(appsData).map((key: string) => appsData[key]);
 }
 
 export function useApps(): AppRegistration[] {
