@@ -1,7 +1,7 @@
+import { storage } from '../../echo-base/utils/storage';
 import { PersistEchoSetting } from '../../settings/persistEchoSetting';
 import { settings } from '../../state/defaultStates';
 import { Settings } from '../../types/settings';
-import { storage } from '../../utils/storage';
 
 const localStore = new PersistEchoSetting();
 

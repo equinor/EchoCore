@@ -1,4 +1,4 @@
-import { EchoLocalStorage } from '../types/storage';
+import { EchoLocalStorage } from '../../types/storage';
 
 export const storage: EchoLocalStorage = {
     setItem: <T>(key: string, data: T) => {

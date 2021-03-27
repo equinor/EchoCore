@@ -19,6 +19,7 @@ export { BackendError, ForbiddenError, NetworkError, NotFoundError, ValidationEr
 export type { ErrorProperties } from './echo-base/errors/types';
 export { AuthenticationProvider } from './echo-base/services/authentication/authProvider';
 export { default as BaseClient } from './echo-base/services/baseClient/baseClient';
+export { storage } from './echo-base/utils/storage';
 export { default as useCleanup } from './hooks/useCleanup';
 export { default as useInitial } from './hooks/useInitial';
 export { default as usePanels } from './hooks/usePanels';
@@ -39,7 +40,6 @@ export { default as useAppModuleState } from './state/useAppModuleState';
 export { default as useGlobalState } from './state/useGlobalState';
 export * from './types';
 export { default as eventHub } from './utils/eventHub';
-export { storage } from './utils/storage';
 export { makeUniqBy } from './utils/uniq';
 
 export const EchoEnv = new Env();

@@ -1,5 +1,4 @@
-import { EquinorModuleMeta } from '../echo-setup/echoSetup';
-import { storage } from '../utils/storage';
+import { EquinorModuleMeta } from './types';
 
 export function persistLocalModuleMeta(key: string, modules: EquinorModuleMeta[]): void {
     storage.setItem(key, modules);

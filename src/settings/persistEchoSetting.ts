@@ -1,7 +1,7 @@
+import { storage } from '../echo-base/utils/storage';
 import { settings } from '../state/defaultStates';
 import { Settings } from '../types/settings';
 import { EchoLocalStorage } from '../types/storage';
-import { storage } from '../utils/storage';
 
 export class PersistEchoSetting {
     private echoStorage: EchoLocalStorage;
