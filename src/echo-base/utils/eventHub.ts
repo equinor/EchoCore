@@ -1,4 +1,4 @@
-import { EchoEventHub, EchoEvents } from '../types/eventHub';
+import { EchoEventHub, EchoEvents } from '../../types/eventHub';
 
 // TODO: Write tests
 /**
