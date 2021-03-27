@@ -1,19 +1,6 @@
-import { dispatch, readState } from '../state/globalActions';
+import { dispatch } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
-import { ApplicationManifest, GlobalState } from '../types';
-
-/**
- * @return `ApplicationManifest` according to appKey if module is missing
- *  return is `undefined` and `Error` with `Application manifest is missing.` thrown.
- * @param appKey uniq application key.
- */
-export function getAppManifest(appKey: string): ApplicationManifest | undefined {
-    return readState(getCoreContext(), (state): ApplicationManifest | undefined => {
-        const appManifest = state.modules.find((mod) => mod.appKey === appKey);
-        if (appManifest) return appManifest;
-        throw new Error('Application manifest is missing.');
-    });
-}
+import { GlobalState } from '../types';
 
 /**
  * Function Used for updating the modules global state.

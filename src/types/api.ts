@@ -1,9 +1,9 @@
-import type { RouteComponentProps } from 'react-router';
+import type { RouteComponentProps } from 'react-router-dom';
 import { AnyComponent } from './components';
 import { Panel } from './panel';
 import { AppMetaData } from './state';
 
-export interface EchoApi {
+export interface ModuleApi {
     registerApp: <Key extends string>(
         name: Key,
         Component: AnyComponent<AppComponentProps>,

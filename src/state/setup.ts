@@ -26,9 +26,10 @@ export async function setup(coreConfig: CoreConfig): Promise<void> {
  * @param coreConfig object that defines application configurations.
  * logger function to be used for authentication
  */
-export async function authenticate(coreConfig: CoreConfig): Promise<void> {
+export async function authenticate(coreConfig: CoreConfig): Promise<boolean> {
     await EchoAuthProvider.handleLogin(coreConfig.authProviderLogFunc);
     getGraphProfile();
+    return EchoAuthProvider.isAuthenticated;
 }
 
 /**

@@ -1,6 +1,7 @@
 import { dispatch } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
-import { Panel } from '../types';
+import { useGlobalState } from '../state/useGlobalState';
+import { Dict, Panel } from '../types';
 import { GlobalState } from '../types/state';
 import { addOrOverwriteWithKey, removeWithKey } from '../utils/state';
 
@@ -23,4 +24,13 @@ export function unnRegisterPanels<TKey extends string>(key: TKey): void {
             panels: removeWithKey(s.registry.panels, key)
         }
     }));
+}
+
+export function usePanels(): Dict<Panel[]> {
+    return useGlobalState((state: GlobalState) => state.registry.panels);
+}
+
+export function usePanelByKey(key: string): Panel[] | undefined {
+    const panelsDict = usePanels();
+    return panelsDict[key];
 }
