@@ -1,4 +1,5 @@
 import React from 'react';
+import { AnyComponent } from './components';
 
 export enum PanelType {
     left = 'left',
@@ -8,7 +9,8 @@ export enum PanelType {
 
 export interface Panel {
     panelType: PanelType;
-    component: React.FC;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    component: AnyComponent<any>;
     key: string;
     label: string;
     icon: React.FC;

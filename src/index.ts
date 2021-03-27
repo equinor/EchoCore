@@ -13,8 +13,9 @@ import echoClient from './services/echoClient/echoClient';
 import useAppModuleState from './state/useGlobalState';
 
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
+export { default as ArgumentError } from './errors/ArgumentError';
 export { default as BaseError } from './errors/BaseError';
-export { default as NetworkError } from './errors/NetworkError';
+export { BackendError, ForbiddenError, NetworkError, NotFoundError, ValidationError } from './errors/network';
 export type { ErrorProperties } from './errors/types';
 export { default as useCleanup } from './hooks/useCleanup';
 export { default as useInitial } from './hooks/useInitial';
@@ -24,7 +25,7 @@ export { default as PanelHandler } from './panels/corePanels';
 export { getPlants, getPlantsData, setPlantsData } from './plants/globalPlantsDataActions';
 export { usePlants, usePlantsData } from './plants/usePlants';
 export { AuthenticationProvider } from './services/authentication/authProvider';
-export { BaseClient } from './services/baseClient.ts/baseClient';
+export { default as BaseClient } from './services/baseClient/baseClient';
 export { default as EchoSettings } from './settings';
 export {
     getInstCode,
