@@ -1,5 +1,4 @@
-import { EchoLocalStorage } from '../../echo-base/types/storage';
-import { storage } from '../../echo-base/utils/storage';
+import { EchoLocalStorage, storage } from '../../echo-base';
 import { settings } from '../state/defaultStates';
 import { Settings } from '../types/settings';
 

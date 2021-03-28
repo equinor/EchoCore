@@ -1,4 +1,4 @@
-import NetworkError from '../../errors/network/NetworkError';
+import NetworkError from '../../errors/NetworkError';
 
 describe('NetworkError', () => {
     const message = 'Network Error Testing';

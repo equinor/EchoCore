@@ -1,10 +1,8 @@
-import { getModulesMeta } from '../echo-base/module/fetchModules';
-import { EchoPortal, ModulesMetaFetch } from '../echo-base/types/module';
+import { EchoPortal, getModulesMeta, ModulesMetaFetch } from '../echo-base';
 import { setSetting } from '../echo-core/settings/globalSettingsActions';
 import persistEchoSetting from '../echo-core/settings/persistEchoSetting';
 import { Panel } from '../echo-core/types/panel';
 import { authenticate } from './setup';
-
 export interface EchoSetupOptions {
     rootLoadingElementId: string;
     leftPanel: Panel;

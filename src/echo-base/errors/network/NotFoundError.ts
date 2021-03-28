@@ -1,3 +1,3 @@
-import NetworkError from './NetworkError';
+import NetworkError from '../NetworkError';
 
 export default class NotFoundError extends NetworkError {}
