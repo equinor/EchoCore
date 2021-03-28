@@ -1,4 +1,4 @@
-import { storage } from '../../../echo-base/utils/storage';
+import { storage } from '../../../echo-base';
 import { PersistEchoSetting } from '../../settings/persistEchoSetting';
 import { settings } from '../../state/defaultStates';
 import { Settings } from '../../types/settings';

@@ -13,13 +13,8 @@ import echoClient from './services/echoClient/echoClient';
 import useAppModuleState from './state/useAppModuleState';
 export { default as ArgumentError } from '../echo-base/errors/ArgumentError';
 export { default as BaseError } from '../echo-base/errors/BaseError';
-export {
-    BackendError,
-    ForbiddenError,
-    NetworkError,
-    NotFoundError,
-    ValidationError
-} from '../echo-base/errors/network';
+export { BackendError, ForbiddenError, NotFoundError, ValidationError } from '../echo-base/errors/network';
+export { default as NetworkError } from '../echo-base/errors/NetworkError';
 export type { ErrorProperties } from '../echo-base/types/error';
 export { default as eventHub } from '../echo-base/utils/eventHub';
 export { storage } from '../echo-base/utils/storage';
