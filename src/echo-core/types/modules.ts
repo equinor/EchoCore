@@ -5,10 +5,10 @@ import { Panel } from './panel';
  * module registered
  *
  * @export
- * @interface Module
+ * @interface AppModule
  */
-export interface Module {
-    test: string;
+export interface AppModule {
+    name: string;
 }
 
 export interface EchoApp {

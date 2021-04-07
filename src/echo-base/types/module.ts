@@ -1,18 +1,52 @@
-export interface EquinorModuleMeta {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export interface SingleAppMetadata {
     name: string;
+    link: string;
+    requireRef: string;
+    integrity?: string;
+    custom?: any;
+    config?: Record<string, any>;
+}
+export interface MultiAppsMetadata {
+    name: string;
+    link: string;
+    bundle: string;
+    integrity?: string;
+    custom?: any;
 }
 
-export interface EquinorModuleData {
-    setup: () => void | Promise<void>;
+export type App = SingleApp | MultiApp;
+/**
+ * Describes the metadata transported by a Apps.
+ */
+export type AppMetadata = SingleAppMetadata | MultiAppsMetadata;
+
+export type SingleApp = AppData & AppMetadata;
+
+export type MultiApp = MultiAppData & MultiAppsMetadata;
+
+/**
+ * Defines the API accessible from Apps.
+ */
+export interface AppApi extends EventEmitter {
+    /**
+     * Gets the metadata of the current App.
+     */
+    meta: AppMetadata;
 }
 
-export type EquinorModule = EquinorModuleData & EquinorModuleMeta;
+export interface AppData {
+    setup: (api: AppApi) => void | Promise<void>;
+}
+export interface MultiAppData {
+    setup: (apiFactory: AppApiCreator) => void | Promise<void>;
+}
 
 export interface EchoPortal {
     isAuthenticated: boolean;
 }
 
-export type ModulesMetaFetch = () => Promise<EquinorModuleMeta[]>;
+export type AppMetaFetch = () => Promise<AppMetadata[]>;
 
 export interface EventMap {
     [custom: string]: unknown;
@@ -50,4 +84,11 @@ export interface EventEmitter {
      * @param arg The payload of the event.
      */
     emit<K extends keyof EventMap>(type: K, arg: EventMap[K]): EventEmitter;
+}
+
+/**
+ * The creator function for the App API.
+ */
+export interface AppApiCreator {
+    (target: AppMetadata): AppApi;
 }
