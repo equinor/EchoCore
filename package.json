@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-core",
-    "version": "0.1.25",
+    "version": "0.1.26",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "dist/index.js",
     "types": "dist/types/index.d.ts",
