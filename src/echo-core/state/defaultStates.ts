@@ -46,7 +46,7 @@ const defaultGlobalState: GlobalState = {
     ui: {},
     registry: {
         panels: {},
-        apps: {}
+        routes: {}
     },
     activePanel: ActivePanel.None,
     moduleState: {},

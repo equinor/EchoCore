@@ -15,6 +15,7 @@ export { default as ArgumentError } from '../echo-base/errors/ArgumentError';
 export { default as BaseError } from '../echo-base/errors/BaseError';
 export { BackendError, ForbiddenError, NotFoundError, ValidationError } from '../echo-base/errors/network';
 export { default as NetworkError } from '../echo-base/errors/NetworkError';
+export { EchoEvents } from '../echo-base/types';
 export type { ErrorProperties } from '../echo-base/types/error';
 export { default as eventHub } from '../echo-base/utils/eventHub';
 export { storage } from '../echo-base/utils/storage';

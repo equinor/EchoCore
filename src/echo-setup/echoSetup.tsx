@@ -1,4 +1,4 @@
-import { EchoPortal, getModulesMeta, ModulesMetaFetch } from '../echo-base';
+import { AppMetaFetch, EchoPortal, getModulesMeta } from '../echo-base';
 import { setSetting } from '../echo-core/settings/globalSettingsActions';
 import persistEchoSetting from '../echo-core/settings/persistEchoSetting';
 import { Panel } from '../echo-core/types/panel';
@@ -8,7 +8,7 @@ export interface EchoSetupOptions {
     leftPanel: Panel;
     rightPanel: Panel;
     authProviderLogFunc?: (...args: unknown[]) => void;
-    getModules: ModulesMetaFetch;
+    getModules: AppMetaFetch;
 }
 
 export default async function echoSetup(options: EchoSetupOptions): Promise<EchoPortal | undefined> {
