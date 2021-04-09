@@ -26,10 +26,12 @@ export function useEventSubscriber<T>(
     const { eventHub } = useEchoEventHub();
 
     useEffect(() => {
-        if (keys instanceof Array) {
-            return eventHub.subscribeMany<T>(keys, handler);
-        }
-        return eventHub.subscribe<T>(keys, handler);
+        const unsubscribe =
+            keys instanceof Array ? eventHub.subscribeMany<T>(keys, handler) : eventHub.subscribe<T>(keys, handler);
+
+        return (): void => {
+            unsubscribe();
+        };
     }, [keys, handler, eventHub]);
 
     return eventHub;
