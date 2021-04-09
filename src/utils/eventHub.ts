@@ -50,10 +50,10 @@ class EventHub implements EchoEventHub {
      * @memberof EventHub
      */
     subscribeMany<T>(keys: Array<string | EchoEvents>, handler: (payload: T) => void): () => void {
-        const eventListenerRemovers: Array<() => void> = keys.map((key) => this.subscribe(key, handler));
+        const unsubscribeFunctions: Array<() => void> = keys.map((key) => this.subscribe(key, handler));
         return (): void => {
-            eventListenerRemovers.map((removerFunction) => {
-                removerFunction();
+            unsubscribeFunctions.map((unsubscribe) => {
+                unsubscribe();
             });
         };
     }

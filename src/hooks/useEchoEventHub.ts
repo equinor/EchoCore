@@ -8,8 +8,7 @@ import { EchoEventHub, EchoEvents } from '../types/eventHub';
  * @return {EchoEventHubContextInterface} Returns an instance of EchoEventHubContextInterface
  */
 export function useEchoEventHub(): EchoEventHubContextInterface {
-    const echoEventHubContext = useContext(EchoEventHubContext);
-    return echoEventHubContext as EchoEventHubContextInterface;
+    return useContext(EchoEventHubContext);
 }
 
 /**
