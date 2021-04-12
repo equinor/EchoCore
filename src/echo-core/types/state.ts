@@ -42,11 +42,12 @@ export interface RegistryState {
     panels: Dict<Array<Panel>>;
 }
 
+// TODO Delete =>
 export interface RouteRegistration extends BaseRegistration {
     component: WrappedComponent<AppComponentProps>;
     meta: AppMetaData;
 }
-
+// TODO Delete =>
 export interface BaseRegistration {
     key: string;
 }

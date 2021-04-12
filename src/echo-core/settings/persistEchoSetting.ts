@@ -1,4 +1,4 @@
-import { EchoLocalStorage, storage } from '../../echo-base';
+import { EchoLocalStorage, storage } from '@equinor/echo-base';
 import { settings } from '../state/defaultStates';
 import { Settings } from '../types/settings';
 

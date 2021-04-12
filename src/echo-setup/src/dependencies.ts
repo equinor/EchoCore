@@ -1,4 +1,4 @@
-import { AvailableDependencies } from '../echo-base';
+import { AvailableDependencies } from '@equinor/echo-base';
 
 export const globalDependencies: AvailableDependencies = {
     react: require('react'),

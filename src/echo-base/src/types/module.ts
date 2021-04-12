@@ -1,4 +1,5 @@
-import { RouteRegistration } from '../../../echo-core';
+import { AppComponentProps } from './api';
+import { WrappedComponent } from './components';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface SingleAppMetadata {
@@ -39,6 +40,21 @@ export interface AppApi extends EventEmitter {
     unRegisterRoute: <TKey extends string>(key: TKey) => void;
     getRoutesData: () => Readonly<RouteRegistration[]>;
     useRoutes: () => RouteRegistration[];
+}
+
+export interface RouteRegistration extends BaseRegistration {
+    component: WrappedComponent<AppComponentProps>;
+    meta: AppMetaData;
+}
+
+export interface AppMetaData {
+    name: string;
+    icon: string;
+    homeScreen?: boolean;
+}
+
+export interface BaseRegistration {
+    key: string;
 }
 
 export interface AppData {

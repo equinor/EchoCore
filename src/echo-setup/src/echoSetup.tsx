@@ -1,8 +1,6 @@
-import { AppMetaFetch, EchoPortal, getModulesMeta } from '../echo-base';
-import { setSetting } from '../echo-core/settings/globalSettingsActions';
-import persistEchoSetting from '../echo-core/settings/persistEchoSetting';
-import { Panel } from '../echo-core/types/panel';
-import { authenticate } from './setup';
+import { AppMetaFetch } from '@equinor/echo-base';
+import { Panel } from '@equinor/echo-core';
+import { authenticate } from '../setup';
 export interface EchoSetupOptions {
     rootLoadingElementId: string;
     leftPanel: Panel;

@@ -1,5 +1,5 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
-import { ArgumentError, BaseError, initializeError, NetworkError } from '../../../echo-base';
+import { ArgumentError, BaseError, initializeError, NetworkError } from '@equinor/echo-base';
 import { AuthenticationProvider } from '../authentication/authProvider';
 
 export class AuthenticationError extends BaseError {}
