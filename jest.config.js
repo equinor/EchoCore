@@ -6,5 +6,8 @@ module.exports = {
             lines: 90,
             statements: 90
         }
+    },
+    globals: {
+        crypto: require('crypto')
     }
 };
