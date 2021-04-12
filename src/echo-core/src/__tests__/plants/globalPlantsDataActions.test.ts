@@ -1,8 +1,8 @@
+import { PlantsData } from '../..';
 import { getPlants, getPlantsData, setPlantsData } from '../../plants/globalPlantsDataActions';
 import defaultGlobalState, { plantsData } from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
-import { PlantsData } from '../../types/plants';
 
 beforeEach(() => {
     initialize();

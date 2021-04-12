@@ -1,4 +1,4 @@
-import { EchoLocalStorage, storage } from '../../echo-base';
+import { EchoLocalStorage, storage } from '@equinor/echo-base';
 import { plantsData } from '../state/defaultStates';
 import { PlantsData } from '../types/plants';
 

@@ -1,5 +1,5 @@
 {
-    "name": "@equinor/echo-core",
+    "name": "@equinor/echo-core-lerna",
     "version": "0.1.25",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "dist/index.js",

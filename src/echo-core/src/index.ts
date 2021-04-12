@@ -12,18 +12,15 @@ import EchoAuthProvider from './services/authentication/echoProvider';
 import echoClient from './services/echoClient/echoClient';
 import useAppModuleState from './state/useAppModuleState';
 export {
-    BackendError,
     default as ArgumentError,
     default as BaseError,
     default as eventHub,
     default as NetworkError,
     EchoEvents,
-    ForbiddenError,
-    NotFoundError,
-    storage,
-    ValidationError
+    storage
 } from '@equinor/echo-base';
 export type { ErrorProperties } from '@equinor/echo-base';
+export { BackendError, ForbiddenError, NotFoundError, ValidationError } from '@equinor/echo-base/lib/errors/network';
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
 export { default as useCleanup } from './hooks/useCleanup';
 export { default as useInitial } from './hooks/useInitial';

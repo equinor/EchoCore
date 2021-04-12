@@ -1,9 +1,9 @@
 import { dispatch } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
-import { Module } from '../types/modules';
+import { AppModule } from '../types/modules';
 import { GlobalState } from '../types/state';
 
-export function registerModules<TKey extends string>(module: Module): void {
+export function registerModules<TKey extends string>(module: AppModule): void {
     dispatch(getCoreContext(), (s: GlobalState) => ({
         ...s,
         modules: addOrOverwrite(s.modules, module)
@@ -17,20 +17,21 @@ export function unnRegisterApp<TKey extends string>(key: TKey): void {
     }));
 }
 
-function addOrOverwrite(modules: Array<Module>, module: Module): Module[] {
-    if (modules.find((m) => (m.test = module.test))) {
+function addOrOverwrite(modules: Array<AppModule>, module: AppModule): AppModule[] {
+    if (modules.find((m) => (m.name = module.name))) {
     }
     return [];
 }
 
-function removeModuleByKey(modules: Module[], key: TKey): Module[] {
+function removeModuleByKey<TKey extends string>(modules: AppModule[], key: TKey): AppModule[] {
+    console.log(modules, key);
     return [];
 }
 
-function validateModule(moduleA: Module, moduleB?: Module): boolean {
-    if (moduleB) {
-        return moduleA.test !== moduleB.test;
-        // move validation
-    }
-    return true;
-}
+// function validateModule(moduleA: AppModule, moduleB?: AppModule): boolean {
+//     if (moduleB) {
+//         return moduleA.name !== moduleB.name;
+//         // move validation
+//     }
+//     return true;
+// }

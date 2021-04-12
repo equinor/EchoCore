@@ -1,29 +1,14 @@
 import { getSettings, getSettingsByKey, setSetting, updateSettingByKey } from '../../settings/globalSettingsActions';
-import { legendOptions, settings } from '../../state/defaultStates';
+import defaultGlobalState from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
-import { GlobalState } from '../../types';
-import { ActivePanel } from '../../types/panel';
 
 beforeEach(() => {
     initialize();
 });
 
-const globalInit: GlobalState = {
-    modules: [],
-    panels: [],
-    ui: {},
-    activePanel: ActivePanel.None,
-    activeModule: '',
-    moduleState: {},
-    userProfile: undefined,
-    userPhotoUrl: undefined,
-    legendOptions,
-    settings
-};
-
 function initialize(): void {
-    dispatch(getCoreContext(), () => globalInit);
+    dispatch(getCoreContext(), () => defaultGlobalState);
 }
 
 describe('globalSettingsActions', () => {
