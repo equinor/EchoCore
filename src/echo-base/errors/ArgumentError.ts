@@ -4,8 +4,10 @@ interface ArgumentErrorArgs {
     argumentName: string;
 }
 
-export default class ArgumentError extends BaseError {
+export class ArgumentError extends BaseError {
     constructor({ argumentName }: ArgumentErrorArgs) {
         super({ message: argumentName });
     }
 }
+
+export default ArgumentError;

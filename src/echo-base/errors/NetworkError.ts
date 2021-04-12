@@ -18,7 +18,7 @@ export interface NetworkErrorArgs extends CommonErrorArgs {
  * @class NetworkError
  * @extends {BaseError}
  */
-export default class NetworkError extends BaseError {
+export class NetworkError extends BaseError {
     constructor({ message, httpStatusCode, url, exception }: NetworkErrorArgs) {
         super({ message: message || '', exception });
         this.addProperties({ url, httpStatusCode });
@@ -29,3 +29,5 @@ export default class NetworkError extends BaseError {
         return this.properties.url as string;
     };
 }
+
+export default NetworkError;

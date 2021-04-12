@@ -8,7 +8,7 @@ import { BaseErrorArgs, BaseErrorProps, ErrorProperties } from '../types/error';
  * @class BaseError
  * @extends {Error}
  */
-export default class BaseError extends Error implements BaseErrorProps {
+export class BaseError extends Error implements BaseErrorProps {
     protected properties: ErrorProperties;
     hasBeenLogged = false;
 
@@ -25,3 +25,5 @@ export default class BaseError extends Error implements BaseErrorProps {
         this.properties = { ...this.properties, ...values };
     };
 }
+
+export default BaseError;

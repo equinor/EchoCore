@@ -38,11 +38,11 @@ export interface RegistryState {
     /**
      * The registered app components for the router.
      */
-    apps: Dict<AppRegistration>;
+    routes: Dict<RouteRegistration>;
     panels: Dict<Array<Panel>>;
 }
 
-export interface AppRegistration extends BaseRegistration {
+export interface RouteRegistration extends BaseRegistration {
     component: WrappedComponent<AppComponentProps>;
     meta: AppMetaData;
 }

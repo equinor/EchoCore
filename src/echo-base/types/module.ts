@@ -1,3 +1,5 @@
+import { RouteRegistration } from '../../echo-core';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface SingleAppMetadata {
     name: string;
@@ -33,6 +35,10 @@ export interface AppApi extends EventEmitter {
      * Gets the metadata of the current App.
      */
     meta: AppMetadata;
+    registerRoute: <TKey extends string>(key: TKey, route: RouteRegistration) => void;
+    unRegisterRoute: <TKey extends string>(key: TKey) => void;
+    getRoutesData: () => Readonly<RouteRegistration[]>;
+    useRoutes: () => RouteRegistration[];
 }
 
 export interface AppData {
@@ -91,4 +97,11 @@ export interface EventEmitter {
  */
 export interface AppApiCreator {
     (target: AppMetadata): AppApi;
+}
+
+/**
+ * The record containing all available dependencies.
+ */
+export interface AvailableDependencies {
+    [name: string]: any;
 }

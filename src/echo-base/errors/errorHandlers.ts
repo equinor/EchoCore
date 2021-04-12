@@ -1,7 +1,7 @@
 import { ErrorInitializerFunction } from '../types/error';
 import BaseError from './BaseError';
-import { BackendError, ForbiddenError, NetworkError, NotFoundError, ValidationError } from './network';
-import { NetworkErrorArgs } from './NetworkError';
+import { BackendError, ForbiddenError, NotFoundError, ValidationError } from './network';
+import { NetworkError, NetworkErrorArgs } from './NetworkError';
 
 export const initializeError: ErrorInitializerFunction<NetworkError, NetworkErrorArgs> = (
     ErrorType,

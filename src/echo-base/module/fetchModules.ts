@@ -1,5 +1,5 @@
 import BaseError from '../errors/BaseError';
-import { EquinorModuleMeta, ModulesMetaFetch } from '../types/module';
+import { AppMetadata, AppMetaFetch } from '../types/module';
 import { verifyModulesMeta } from './verify';
 
 class ModulesMetaError extends BaseError {}
@@ -9,9 +9,9 @@ class ModulesMetaError extends BaseError {}
  *
  * @export
  * @param {ModulesMetaFetch} getModulesCallback
- * @return {*}  {Promise<EquinorModuleMeta[]>}
+ * @return {*}  {Promise<AppMetadata[]>}
  */
-export async function getModulesMeta(getModulesCallback?: ModulesMetaFetch): Promise<EquinorModuleMeta[]> {
+export async function getModulesMeta(getModulesCallback?: AppMetaFetch): Promise<AppMetadata[]> {
     try {
         if (getModulesCallback) {
             return verifyModulesMeta(await getModulesCallback());
