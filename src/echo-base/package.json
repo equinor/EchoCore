@@ -1,12 +1,15 @@
 {
     "name": "@equinor/echo-base",
     "version": "0.0.1",
-    "description": "",
-    "main": "dist/index.js",
     "source": "./index.ts",
+    "module": "esm/index.js",
+    "main": "lib/index.js",
+    "typings": "lib/index.d.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "tsc"
+        "build": "npm run build:commonjs && npm run build:esnext",
+        "build:commonjs": "tsc --project tsconfig.json --outDir lib --module commonjs",
+        "build:esnext": "tsc --project tsconfig.json --outDir esm --module esnext",
+        "test": "echo \"Run test from root folder\" && exit 1"
     },
     "keywords": [
         "echo",
@@ -14,7 +17,22 @@
     ],
     "author": "Echo core team",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://https://github.com/equinor/EchoCore"
+    },
+    "bugs": {
+        "url": "https://github.com/equinor/EchoCore/issues"
+    },
+    "dependencies": {
+        "tslib": "^2.1.0"
+    },
     "devDependencies": {
         "typescript": "^4.2.4"
-    }
+    },
+    "files": [
+        "esm",
+        "lib",
+        "src"
+    ]
 }
