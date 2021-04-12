@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-base",
-    "version": "0.0.4",
+    "version": "0.0.8",
     "module": "esm/index.js",
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
@@ -22,7 +22,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://https://github.com/equinor/EchoCore"
+        "url": "https://github.com/equinor/EchoCore"
     },
     "bugs": {
         "url": "https://github.com/equinor/EchoCore/issues"

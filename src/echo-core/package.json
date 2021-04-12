@@ -36,7 +36,7 @@
         "@babel/preset-env": "^7.12.11",
         "@babel/preset-react": "^7.12.10",
         "@babel/preset-typescript": "^7.12.7",
-        "@equinor/echo-base": "0.0.4",
+        "@equinor/echo-base": "0.0.5",
         "@microsoft/microsoft-graph-types": "^1.20.0",
         "@rollup/plugin-node-resolve": "^11.0.1",
         "@rollup/plugin-typescript": "^8.0.0",
