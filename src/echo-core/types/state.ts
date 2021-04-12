@@ -1,6 +1,6 @@
 import { Atom } from '@dbeining/react-atom';
 import { User } from '@microsoft/microsoft-graph-types';
-import BaseError from '../../echo-base/errors/BaseError';
+import BaseError from '../../echo-base/src/errors/BaseError';
 import { AppComponentProps } from './api';
 import { Dict } from './common';
 import { AnyComponent, WrappedComponent } from './components';

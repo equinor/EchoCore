@@ -1,4 +1,4 @@
-import { globalDependencies } from '../../echo-setup/dependencies';
+import { globalDependencies } from '../../../echo-setup/dependencies';
 import { App, AppData, AppMetadata } from '../types/module';
 import { checkAppAsync, getLocalRequire } from './dependency';
 

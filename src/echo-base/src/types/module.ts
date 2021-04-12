@@ -1,4 +1,4 @@
-import { RouteRegistration } from '../../echo-core';
+import { RouteRegistration } from '../../../echo-core';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface SingleAppMetadata {
