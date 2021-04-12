@@ -3,6 +3,7 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import del from 'rollup-plugin-delete';
 import dt from 'rollup-plugin-dts';
+import tslibResolveId from 'rollup-plugin-tslib-resolve-id';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 import ts2 from 'rollup-plugin-typescript2';
 import pkg from './package.json';
@@ -16,8 +17,9 @@ export default [
             format: 'cjs',
             exports: 'named'
         },
-        external: ['react', 'react-dom', 'react-router'],
+        external: ['react', 'react-dom', 'react-router', '@equinor/echo-base'],
         plugins: [
+            tslibResolveId(),
             del({ targets: 'dist/*', runOnce: true }),
             ts2(),
             typescriptPaths(),
@@ -29,7 +31,8 @@ export default [
             }),
             commonjs({
                 namedExports: {
-                    '@dbeining/react-atom': ['Atom', 'useAtom', 'deref', 'swap']
+                    '@dbeining/react-atom': ['Atom', 'useAtom', 'deref', 'swap'],
+                    tslib: ['__awaiter']
                 }
             }),
             nodeResolve()

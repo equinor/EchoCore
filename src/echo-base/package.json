@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-base",
-    "version": "0.0.2",
+    "version": "0.0.4",
     "module": "esm/index.js",
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
@@ -27,9 +27,6 @@
     "bugs": {
         "url": "https://github.com/equinor/EchoCore/issues"
     },
-    "dependencies": {
-        "tslib": "^2.1.0"
-    },
     "devDependencies": {
         "typescript": "^4.2.4"
     },
@@ -45,5 +42,8 @@
         "esm",
         "lib",
         "src"
-    ]
+    ],
+    "dependencies": {
+        "tslib": "^2.2.0"
+    }
 }

@@ -2,9 +2,9 @@
     "name": "@equinor/echo-core",
     "version": "0.1.25",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
-    "main": "dist/index.js",
-    "types": "dist/types/index.d.ts",
-    "source": "src/echo-core/index.ts",
+    "main": ".dist/index.js",
+    "types": ".dist/types/index.d.ts",
+    "source": "./src/index.ts",
     "scripts": {
         "build": "rollup -c",
         "start": "rollup -c -w",
@@ -25,7 +25,7 @@
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-router": "^5.2.0",
-        "@equinor/echo-base": "0.0.2"
+        "@equinor/echo-base": "*"
     },
     "dependencies": {
         "@azure/msal-browser": "^2.8.0",
@@ -36,7 +36,7 @@
         "@babel/preset-env": "^7.12.11",
         "@babel/preset-react": "^7.12.10",
         "@babel/preset-typescript": "^7.12.7",
-        "@equinor/echo-base": "0.0.2",
+        "@equinor/echo-base": "0.0.4",
         "@microsoft/microsoft-graph-types": "^1.20.0",
         "@rollup/plugin-node-resolve": "^11.0.1",
         "@rollup/plugin-typescript": "^8.0.0",
@@ -64,6 +64,7 @@
         "rollup-plugin-commonjs": "^10.1.0",
         "rollup-plugin-delete": "^2.0.0",
         "rollup-plugin-dts": "^2.0.0",
+        "rollup-plugin-tslib-resolve-id": "0.0.0",
         "rollup-plugin-typescript": "^1.0.1",
         "rollup-plugin-typescript-paths": "^1.2.2",
         "rollup-plugin-typescript2": "^0.29.0",
