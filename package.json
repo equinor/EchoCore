@@ -21,15 +21,6 @@
     },
     "author": "Echo Core",
     "license": "MIT",
-    "peerDependencies": {
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-router": "^5.2.0"
-    },
-    "dependencies": {
-        "@azure/msal-browser": "^2.8.0",
-        "@dbeining/react-atom": "^4.1.12"
-    },
     "devDependencies": {
         "@babel/core": "^7.12.10",
         "@babel/preset-env": "^7.12.11",
@@ -57,14 +48,6 @@
         "react-router": "^5.2.0",
         "react-router-dom": "^5.2.0",
         "react-test-renderer": "^17.0.1",
-        "rollup": "^2.34.1",
-        "rollup-plugin-babel": "^4.4.0",
-        "rollup-plugin-commonjs": "^10.1.0",
-        "rollup-plugin-delete": "^2.0.0",
-        "rollup-plugin-dts": "^2.0.0",
-        "rollup-plugin-typescript": "^1.0.1",
-        "rollup-plugin-typescript-paths": "^1.2.2",
-        "rollup-plugin-typescript2": "^0.29.0",
         "typescript": "^4.1.2"
     },
     "files": [
