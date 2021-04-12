@@ -16,6 +16,7 @@ export function unnRegisterApp<TKey extends string>(key: TKey): void {
         modules: removeModuleByKey(s.modules, key)
     }));
 }
+
 function addOrOverwrite(modules: Array<Module>, module: Module): Module[] {
     if (modules.find((m) => (m.test = module.test))) {
     }
