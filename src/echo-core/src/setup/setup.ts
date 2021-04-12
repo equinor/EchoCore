@@ -1,10 +1,10 @@
-import { setUserInformation } from '../echo-core/actions/userInformationActions';
-import PanelHandler from '../echo-core/panels/corePanels';
-import EchoAuthProvider from '../echo-core/services/authentication/echoProvider';
-import { graphGetProfile, graphGetProfilePicture } from '../echo-core/services/graph/graphUtils';
-import { setSetting } from '../echo-core/settings/globalSettingsActions';
-import persistEchoSetting from '../echo-core/settings/persistEchoSetting';
-import { CoreConfig } from '../echo-core/types/coreConfig';
+import { setUserInformation } from '../actions/userInformationActions';
+import PanelHandler from '../panels/corePanels';
+import EchoAuthProvider from '../services/authentication/echoProvider';
+import { graphGetProfile, graphGetProfilePicture } from '../services/graph/graphUtils';
+import { setSetting } from '../settings/globalSettingsActions';
+import persistEchoSetting from '../settings/persistEchoSetting';
+import { CoreConfig } from '../types/coreConfig';
 
 /**
  * Method for setting up the echo core basics:

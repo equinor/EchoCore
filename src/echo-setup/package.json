@@ -21,7 +21,7 @@
         "react-dom": "^17.0.2"
     },
     "devDependencies": {
-        "@equinor/echo-base": "0.0.1",
+        "@equinor/echo-base": "0.0.2",
         "@equinor/echo-components": "0.0.11",
         "@equinor/echo-core": "^0.1.25",
         "@equinor/echo-framework": "0.0.20",

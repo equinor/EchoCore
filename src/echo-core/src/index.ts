@@ -11,14 +11,19 @@ import registerPanels from './panels/registerPanel';
 import EchoAuthProvider from './services/authentication/echoProvider';
 import echoClient from './services/echoClient/echoClient';
 import useAppModuleState from './state/useAppModuleState';
-export { default as ArgumentError } from '../echo-base/src/errors/ArgumentError';
-export { default as BaseError } from '../echo-base/src/errors/BaseError';
-export { BackendError, ForbiddenError, NotFoundError, ValidationError } from '../echo-base/src/errors/network';
-export { default as NetworkError } from '../echo-base/src/errors/NetworkError';
-export { EchoEvents } from '../echo-base/src/types';
-export type { ErrorProperties } from '../echo-base/src/types/error';
-export { default as eventHub } from '../echo-base/src/utils/eventHub';
-export { storage } from '../echo-base/src/utils/storage';
+export {
+    BackendError,
+    default as ArgumentError,
+    default as BaseError,
+    default as eventHub,
+    default as NetworkError,
+    EchoEvents,
+    ForbiddenError,
+    NotFoundError,
+    storage,
+    ValidationError
+} from '@equinor/echo-base';
+export type { ErrorProperties } from '@equinor/echo-base';
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
 export { default as useCleanup } from './hooks/useCleanup';
 export { default as useInitial } from './hooks/useInitial';

@@ -1,4 +1,4 @@
-import { AppMetaFetch } from '@equinor/echo-base';
+import { AppMetaFetch, EchoPortal, getModulesMeta } from '@equinor/echo-base';
 import { Panel } from '@equinor/echo-core';
 import { authenticate } from '../setup';
 export interface EchoSetupOptions {
@@ -16,7 +16,7 @@ export default async function echoSetup(options: EchoSetupOptions): Promise<Echo
     const modules = await getModulesMeta(options.getModules);
     console.log(modules);
 
-    setSetting(persistEchoSetting.getSettingsFromLocalStorage());
+    // setSetting(persistEchoSetting.getSettingsFromLocalStorage());
 
     return {
         isAuthenticated
