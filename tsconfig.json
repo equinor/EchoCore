@@ -1,20 +1,25 @@
 {
-    "compilerOptions": {
-        "target": "es2015",
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noImplicitAny": false ,
-        "noEmit": true,
-        "jsx": "react"
-    },
-    "include": ["src", "doc"]
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "jsx": "react",
+    "noLib": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "target": "es5",
+    "sourceMap": true,
+    "lib": ["es6", "dom", "esnext"]
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "src/**/node_modules",
+    "src/**/lib"
+  ]
 }

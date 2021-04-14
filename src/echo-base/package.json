@@ -1,12 +1,18 @@
 {
     "name": "@equinor/echo-base",
-    "version": "0.0.1",
-    "description": "",
-    "main": "dist/index.js",
-    "source": "./index.ts",
+    "version": "0.0.8",
+    "module": "esm/index.js",
+    "main": "lib/index.js",
+    "typings": "lib/index.d.ts",
+    "sideEffects": false,
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "tsc"
+        "build": "npm run build:commonjs && npm run build:esnext",
+        "build:commonjs": "tsc --project tsconfig.json --outDir lib --module commonjs",
+        "build:esnext": "tsc --project tsconfig.json --outDir esm --module esnext",
+        "echo-publish": "npm publish --access public",
+        "echo-publish-beta": "npm publish --access public --tag beta",
+        "echo-publish-next": "npm publish --access public --tag next",
+        "test": "echo \"Run test from root folder\" && exit 1"
     },
     "keywords": [
         "echo",
@@ -14,7 +20,30 @@
     ],
     "author": "Echo core team",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/equinor/EchoCore"
+    },
+    "bugs": {
+        "url": "https://github.com/equinor/EchoCore/issues"
+    },
     "devDependencies": {
         "typescript": "^4.2.4"
+    },
+    "peerDependencies": {
+        "@equinor/echo-components": "*",
+        "@equinor/echo-framework": "*",
+        "@equinor/echo-utils": "*",
+        "@equinor/echo-base": "*",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
+    },
+    "files": [
+        "esm",
+        "lib",
+        "src"
+    ],
+    "dependencies": {
+        "tslib": "^2.2.0"
     }
 }
