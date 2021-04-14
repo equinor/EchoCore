@@ -15,6 +15,7 @@ function initialize(): void {
 describe('plantSettingActions', () => {
     const plantSettings: PlantSettings = {
         instCode: 'JSV',
+        hasTr2000: true,
         sapPlantId: 'JSV',
         proCoSysPlantId: 'JSV',
         plantName: 'Johann Sverdrup'
