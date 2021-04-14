@@ -1,17 +1,25 @@
 import { AppMetaFetch, EchoPortal, getModulesMeta } from '@equinor/echo-base';
-import { Panel } from '@equinor/echo-core';
-import { authenticate } from '../setup';
+import EchoCore, { Panel } from '@equinor/echo-core';
+
+type AuthLogFunction =  (...args: unknown[]) => void;
+const authProvider = EchoCore.EchoAuthProvider;
 export interface EchoSetupOptions {
     rootLoadingElementId: string;
-    leftPanel: Panel;
-    rightPanel: Panel;
-    authProviderLogFunc?: (...args: unknown[]) => void;
+    corePanels: Panel[]
+    authProviderLogFunc?: AuthLogFunction
     getModules: AppMetaFetch;
 }
 
+async function authenticate(authProviderLogFunc?: AuthLogFunction ): Promise<boolean> {
+    await authProvider.handleLogin(authProviderLogFunc);
+    return authProvider.isAuthenticated;
+} 
+
+
 export default async function echoSetup(options: EchoSetupOptions): Promise<EchoPortal | undefined> {
-    const isAuthenticated = await authenticate(options);
+    const isAuthenticated  = await authenticate();
     if (!isAuthenticated) return;
+    
 
     const modules = await getModulesMeta(options.getModules);
     console.log(modules);
