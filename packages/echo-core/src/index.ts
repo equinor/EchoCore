@@ -11,24 +11,24 @@ import registerPanels from './panels/registerPanel';
 import EchoAuthProvider from './services/authentication/echoProvider';
 import echoClient from './services/echoClient/echoClient';
 import useAppModuleState from './state/useAppModuleState';
-export {
-    default as ArgumentError,
-    default as BaseError,
-    default as eventHub,
-    default as NetworkError,
-    EchoEvents,
-    storage
-} from '@equinor/echo-base';
+export { EchoEvents, storage } from '@equinor/echo-base';
 export type { ErrorProperties } from '@equinor/echo-base';
+export { default as ArgumentError } from '@equinor/echo-base/lib/errors/ArgumentError';
+export { default as BaseError } from '@equinor/echo-base/lib/errors/BaseError';
 export { BackendError, ForbiddenError, NotFoundError, ValidationError } from '@equinor/echo-base/lib/errors/network';
+export { default as NetworkError } from '@equinor/echo-base/lib/errors/NetworkError';
+export { default as eventHub } from '@equinor/echo-base/lib/utils/eventHub';
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
+export { default as EchoEventHubContext } from './contexts/EchoEventHubContext';
 export { default as useCleanup } from './hooks/useCleanup';
+export { useEchoEventHub, useEventSubscriber } from './hooks/useEchoEventHub';
 export { default as useInitial } from './hooks/useInitial';
 export { default as usePanels } from './hooks/usePanels';
 export * from './observers/classObserver';
 export { default as PanelHandler } from './panels/corePanels';
 export { getPlants, getPlantsData, setPlantsData } from './plants/globalPlantsDataActions';
 export { usePlants, usePlantsData } from './plants/usePlants';
+export { default as EchoEventHubProvider } from './providers/EchoEventHubProvider';
 export { AuthenticationProvider } from './services/authentication/authProvider';
 export { default as BaseClient } from './services/baseClient/baseClient';
 export { default as EchoSettings } from './settings';
