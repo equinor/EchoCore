@@ -1,5 +1,3 @@
-import { AppComponentProps } from './api';
-import { WrappedComponent } from './components';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface SingleAppMetadata {
@@ -36,14 +34,10 @@ export interface AppApi extends EventEmitter {
      * Gets the metadata of the current App.
      */
     meta: AppMetadata;
-    registerRoute: <TKey extends string>(key: TKey, route: RouteRegistration) => void;
-    unRegisterRoute: <TKey extends string>(key: TKey) => void;
-    getRoutesData: () => Readonly<RouteRegistration[]>;
-    useRoutes: () => RouteRegistration[];
+    registerPage: <TKey extends string>(key: TKey, route: RouteRegistration) => void;
 }
 
 export interface RouteRegistration extends BaseRegistration {
-    component: WrappedComponent<AppComponentProps>;
     meta: AppMetaData;
 }
 
