@@ -24,3 +24,5 @@ export const storage: EchoLocalStorage = {
         localStorage.removeItem(key);
     }
 };
+
+export default storage;
