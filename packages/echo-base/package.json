@@ -22,7 +22,8 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/equinor/EchoCore"
+        "url": "https://github.com/equinor/EchoCore",
+        "directory": "packages/echo-base"
     },
     "bugs": {
         "url": "https://github.com/equinor/EchoCore/issues"

@@ -12,6 +12,11 @@
     ],
     "author": "Echo core team",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/equinor/EchoCore",
+        "directory": "packages/echo-setup"
+    },
     "peerDependencies": {
         "@equinor/echo-components": "*",
         "@equinor/echo-framework": "*",

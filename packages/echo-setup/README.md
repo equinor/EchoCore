@@ -1,4 +1,4 @@
-![logo](/doc/ee.png)
+![logo](https://raw.githubusercontent.com/equinor/EchoCore/main/doc/ee.png)
 
 # EchoSetup
 
