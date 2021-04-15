@@ -29,13 +29,14 @@ interface ModuleAPI {
     registerApp: (route: string, appData: AppData) => void;
     registerPage: (route: string, component: Component) => void;
     registerPanel: (key: string, component: Component, options?: PanelOptions) => void;
+    
 }
 ```
 
 An example of use oth the registrations actions, provided trough the setup function can be.
 
 ```ts
-function setup(api: ModuleAPI) {
+export function setup(api: ModuleAPI) {
     api.registerApp('/media', { appComponent: App, icon: 'media', title: 'Echo Media' });
 }
 ```
