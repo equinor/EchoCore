@@ -6,6 +6,8 @@
     "importHelpers": true
   },
   "include": [
-    "./src"
-  ]
+    "./lib",
+    "./esm"
+  ],
+  "exclude": ["./src"]
  }
