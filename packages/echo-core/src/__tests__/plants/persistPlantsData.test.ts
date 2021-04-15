@@ -12,19 +12,20 @@ beforeEach(() => {
 function initialize(): void {
     jest.resetModules();
     jest.clearAllMocks();
-    jest.mock('window.crypto');
 }
 
 const mockPlantsData: PlantsData = {
     plants: [
         {
             instCode: 'JSV',
+            hasTr2000: true,
             description: 'description',
             sapPlantId: 'id',
             proCoSysPlantId: 'procosysId'
         },
         {
             instCode: 'JCA',
+            hasTr2000: true,
             description: 'description',
             sapPlantId: 'id2',
             proCoSysPlantId: 'procosysId2'

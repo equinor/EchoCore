@@ -39,7 +39,13 @@ describe('globalSettingsActions', () => {
         it('showTextHighlighting and selectedInstCode should equal true and JSV', () => {
             setSetting({
                 showTextHighlighting: true,
-                plantSettings: { instCode: 'JSV', sapPlantId: 'JSV', plantName: 'JSV', proCoSysPlantId: 'JSV' }
+                plantSettings: {
+                    instCode: 'JSV',
+                    sapPlantId: 'JSV',
+                    plantName: 'JSV',
+                    proCoSysPlantId: 'JSV',
+                    hasTr2000: true
+                }
             });
             const result = getSettings();
             expect(result.showTextHighlighting).toBe(true);
