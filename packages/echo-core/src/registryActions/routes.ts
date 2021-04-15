@@ -1,7 +1,8 @@
 import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { useGlobalState } from '../state/useGlobalState';
-import { GlobalState, RouteRegistration } from '../types/state';
+import { RouteRegistration } from '../types/registry';
+import { GlobalState } from '../types/state';
 import { addOrOverwriteWithKey, removeWithKey } from '../utils/state';
 
 /**

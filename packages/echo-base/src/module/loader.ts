@@ -1,3 +1,4 @@
+import { LoaderConfig } from '../types/loader';
 import { App, AppData, AppMetadata, AvailableDependencies } from '../types/module';
 import { checkAppAsync, getLocalRequire } from './dependency';
 
@@ -35,12 +36,11 @@ export function loadApp(
     });
 }
 
-export function loader(meta: AppMetadata): AppData {
-    // implement
-    console.log(meta);
-    return {
-        setup: (): void => {
-            // Empty Setup
-        }
-    };
+
+
+export function loader(
+    getDependencies: ()=> Record<string, any>,
+    options: LoaderConfig
+) {
+    return  
 }

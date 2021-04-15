@@ -2,12 +2,12 @@ import { Atom } from '@dbeining/react-atom';
 import BaseError from '@equinor/echo-base/lib/errors/BaseError';
 import { User } from '@microsoft/microsoft-graph-types';
 import { AppComponentProps } from './api';
-import { Dict } from './common';
-import { AnyComponent, WrappedComponent } from './components';
+import { AnyComponent } from './components';
 import { LegendOptions } from './legend';
 import { AppModule } from './modules';
 import { Panel } from './panel';
 import { PlantsData } from './plants';
+import { AppMetaData, RegistryState } from './registry';
 import { Settings } from './settings';
 import { UI } from './ui';
 
@@ -30,33 +30,6 @@ export interface GlobalStateContext {
 }
 
 export type EchoCustomState<T> = Partial<T>;
-
-/**
- * The Echo global app sub-state container for registering application components.
- */
-export interface RegistryState {
-    /**
-     * The registered app components for the router.
-     */
-    routes: Dict<RouteRegistration>;
-    panels: Dict<Array<Panel>>;
-}
-
-// TODO Delete =>
-export interface RouteRegistration extends BaseRegistration {
-    component: WrappedComponent<AppComponentProps>;
-    meta: AppMetaData;
-}
-// TODO Delete =>
-export interface BaseRegistration {
-    key: string;
-}
-
-export interface AppMetaData {
-    name: string;
-    icon: string;
-    homeScreen?: boolean;
-}
 
 export interface ModuleApi {
     registerApp: <Key extends string>(
