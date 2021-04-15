@@ -1,4 +1,5 @@
 export * from './error';
-export * from './eventHub';
+export * from './event';
 export * from './module';
 export * from './storage';
+

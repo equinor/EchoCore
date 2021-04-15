@@ -1,4 +1,4 @@
-import { EchoEventHub, EchoEvents } from '../types/eventHub';
+import { EchoEventHub, EchoEvents } from '../types/event';
 
 /**
  * Class for creating an eventHub to be used for emitting and subscribing to either

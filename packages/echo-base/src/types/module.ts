@@ -1,3 +1,4 @@
+import { ModuleEventEmitter } from "./event";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface SingleAppMetadata {
@@ -22,19 +23,24 @@ export type App = SingleApp | MultiApp;
  */
 export type AppMetadata = SingleAppMetadata | MultiAppsMetadata;
 
+/**
+ * The metadata for a single app.
+ */
 export type SingleApp = AppData & AppMetadata;
 
+/**
+ * The metadata for apps containing apps.
+ */
 export type MultiApp = MultiAppData & MultiAppsMetadata;
 
 /**
  * Defines the API accessible from Apps.
  */
-export interface AppApi extends EventEmitter {
+export interface AppApi extends ModuleEventEmitter {
     /**
      * Gets the metadata of the current App.
      */
     meta: AppMetadata;
-    registerPage: <TKey extends string>(key: TKey, route: RouteRegistration) => void;
 }
 
 export interface RouteRegistration extends BaseRegistration {
@@ -64,43 +70,8 @@ export interface EchoPortal {
 
 export type AppMetaFetch = () => Promise<AppMetadata[]>;
 
-export interface EventMap {
-    [custom: string]: unknown;
-}
 
-/**
- * Listener for module app shell events.
- */
-export interface Listener<T> {
-    /**
-     * Receives an event of type T.
-     */
-    (arg: T): void;
-}
 
-/**
- * Emitter of module app shell events
- */
-export interface EventEmitter {
-    /**
-     * Attaches a new event listener.
-     * @param type The type of the event to listen for.
-     * @param callback The callback to trigger.
-     */
-    on<K extends keyof EventMap>(type: K, callback: Listener<EventMap[K]>): EventEmitter;
-    /**
-     * Detaches an existing event listener.
-     * @param type The type of the event to listen for.
-     * @param callback The callback to trigger.
-     */
-    of<K extends keyof EventMap>(type: K, callback: Listener<EventMap[K]>): EventEmitter;
-    /**
-     * Emits a new event with the given type.
-     * @param type The type of the event to emit.
-     * @param arg The payload of the event.
-     */
-    emit<K extends keyof EventMap>(type: K, arg: EventMap[K]): EventEmitter;
-}
 
 /**
  * The creator function for the App API.
