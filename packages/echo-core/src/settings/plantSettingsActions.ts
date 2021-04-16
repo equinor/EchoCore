@@ -22,11 +22,11 @@ export function setSelectedPlant(plantSettings: PlantSettings): void {
  * @return {*}  {PlantSettings}
  */
 export function getSelectedPlant(): PlantSettings {
-    const { instCode, sapPlantId, proCoSysPlantId, plantName } = readState(getCoreContext(), (state) => {
+    const { instCode, sapPlantId, proCoSysPlantId, plantName, hasTr2000 } = readState(getCoreContext(), (state) => {
         return state.settings.plantSettings;
     });
 
-    return { instCode, sapPlantId, proCoSysPlantId, plantName };
+    return { instCode, sapPlantId, proCoSysPlantId, plantName, hasTr2000 };
 }
 
 /**
