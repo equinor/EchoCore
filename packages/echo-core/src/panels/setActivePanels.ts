@@ -1,4 +1,4 @@
-import { dispatch, readState } from '../state/globalActions';
+import { dispatch, readState } from '../actions/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { GlobalState } from '../types';
 import PanelHandler, { ACTIVE_PANEL_KEY } from './corePanels';

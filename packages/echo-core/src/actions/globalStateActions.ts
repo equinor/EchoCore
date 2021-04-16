@@ -1,6 +1,6 @@
-import { dispatch } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { AppError, AppModule, GlobalState } from '../types';
+import { dispatch } from './globalActions';
 
 /**
  * Function Used for updating the modules global state.

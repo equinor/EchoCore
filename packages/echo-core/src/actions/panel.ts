@@ -1,9 +1,9 @@
-import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { useGlobalState } from '../state/useGlobalState';
 import { Dict, Panel } from '../types';
 import { GlobalState } from '../types/state';
 import { addOrOverwriteWithKey, removeWithKey } from '../utils/state';
+import { dispatch, readState } from './globalActions';
 
 /**
  *

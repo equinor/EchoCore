@@ -1,6 +1,7 @@
 import { Atom } from '@dbeining/react-atom';
 import BaseError from '@equinor/echo-base/lib/errors/BaseError';
 import { User } from '@microsoft/microsoft-graph-types';
+import { GlobalsStateActions } from './actions';
 import { AppComponentProps } from './api';
 import { AnyComponent } from './components';
 import { LegendOptions } from './legend';
@@ -27,6 +28,7 @@ export interface GlobalState {
 }
 export interface GlobalStateContext {
     state: Atom<GlobalState>;
+    actions: GlobalsStateActions;
 }
 
 export type EchoCustomState<T> = Partial<T>;

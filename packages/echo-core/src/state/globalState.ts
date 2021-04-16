@@ -1,6 +1,7 @@
 import { Atom } from '@dbeining/react-atom';
 import { createContext } from 'react';
 import { GlobalState, GlobalStateContext } from '../types';
+import { GlobalsStateActions } from '../types/actions';
 import defaultGlobalState from './defaultStates';
 
 /**
@@ -23,7 +24,8 @@ export function createGlobalState(defaultState: GlobalState): Atom<GlobalState> 
  */
 export function createGlobalApplicationContext(state: Atom<GlobalState>): GlobalStateContext {
     const ctx: GlobalStateContext = {
-        state: state
+        state,
+        actions: {} as GlobalsStateActions
         // Todo update with httpApi, authentication and more...
     };
     return ctx;

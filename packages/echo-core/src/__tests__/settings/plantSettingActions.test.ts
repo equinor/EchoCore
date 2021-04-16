@@ -1,6 +1,6 @@
+import { dispatch } from '../../actions/globalActions';
 import { getInstCode, getProCoSysPlantId, getSapPlantId, setSelectedPlant } from '../../settings/plantSettingsActions';
 import defaultGlobalState from '../../state/defaultStates';
-import { dispatch } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
 import { PlantSettings } from '../../types/settings';
 

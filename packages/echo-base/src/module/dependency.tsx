@@ -32,7 +32,31 @@ function checkApp(app?: AppData): AppData {
     };
 }
 
-export function checkAppAsync(app?: AppData | Promise<AppData>): Promise<AppData> {
+
+export async function loadScript(
+    link: string,
+    depName: string,
+    dependencies: AvailableDependencies,
+    crossOrigin?: string
+): Promise<AppData | undefined> {
+    return new Promise<AppData | undefined>((resolve, reject) => {
+
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = link;
+        script.crossOrigin = crossOrigin ? crossOrigin : "";
+    
+
+        window[depName] = getLocalRequire(dependencies);
+
+        script.onload = (): void => resolve(checkAppAsync(script.app));   
+        script.onerror = (): void => reject('could not load');
+
+        document.head.appendChild(script);
+    });
+}
+
+export async function checkAppAsync(app?: AppData | Promise<AppData>): Promise<AppData> {
     return Promise.resolve(app).then((resolvedApp) => checkApp(resolvedApp));
 }
 

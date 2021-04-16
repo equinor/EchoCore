@@ -1,7 +1,7 @@
-import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { LegendOptions } from '../types/legend';
 import { GlobalState } from '../types/state';
+import { dispatch, readState } from './globalActions';
 /**
  * Echo core function for updating the legend State.
  * @export Function from Echo Core

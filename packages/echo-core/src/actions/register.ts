@@ -1,7 +1,7 @@
-import { dispatch } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { AppModule } from '../types/modules';
 import { GlobalState } from '../types/state';
+import { dispatch } from './globalActions';
 
 export function registerModules<TKey extends string>(module: AppModule): void {
     dispatch(getCoreContext(), (s: GlobalState) => ({

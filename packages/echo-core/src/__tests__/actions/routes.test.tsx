@@ -1,5 +1,5 @@
 import React from 'react';
-import { getRoutesData, registerRoute, unRegisterRoute } from '../../registryActions/routes';
+import { getRoutesData, registerRoute, unRegisterRoute } from '../../actions/routes';
 import { AppMetaData, RouteRegistration } from '../../types';
 
 const TestComponent: React.FC = () => {
