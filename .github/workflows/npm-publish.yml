@@ -11,7 +11,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
               with:
-                  token: ${{ secrets.admin_token }}
+                  token: ${{ secrets.git_token }}
                   fetch-depth: 0
 
             - name: Setup node
