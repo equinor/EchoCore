@@ -1,4 +1,4 @@
-import { setUserInformation } from '../actions/userInformationActions';
+import { setUserInformation } from '../actions/userInformation';
 import PanelHandler from '../panels/corePanels';
 import EchoAuthProvider from '../services/authentication/echoProvider';
 import { graphGetProfile, graphGetProfilePicture } from '../services/graph/graphUtils';

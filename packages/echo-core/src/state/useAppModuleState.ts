@@ -1,5 +1,5 @@
 import { useAtom } from '@dbeining/react-atom';
-import { setModuleState } from '../actions/globalStateActions';
+import { setModuleState } from '../actions/globalState';
 import useInitial from '../hooks/useInitial';
 import { getCoreState } from './globalState';
 

@@ -1,13 +1,17 @@
-import { AppMetaData, RouteRegistration } from '@equinor/echo-base';
-import { getRoutesData, registerRoute, unRegisterRoute } from '../../registryActions/routes';
+import React from 'react';
+import { getRoutesData, registerRoute, unRegisterRoute } from '../../actions/routes';
+import { AppMetaData, RouteRegistration } from '../../types/registry';
 
+const test = () => {
+    return <div>Test</div>;
+};
 const appMeta: AppMetaData = {
-    name: 'newApp',
-    icon: 'some icon'
+    title: 'newApp'
 };
 
 const testRoute: RouteRegistration = {
-    key: 'testRoute',
+    key: 'newApp',
+    component: test,
     meta: appMeta
 };
 

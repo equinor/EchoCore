@@ -1,4 +1,4 @@
-import { setLegendOption } from './actions/legendOptionsStateActions';
+import { setLegendOption } from './actions/legendOptions';
 import { EnvironmentVariables } from './configuration/environment';
 import Env from './Env';
 import useAuthenticate from './hooks/useAuthenticate';
@@ -19,6 +19,7 @@ export { BackendError, ForbiddenError, NotFoundError, ValidationError } from '@e
 export { default as NetworkError } from '@equinor/echo-base/lib/errors/NetworkError';
 export { default as eventHub } from '@equinor/echo-base/lib/utils/eventHub';
 export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
+export { getPlants, getPlantsData, setPlantsData } from './actions/plantsData';
 export { default as EchoEventHubContext } from './contexts/EchoEventHubContext';
 export { default as useCleanup } from './hooks/useCleanup';
 export { useEchoEventHub, useEventSubscriber } from './hooks/useEchoEventHub';
@@ -26,7 +27,6 @@ export { default as useInitial } from './hooks/useInitial';
 export { default as usePanels } from './hooks/usePanels';
 export * from './observers/classObserver';
 export { default as PanelHandler } from './panels/corePanels';
-export { getPlants, getPlantsData, setPlantsData } from './plants/globalPlantsDataActions';
 export { usePlants, usePlantsData } from './plants/usePlants';
 export { default as EchoEventHubProvider } from './providers/EchoEventHubProvider';
 export { AuthenticationProvider } from './services/authentication/authProvider';

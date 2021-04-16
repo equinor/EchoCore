@@ -1,5 +1,5 @@
 import { readState } from '../../actions/globalActions';
-import { setModuleState } from '../../actions/globalStateActions';
+import { setModuleState } from '../../actions/globalState';
 import { getCoreContext } from '../../state/globalState';
 import { GlobalState } from '../../types/state';
 
