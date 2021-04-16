@@ -1,0 +1,35 @@
+name: Bump version
+
+on:
+    release:
+        types:
+            - published
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [12.x]
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  token: ${{ secrets.admin_token }}
+                  fetch-depth: 0
+
+            - name: Setup node
+              uses: actions/setup-node@v2
+              with:
+                  registry-url: https://registry.npmjs.org
+
+            - name: Config git user
+              run: |
+                  git config --global user.name "${{ github.actor }}"
+                  git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+                  git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+            - name: Bump versions
+              run: |
+                  git checkout main
+                  npx lerna version --yes --conventional-commits --create-release github
+              env:
+                  GH_TOKEN: ${{ github.token }}
