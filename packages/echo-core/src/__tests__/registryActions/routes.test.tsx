@@ -1,10 +1,5 @@
-import React from 'react';
+import { AppMetaData, RouteRegistration } from '@equinor/echo-base';
 import { getRoutesData, registerRoute, unRegisterRoute } from '../../registryActions/routes';
-import { AppMetaData, RouteRegistration } from '../../types';
-
-const TestComponent: React.FC = () => {
-    return <div>Hei</div>;
-};
 
 const appMeta: AppMetaData = {
     name: 'newApp',
@@ -13,7 +8,6 @@ const appMeta: AppMetaData = {
 
 const testRoute: RouteRegistration = {
     key: 'testRoute',
-    component: TestComponent,
     meta: appMeta
 };
 
