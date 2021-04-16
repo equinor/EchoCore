@@ -21,5 +21,6 @@ jobs:
             - name: npm install, test and build
               run: |
                   npm install
+                  npm run lerna-install
                   npm run echo-test
                   npm run build

@@ -1,43 +1,35 @@
 {
-    "name": "@equinor/echo-core",
-    "version": "0.1.26",
+    "name": "@equinor/echo-core-lerna",
+    "version": "0.0.0",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
-    "main": "dist/index.js",
-    "types": "dist/types/index.d.ts",
-    "source": "src/index.ts",
     "scripts": {
-        "build": "rollup -c",
-        "start": "rollup -c -w",
-        "echo-publish": "npm publish --access public",
-        "echo-publish-beta": "npm publish --access public --tag beta",
         "echo-test": "jest",
-        "patch": "npm version patch",
-        "major": "npm version major",
-        "minor": "npm version minor",
+        "core-start": "lerna run start --stream --scope @equinor/echo-core",
+        "version": "lerna version --conventional-commits --yes",
+        "lerna-install": "lerna exec npm install",
+        "bootstrap": "lerna bootstrap",
+        "build": "lerna run build",
+        "link": "lerna exec npm link --scope @equinor/echo-core",
+        "unlink": "lerna exec npm unlink --scope @equinor/echo-core",
+        "echo-publish": "lerna publish from-package --yes --no-verify-access",
         "test-wo-install": "jest --watchAll",
         "test": "npm ci & jest --watchAll",
         "test-coverage": "npm ci & jest --coverage --watchAll",
-        "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color"
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx packages --color"
     },
-    "author": "Echo Core",
+    "author": "Echo Core Team",
     "license": "MIT",
-    "peerDependencies": {
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2"
-    },
-    "dependencies": {
-        "@azure/msal-browser": "^2.8.0",
-        "@dbeining/react-atom": "^4.1.12"
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/equinor/EchoCore"
     },
     "devDependencies": {
         "@babel/core": "^7.12.10",
         "@babel/preset-env": "^7.12.11",
         "@babel/preset-react": "^7.12.10",
         "@babel/preset-typescript": "^7.12.7",
-        "@microsoft/microsoft-graph-types": "^1.20.0",
-        "@rollup/plugin-node-resolve": "^11.0.1",
-        "@rollup/plugin-typescript": "^8.0.0",
         "@types/jest": "^26.0.20",
+        "@types/node": "^14.14.37",
         "@types/react": "^17.0.3",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
@@ -49,20 +41,8 @@
         "eslint-plugin-react-hooks": "^4.1.2",
         "jest": "^26.6.3",
         "jest-expo": "^40.0.1",
+        "lerna": "^4.0.0",
         "prettier": "^2.0.5",
-        "react": "^17.0.2",
-        "react-test-renderer": "^17.0.1",
-        "rollup": "^2.34.1",
-        "rollup-plugin-babel": "^4.4.0",
-        "rollup-plugin-commonjs": "^10.1.0",
-        "rollup-plugin-delete": "^2.0.0",
-        "rollup-plugin-dts": "^2.0.0",
-        "rollup-plugin-typescript": "^1.0.1",
-        "rollup-plugin-typescript-paths": "^1.2.2",
-        "rollup-plugin-typescript2": "^0.29.0",
         "typescript": "^4.1.2"
-    },
-    "files": [
-        "dist/"
-    ]
+    }
 }

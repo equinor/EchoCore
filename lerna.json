@@ -1,0 +1,20 @@
+{
+    "packages": ["packages/*"],
+    "version": "independent",
+    "command": {
+        "version": {
+            "ignoreChanges": ["*.spec.ts", "*.md"],
+            "allowBranch": ["main", "feat/*", "feature/*", "fix/*", "bugfix/*"],
+            "conventionalCommits": true
+        },
+        "bootstrap": {
+            "hoist": true,
+            "npmClientArgs": ["--no-package-lock"]
+        },
+        "publish": {
+            "conventionalCommits": true,
+            "ignoreChanges": ["*.spec.ts", "*.md"],
+            "message": "chore(release): publish"
+        }
+    }
+}
