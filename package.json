@@ -6,7 +6,7 @@
         "echo-test": "jest",
         "core-start": "lerna run start --stream --scope @equinor/echo-core",
         "version": "lerna version --conventional-commits --yes",
-        "install": "lerna exec npm install",
+        "lerna-install": "lerna exec npm install",
         "bootstrap": "lerna bootstrap",
         "build": "lerna run build",
         "link": "lerna exec npm link --scope @equinor/echo-core",

@@ -9,6 +9,7 @@ export const legendOptions: LegendOptions = {
 
 const plantSettings: PlantSettings = {
     instCode: '',
+    hasTr2000: false,
     sapPlantId: '',
     proCoSysPlantId: '',
     plantName: ''
@@ -46,7 +47,8 @@ const defaultGlobalState: GlobalState = {
     ui: {},
     registry: {
         panels: {},
-        routes: {}
+        routes: {},
+        appLinks: {}
     },
     activePanel: ActivePanel.None,
     moduleState: {},

@@ -17,12 +17,13 @@ function useSettings(): Settings {
  * @return {*}  {UsePlantSettings}
  */
 export default function usePlantSettings(): PlantSettings {
-    const { instCode, sapPlantId, plantName, proCoSysPlantId } = useSettings().plantSettings;
+    const { instCode, sapPlantId, plantName, proCoSysPlantId, hasTr2000 } = useSettings().plantSettings;
     return {
         instCode,
         sapPlantId,
         plantName,
-        proCoSysPlantId
+        proCoSysPlantId,
+        hasTr2000
     };
 }
 /**
