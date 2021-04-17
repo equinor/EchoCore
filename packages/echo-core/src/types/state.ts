@@ -2,6 +2,7 @@ import { Atom } from '@dbeining/react-atom';
 import { User } from '@microsoft/microsoft-graph-types';
 import { GlobalsStateActions } from './actions';
 import { AppComponentProps } from './api';
+import { Dict } from './common';
 import { AnyComponent } from './components';
 import { LegendOptions } from './legend';
 import { AppModule, ModuleAppError } from './modules';
@@ -14,10 +15,9 @@ import { UI } from './ui';
 export interface GlobalState {
     app: EchoAppState;
     modules: Array<AppModule>;
+    coreComponents: EchoCoreComponents;
     registry: RegistryState;
-    panels: Array<Panel>;
-    ui: UI;
-    activePanel: string;
+    ui: Dict<UI>;
     userProfile?: User;
     userPhotoUrl?: string;
     legendOptions: LegendOptions;
@@ -43,6 +43,15 @@ export interface ModuleApi {
     unRegisterPanes: <Key extends string>(key: Key) => void;
 }
 
+export interface EchoCoreComponents {
+    panels: Dict<Panel>;
+}
+
+export interface CorePanels {
+    mainMenu: Panel;
+    searchPanel: Panel;
+}
+
 /**
  * The Echo global app sub-state container for app information.
  */
@@ -50,7 +59,9 @@ export interface EchoAppState {
     /*
      * The key for the active application panel.
      */
-    activePanel: string;
+    activePanelState: ActivePanel;
+    activeState: ActiveState;
+
     /**
      * Information for the layout computation.
      */
@@ -65,6 +76,17 @@ export interface EchoAppState {
      * Gets an unrecoverable application error, if any.
      */
     error: ModuleAppError | undefined;
+}
+
+export interface ActiveState {
+    activeTagNo: string;
+    activeDocumentNo: string;
+    activeFileId: string;
+}
+
+export interface ActivePanel {
+    isPanelActive: boolean;
+    activePanel: string;
 }
 
 /**

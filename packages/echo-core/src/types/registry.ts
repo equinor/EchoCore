@@ -1,7 +1,7 @@
 import { AppComponentProps } from './api';
 import { Dict } from './common';
 import { WrappedComponent } from './components';
-import { Panel } from './panel';
+import { EchoPanel } from './panel';
 
 /**
  * The Echo global app sub-state container for registering application components.
@@ -11,7 +11,7 @@ export interface RegistryState {
      * The registered app components for the router.
      */
     routes: Dict<RouteRegistration>;
-    panels: Dict<Array<Panel>>;
+    panels: Dict<EchoPanel>;
     appLinks: Dict<AppLink>;
 }
 

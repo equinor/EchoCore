@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { AnyComponent } from './components';
-import { UI } from './ui';
+import { PanelUI } from './ui';
 
 export enum PanelType {
     left = 'left',
@@ -14,7 +15,6 @@ export interface Panel {
     key: string;
     label: string;
     icon: React.FC | string;
-    ui?: UI;
     disabled?: boolean;
 }
 
@@ -22,4 +22,15 @@ export enum ActivePanel {
     AppMenu = 'AppMenu',
     ToolMenu = 'ToolMenu',
     None = ''
+}
+
+export interface EchoPanel {
+    panels: Panel[];
+    options: Partial<EchoPanelOptions>;
+}
+
+export interface EchoPanelOptions extends PanelUI {
+    searchActive: boolean;
+    customPanelActive: string;
+    addSearch: boolean;
 }

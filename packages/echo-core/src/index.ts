@@ -1,4 +1,5 @@
 import { setLegendOption } from './actions/legendOptions';
+import { registerPanels } from './actions/panels';
 import { EnvironmentVariables } from './configuration/environment';
 import Env from './Env';
 import useAuthenticate from './hooks/useAuthenticate';
@@ -7,7 +8,6 @@ import useEchoSetup from './hooks/useSetup';
 import useUserPhoto from './hooks/useUserPhoto';
 import useUserProfile from './hooks/useUserProfile';
 import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './panels/corePanels';
-import registerPanels from './panels/registerPanel';
 import EchoAuthProvider from './services/authentication/echoProvider';
 import echoClient from './services/echoClient/echoClient';
 import useAppModuleState from './state/useAppModuleState';

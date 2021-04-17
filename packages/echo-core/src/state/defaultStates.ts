@@ -40,17 +40,27 @@ const defaultGlobalState: GlobalState = {
     app: {
         error: undefined,
         loading: typeof window !== 'undefined',
-        layout: 'desktop'
+        layout: 'desktop',
+        activePanelState: {
+            activePanel: ActivePanel.None,
+            isPanelActive: false
+        },
+        activeState: {
+            activeTagNo: '',
+            activeDocumentNo: '',
+            activeFileId: ''
+        }
+    },
+    coreComponents: {
+        panels: {}
     },
     modules: [],
-    panels: [],
     ui: {},
     registry: {
         panels: {},
         routes: {},
         appLinks: {}
     },
-    activePanel: ActivePanel.None,
     moduleState: {},
     userProfile: undefined,
     userPhotoUrl: undefined,
