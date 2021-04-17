@@ -6,7 +6,7 @@ interface EventHubProviderProps {
     children: ReactNode;
 }
 
-const EventHubProvider: React.FC<EventHubProviderProps> = ({ children }) => {
+export const EventHubProvider: React.FC<EventHubProviderProps> = ({ children }) => {
     const providerPayload = useMemo(() => ({ eventHub }), []);
     return <EchoEventHubContext.Provider value={providerPayload}>{children}</EchoEventHubContext.Provider>;
 };

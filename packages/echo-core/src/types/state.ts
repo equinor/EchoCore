@@ -1,11 +1,10 @@
 import { Atom } from '@dbeining/react-atom';
-import BaseError from '@equinor/echo-base/lib/errors/BaseError';
 import { User } from '@microsoft/microsoft-graph-types';
 import { GlobalsStateActions } from './actions';
 import { AppComponentProps } from './api';
 import { AnyComponent } from './components';
 import { LegendOptions } from './legend';
-import { AppModule } from './modules';
+import { AppModule, ModuleAppError } from './modules';
 import { Panel } from './panel';
 import { PlantsData } from './plants';
 import { AppMetaData, RegistryState } from './registry';
@@ -44,12 +43,14 @@ export interface ModuleApi {
     unRegisterPanes: <Key extends string>(key: Key) => void;
 }
 
-export class AppError extends BaseError {}
-
 /**
  * The Echo global app sub-state container for app information.
  */
 export interface EchoAppState {
+    /*
+     * The key for the active application panel.
+     */
+    activePanel: string;
     /**
      * Information for the layout computation.
      */
@@ -63,7 +64,7 @@ export interface EchoAppState {
     /**
      * Gets an unrecoverable application error, if any.
      */
-    error: AppError | undefined;
+    error: ModuleAppError | undefined;
 }
 
 /**

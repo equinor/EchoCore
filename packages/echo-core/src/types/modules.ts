@@ -1,3 +1,4 @@
+import { BaseError } from '@equinor/echo-base';
 import { Component } from 'react';
 import { Panel } from './panel';
 
@@ -19,3 +20,5 @@ export interface EchoApp {
 }
 
 type AppContext = {};
+
+export class ModuleAppError extends BaseError {}
