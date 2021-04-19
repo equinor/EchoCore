@@ -1,4 +1,4 @@
-import { ModuleEventEmitter } from "./event";
+import { ModuleEventEmitter } from './event';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface SingleAppMetadata {
@@ -17,7 +17,7 @@ export interface MultiAppsMetadata {
     custom?: any;
 }
 
-export type App = SingleApp | MultiApp;
+export type AppModule = SingleAppModule | MultiAppModule;
 /**
  * Describes the metadata transported by a Apps.
  */
@@ -26,17 +26,17 @@ export type AppMetadata = SingleAppMetadata | MultiAppsMetadata;
 /**
  * The metadata for a single app.
  */
-export type SingleApp = AppData & AppMetadata;
+export type SingleAppModule = AppData & AppMetadata;
 
 /**
  * The metadata for apps containing apps.
  */
-export type MultiApp = MultiAppData & MultiAppsMetadata;
+export type MultiAppModule = MultiAppData & MultiAppsMetadata;
 
 /**
  * Defines the API accessible from Apps.
  */
-export interface AppApi extends ModuleEventEmitter {
+export interface AppModuleApi extends ModuleEventEmitter {
     /**
      * Gets the metadata of the current App.
      */
@@ -58,7 +58,7 @@ export interface BaseRegistration {
 }
 
 export interface AppData {
-    setup: (api: AppApi) => void | Promise<void>;
+    setup: (api: AppModuleApi) => void | Promise<void>;
 }
 export interface MultiAppData {
     setup: (apiFactory: AppApiCreator) => void | Promise<void>;
@@ -70,14 +70,11 @@ export interface EchoPortal {
 
 export type AppMetaFetch = () => Promise<AppMetadata[]>;
 
-
-
-
 /**
  * The creator function for the App API.
  */
 export interface AppApiCreator {
-    (target: AppMetadata): AppApi;
+    (target: AppMetadata): AppModuleApi;
 }
 
 /**

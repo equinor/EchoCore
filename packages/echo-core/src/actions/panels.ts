@@ -53,7 +53,7 @@ export function registerCorePanels(searchPanel: Panel, mainMenu: Panel): void {
  * @template TKey
  * @param {TKey} key
  */
-export function unnRegisterPanels<TKey extends string>(key: TKey): void {
+export function unRegisterPanels<TKey extends string>(key: TKey): void {
     dispatch(getCoreContext(), (s: GlobalState) => ({
         ...s,
         registry: {
