@@ -1,14 +1,12 @@
 import { Atom } from '@dbeining/react-atom';
 import { User } from '@microsoft/microsoft-graph-types';
 import { GlobalsStateActions } from './actions';
-import { AppComponentProps } from './api';
 import { Dict } from './common';
-import { AnyComponent } from './components';
 import { LegendOptions } from './legend';
 import { AppModule, ModuleAppError } from './modules';
 import { Panel } from './panel';
 import { PlantsData } from './plants';
-import { AppMetaData, RegistryState } from './registry';
+import { RegistryState } from './registry';
 import { Settings } from './settings';
 import { UI } from './ui';
 
@@ -31,17 +29,6 @@ export interface GlobalStateContext {
 }
 
 export type EchoCustomState<T> = Partial<T>;
-
-export interface ModuleApi {
-    registerApp: <Key extends string>(
-        name: Key,
-        Component: AnyComponent<AppComponentProps>,
-        meta?: AppMetaData
-    ) => void;
-    unRegisterApp: <Key extends string>(name: Key) => void;
-    registerPanels: <Key extends string>(key: Key, panels: Panel | Array<Panel>) => void;
-    unRegisterPanes: <Key extends string>(key: Key) => void;
-}
 
 export interface EchoCoreComponents {
     panels: Dict<Panel>;
