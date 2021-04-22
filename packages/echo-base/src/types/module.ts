@@ -1,5 +1,5 @@
-import { AppApiCreator } from './creators';
-import { ModuleEventEmitter } from './event';
+import { EchoModuleApiCreator } from './creators';
+import { EchoEventHub as EchoEventHub } from './event';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface SingleAppMetadata extends MetaDataBase {
@@ -21,7 +21,7 @@ export interface MetaDataBase {
 
 export type EchoModule = SingleModule | MultiModule;
 
-export type AppModuleData = AppData | MultiAppData;
+export type EchoModuleData = ModuleData | MultiModuleData;
 /**
  * Describes the metadata transported by a Apps.
  */
@@ -30,42 +30,37 @@ export type AppMetaData = SingleAppMetadata | MultiAppsMetadata;
 /**
  * The metadata for a single app.
  */
-export type SingleModule = AppData & AppMetaData;
+export type SingleModule = ModuleData & AppMetaData;
 
 /**
  * The metadata for apps containing apps.
  */
-export type MultiModule = MultiAppData & MultiAppsMetadata;
+export type MultiModule = MultiModuleData & MultiAppsMetadata;
 
 /**
  * Defines the API accessible from Apps.
  */
-export interface AppModuleApi extends ModuleEventEmitter {
+export interface EchoModuleApi {
     /**
      * Gets the metadata of the current App.
      */
     meta: AppMetaData;
+    eventHub: EchoEventHub;
 }
 
 export interface RouteRegistration extends BaseRegistration {
     meta: AppMetaData;
 }
 
-// export interface AppMetaData {
-//     name: string;
-//     icon: string;
-//     homeScreen?: boolean;
-// }
-
 export interface BaseRegistration {
     key: string;
 }
 
-export interface AppData {
-    setup: (api: AppModuleApi) => void | Promise<void>;
+export interface ModuleData {
+    setup: (api: EchoModuleApi) => void | Promise<void>;
 }
-export interface MultiAppData {
-    setup: (apiFactory: AppApiCreator) => void | Promise<void>;
+export interface MultiModuleData {
+    setup: (apiFactory: EchoModuleApiCreator) => void | Promise<void>;
 }
 
 export interface EchoPortal {

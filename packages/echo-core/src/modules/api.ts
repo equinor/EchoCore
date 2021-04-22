@@ -1,27 +1,28 @@
-import { AppApi as AppModuleApi, AppMetaData } from '@equinor/echo-base/lib/types/module';
+import { AppMetaData, EchoModuleApi, eventHub } from '@equinor/echo-base';
 import { AppOptions, registerApp, registerPanels, unRegisterApp, unRegisterPanels } from '../actions';
 import { EchoPanelOptions, Panel } from '../types/panel';
-
-interface EchoAppModuleApiCreator {
-    (moduleMeta: AppMetaData): AppModuleApi;
-}
-
 declare module '@equinor/echo-base' {
-    interface AppApi {
+    interface EchoModuleApi {
         registerApp: <RKey extends string>(key: RKey, options: AppOptions) => void;
         unRegisterApp: <Key extends string>(name: Key) => void;
         registerPanels: <TKey extends string>(key: TKey, panels: Panel[], options: Partial<EchoPanelOptions>) => void;
-        unRegisterPanes: <Key extends string>(key: Key) => void;
+        unRegisterPanels: <Key extends string>(key: Key) => void;
     }
 }
 
+interface EchoAppModuleApiCreator {
+    (meta: AppMetaData): EchoModuleApi;
+}
+
 export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
-    return (meta: AppMetaData): AppModuleApi => {
+    return (meta: AppMetaData): EchoModuleApi => {
         return {
-            registerApp: registerApp,
-            registerPanels: registerPanels,
-            unRegisterApp: unRegisterApp,
-            unRegisterPanes: unRegisterPanels
+            meta,
+            eventHub,
+            registerApp,
+            registerPanels,
+            unRegisterApp,
+            unRegisterPanels
         };
     };
 }

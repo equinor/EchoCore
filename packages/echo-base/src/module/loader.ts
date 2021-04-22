@@ -1,10 +1,10 @@
 import {
     AppDependencyGetter,
     AppMetaData,
-    AppModuleData,
     AvailableDependencies,
     DefaultLoaderConfig,
     EchoModule,
+    EchoModuleData,
     ModuleLoader
 } from '../types';
 import { createEmptyModule } from '../utils/emptyApp';
@@ -38,7 +38,7 @@ export function moduleLoader(getDependencies: AppDependencyGetter, config: Defau
 async function loadModule(
     meta: AppMetaData,
     getDependencies: AppDependencyGetter,
-    loader: (dependencies: AvailableDependencies) => Promise<AppModuleData>
+    loader: (dependencies: AvailableDependencies) => Promise<EchoModuleData>
 ): Promise<EchoModule> {
     const dependencies = {
         ...(getDependencies(meta) || {})

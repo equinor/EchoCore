@@ -26,7 +26,6 @@ export { useEchoEventHub, useEventSubscriber } from './hooks/useEchoEventHub';
 export { default as useInitial } from './hooks/useInitial';
 export { default as usePanels } from './hooks/usePanels';
 export * from './observers/classObserver';
-export { default as PanelHandler } from './panels/corePanels';
 export { usePlants, usePlantsData } from './plants/usePlants';
 export { default as EchoEventHubProvider } from './providers/EchoEventHubProvider';
 export { AuthenticationProvider } from './services/authentication/authProvider';

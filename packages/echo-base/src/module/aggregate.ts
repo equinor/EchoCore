@@ -1,8 +1,8 @@
-import { AppApiCreator, EchoModule } from '../types';
+import { EchoModule, EchoModuleApiCreator } from '../types';
 import { isfunc } from '../utils/isFunc';
 import { setupApp } from './setup';
 
-function checkCreateApi(createAppApi: AppApiCreator): boolean {
+function checkCreateApi(createAppApi: EchoModuleApiCreator): boolean {
     if (!isfunc(createAppApi)) {
         console.warn('Invalid `createAppApi` function. Skipping App installation.');
         return false;
@@ -11,7 +11,7 @@ function checkCreateApi(createAppApi: AppApiCreator): boolean {
     return true;
 }
 
-export async function createModules(createAppApi: AppApiCreator, apps: EchoModule[]): Promise<EchoModule[]> {
+export async function createModules(createAppApi: EchoModuleApiCreator, apps: EchoModule[]): Promise<EchoModule[]> {
     const promises: Array<Promise<EchoModule>> = [];
 
     for (const app of apps) {
@@ -21,7 +21,7 @@ export async function createModules(createAppApi: AppApiCreator, apps: EchoModul
     return await Promise.all(promises).then((loadedApps) => loadedApps);
 }
 
-export async function createModule(createAppApi: AppApiCreator, app: EchoModule): Promise<EchoModule> {
+export async function createModule(createAppApi: EchoModuleApiCreator, app: EchoModule): Promise<EchoModule> {
     if (checkCreateApi(createAppApi)) {
         await setupApp(app, createAppApi);
     }

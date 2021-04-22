@@ -1,4 +1,4 @@
-import { EchoEventHub, EchoEvents } from '../types/event';
+import { EchoEventHub, EchoEvents, UnsubscribeFunction } from '../types/event';
 
 /**
  * Class for creating an eventHub to be used for emitting and subscribing to either
@@ -28,7 +28,7 @@ class EventHub implements EchoEventHub {
      * @return {*} Returns a cleanup function for unsubscribing to the event {() => void}
      * @memberof EventHub
      */
-    subscribe<T>(key: string | EchoEvents, handler: (payload: T) => void): () => void {
+    subscribe<T>(key: string | EchoEvents, handler: (payload: T) => void): UnsubscribeFunction {
         const eventHandler = (e: Event): void => {
             const customEvent = e as CustomEvent;
             const payload = customEvent.detail as T;
@@ -47,7 +47,7 @@ class EventHub implements EchoEventHub {
      * @return {*} Returns cleanup function for unsubscribing from the subscribed events {() => void}
      * @memberof EventHub
      */
-    subscribeMany<T>(keys: Array<string | EchoEvents>, handler: (payload: T) => void): () => void {
+    subscribeMany<T>(keys: Array<string | EchoEvents>, handler: (payload: T) => void): UnsubscribeFunction {
         const unsubscribeFunctions: Array<() => void> = keys.map((key) => this.subscribe(key, handler));
         return (): void => {
             unsubscribeFunctions.map((unsubscribe) => {

@@ -1,7 +1,7 @@
 import { ModuleLoadingError } from '../../module/errors';
 import { standardStrategy } from '../../module/strategies';
-import { AppMetaData, AppModuleApi, EchoModule, LoadingModuleOptions } from '../../types';
-function createMockApi(meta: AppMetaData): AppModuleApi {
+import { AppMetaData, EchoModule, LoadingModuleOptions, ModuleApi } from '../../types';
+function createMockApi(meta: AppMetaData): ModuleApi {
     return {
         meta,
         emit: jest.fn(),

@@ -1,10 +1,10 @@
-import { AppMetaData, AppModuleApi, AvailableDependencies } from './module';
+import { AppMetaData, AvailableDependencies, EchoModuleApi } from './module';
 
 /**
  * The creator function for the App API.
  */
-export interface AppApiCreator {
-    (target: AppMetaData): AppModuleApi;
+export interface EchoModuleApiCreator {
+    (target: AppMetaData): EchoModuleApi;
 }
 
 export interface ModuleRequester {

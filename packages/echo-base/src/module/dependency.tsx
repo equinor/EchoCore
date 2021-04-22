@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AppData, AvailableDependencies, MultiAppsMetadata, SingleAppMetadata } from '../types';
+import { AvailableDependencies, ModuleData, MultiAppsMetadata, SingleAppMetadata } from '../types';
 
 declare global {
     interface HTMLScriptElement {
-        app?: AppData;
+        app?: ModuleData;
     }
 }
 
@@ -17,7 +17,7 @@ function requireModule(name: string, dependencies: AvailableDependencies): any {
     return dependency;
 }
 
-function checkApp(name: string, app?: AppData): AppData {
+function checkApp(name: string, app?: ModuleData): ModuleData {
     if (!app) {
         console.error('Invalid module found.', name);
     } else if (typeof app.setup !== 'function') {
@@ -39,8 +39,8 @@ export async function includeScript(
     dependencies: AvailableDependencies,
     crossOrigin?: string,
     integrity?: string
-): Promise<AppData | undefined> {
-    return new Promise<AppData | undefined>((resolve, reject) => {
+): Promise<ModuleData | undefined> {
+    return new Promise<ModuleData | undefined>((resolve, reject) => {
         const script = document.createElement('script');
         script.async = true;
         script.src = link;
@@ -62,7 +62,7 @@ export async function includeScript(
     });
 }
 
-export async function checkAppAsync(name: string, app?: AppData | Promise<AppData>): Promise<AppData> {
+export async function checkAppAsync(name: string, app?: ModuleData | Promise<ModuleData>): Promise<ModuleData> {
     const resolvedApp = await Promise.resolve(app);
     return checkApp(name, resolvedApp);
 }
@@ -75,7 +75,7 @@ export async function includeDependency(
     { name, link, requireRef, integrity }: SingleAppMetadata,
     dependencies?: AvailableDependencies,
     crossOrigin?: string
-): Promise<AppData> {
+): Promise<ModuleData> {
     return await includeScript(name, link, requireRef, dependencies, crossOrigin, integrity);
 }
 
@@ -83,6 +83,6 @@ export function includeBundle(
     { name, link, bundle, integrity }: MultiAppsMetadata,
     dependencies?: AvailableDependencies,
     crossOrigin?: string
-): Promise<AppData> {
+): Promise<ModuleData> {
     return includeScript(name ?? '(bundle)', link, bundle, dependencies, crossOrigin, integrity);
 }
