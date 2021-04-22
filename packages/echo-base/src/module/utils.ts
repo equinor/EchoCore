@@ -1,4 +1,4 @@
-import { AppMetadata, SingleAppModule } from '../types/module';
+import { AppMetaData, SingleModule } from '../types/module';
 
 /**
  *
@@ -24,10 +24,10 @@ export function isfunc(f: unknown): f is Function {
  *
  *
  * @export
- * @param {AppMetadata} meta
+ * @param {AppMetaData} meta
  * @return {*}  {SingleApp}
  */
-export function createEmptyApp(meta: AppMetadata): SingleAppModule {
+export function createEmptyApp(meta: AppMetaData): SingleModule {
     return {
         ...meta,
         setup(): void {

@@ -1,5 +1,3 @@
-
-
 /**
  * The Base Components Props obtained by avery app.
  */

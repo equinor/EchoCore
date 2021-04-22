@@ -1,6 +1,6 @@
 import { getCoreContext } from '../state/globalState';
-import { AppModule } from '../types/modules';
-import { GlobalState, ModuleAppError } from '../types/state';
+import { AppModule, ModuleAppError } from '../types/modules';
+import { GlobalState } from '../types/state';
 import { dispatch } from './globalActions';
 
 /**

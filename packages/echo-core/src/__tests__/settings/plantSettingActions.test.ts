@@ -2,7 +2,7 @@ import { dispatch } from '../../actions/globalActions';
 import { getInstCode, getProCoSysPlantId, getSapPlantId, setSelectedPlant } from '../../settings/plantSettingsActions';
 import defaultGlobalState from '../../state/defaultStates';
 import { getCoreContext } from '../../state/globalState';
-import { PlantSettings } from '../../types/settings';
+import { PlantSettings } from '../../types';
 
 beforeEach(() => {
     initialize();

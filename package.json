@@ -12,8 +12,8 @@
         "link": "lerna exec npm link --scope @equinor/echo-core",
         "unlink": "lerna exec npm unlink --scope @equinor/echo-core",
         "echo-publish": "lerna publish from-package --yes --no-verify-access",
-        "test-wo-install": "jest --watchAll",
-        "test": "npm ci & jest --watchAll",
+        "test-w-install": "npm ci & jest --watchAll",
+        "test": "jest --watchAll",
         "test-coverage": "npm ci & jest --coverage --watchAll",
         "lint": "eslint --ext .js,.jsx,.ts,.tsx packages --color"
     },
