@@ -23,8 +23,8 @@ async function evaluateAllModules(
 }
 
 export async function standardStrategy(options: LoadingModuleOptions, callback: AppModuleLoaded): Promise<void> {
-    const { createApi, fetchModules, modules } = options;
-    const loader: ModuleLoader = createModuleLoader({});
+    const { createApi, fetchModules, modules, config, dependencies, getDependencies } = options;
+    const loader: ModuleLoader = createModuleLoader(config, dependencies, getDependencies);
     try {
         const fetchedModules = await loadModules(fetchModules, loader);
         const allModules = await evaluateAllModules(createApi, modules, fetchedModules);

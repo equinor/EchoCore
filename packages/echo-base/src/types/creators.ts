@@ -14,3 +14,6 @@ export interface ModuleRequester {
 export interface AppDependencyGetter {
     (target: AppMetaData): AvailableDependencies | undefined | false;
 }
+export interface AppDependencyFetcher {
+    (url: string): Promise<string>;
+}

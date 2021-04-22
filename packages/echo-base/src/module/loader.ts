@@ -50,7 +50,7 @@ export async function loadModules(fetchModules: ModuleRequester, loader: ModuleL
 const inBrowser = typeof document !== 'undefined';
 
 export function createModuleLoader(
-    config: DefaultLoaderConfig,
+    config?: DefaultLoaderConfig,
     dependencies?: AvailableDependencies,
     getDependencies?: AppDependencyGetter
 ): ModuleLoader {
@@ -66,21 +66,7 @@ export function moduleLoader(getDependencies: AppDependencyGetter, config: Defau
             return loadFrom(meta, getDependencies, (deps) => includeBundle(meta, deps, config.crossOrigin));
         }
 
-        // const name = meta.name;
-        //const fetchDependency = defaultFetchDependency,
-        // if ('link' in meta && meta.link) {
-        //     const link = meta.link;
-
-        //     return fetchDependency(link, '').then((content) =>
-        //         loadFrom(meta, getDependencies, (deps) => compileDependency(name, content, link, deps))
-        //     );
-        // } else if ('content' in meta && meta.content) {
-        //     const content = meta.content;
-        //     return loadFrom(meta, getDependencies, (deps) => compileDependency(name, content, undefined, deps));
-        // } else {
-        //     console.warn('Empty pilet found!', name);
-        // }
-
+        console.warn('Empty Module found!', name);
         return Promise.resolve(createEmptyModule(meta));
     };
 }
