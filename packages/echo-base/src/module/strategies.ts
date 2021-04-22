@@ -1,7 +1,8 @@
 import { AppApiCreator, AppModuleLoaded, EchoModule, LoadingModuleOptions, ModuleLoader } from '../types';
 import { createModules } from './aggregate';
 import { ModulesEvaluationError } from './errors';
-import { createModuleLoader, loadModules } from './loader';
+import { loadModules } from './load';
+import { createModuleLoader } from './loader';
 
 async function evaluateAllModules(
     createApi: AppApiCreator,
