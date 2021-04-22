@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-core",
-    "version": "0.1.26",
+    "version": "0.1.4",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "./dist/index.js",
     "types": "./dist/types/index.d.ts",
@@ -28,11 +28,11 @@
         "directory": "packages/echo-core"
     },
     "peerDependencies": {
+        "@equinor/echo-base": "*",
         "react": "*",
         "react-dom": "*",
         "react-router": "*",
-        "react-router-dom": "*",
-        "@equinor/echo-base": "*"
+        "react-router-dom": "*"
     },
     "dependencies": {
         "@azure/msal-browser": "^2.8.0",
