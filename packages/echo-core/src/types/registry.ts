@@ -17,8 +17,9 @@ export interface RegistryState {
 
 export interface AppLink extends AppLinkOptions {
     tile: string;
-    icon: string;
-    uri: string;
+    icon?: string;
+    url: string;
+    description?: string;
 }
 
 export interface AppLinkOptions {
@@ -40,12 +41,13 @@ export interface NativeMessage {
     messageValue: boolean;
 }
 
-export interface RouteRegistration extends BaseRegistration {
+export interface RouteRegistration extends BaseRouteRegistration {
     component: WrappedComponent<AppComponentProps>;
-    meta: AppMetaData;
 }
 
-export interface BaseRegistration {
+export interface BaseRouteRegistration {
+    layoutKey?: string;
+    url: string;
     key: string;
 }
 
