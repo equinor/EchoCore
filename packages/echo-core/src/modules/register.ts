@@ -1,4 +1,4 @@
-import { dispatch } from '../state/globalActions';
+import { dispatch } from '../actions';
 import { getCoreContext } from '../state/globalState';
 import { AppModule } from '../types/modules';
 import { GlobalState } from '../types/state';
@@ -17,11 +17,3 @@ export function unnRegisterModules<TKey extends string>(key: TKey): void {
         modules: removeModuleByKey(s.modules, key)
     }));
 }
-
-// function validateModule(moduleA: AppModule, moduleB?: AppModule): boolean {
-//     if (moduleB) {
-//         return moduleA.name !== moduleB.name;
-//         // move validation
-//     }
-//     return true;
-// }

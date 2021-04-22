@@ -18,15 +18,14 @@ export interface Panel {
     disabled?: boolean;
 }
 
-export enum ActivePanel {
-    AppMenu = 'AppMenu',
-    ToolMenu = 'ToolMenu',
-    None = ''
-}
-
 export interface EchoPanel {
     panels: Panel[];
     options: Partial<EchoPanelOptions>;
+}
+
+export interface ActivePanel {
+    isPanelActive: boolean;
+    activePanel: string;
 }
 
 export interface EchoPanelOptions extends PanelUI {
@@ -34,3 +33,6 @@ export interface EchoPanelOptions extends PanelUI {
     customPanelActive: string;
     addSearch: boolean;
 }
+
+export const ECHO_CORE_MAIN = 'echoCoreMain';
+export const ECHO_CORE_SEARCH = 'echoCoreSearch';

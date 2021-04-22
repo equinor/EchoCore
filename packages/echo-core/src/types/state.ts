@@ -4,7 +4,7 @@ import { GlobalsStateActions } from './actions';
 import { Dict } from './common';
 import { LegendOptions } from './legend';
 import { AppModule, ModuleAppError } from './modules';
-import { Panel } from './panel';
+import { ActivePanel, Panel } from './panel';
 import { PlantsData } from './plants';
 import { RegistryState } from './registry';
 import { Settings } from './settings';
@@ -69,11 +69,6 @@ export interface ActiveState {
     activeTagNo: string;
     activeDocumentNo: string;
     activeFileId: string;
-}
-
-export interface ActivePanel {
-    isPanelActive: boolean;
-    activePanel: string;
 }
 
 /**

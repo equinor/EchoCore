@@ -1,4 +1,4 @@
-import { ActivePanel, GlobalState, LegendOptions } from '../types';
+import { GlobalState, LegendOptions } from '../types';
 import { PlantsData } from '../types/plants';
 import { PlantSettings, Settings } from '../types/settings';
 
@@ -42,7 +42,7 @@ const defaultGlobalState: GlobalState = {
         loading: typeof window !== 'undefined',
         layout: 'desktop',
         activePanelState: {
-            activePanel: ActivePanel.None,
+            activePanel: '',
             isPanelActive: false
         },
         activeState: {

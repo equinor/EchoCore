@@ -1,5 +1,5 @@
 import { useGlobalState } from '../state/useGlobalState';
-import { ActivePanel, ActiveState, EchoAppState, GlobalState } from '../types/state';
+import { ActivePanel, ActiveState, EchoAppState, GlobalState } from '../types';
 
 /**
  *

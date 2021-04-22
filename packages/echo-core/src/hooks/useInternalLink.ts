@@ -4,13 +4,15 @@ import { AppLinkOptions } from '../types/registry';
 import { SendMessageToReactNative } from '../utils/sendMessageToReactNative';
 import { useEchoEventHub } from './useEchoEventHub';
 
+type LinkFunction = (linkTo: string, options: Partial<AppLinkOptions>) => void;
 /**
  *
  * A hook providing a function for linking to internal applications.
  * @export
  * @return {Link} a Link function for linking to internal applications,
  */
-export function useInternalLink(): typeof Link {
+
+export function useInternalLink(): LinkFunction {
     const history = useHistory();
     const { eventHub } = useEchoEventHub();
 

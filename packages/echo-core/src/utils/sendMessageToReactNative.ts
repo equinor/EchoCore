@@ -1,5 +1,10 @@
-import { TextAtLocation } from '../components/cameraOverlay/tagScanner';
-
+export interface TextAtLocation {
+    text: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+}
 declare global {
     interface Window {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
