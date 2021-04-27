@@ -19,7 +19,6 @@ describe('Echo-Base strategies module', () => {
             {
                 setup: setupMock,
                 key: 'sA1',
-                hash: '12g',
                 name: 'someApp',
                 fileUri: 'file.js',
                 version: '1',
@@ -28,7 +27,6 @@ describe('Echo-Base strategies module', () => {
             {
                 setup: setupMock,
                 key: 'sA2',
-                hash: '12g',
                 name: 'someApp',
                 fileUri: 'file.js',
                 version: '1',
