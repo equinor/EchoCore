@@ -1,4 +1,4 @@
-import { dispatch } from '../../actions/globalActions';
+import { dispatch } from '../../actions/coreActions/globalActions';
 import { getPlants, getPlantsData, setPlantsData } from '../../actions/plantsData';
 import defaultGlobalState, { plantsData } from '../../state/defaultStates';
 import { getCoreContext } from '../../state/globalState';

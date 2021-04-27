@@ -1,5 +1,5 @@
 import { registerAppLink, unRegisterAppLink } from '../../actions/appLinks';
-import { readState } from '../../actions/globalActions';
+import { readState } from '../../actions/coreActions/globalActions';
 import { getCoreContext } from '../../state/globalState';
 import { AppLink } from '../../types/registry';
 import { GlobalState } from '../../types/state';
@@ -7,7 +7,7 @@ import { GlobalState } from '../../types/state';
 const appLink: AppLink = {
     tile: 'app',
     icon: 'app-icon',
-    uri: '/app'
+    path: '/app'
 };
 
 describe('appLink-registerAppLink', () => {

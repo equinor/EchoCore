@@ -11,9 +11,9 @@ function checkFetchFunction(fetchModules: ModuleRequester): boolean {
     return true;
 }
 
-export function loadMetaData(fetchModules: ModuleRequester): Promise<ModuleMetaData[]> {
+export async function loadMetaData(fetchModules: ModuleRequester): Promise<ModuleMetaData[]> {
     if (checkFetchFunction(fetchModules)) {
-        return fetchModules();
+        return await fetchModules();
     }
 
     return Promise.resolve([]);

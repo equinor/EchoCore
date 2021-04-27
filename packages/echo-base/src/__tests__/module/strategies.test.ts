@@ -1,13 +1,13 @@
 import { ModuleLoadingError } from '../../module/errors';
 import { standardStrategy } from '../../module/strategies';
-import { AppMetaData, EchoModule, LoadingModuleOptions, ModuleApi } from '../../types';
-function createMockApi(meta: AppMetaData): ModuleApi {
-    return {
+import { EchoModule, EchoModuleApi, EchoModuleApiCreator, LoadingModuleOptions, ModuleMetaData } from '../../types';
+import { eventHub } from '../../utils/eventHub';
+
+function createMockApi(): EchoModuleApiCreator {
+    return (meta: ModuleMetaData): EchoModuleApi => ({
         meta,
-        emit: jest.fn(),
-        of: jest.fn(),
-        on: jest.fn()
-    };
+        eventHub
+    });
 }
 
 describe('Echo-Base strategies module', () => {
@@ -15,24 +15,28 @@ describe('Echo-Base strategies module', () => {
         // Arrange
         const setupMock = jest.fn();
         const callbackMock = jest.fn();
-        const appModule: Array<EchoModule> = [
+        const appModule = [
             {
                 setup: setupMock,
+                key: 'sA1',
                 hash: '12g',
                 name: 'someApp',
-                link: 'file.js',
-                version: '1'
+                fileUri: 'file.js',
+                version: '1',
+                shortName: 'someApp'
             },
             {
                 setup: setupMock,
+                key: 'sA2',
                 hash: '12g',
                 name: 'someApp',
-                link: 'file.js',
-                version: '1'
+                fileUri: 'file.js',
+                version: '1',
+                shortName: 'someApp'
             }
-        ];
+        ] as EchoModule[];
         const loadingOptions: LoadingModuleOptions = {
-            createApi: createMockApi,
+            createApi: createMockApi(),
             fetchModules: jest.fn(() => Promise.resolve(appModule)),
             modules: appModule
         };
@@ -44,10 +48,11 @@ describe('Echo-Base strategies module', () => {
         expect(callbackMock.mock.calls[0][0]).toBeUndefined();
         expect(callbackMock.mock.calls[0][1]).toHaveLength(2);
     });
+
     it('standardStrategy evaluates also with no modules', async () => {
         const callbackMock = jest.fn();
         const loadingOptions: LoadingModuleOptions = {
-            createApi: createMockApi,
+            createApi: createMockApi(),
             fetchModules: jest.fn(() => Promise.resolve([])),
             modules: []
         };
@@ -64,7 +69,7 @@ describe('Echo-Base strategies module', () => {
         const error = new ModuleLoadingError({ message: 'Invalid modules' });
         const modules = true as any;
         const invalidLoadModuleOptions: LoadingModuleOptions = {
-            createApi: createMockApi,
+            createApi: createMockApi(),
             fetchModules: jest.fn(() => Promise.resolve(modules)),
             modules
         };

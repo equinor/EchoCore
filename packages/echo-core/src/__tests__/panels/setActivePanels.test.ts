@@ -1,4 +1,4 @@
-import { readState } from '../../actions/globalActions';
+import { readState } from '../../actions/coreActions/globalActions';
 import { setActivePanel } from '../../actions/panels';
 import { getCoreContext } from '../../state/globalState';
 import { GlobalState } from '../../types/state';

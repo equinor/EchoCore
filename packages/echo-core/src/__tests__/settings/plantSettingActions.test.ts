@@ -1,4 +1,4 @@
-import { dispatch } from '../../actions/globalActions';
+import { dispatch } from '../../actions/coreActions/globalActions';
 import { getInstCode, getProCoSysPlantId, getSapPlantId, setSelectedPlant } from '../../settings/plantSettingsActions';
 import defaultGlobalState from '../../state/defaultStates';
 import { getCoreContext } from '../../state/globalState';

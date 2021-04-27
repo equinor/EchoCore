@@ -1,4 +1,4 @@
-import { dispatch, readState } from '../../actions/globalActions';
+import { dispatch, readState } from '../../actions/coreActions/globalActions';
 import { getLegendOption, setLegendOption } from '../../actions/legendOptions';
 import defaultGlobalState from '../../state/defaultStates';
 import { getCoreContext } from '../../state/globalState';
