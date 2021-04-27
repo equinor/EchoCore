@@ -2,17 +2,19 @@ import { EchoModuleApiCreator } from './creators';
 import { EchoEventHub as EchoEventHub } from './event';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface SingleAppMetadata extends MetaDataBase {
+export interface SingleModuleMetadata extends MetaDataBase {
     requireRef: string;
     config?: Record<string, any>;
 }
-export interface MultiAppsMetadata extends MetaDataBase {
+export interface MultiModuleMetadata extends MetaDataBase {
     bundle?: string;
 }
 
 export interface MetaDataBase {
+    key: string;
     name: string;
-    link: string;
+    shortName: string;
+    fileUri: string;
     hash: string;
     version: string;
     integrity?: string;
@@ -25,17 +27,17 @@ export type EchoModuleData = ModuleData | MultiModuleData;
 /**
  * Describes the metadata transported by a Apps.
  */
-export type AppMetaData = SingleAppMetadata | MultiAppsMetadata;
+export type AppMetaData = SingleModuleMetadata | MultiModuleMetadata;
 
 /**
  * The metadata for a single app.
  */
-export type SingleModule = ModuleData & AppMetaData;
+export type SingleModule = ModuleData & SingleModuleMetadata;
 
 /**
  * The metadata for apps containing apps.
  */
-export type MultiModule = MultiModuleData & MultiAppsMetadata;
+export type MultiModule = MultiModuleData & MultiModuleMetadata;
 
 /**
  * Defines the API accessible from Apps.
@@ -46,14 +48,6 @@ export interface EchoModuleApi {
      */
     meta: AppMetaData;
     eventHub: EchoEventHub;
-}
-
-export interface RouteRegistration extends BaseRegistration {
-    meta: AppMetaData;
-}
-
-export interface BaseRegistration {
-    key: string;
 }
 
 export interface ModuleData {

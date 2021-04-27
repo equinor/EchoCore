@@ -11,6 +11,7 @@ import EchoAuthProvider from './services/authentication/echoProvider';
 import echoClient from './services/echoClient/echoClient';
 import useAppModuleState from './state/useAppModuleState';
 import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './types';
+
 export { EchoEvents, storage } from '@equinor/echo-base';
 export type { ErrorProperties } from '@equinor/echo-base';
 export { default as ArgumentError } from '@equinor/echo-base/lib/errors/ArgumentError';
@@ -18,13 +19,11 @@ export { default as BaseError } from '@equinor/echo-base/lib/errors/BaseError';
 export { BackendError, ForbiddenError, NotFoundError, ValidationError } from '@equinor/echo-base/lib/errors/network';
 export { default as NetworkError } from '@equinor/echo-base/lib/errors/NetworkError';
 export { default as eventHub } from '@equinor/echo-base/lib/utils/eventHub';
-export { readModuleState, updateModuleState, updateSpecificModuleState } from './actions/moduleState';
-export { getPlants, getPlantsData, setPlantsData } from './actions/plantsData';
+export * from './actions';
 export { default as EchoEventHubContext } from './contexts/EchoEventHubContext';
-export { default as useCleanup } from './hooks/useCleanup';
-export { useEchoEventHub, useEventSubscriber } from './hooks/useEchoEventHub';
-export { default as useInitial } from './hooks/useInitial';
-export { default as usePanels } from './hooks/usePanels';
+export * from './hooks';
+export * from './modules';
+export { EchoModuleApi } from './modules/api';
 export * from './observers/classObserver';
 export { usePlants, usePlantsData } from './plants/usePlants';
 export { default as EchoEventHubProvider } from './providers/EchoEventHubProvider';
@@ -43,7 +42,6 @@ export { default as useAppModuleState } from './state/useAppModuleState';
 export * from './state/useGlobalState';
 export * from './types';
 export { makeUniqBy } from './utils/uniq';
-
 export const EchoEnv = new Env();
 
 export class Core {

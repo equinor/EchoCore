@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-base",
-    "version": "0.2.2",
+    "version": "0.2.61",
     "module": "esm/index.js",
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",

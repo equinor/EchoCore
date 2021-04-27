@@ -47,5 +47,5 @@ async function loadModule(
     return {
         ...app,
         ...meta
-    };
+    } as EchoModule;
 }

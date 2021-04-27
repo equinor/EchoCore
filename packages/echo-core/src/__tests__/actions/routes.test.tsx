@@ -1,19 +1,15 @@
 import React from 'react';
 import { getRoutesData, registerRoute, unRegisterRoute } from '../../actions/routes';
-import { AppMetaData, RouteRegistration } from '../../types/registry';
+import { RouteRegistration } from '../../types/registry';
 
 const TestComponent: React.FC = () => {
     return <div>Hei</div>;
 };
 
-const appMeta: AppMetaData = {
-    title: 'newApp'
-};
-
 const testRoute: RouteRegistration = {
     key: 'testRoute',
     component: TestComponent,
-    meta: appMeta
+    url: 'test'
 };
 
 describe('getRoutes', () => {

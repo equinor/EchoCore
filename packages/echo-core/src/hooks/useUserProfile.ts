@@ -5,7 +5,9 @@ import { CoreContext } from '../state/globalState';
 /**
  * Echo Core function for getting the graph user profile from echo core state.
  */
-export default function useUserProfile(): User | undefined {
+export function useUserProfile(): User | undefined {
     const { userProfile } = useAtom(CoreContext.state);
     return userProfile;
 }
+
+export default useUserProfile;

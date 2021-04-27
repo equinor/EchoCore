@@ -13,7 +13,7 @@ const rootLoadingElement = document.getElementById('rootloading');
  * @param config configuration object specific to for echo application
  * @returns whether user is authenticated or not
  */
-const useEchoSetup = (config: CoreConfig): boolean => {
+export const useEchoSetup = (config: CoreConfig): boolean => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useInitial(async () => {

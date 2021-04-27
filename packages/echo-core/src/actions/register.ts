@@ -1,7 +1,7 @@
 import { getCoreContext } from '../state/globalState';
 import { AppModule } from '../types/modules';
 import { GlobalState } from '../types/state';
-import { dispatch } from './globalActions';
+import { dispatch } from './coreActions/globalActions';
 
 export function registerModules<TKey extends string>(module: AppModule): void {
     dispatch(getCoreContext(), (s: GlobalState) => ({
@@ -10,7 +10,7 @@ export function registerModules<TKey extends string>(module: AppModule): void {
     }));
 }
 
-export function unnRegisterApp<TKey extends string>(key: TKey): void {
+export function unnRegisterModule<TKey extends string>(key: TKey): void {
     dispatch(getCoreContext(), (s: GlobalState) => ({
         ...s,
         modules: removeModuleByKey(s.modules, key)

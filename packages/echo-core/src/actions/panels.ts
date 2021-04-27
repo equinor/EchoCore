@@ -2,7 +2,7 @@ import { getCoreContext } from '../state/globalState';
 import { Dict, EchoPanel, EchoPanelOptions, Panel } from '../types';
 import { GlobalState } from '../types/state';
 import { addOrOverwriteWithKey, removeWithKey } from '../utils/state';
-import { dispatch, readState } from './globalActions';
+import { dispatch, readState } from './coreActions/globalActions';
 
 /**
  * Core Action for registering panels
@@ -11,7 +11,7 @@ import { dispatch, readState } from './globalActions';
  */
 export function registerPanels<TKey extends string>(
     key: TKey,
-    panels: Panel[] = [],
+    panels: Panel[] | Panel = [],
     options: Partial<EchoPanelOptions> = {}
 ): void {
     dispatch(getCoreContext(), (s: GlobalState) => ({
@@ -85,6 +85,16 @@ export function getPanelByKey(key: string): EchoPanel | undefined {
     return panelsDict[key];
 }
 
+export function updatePanelByKey(key: string, panel: EchoPanel): void {
+    dispatch(getCoreContext(), (s: GlobalState) => ({
+        ...s,
+        registry: {
+            ...s.registry,
+            panels: addOrOverwriteWithKey(s.registry.panels, key, panel)
+        }
+    }));
+}
+
 /**
  * Echo Core helper method for setting active panel
  * if the setActivePanel is called with same key twice it will close the panel
@@ -102,8 +112,31 @@ export function setActivePanel(key: string): void {
             app: {
                 ...s.app,
                 activePanelState: {
+                    ...s.app.activePanelState,
                     activePanel,
                     isPanelActive
+                }
+            }
+        };
+    });
+}
+/**
+ * Echo Core helper method for setting active panel
+ * if the setActivePanel is called with same key twice it will close the panel
+ * it will also close if called with empty string,
+ *
+ * @export
+ * @param {string} key to identify which panel to open
+ */
+export function setActiveModulePanels(key: string): void {
+    dispatch(getCoreContext(), (s: GlobalState) => {
+        return {
+            ...s,
+            app: {
+                ...s.app,
+                activePanelState: {
+                    ...s.app.activePanelState,
+                    activeModulePanels: key
                 }
             }
         };

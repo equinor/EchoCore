@@ -2,7 +2,7 @@ import { getCoreContext } from '../state/globalState';
 import { AppLink } from '../types/registry';
 import { GlobalState } from '../types/state';
 import { addOrOverwriteWithKey, removeWithKey } from '../utils/state';
-import { dispatch } from './globalActions';
+import { dispatch } from './coreActions/globalActions';
 
 /**
  *

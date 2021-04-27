@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AvailableDependencies, ModuleData, MultiAppsMetadata, SingleAppMetadata } from '../types';
+import { AvailableDependencies, ModuleData, MultiModuleMetadata, SingleModuleMetadata } from '../types';
 
 declare global {
     interface HTMLScriptElement {
@@ -34,7 +34,7 @@ function checkApp(name: string, app?: ModuleData): ModuleData {
 
 export async function includeScript(
     name: string,
-    link: string,
+    fileUri: string,
     depName: string,
     dependencies: AvailableDependencies,
     crossOrigin?: string,
@@ -43,7 +43,7 @@ export async function includeScript(
     return new Promise<ModuleData | undefined>((resolve, reject) => {
         const script = document.createElement('script');
         script.async = true;
-        script.src = link;
+        script.src = fileUri;
         script.id = name;
 
         if (integrity) {
@@ -72,7 +72,7 @@ export function getLocalRequire(dependencies: AvailableDependencies = {}) {
 }
 
 export async function includeDependency(
-    { name, link, requireRef, integrity }: SingleAppMetadata,
+    { name, fileUri: link, requireRef, integrity }: SingleModuleMetadata,
     dependencies?: AvailableDependencies,
     crossOrigin?: string
 ): Promise<ModuleData> {
@@ -80,7 +80,7 @@ export async function includeDependency(
 }
 
 export function includeBundle(
-    { name, link, bundle, integrity }: MultiAppsMetadata,
+    { name, fileUri: link, bundle, integrity }: MultiModuleMetadata,
     dependencies?: AvailableDependencies,
     crossOrigin?: string
 ): Promise<ModuleData> {

@@ -1,4 +1,4 @@
-import { AppModuleLoaded, EchoModule, EchoModuleApiCreator, LoadingModuleOptions, ModuleLoader } from '../types';
+import { EchoModule, EchoModuleApiCreator, EchoModuleLoaded, LoadingModuleOptions, ModuleLoader } from '../types';
 import { createModules } from './aggregate';
 import { ModulesEvaluationError } from './errors';
 import { loadModules } from './load';
@@ -23,7 +23,7 @@ async function evaluateAllModules(
     }
 }
 
-export async function standardStrategy(options: LoadingModuleOptions, callback: AppModuleLoaded): Promise<void> {
+export async function standardStrategy(options: LoadingModuleOptions, callback: EchoModuleLoaded): Promise<void> {
     const { createApi, fetchModules, modules, config, dependencies, getDependencies } = options;
     const loader: ModuleLoader = createModuleLoader(config, dependencies, getDependencies);
     try {

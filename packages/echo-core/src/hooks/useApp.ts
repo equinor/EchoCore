@@ -17,7 +17,7 @@ export function useAppState(): EchoAppState {
  * @export
  * @return {*}  {string}
  */
-export function useActivePanel(): ActivePanel {
+export function useActivePanelState(): ActivePanel {
     return useAppState().activePanelState;
 }
 

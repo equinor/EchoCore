@@ -43,6 +43,7 @@ const defaultGlobalState: GlobalState = {
         layout: 'desktop',
         activePanelState: {
             activePanel: '',
+            activeModulePanels: '',
             isPanelActive: false
         },
         activeState: {

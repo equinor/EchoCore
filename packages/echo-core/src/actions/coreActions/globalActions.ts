@@ -1,5 +1,5 @@
 import { deref, swap } from '@dbeining/react-atom';
-import { GlobalState, GlobalStateContext } from '../types';
+import { GlobalState, GlobalStateContext } from '../../types';
 
 /**
  * Echo Core Action for updating the globalState

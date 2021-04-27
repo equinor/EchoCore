@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import { createOfflineMessage } from '../message/message';
 import { AppLinkOptions } from '../types/registry';
 import { SendMessageToReactNative } from '../utils/sendMessageToReactNative';

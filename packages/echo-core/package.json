@@ -1,9 +1,9 @@
 {
     "name": "@equinor/echo-core",
-    "version": "0.1.4",
+    "version": "0.1.46",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "./dist/index.js",
-    "types": "./dist/types/index.d.ts",
+    "types": "./dist/index.d.ts",
     "source": "./src/index.ts",
     "scripts": {
         "build": "rollup -c",
@@ -44,7 +44,7 @@
         "@babel/preset-env": "^7.12.11",
         "@babel/preset-react": "^7.12.10",
         "@babel/preset-typescript": "^7.12.7",
-        "@equinor/echo-base": "^0.2.2",
+        "@equinor/echo-base": "^0.2.61",
         "@microsoft/microsoft-graph-types": "^1.20.0",
         "@rollup/plugin-node-resolve": "^11.0.1",
         "@rollup/plugin-typescript": "^8.0.0",

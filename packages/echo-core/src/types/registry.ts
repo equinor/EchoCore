@@ -18,13 +18,14 @@ export interface RegistryState {
 export interface AppLink extends AppLinkOptions {
     tile: string;
     icon?: string;
-    url: string;
+    path: string;
     description?: string;
 }
 
 export interface AppLinkOptions {
     altText?: string;
     homeScreen?: boolean;
+    mainMenu?: boolean;
     appMenu?: boolean;
     params?: string;
     eventTracker?: EventTracker;
@@ -47,7 +48,7 @@ export interface RouteRegistration extends BaseRouteRegistration {
 
 export interface BaseRouteRegistration {
     layoutKey?: string;
-    url: string;
+    path: string;
     key: string;
 }
 

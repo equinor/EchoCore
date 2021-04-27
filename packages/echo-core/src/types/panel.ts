@@ -26,6 +26,7 @@ export interface EchoPanel {
 export interface ActivePanel {
     isPanelActive: boolean;
     activePanel: string;
+    activeModulePanels: string;
 }
 
 export interface EchoPanelOptions extends PanelUI {

@@ -8,7 +8,7 @@ import { ActivePanel, Panel } from './panel';
 import { PlantsData } from './plants';
 import { RegistryState } from './registry';
 import { Settings } from './settings';
-import { UI } from './ui';
+import { PanelUI, UI } from './ui';
 
 export interface GlobalState {
     app: EchoAppState;
@@ -69,6 +69,7 @@ export interface ActiveState {
     activeTagNo: string;
     activeDocumentNo: string;
     activeFileId: string;
+    ui?: PanelUI;
 }
 
 /**

@@ -1,6 +1,6 @@
 import { getCoreContext } from '../state/globalState';
 import { GlobalState } from '../types';
-import { dispatch } from './globalActions';
+import { dispatch } from './coreActions/globalActions';
 
 /**
  * Function Used for updating the modules global state.

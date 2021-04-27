@@ -1,4 +1,4 @@
-import { dispatch, readState } from '../actions/globalActions';
+import { dispatch, readState } from '../actions/coreActions/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { Settings } from '../types/settings';
 import { GlobalState } from '../types/state';

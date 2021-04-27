@@ -1,9 +1,8 @@
 import { getCoreContext } from '../state/globalState';
-import { useGlobalState } from '../state/useGlobalState';
 import { RouteRegistration } from '../types/registry';
 import { GlobalState } from '../types/state';
 import { addOrOverwriteWithKey, removeWithKey } from '../utils/state';
-import { dispatch, readState } from './globalActions';
+import { dispatch, readState } from './coreActions/globalActions';
 
 /**
  * Function for registering a route to the global state.
@@ -13,13 +12,15 @@ import { dispatch, readState } from './globalActions';
  * @param {RouteRegistration} route
  */
 export function registerRoute<TKey extends string>(key: TKey, route: RouteRegistration): void {
-    dispatch(getCoreContext(), (s: GlobalState) => ({
-        ...s,
-        registry: {
-            ...s.registry,
-            routes: addOrOverwriteWithKey(s.registry.routes, key, route)
-        }
-    }));
+    dispatch(getCoreContext(), (s: GlobalState) => {
+        return {
+            ...s,
+            registry: {
+                ...s.registry,
+                routes: addOrOverwriteWithKey(s.registry.routes, key, route)
+            }
+        };
+    });
 }
 
 /**
@@ -45,15 +46,5 @@ export function unRegisterRoute<TKey extends string>(key: TKey): void {
  */
 export function getRoutesData(): Readonly<RouteRegistration[]> {
     const routesData = readState(getCoreContext(), (state: GlobalState) => state.registry.routes);
-    return Object.keys(routesData).map((key: string) => routesData[key]);
-}
-
-/**
- * Hook for getting the currently registered routes from the global state.
- * @export
- * @return {*}  {RouteRegistration[]}
- */
-export function useRoutes(): RouteRegistration[] {
-    const routesData = useGlobalState((state: GlobalState) => state.registry.routes);
     return Object.keys(routesData).map((key: string) => routesData[key]);
 }
