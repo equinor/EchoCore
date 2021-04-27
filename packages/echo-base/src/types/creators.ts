@@ -1,18 +1,18 @@
-import { AppMetaData, AvailableDependencies, EchoModuleApi } from './module';
+import { AvailableDependencies, EchoModuleApi, ModuleMetaData } from './module';
 
 /**
  * The creator function for the App API.
  */
 export interface EchoModuleApiCreator {
-    (target: AppMetaData): EchoModuleApi;
+    (target: ModuleMetaData): EchoModuleApi;
 }
 
 export interface ModuleRequester {
-    (): Promise<Array<AppMetaData>>;
+    (): Promise<Array<ModuleMetaData>>;
 }
 
 export interface AppDependencyGetter {
-    (target: AppMetaData): AvailableDependencies | undefined | false;
+    (target: ModuleMetaData): AvailableDependencies | undefined | false;
 }
 export interface AppDependencyFetcher {
     (url: string): Promise<string>;

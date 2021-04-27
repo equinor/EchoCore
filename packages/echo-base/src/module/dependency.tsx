@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AvailableDependencies, ModuleData, MultiModuleMetadata, SingleModuleMetadata } from '../types';
+import { AvailableDependencies, ModuleData, ModuleMetaData } from '../types';
 
 declare global {
     interface HTMLScriptElement {
@@ -72,17 +72,9 @@ export function getLocalRequire(dependencies: AvailableDependencies = {}) {
 }
 
 export async function includeDependency(
-    { name, fileUri: link, requireRef, integrity }: SingleModuleMetadata,
+    { name, fileUri: link, requireRef, integrity }: ModuleMetaData,
     dependencies?: AvailableDependencies,
     crossOrigin?: string
 ): Promise<ModuleData> {
     return await includeScript(name, link, requireRef, dependencies, crossOrigin, integrity);
-}
-
-export function includeBundle(
-    { name, fileUri: link, bundle, integrity }: MultiModuleMetadata,
-    dependencies?: AvailableDependencies,
-    crossOrigin?: string
-): Promise<ModuleData> {
-    return includeScript(name ?? '(bundle)', link, bundle, dependencies, crossOrigin, integrity);
 }

@@ -1,15 +1,15 @@
 import {
     AppDependencyGetter,
-    AppMetaData,
     AvailableDependencies,
     DefaultLoaderConfig,
     EchoModule,
-    EchoModuleData,
-    ModuleLoader
+    ModuleData,
+    ModuleLoader,
+    ModuleMetaData
 } from '../types';
 import { createEmptyModule } from '../utils/emptyApp';
 import { getDependencyResolver } from '../utils/getDependencyResolver';
-import { includeBundle, includeDependency } from './dependency';
+import { includeDependency } from './dependency';
 
 const inBrowser = typeof document !== 'undefined';
 
@@ -23,22 +23,20 @@ export function createModuleLoader(
 }
 
 export function moduleLoader(getDependencies: AppDependencyGetter, config: DefaultLoaderConfig = {}) {
-    return (meta: AppMetaData): Promise<EchoModule> => {
+    return (meta: ModuleMetaData): Promise<EchoModule> => {
         if (inBrowser && 'requireRef' in meta && meta.requireRef) {
             return loadModule(meta, getDependencies, (deps) => includeDependency(meta, deps, config.crossOrigin));
-        } else if (inBrowser && 'bundle' in meta && meta.bundle) {
-            return loadModule(meta, getDependencies, (deps) => includeBundle(meta, deps, config.crossOrigin));
         }
 
-        console.warn('Empty Module found!', name);
+        console.warn('Empty Module found!', meta.name);
         return Promise.resolve(createEmptyModule(meta));
     };
 }
 
 async function loadModule(
-    meta: AppMetaData,
+    meta: ModuleMetaData,
     getDependencies: AppDependencyGetter,
-    loader: (dependencies: AvailableDependencies) => Promise<EchoModuleData>
+    loader: (dependencies: AvailableDependencies) => Promise<ModuleData>
 ): Promise<EchoModule> {
     const dependencies = {
         ...(getDependencies(meta) || {})
@@ -47,5 +45,5 @@ async function loadModule(
     return {
         ...app,
         ...meta
-    } as EchoModule;
+    };
 }

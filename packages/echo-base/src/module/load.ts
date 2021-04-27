@@ -1,4 +1,4 @@
-import { AppMetaData, EchoModule, ModuleLoader, ModuleRequester } from '../types';
+import { EchoModule, ModuleLoader, ModuleMetaData, ModuleRequester } from '../types';
 import { ModuleLoadingError } from './errors';
 import { isfunc } from './utils';
 
@@ -11,7 +11,7 @@ function checkFetchFunction(fetchModules: ModuleRequester): boolean {
     return true;
 }
 
-export function loadMetaData(fetchModules: ModuleRequester): Promise<AppMetaData[]> {
+export function loadMetaData(fetchModules: ModuleRequester): Promise<ModuleMetaData[]> {
     if (checkFetchFunction(fetchModules)) {
         return fetchModules();
     }

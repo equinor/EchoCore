@@ -1,8 +1,8 @@
 import ArgumentError from '../errors/ArgumentError';
-import { AppMetaData } from '../types/module';
+import { ModuleMetaData } from '../types/module';
 import { persistLocalModuleMeta } from './persist';
 
-export function verifyModulesMeta(modules: AppMetaData[]): AppMetaData[] {
+export function verifyModulesMeta(modules: ModuleMetaData[]): ModuleMetaData[] {
     if (modules.length === 0) {
         throw new ArgumentError({ argumentName: 'No modules awaitable' });
     }

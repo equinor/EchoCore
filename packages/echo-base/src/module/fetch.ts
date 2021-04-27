@@ -1,4 +1,4 @@
-import { AppMetaData, AppMetaFetch } from '../types/module';
+import { AppMetaFetch, ModuleMetaData } from '../types/module';
 import { ModulesMetaError } from './errors';
 import { verifyModulesMeta } from './verify';
 
@@ -9,7 +9,7 @@ import { verifyModulesMeta } from './verify';
  * @param {ModulesMetaFetch} getModulesCallback
  * @return {*}  {Promise<AppMetadata[]>}
  */
-export async function getModulesMeta(getModulesCallback?: AppMetaFetch): Promise<AppMetaData[]> {
+export async function getModulesMeta(getModulesCallback?: AppMetaFetch): Promise<ModuleMetaData[]> {
     try {
         if (getModulesCallback) {
             return verifyModulesMeta(await getModulesCallback());

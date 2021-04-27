@@ -1,5 +1,5 @@
 import { AppDependencyGetter } from '../types';
-import { AppMetaData, AvailableDependencies } from '../types/module';
+import { AvailableDependencies, ModuleMetaData } from '../types/module';
 
 const defaultGlobalDependencies: AvailableDependencies = {};
 const defaultGetDependencies: AppDependencyGetter = () => false;
@@ -8,7 +8,7 @@ export function getDependencyResolver(
     globalDependencies = defaultGlobalDependencies,
     getLocalDependencies = defaultGetDependencies
 ): AppDependencyGetter {
-    return (target: AppMetaData): false | AvailableDependencies => {
+    return (target: ModuleMetaData): false | AvailableDependencies => {
         return getLocalDependencies(target) || globalDependencies;
     };
 }

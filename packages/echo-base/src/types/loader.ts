@@ -1,5 +1,5 @@
 import BaseError from '../errors/BaseError';
-import { AppMetaData, EchoModule } from './module';
+import { EchoModule, ModuleMetaData } from './module';
 
 export class ModuleAppError extends BaseError {}
 /**
@@ -21,7 +21,7 @@ export interface EchoModulesLoading {
     (error: ModuleAppError | undefined, modules: Array<EchoModule>, loaded: boolean): void;
 }
 export interface ModuleLoader {
-    (meta: AppMetaData): Promise<EchoModule>;
+    (meta: ModuleMetaData): Promise<EchoModule>;
 }
 
 export interface DefaultLoaderConfig {

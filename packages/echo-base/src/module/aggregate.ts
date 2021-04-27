@@ -1,6 +1,6 @@
 import { EchoModule, EchoModuleApiCreator } from '../types';
-import { isfunc } from '../utils/isFunc';
 import { setupApp } from './setup';
+import { isfunc } from './utils';
 
 function checkCreateApi(createAppApi: EchoModuleApiCreator): boolean {
     if (!isfunc(createAppApi)) {

@@ -1,6 +1,6 @@
-import { AppMetaData, EchoModule } from '../types/module';
+import { EchoModule, ModuleMetaData } from '../types/module';
 
-export function createEmptyModule(meta: AppMetaData): EchoModule {
+export function createEmptyModule(meta: ModuleMetaData): EchoModule {
     return {
         ...meta,
         setup(): void {

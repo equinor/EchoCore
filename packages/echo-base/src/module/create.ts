@@ -1,7 +1,7 @@
 import { EchoModulesLoading, LoadingModuleOptions } from '../types';
 import { EchoModule } from '../types/module';
-import { isfunc } from '../utils/isFunc';
 import { standardStrategy } from './strategies';
+import { isfunc } from './utils';
 
 interface StartLoadingModules {
     connect(notifier: EchoModulesLoading): void;
