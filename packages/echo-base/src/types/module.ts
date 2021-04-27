@@ -3,7 +3,6 @@ import { EchoEventHub as EchoEventHub } from './event';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ModuleMetaData extends MetaDataBase {
     requireRef?: string;
-    config?: Record<string, any>;
 }
 export interface MetaDataBase {
     key: string;
@@ -12,7 +11,6 @@ export interface MetaDataBase {
     fileUri: string;
     version: string;
     integrity?: string;
-    custom?: any;
 }
 
 /**
