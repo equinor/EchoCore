@@ -16,7 +16,7 @@ export interface MetaDataBase {
 }
 
 /**
- * The metadata for a single app.
+ *  Echo Module setup function and meta data combined.
  */
 export type EchoModule = ModuleData & ModuleMetaData;
 
