@@ -10,7 +10,6 @@ export interface MetaDataBase {
     name: string;
     shortName: string;
     fileUri: string;
-    hash?: string;
     version: string;
     integrity?: string;
     custom?: any;

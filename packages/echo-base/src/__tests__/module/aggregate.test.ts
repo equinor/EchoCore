@@ -4,10 +4,11 @@ describe('Echo-Base aggregate module', () => {
         const create: any = jest.fn(() => ({}));
         const setup = jest.fn();
         await createModule(create, {
+            key: 'any',
+            shortName: 'any',
             name: 'any',
             version: '1.0.0',
-            link: 'test.js',
-            hash: '123',
+            fileUri: 'test.js',
             setup
         });
         expect(create).toBeCalled();
@@ -17,10 +18,11 @@ describe('Echo-Base aggregate module', () => {
     it('creatModule does not call due to invalid api creator', async () => {
         const setup = jest.fn();
         await createModule(undefined, {
+            key: 'any',
+            shortName: 'any',
             name: 'any',
             version: '1.0.0',
-            link: 'test.js',
-            hash: '123',
+            fileUri: 'test.js',
             setup: 5 as any
         });
         expect(setup).not.toBeCalled();
@@ -31,17 +33,19 @@ describe('Echo-Base aggregate module', () => {
         const setup = jest.fn();
         await createModules(create, [
             {
+                key: 'any',
+                shortName: 'any',
                 name: 'any',
                 version: '1.0.0',
-                link: 'test.js',
-                hash: '123',
+                fileUri: 'test.js',
                 setup
             },
             {
+                key: 'any',
+                shortName: 'any',
                 name: 'any',
                 version: '1.0.0',
-                link: 'test.js',
-                hash: '123',
+                fileUri: 'test.js',
                 setup
             }
         ]);
