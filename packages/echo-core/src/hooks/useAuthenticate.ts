@@ -9,6 +9,8 @@ const useAuthenticate = (authProvider: AuthenticationProvider, logRequest?: (...
             authProvider.handleLogin(logRequest).then(() => {
                 setIsAuthenticated(authProvider.isAuthenticated);
             });
+        } else {
+            setIsAuthenticated(authProvider.isAuthenticated);
         }
     }, [authProvider, logRequest]);
 
