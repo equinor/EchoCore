@@ -14,7 +14,7 @@
         "echo-publish": "lerna publish from-package --yes --no-verify-access",
         "test-w-install": "npm ci & jest --watchAll",
         "test": "jest --watchAll",
-        "test-coverage": "npm ci & jest --coverage --watchAll",
+        "test-coverage": "jest --coverage --watchAll",
         "lint": "eslint --ext .js,.jsx,.ts,.tsx packages --color"
     },
     "author": "Echo Core Team",

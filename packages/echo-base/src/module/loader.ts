@@ -13,6 +13,15 @@ import { includeDependency } from './dependency';
 
 const inBrowser = typeof document !== 'undefined';
 
+/**
+ *
+ *
+ * @export
+ * @param {DefaultLoaderConfig} [config]
+ * @param {AvailableDependencies} [dependencies]
+ * @param {AppDependencyGetter} [getDependencies]
+ * @return {*}  {ModuleLoader}
+ */
 export function createModuleLoader(
     config?: DefaultLoaderConfig,
     dependencies?: AvailableDependencies,
@@ -22,7 +31,15 @@ export function createModuleLoader(
     return moduleLoader(getDeps, config);
 }
 
-export function moduleLoader(getDependencies: AppDependencyGetter, config: DefaultLoaderConfig = {}) {
+/**
+ *
+ *
+ * @export
+ * @param {AppDependencyGetter} getDependencies
+ * @param {DefaultLoaderConfig} [config={}]
+ * @return {*}  {ModuleLoader}
+ */
+export function moduleLoader(getDependencies: AppDependencyGetter, config: DefaultLoaderConfig = {}): ModuleLoader {
     return (meta: ModuleMetaData): Promise<EchoModule> => {
         if (inBrowser && 'requireRef' in meta && meta.requireRef) {
             return loadModule(meta, getDependencies, (deps) => includeDependency(meta, deps, config.crossOrigin));
@@ -33,6 +50,14 @@ export function moduleLoader(getDependencies: AppDependencyGetter, config: Defau
     };
 }
 
+/**
+ *
+ *
+ * @param {ModuleMetaData} meta
+ * @param {AppDependencyGetter} getDependencies
+ * @param {(dependencies: AvailableDependencies) => Promise<ModuleData>} loader
+ * @return {*}  {Promise<EchoModule>}
+ */
 async function loadModule(
     meta: ModuleMetaData,
     getDependencies: AppDependencyGetter,

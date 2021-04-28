@@ -7,7 +7,17 @@ interface StartLoadingModules {
     connect(notifier: EchoModulesLoading): void;
     disconnect(notifier: EchoModulesLoading): void;
 }
-
+/**
+ * Used to start loading modules, the modules can be provided, or a fetch call can be defined to
+ * retrieving the moduleMetaData that in turn will load the js files, and initialize the all modules.
+ * Module data will be stored in the globals store trough the notifier provided trough the connect function.
+ *
+ * This function is used in Echo Framework in the Mediator Component.
+ *
+ * @export
+ * @param {LoadingModuleOptions} options
+ * @return {*}  {StartLoadingModules}
+ */
 export function startLoadingModules(options: LoadingModuleOptions): StartLoadingModules {
     const state = {
         loaded: false,

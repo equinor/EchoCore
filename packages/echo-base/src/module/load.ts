@@ -1,18 +1,9 @@
 import { EchoModule, ModuleLoader, ModuleMetaData, ModuleRequester } from '../types';
 import { ModuleLoadingError } from './errors';
-import { isfunc } from './utils';
-
-function checkFetchFunction(fetchModules: ModuleRequester): boolean {
-    if (!isfunc(fetchModules)) {
-        console.error('Could not get the Modules. Provide a valid `fetchModules` function.');
-        return false;
-    }
-
-    return true;
-}
+import { checkFunction } from './utils';
 
 export async function loadMetaData(fetchModules: ModuleRequester): Promise<ModuleMetaData[]> {
-    if (checkFetchFunction(fetchModules)) {
+    if (checkFunction(fetchModules, 'Could not get the Modules. Provide a valid `fetchModules` function.')) {
         return await fetchModules();
     }
 

@@ -3,10 +3,17 @@ import { AvailableDependencies, ModuleData, ModuleMetaData } from '../types';
 
 declare global {
     interface HTMLScriptElement {
-        app?: ModuleData;
+        module?: ModuleData;
     }
 }
 
+/**
+ * Returns the module dependency if present in the AvailableDependencies
+ *
+ * @param {string} name
+ * @param {AvailableDependencies} dependencies
+ * @return {*}  {*}
+ */
 function requireModule(name: string, dependencies: AvailableDependencies): any {
     const dependency = dependencies[name];
     if (!dependency) {
@@ -17,13 +24,21 @@ function requireModule(name: string, dependencies: AvailableDependencies): any {
     return dependency;
 }
 
-function checkApp(name: string, app?: ModuleData): ModuleData {
-    if (!app) {
+/**
+ * Verifies if the module is a correct EchoModule with a exported setup function.
+ * Will provide a empty module if verification fails to prevent system crash.
+ *
+ * @param {string} name
+ * @param {ModuleData} [module]
+ * @return {*}  {ModuleData}
+ */
+function checkApp(name: string, module?: ModuleData): ModuleData {
+    if (!module) {
         console.error('Invalid module found.', name);
-    } else if (typeof app.setup !== 'function') {
+    } else if (typeof module.setup !== 'function') {
         console.warn('Setup function is missing.', name);
     } else {
-        return app;
+        return module;
     }
     return {
         setup(): void {
@@ -31,7 +46,19 @@ function checkApp(name: string, app?: ModuleData): ModuleData {
         }
     };
 }
-
+/**
+ * Incudes a script tag in the DOM,
+ * and extracts the setup function.
+ *
+ * @export
+ * @param {string} name
+ * @param {string} fileUri
+ * @param {string} depName
+ * @param {AvailableDependencies} dependencies
+ * @param {string} [crossOrigin]
+ * @param {string} [integrity]
+ * @return {*}  {(Promise<ModuleData | undefined>)}
+ */
 export async function includeScript(
     name: string,
     fileUri: string,
@@ -55,22 +82,44 @@ export async function includeScript(
 
         window[depName] = getLocalRequire(dependencies);
 
-        script.onload = (): void => resolve(checkAppAsync(name, script.app));
+        script.onload = (): void => resolve(checkAppAsync(name, script.module));
         script.onerror = (): void => reject('could not load');
 
         document.head.appendChild(script);
     });
 }
 
-export async function checkAppAsync(name: string, app?: ModuleData | Promise<ModuleData>): Promise<ModuleData> {
-    const resolvedApp = await Promise.resolve(app);
+/**
+ * async wrapper of check app resolving the app ModuleData
+ *
+ * @export
+ * @param {string} name
+ * @param {(ModuleData | Promise<ModuleData>)} [module]
+ * @return {*}  {Promise<ModuleData>}
+ */
+export async function checkAppAsync(name: string, module?: ModuleData | Promise<ModuleData>): Promise<ModuleData> {
+    const resolvedApp = await Promise.resolve(module);
     return checkApp(name, resolvedApp);
 }
-
+/**
+ * Function added to window object for retrieving AvailableDependencies
+ *
+ * @export
+ * @param {AvailableDependencies} [dependencies={}]
+ * @return {*}
+ */
 export function getLocalRequire(dependencies: AvailableDependencies = {}) {
     return (moduleName: string): void => requireModule(moduleName, dependencies);
 }
-
+/**
+ * Retiring the current module.
+ *
+ * @export
+ * @param {ModuleMetaData} { name, fileUri: link, requireRef, integrity }
+ * @param {AvailableDependencies} [dependencies]
+ * @param {string} [crossOrigin]
+ * @return {*}  {Promise<ModuleData>}
+ */
 export async function includeDependency(
     { name, fileUri: link, requireRef, integrity }: ModuleMetaData,
     dependencies?: AvailableDependencies,

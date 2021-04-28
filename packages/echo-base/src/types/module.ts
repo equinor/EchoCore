@@ -1,4 +1,4 @@
-import { EchoEventHub as EchoEventHub } from './event';
+import { EchoEventHub } from './event';
 
 export interface ModuleMetaData extends MetaDataBase {
     requireRef?: string;
