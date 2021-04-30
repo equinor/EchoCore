@@ -18,7 +18,6 @@ declare module '@equinor/echo-base' {
     interface EchoModuleApi {
         registerApp: (appComponent: WrappedComponent<AppComponentProps>, options?: AppOptions) => void;
         unRegisterApp: () => void;
-        registerAppPanels: (panels: Panel[], options: Partial<EchoPanelOptions>) => void;
         registerPanels: (key: string, panels: Panel[], options?: Partial<EchoPanelOptions>) => void;
         registerAppWithKey: (key: string, options: RegisterAppOptions) => void;
         unRegisterPanels: (key: string) => void;
@@ -39,6 +38,8 @@ export interface AppOptions {
     layoutKey?: string;
     icon?: string;
     description?: string;
+    panels?: Panel[] | Panel;
+    panelsOptions?: Partial<EchoPanelOptions>;
 }
 
 export interface PageOptions {
@@ -65,9 +66,7 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                     homeScreen
                 };
                 registerApp(shortName, appOptions);
-            },
-            registerAppPanels: (panels: Panel[], options?: Partial<EchoPanelOptions>): void => {
-                registerPanels(shortName, panels, options);
+                if (options.panels) registerPanels(shortName, options.panels, options.panelsOptions);
             },
             unRegisterApp: (): void => {
                 unRegisterApp(shortName);

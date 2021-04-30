@@ -3,16 +3,20 @@ import { Dict, EchoPanel, EchoPanelOptions, Panel } from '../types';
 import { GlobalState } from '../types/state';
 import { addOrOverwriteWithKey, removeWithKey } from '../utils/state';
 import { dispatch, readState } from './coreActions/globalActions';
-
 /**
+ *
  * Core Action for registering panels
- * @param panels
- * @param options
+ *
+ * @export
+ * @template TKey
+ * @param {TKey} key
+ * @param {(Panel[] | Panel)} [panels=[]]
+ * @param {Partial<EchoPanelOptions>} [options={}]
  */
 export function registerPanels<TKey extends string>(
     key: TKey,
     panels: Panel[] | Panel = [],
-    options: Partial<EchoPanelOptions> = {}
+    options?: Partial<EchoPanelOptions>
 ): void {
     dispatch(getCoreContext(), (s: GlobalState) => ({
         ...s,
@@ -20,7 +24,7 @@ export function registerPanels<TKey extends string>(
             ...s.registry,
             panels: addOrOverwriteWithKey(s.registry.panels, key, {
                 panels: panels instanceof Array ? panels : [panels],
-                options
+                options: options ? options : {}
             })
         }
     }));
@@ -47,7 +51,7 @@ export function registerCorePanels(searchPanel: Panel, mainMenu: Panel): void {
 }
 
 /**
- *
+ * Unregister a panel.
  *
  * @export
  * @template TKey
@@ -64,21 +68,21 @@ export function unRegisterPanels<TKey extends string>(key: TKey): void {
 }
 
 /**
- *
+ * returns all panels registered,
  *
  * @export
- * @return {*}  {Dict<Panel[]>}
+ * @return {*}  {Dict<EchoPanel[]>}
  */
 export function getPanelsData(): Dict<EchoPanel> {
     return readState(getCoreContext(), (state: GlobalState) => state.registry.panels);
 }
 
 /**
- *
+ * Return the current panel by key
  *
  * @export
  * @param {string} key
- * @return {*}  {(Panel[] | undefined)}
+ * @return {*}  {(EchoPanel[] | undefined)}
  */
 export function getPanelByKey(key: string): EchoPanel | undefined {
     const panelsDict = getPanelsData();
