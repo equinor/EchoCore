@@ -10,7 +10,7 @@ export function registerModules<TKey extends string>(module: AppModule): void {
     }));
 }
 
-export function unnRegisterModule<TKey extends string>(key: TKey): void {
+export function unRegisterModule<TKey extends string>(key: TKey): void {
     dispatch(getCoreContext(), (s: GlobalState) => ({
         ...s,
         modules: removeModuleByKey(s.modules, key)
@@ -24,7 +24,6 @@ function addOrOverwrite(modules: Array<AppModule>, module: AppModule): AppModule
 }
 
 function removeModuleByKey<TKey extends string>(modules: AppModule[], key: TKey): AppModule[] {
-    console.log(modules, key);
     return [];
 }
 
