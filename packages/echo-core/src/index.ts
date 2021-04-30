@@ -1,5 +1,4 @@
 import { setLegendOption } from './actions/legendOptions';
-import { registerPanels } from './actions/panels';
 import { EnvironmentVariables } from './configuration/environment';
 import Env from './Env';
 import useAuthenticate from './hooks/useAuthenticate';
@@ -23,21 +22,14 @@ export * from './actions';
 export { default as EchoEventHubContext } from './contexts/EchoEventHubContext';
 export * from './hooks';
 export * from './modules';
-export { EchoModuleApi } from './modules/api';
 export * from './observers/classObserver';
 export { usePlants, usePlantsData } from './plants/usePlants';
 export { default as EchoEventHubProvider } from './providers/EchoEventHubProvider';
 export { AuthenticationProvider } from './services/authentication/authProvider';
 export { default as BaseClient } from './services/baseClient/baseClient';
 export { default as EchoSettings } from './settings';
-export {
-    getInstCode,
-    getProCoSysPlantId,
-    getSapPlantId,
-    getSelectedPlant,
-    setSelectedPlant
-} from './settings/plantSettingsActions';
-export { default as usePlantSettings } from './settings/useSetting';
+export * from './settings/plantSettingsActions';
+export * from './settings/useSetting';
 export { default as useAppModuleState } from './state/useAppModuleState';
 export * from './state/useGlobalState';
 export * from './types';
@@ -46,7 +38,6 @@ export const EchoEnv = new Env();
 
 export class Core {
     useEchoSetup = useEchoSetup;
-    registerPanels = registerPanels;
     useAppModuleState = useAppModuleState;
     useLegendOptions = useLegendOptions;
     useUserProfile = useUserProfile;
