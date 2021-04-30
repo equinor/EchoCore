@@ -2,14 +2,14 @@ import React from 'react';
 import { getRoutesData, registerRoute, unRegisterRoute } from '../../actions/routes';
 import { RouteRegistration } from '../../types/registry';
 
-const TestComponent: React.FC = () => {
-    return <div>Hei</div>;
+const test = () => {
+    return <div>Test</div>;
 };
 
 const testRoute: RouteRegistration = {
-    key: 'testRoute',
-    component: TestComponent,
-    url: 'test'
+    key: 'newApp',
+    path: 'newApp',
+    component: test
 };
 
 describe('getRoutes', () => {
