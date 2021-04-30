@@ -5,7 +5,7 @@ export function setupSingleModule(module: EchoModule, api: EchoModuleApi): void 
         const result = module.setup(api);
         return result;
     } catch (error) {
-        throw error;
+        console.warn(error);
     }
 }
 

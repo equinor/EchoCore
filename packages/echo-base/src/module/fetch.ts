@@ -4,7 +4,7 @@
  * @param token The Token for authentication.
  * @returns A promise leading to the raw text content.
  */
-export async function defaultFetchDependency(url: string, token: string): Promise<string> {
+export async function defaultFetchDependency(url: string, token?: string): Promise<string> {
     const m = await fetch(url, {
         headers: { token },
         method: 'GET',

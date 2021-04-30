@@ -28,7 +28,7 @@ export function createModuleLoader(
     getDependencies?: AppDependencyGetter
 ): ModuleLoader {
     const getDeps = getDependencyResolver(dependencies, getDependencies);
-    return moduleLoader(getDeps, config);
+    return getModuleLoader(getDeps, config);
 }
 
 /**
@@ -40,7 +40,7 @@ export function createModuleLoader(
  * @param {DefaultLoaderConfig} [config={}]
  * @return {*}  {ModuleLoader}
  */
-export function moduleLoader(getDependencies: AppDependencyGetter, config: DefaultLoaderConfig = {}): ModuleLoader {
+export function getModuleLoader(getDependencies: AppDependencyGetter, config: DefaultLoaderConfig = {}): ModuleLoader {
     return (meta: ModuleMetaData): Promise<EchoModule> => {
         if (inBrowser && 'requireRef' in meta && meta.requireRef) {
             return loadModule(meta, getDependencies, (deps) => includeDependency(meta, deps, config.crossOrigin));
