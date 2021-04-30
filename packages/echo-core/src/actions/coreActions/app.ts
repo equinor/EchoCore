@@ -1,6 +1,6 @@
-import { AppLink, RouteRegistration } from '../types/registry';
-import { registerAppLink, unRegisterAppLink } from './appLinks';
-import { registerRoute, unRegisterRoute } from './routes';
+import { AppLink, RouteRegistration } from '../../types/registry';
+import { registerAppLink, unRegisterAppLink } from '../appLinks';
+import { registerRoute, unRegisterRoute } from '../routes';
 
 export type RegisterAppOptions = RouteRegistration & AppLink;
 

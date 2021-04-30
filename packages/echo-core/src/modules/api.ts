@@ -1,5 +1,6 @@
-import { AppMetaData, EchoModuleApi as ModuleApi, eventHub } from '@equinor/echo-base';
+import { AppMetaData, eventHub } from '@equinor/echo-base';
 import React from 'react';
+import { updatePanelUI } from '../actions';
 import {
     registerApp,
     RegisterAppOptions,
@@ -7,45 +8,17 @@ import {
     registerPanels,
     unRegisterApp,
     unRegisterPage,
-    unRegisterPanels,
-    updatePanelUI
-} from '../actions';
-import { AppKey, PanelUI, RouteRegistration } from '../types';
-import { AppComponentProps } from '../types/api';
+    unRegisterPanels
+} from '../actions/coreActions';
+import { RouteRegistration } from '../types';
+import { AppComponentProps, AppOptions, EchoAppModuleApiCreator, EchoModuleApi, PageOptions } from '../types/api';
 import { WrappedComponent } from '../types/components';
-import { EchoPanelOptions, Panel } from '../types/panel';
-declare module '@equinor/echo-base' {
-    interface EchoModuleApi {
-        registerApp: (appComponent: WrappedComponent<AppComponentProps>, options?: AppOptions) => void;
-        unRegisterApp: () => void;
-        registerPanels: (key: string, panels: Panel[], options?: Partial<EchoPanelOptions>) => void;
-        registerAppWithKey: (key: string, options: RegisterAppOptions) => void;
-        unRegisterPanels: (key: string) => void;
-        updatePanelUI: (ui?: PanelUI, key?: string) => void;
-        registerPage: (path: string, component: React.FC, options?: PageOptions) => void;
-        unRegisterPage: (appKey: AppKey) => void;
-    }
-}
 
-export type EchoModuleApi = ModuleApi;
-
-export interface EchoAppModuleApiCreator {
-    (meta: AppMetaData): EchoModuleApi;
-}
-export interface AppOptions {
-    appMenu?: boolean;
-    homeScreen?: boolean;
-    layoutKey?: string;
-    icon?: string;
-    description?: string;
-    panels?: Panel[] | Panel;
-    panelsOptions?: Partial<EchoPanelOptions>;
-}
-
-export interface PageOptions {
-    layoutKey?: string;
-}
-
+/**
+ * Return a function for creating the modules api.
+ * witch will be called with the modules meta data and return `EchoModuleApi`
+ * @return {*}  {EchoAppModuleApiCreator}
+ */
 export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
     return (meta: AppMetaData): EchoModuleApi => {
         const { key, name, shortName } = meta;
