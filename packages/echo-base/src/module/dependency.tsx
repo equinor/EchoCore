@@ -98,8 +98,8 @@ export async function includeScript(
  * @return {*}  {Promise<ModuleData>}
  */
 export async function checkAppAsync(name: string, module?: ModuleData | Promise<ModuleData>): Promise<ModuleData> {
-    const resolvedApp = await Promise.resolve(module);
-    return checkApp(name, resolvedApp);
+    const resolvedModule = await Promise.resolve(module);
+    return checkApp(name, resolvedModule);
 }
 /**
  * Function added to window object for retrieving AvailableDependencies

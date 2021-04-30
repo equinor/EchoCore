@@ -14,7 +14,7 @@ import { includeDependency } from './dependency';
 const inBrowser = typeof document !== 'undefined';
 
 /**
- *
+ * Create a module loader with the provided dependence's.
  *
  * @export
  * @param {DefaultLoaderConfig} [config]
@@ -32,7 +32,8 @@ export function createModuleLoader(
 }
 
 /**
- *
+ * Loader for loading modules, with dependencies, will return a empty module,
+ * if empty module is found, for avoiding crashes.
  *
  * @export
  * @param {AppDependencyGetter} getDependencies
@@ -51,7 +52,7 @@ export function moduleLoader(getDependencies: AppDependencyGetter, config: Defau
 }
 
 /**
- *
+ * Loading the module and combining the javascript module with the modules Metadata.
  *
  * @param {ModuleMetaData} meta
  * @param {AppDependencyGetter} getDependencies

@@ -4,10 +4,18 @@ import { ModulesEvaluationError } from './errors';
 import { loadModules } from './load';
 import { createModuleLoader } from './loader';
 
+/**
+ *Evaluates modules and filters and compeers oldModules to newModules,
+ *
+ * @param {EchoModuleApiCreator} createApi
+ * @param {EchoModule[]} newModules
+ * @param {EchoModule[]} [oldModules=[]]
+ * @return {*}  {Promise<EchoModule[]>}
+ */
 async function evaluateAllModules(
     createApi: EchoModuleApiCreator,
-    oldModules: EchoModule[],
-    newModules: EchoModule[]
+    newModules: EchoModule[],
+    oldModules: EchoModule[] = []
 ): Promise<EchoModule[]> {
     try {
         for (const oldModule of oldModules) {
@@ -17,18 +25,27 @@ async function evaluateAllModules(
                 newModules.splice(newModules.indexOf(newModule), 1);
             }
         }
+
         return createModules(createApi, [...oldModules, ...newModules]);
     } catch (error) {
         throw new ModulesEvaluationError(error);
     }
 }
-
+/**
+ * Loading strategy Fetching modules from api or MocApi en then
+ * evaluating and installing modules.
+ *
+ * @export
+ * @param {LoadingModuleOptions} options
+ * @param {EchoModuleLoaded} callback
+ * @return {*}  {Promise<void>}
+ */
 export async function standardStrategy(options: LoadingModuleOptions, callback: EchoModuleLoaded): Promise<void> {
     const { createApi, fetchModules, modules, config, dependencies, getDependencies } = options;
     const loader: ModuleLoader = createModuleLoader(config, dependencies, getDependencies);
     try {
-        const fetchedModules = await loadModules(fetchModules, loader);
-        const allModules = await evaluateAllModules(createApi, modules, fetchedModules);
+        const fetchedModules = await loadModules(loader, fetchModules);
+        const allModules = await evaluateAllModules(createApi, fetchedModules, modules);
         return callback(undefined, allModules);
     } catch (error) {
         return callback(error, []);

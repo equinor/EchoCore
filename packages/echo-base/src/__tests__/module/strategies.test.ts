@@ -1,4 +1,4 @@
-import { ModuleLoadingError } from '../../module/errors';
+import { ModulesEvaluationError } from '../../module/errors';
 import { standardStrategy } from '../../module/strategies';
 import { EchoModule, EchoModuleApi, EchoModuleApiCreator, LoadingModuleOptions, ModuleMetaData } from '../../types';
 import { eventHub } from '../../utils/eventHub';
@@ -61,10 +61,24 @@ describe('Echo-Base strategies module', () => {
         expect(callbackMock.mock.calls[0][0]).toBeUndefined();
         expect(callbackMock.mock.calls[0][1]).toHaveLength(0);
     });
+
+    it('standardStrategy evaluates also with no modules and no fetch', async () => {
+        const callbackMock = jest.fn();
+        const loadingOptions: LoadingModuleOptions = {
+            createApi: createMockApi()
+        };
+
+        await standardStrategy(loadingOptions, callbackMock);
+
+        expect(callbackMock).toHaveBeenCalledTimes(1);
+        expect(callbackMock.mock.calls[0][0]).toBeUndefined();
+        expect(callbackMock.mock.calls[0][1]).toHaveLength(0);
+    });
+
     it('standardStrategy reports error if failed due to invalid arguments', async () => {
         const setupMock = jest.fn();
         const callbackMock = jest.fn();
-        const error = new ModuleLoadingError({ message: 'Invalid modules' });
+        const error = new ModulesEvaluationError({ message: 'oldModules is not iterable' });
         const modules = true as any;
         const invalidLoadModuleOptions: LoadingModuleOptions = {
             createApi: createMockApi(),

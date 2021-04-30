@@ -1,3 +1,4 @@
+import { EchoModuleApiCreator, ModuleRequester } from '../types/creators';
 import { EchoModule, ModuleMetaData } from '../types/module';
 
 /**
@@ -16,7 +17,7 @@ export function removeElementById(id: string): void {
  * @param {EchoModuleApiCreator} createModuleApi
  * @return {*}  {boolean}
  */
-export function checkFunction(func: unknown, errorMessage: string): boolean {
+export function checkFunction(func: EchoModuleApiCreator | ModuleRequester, errorMessage: string): boolean {
     if (!isfunc(func)) {
         console.warn(errorMessage);
         return false;

@@ -15,7 +15,6 @@ export async function createModules(
     modules: EchoModule[]
 ): Promise<EchoModule[]> {
     const promises: Array<Promise<EchoModule>> = [];
-
     for (const module of modules) {
         promises.push(createModule(createModuleApi, module));
     }

@@ -26,11 +26,3 @@ function addOrOverwrite(modules: Array<AppModule>, module: AppModule): AppModule
 function removeModuleByKey<TKey extends string>(modules: AppModule[], key: TKey): AppModule[] {
     return [];
 }
-
-// function validateModule(moduleA: AppModule, moduleB?: AppModule): boolean {
-//     if (moduleB) {
-//         return moduleA.name !== moduleB.name;
-//         // move validation
-//     }
-//     return true;
-// }
