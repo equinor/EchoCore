@@ -1,5 +1,6 @@
 module.exports = {
     coveragePathIgnorePatterns: [
+        'index.ts',
         'packages/echo-core/src/types/*',
         'packages/echo-core/src/index.ts',
         'packages/echo-core/dist/*',
@@ -7,8 +8,10 @@ module.exports = {
         'packages/echo-core/docs/*',
         'packages/echo-base/src/types/*',
         'packages/echo-base/src/index.ts',
+        'packages/echo-base/docs/*',
         'packages/echo-base/esm/*',
-        'packages/echo-base/lib/*'
+        'packages/echo-base/lib/*',
+        'packages/echo-base/src/errors/network*'
     ],
     collectCoverageFrom: ['packages/**/*.{js,jsx,ts,tsx}', '!<rootDir>/node_modules/'],
     coverageThreshold: {
