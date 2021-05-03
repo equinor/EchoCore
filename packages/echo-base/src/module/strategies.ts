@@ -3,6 +3,7 @@ import { createModules } from './aggregate';
 import { ModulesEvaluationError } from './errors';
 import { loadModules } from './load';
 import { createModuleLoader } from './loader';
+import { filterModulesByEnvironment, isProduction } from './utils';
 
 /**
  *Evaluates modules and filters and compeers oldModules to newModules,
@@ -26,11 +27,12 @@ async function evaluateAllModules(
             }
         }
 
-        return createModules(createApi, [...oldModules, ...newModules]);
+        return createModules(createApi, filterModulesByEnvironment([...oldModules, ...newModules], isProduction));
     } catch (error) {
         throw new ModulesEvaluationError(error);
     }
 }
+
 /**
  * Loading strategy Fetching modules from api or MocApi en then
  * evaluating and installing modules.

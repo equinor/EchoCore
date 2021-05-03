@@ -10,6 +10,7 @@ export interface MetaDataBase {
     fileUri: string;
     version: string;
     integrity?: string;
+    private?: boolean;
 }
 
 /**
