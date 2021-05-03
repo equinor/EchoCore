@@ -1,9 +1,8 @@
-import React from 'react';
-import { getRoutesData, registerRoute, unRegisterRoute } from '../../actions/routes';
-import { RouteRegistration } from '../../types/registry';
+import { getRoutesData, registerPage, unRegisterPage } from '../../../actions/coreActions/';
+import { RouteRegistration } from '../../../types';
 
 const test = () => {
-    return <div>Test</div>;
+    return null;
 };
 
 const testRoute: RouteRegistration = {
@@ -20,7 +19,7 @@ describe('getRoutes', () => {
 });
 describe('registerRoute', () => {
     it('should register a route', () => {
-        registerRoute('newRoute', testRoute);
+        registerPage('newRoute', testRoute);
         const routes = getRoutesData();
 
         expect(routes).toEqual([testRoute]);
@@ -28,9 +27,9 @@ describe('registerRoute', () => {
 });
 describe('unRegisterRoute', () => {
     it('should unregister a route', () => {
-        registerRoute('newRoute', testRoute);
+        registerPage('newRoute', testRoute);
 
-        unRegisterRoute('newRoute');
+        unRegisterPage('newRoute');
         const emptyRoutes = getRoutesData();
 
         expect(emptyRoutes).toEqual([]);
