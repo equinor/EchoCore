@@ -12,6 +12,8 @@ export const useAuthenticate = (
             authProvider.handleLogin(logRequest).then(() => {
                 setIsAuthenticated(authProvider.isAuthenticated);
             });
+        } else {
+            setIsAuthenticated(authProvider.isAuthenticated);
         }
     }, [authProvider, logRequest]);
 
