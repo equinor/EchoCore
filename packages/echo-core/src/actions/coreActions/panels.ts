@@ -23,7 +23,7 @@ export function registerPanels<TKey extends string>(
             ...s.registry,
             panels: addOrOverwriteWithKey(s.registry.panels, key, {
                 panels: panels instanceof Array ? panels : [panels],
-                options: options ? options : {}
+                options: options ? { addSearch: true, ...options } : { addSearch: true }
             })
         }
     }));

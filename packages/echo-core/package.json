@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-core",
-    "version": "0.3.0",
+    "version": "0.2.8",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -30,13 +30,13 @@
     },
     "peerDependencies": {
         "@equinor/echo-base": "*",
-        "react": "*",
-        "react-dom": "*",
-        "react-router": "*",
-        "react-router-dom": "*"
+        "react": ">=17.0.2",
+        "react-dom": ">=17.0.2",
+        "react-router": ">=5.2.0",
+        "react-router-dom": ">=5.2.0"
     },
     "dependencies": {
-        "@azure/msal-browser": "^2.8.0",
+        "@azure/msal-browser": "2.8.0",
         "@dbeining/react-atom": "^4.1.12"
     },
     "devDependencies": {
@@ -44,7 +44,7 @@
         "@babel/preset-env": "^7.12.11",
         "@babel/preset-react": "^7.12.10",
         "@babel/preset-typescript": "^7.12.7",
-        "@equinor/echo-base": "^0.2.61",
+        "@equinor/echo-base": "^0.2.7",
         "@microsoft/microsoft-graph-types": "^1.20.0",
         "@rollup/plugin-node-resolve": "^11.0.1",
         "@rollup/plugin-typescript": "^8.0.0",

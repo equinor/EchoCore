@@ -11,6 +11,7 @@ import echoClient from './services/echoClient/echoClient';
 import useAppModuleState from './state/useAppModuleState';
 import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './types';
 
+export * from '@azure/msal-browser';
 export { EchoEvents, storage } from '@equinor/echo-base';
 export type { ErrorProperties } from '@equinor/echo-base';
 export { default as ArgumentError } from '@equinor/echo-base/lib/errors/ArgumentError';

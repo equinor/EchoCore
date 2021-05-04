@@ -97,7 +97,8 @@ export function setActiveModulePanels(key: string): void {
                 ...s.app,
                 activePanelState: {
                     ...s.app.activePanelState,
-                    activeModulePanels: key
+                    activeModulePanels: key,
+                    ui: {}
                 }
             }
         };

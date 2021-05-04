@@ -16,7 +16,7 @@ export default [
             format: 'cjs',
             exports: 'named'
         },
-        external: ['react', 'react-dom', 'react-router', '@equinor/echo-base'],
+        external: ['react', 'react-dom', 'react-router', '@equinor/echo-base', '@azure/msal-browser'],
         plugins: [
             tslibResolveId(),
             del({ targets: 'dist/*', runOnce: true }),

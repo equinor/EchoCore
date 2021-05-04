@@ -1,4 +1,4 @@
-import { AppMetaData, eventHub } from '@equinor/echo-base';
+import { eventHub, ModuleMetaData } from '@equinor/echo-base';
 import React from 'react';
 import { updatePanelUI } from '../actions';
 import {
@@ -20,7 +20,7 @@ import { WrappedComponent } from '../types/components';
  * @return {*}  {EchoAppModuleApiCreator}
  */
 export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
-    return (meta: AppMetaData): EchoModuleApi => {
+    return (meta: ModuleMetaData): EchoModuleApi => {
         const { key, name, shortName } = meta;
         return {
             meta,

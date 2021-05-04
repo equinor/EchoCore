@@ -1,4 +1,4 @@
-import { AppMetaData, EchoModuleApi as ModuleApi } from '@equinor/echo-base';
+import { EchoModuleApi as ModuleApi, ModuleMetaData } from '@equinor/echo-base';
 import { RegisterAppOptions } from '../actions/coreActions/app';
 import { AppKey, EchoPanelOptions, Panel, PanelUI } from './';
 import { RouteBaseProps, WrappedComponent } from './components';
@@ -74,7 +74,7 @@ declare module '@equinor/echo-base' {
 export type EchoModuleApi = ModuleApi;
 
 export interface EchoAppModuleApiCreator {
-    (meta: AppMetaData): EchoModuleApi;
+    (meta: ModuleMetaData): EchoModuleApi;
 }
 
 export interface AppOptions {

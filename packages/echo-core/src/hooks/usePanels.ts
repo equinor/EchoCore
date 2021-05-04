@@ -36,7 +36,7 @@ export function usePanels(panelType = String(PanelType.left)): UsePanels {
     const panelsDict = useGlobalPanels();
     const corePanels = useCorePanels();
     const [modulePanels, setModulePanels] = useState<Panel[]>([]);
-    const { activePanel, activeModulePanels } = useActivePanelState();
+    const { activePanel, activeModulePanels, ui } = useActivePanelState();
     const [panelUI, setPanelUI] = useState<PanelUI>({});
     const [isPanelActive, setIsPanelActive] = useState<boolean>(false);
 
@@ -57,6 +57,16 @@ export function usePanels(panelType = String(PanelType.left)): UsePanels {
         [activePanel]
     );
 
+    activeModulePanels;
+
+    useEffect(() => {
+        if (ui) {
+            setPanelUI({ ...ui });
+        } else {
+            setPanelUI({});
+        }
+    }, [ui]);
+
     useEffect(() => {
         if (!!modulePanels.find((panel: Panel) => panel.key === activePanel)) setIsPanelActive(true);
         else setIsPanelActive(false);
@@ -71,19 +81,16 @@ export function usePanels(panelType = String(PanelType.left)): UsePanels {
                     ? currentCorePanels
                     : currentCorePanels.filter((panel) => panel.panelType === panelType)
             );
-            setPanelUI({});
             return;
         }
 
         const { panels, options } = activeAppPanels;
         const { searchActive, addSearch, panel, panelButton, panelWrapper } = options;
-        const isActive = addSearch ? addSearch : false;
 
-        if (isPanelActive && panels) {
+        if (panels) {
             searchActive && setActivePanel('searchPanel');
             setPanelUI({ panel, panelButton, panelWrapper });
-
-            const combinedPanels = combinePanels(panels, isActive, getCorePanels, corePanels);
+            const combinedPanels = combinePanels(panels, addSearch ? addSearch : false, getCorePanels, corePanels);
             setModulePanels(
                 panelType === PanelType.all
                     ? combinedPanels
@@ -91,7 +98,6 @@ export function usePanels(panelType = String(PanelType.left)): UsePanels {
             );
         }
     }, [activePanel, isPanelActive, panelsDict, setActivePanel, panelType, corePanels, activeModulePanels]);
-
     return { modulePanels, setActivePanel, activePanel, isPanelActive, panelUI };
 }
 
