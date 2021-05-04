@@ -31,8 +31,6 @@ export interface ActivePanel {
 }
 
 export interface EchoPanelOptions extends PanelUI {
-    searchActive: boolean;
-    customPanelActive: string;
     addSearch: boolean;
 }
 
