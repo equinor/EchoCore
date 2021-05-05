@@ -32,7 +32,7 @@ function requireModule(name: string, dependencies: AvailableDependencies): any {
  * @param {ModuleData} [module]
  * @return {*}  {ModuleData}
  */
-function checkApp(name: string, module?: ModuleData): ModuleData {
+function checkModule(name: string, module?: ModuleData): ModuleData {
     if (!module) {
         console.error('Invalid module found.', name);
     } else if (typeof module.setup !== 'function') {
@@ -99,7 +99,7 @@ export async function includeScript(
  */
 export async function checkAppAsync(name: string, module?: ModuleData | Promise<ModuleData>): Promise<ModuleData> {
     const resolvedModule = await Promise.resolve(module);
-    return checkApp(name, resolvedModule);
+    return checkModule(name, resolvedModule);
 }
 /**
  * Function added to window object for retrieving AvailableDependencies

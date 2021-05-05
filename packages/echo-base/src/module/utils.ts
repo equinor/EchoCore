@@ -57,9 +57,16 @@ export function isProduction(): boolean {
     return process.env.NODE_ENV === 'production';
 }
 
-export function filterModulesByEnvironment(modules: EchoModule[], isProduction?: () => boolean): EchoModule[] {
+export function filterExcludePrivateModulesInProduction(
+    modules: EchoModule[],
+    isProduction?: () => boolean
+): EchoModule[] {
     if (isProduction && isProduction()) {
         return modules.filter((module) => module.private !== true);
     }
     return modules;
+}
+
+export function fireAndForget(asyncFunc: () => Promise<void>): void {
+    asyncFunc();
 }

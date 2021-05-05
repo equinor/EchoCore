@@ -1,7 +1,7 @@
 import { EchoModulesLoading, LoadingModuleOptions } from '../types';
 import { EchoModule } from '../types/module';
 import { standardStrategy } from './strategies';
-import { isfunc } from './utils';
+import { fireAndForget, isfunc } from './utils';
 
 interface StartLoadingModules {
     connect(notifier: EchoModulesLoading): void;
@@ -38,7 +38,9 @@ export function startLoadingModules(options: LoadingModuleOptions): StartLoading
         state.loaded = true;
         notify();
     };
-    standardStrategy(options, setAppModules).then(setLoaded, setLoaded);
+
+    fireAndForget(() => standardStrategy(options, setAppModules).then(setLoaded, setLoaded));
+
     return {
         connect(notifier: EchoModulesLoading): void {
             if (isfunc(notifier)) {

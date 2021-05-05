@@ -39,6 +39,6 @@ export async function loadModules(loader: ModuleLoader, fetchModules?: ModuleReq
     if (modules instanceof Array) {
         return await Promise.all(modules.map(loader));
     } else {
-        throw new ModulesMetaError({ message: 'Invalid modules meta-data' });
+        throw new ModulesMetaError({ message: 'Invalid modules meta-data, argument is not an Array' });
     }
 }

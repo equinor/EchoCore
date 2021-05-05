@@ -3,7 +3,7 @@ import { createModules } from './aggregate';
 import { ModulesEvaluationError } from './errors';
 import { loadModules } from './load';
 import { createModuleLoader } from './loader';
-import { filterModulesByEnvironment, isProduction } from './utils';
+import { filterExcludePrivateModulesInProduction, isProduction } from './utils';
 
 /**
  *Evaluates modules and filters and compeers oldModules to newModules,
@@ -27,7 +27,10 @@ async function evaluateAllModules(
             }
         }
 
-        return createModules(createApi, filterModulesByEnvironment([...oldModules, ...newModules], isProduction));
+        return createModules(
+            createApi,
+            filterExcludePrivateModulesInProduction([...oldModules, ...newModules], isProduction)
+        );
     } catch (error) {
         throw new ModulesEvaluationError(error);
     }
@@ -43,11 +46,10 @@ async function evaluateAllModules(
  * @return {*}  {Promise<void>}
  */
 export async function standardStrategy(options: LoadingModuleOptions, callback: EchoModuleLoaded): Promise<void> {
-    const { createApi, fetchModules, modules, config, dependencies, getDependencies } = options;
-    const loader: ModuleLoader = createModuleLoader(config, dependencies, getDependencies);
+    const loader: ModuleLoader = createModuleLoader(options.config, options.dependencies, options.getDependencies);
     try {
-        const fetchedModules = await loadModules(loader, fetchModules);
-        const allModules = await evaluateAllModules(createApi, fetchedModules, modules);
+        const fetchedModules = await loadModules(loader, options.fetchModules);
+        const allModules = await evaluateAllModules(options.createApi, fetchedModules, options.modules);
         return callback(undefined, allModules);
     } catch (error) {
         return callback(error, []);
