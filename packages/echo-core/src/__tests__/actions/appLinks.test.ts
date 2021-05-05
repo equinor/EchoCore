@@ -5,7 +5,7 @@ import { AppLink } from '../../types/registry';
 import { GlobalState } from '../../types/state';
 
 const appLink: AppLink = {
-    tile: 'app',
+    name: 'app',
     icon: 'app-icon',
     path: '/app'
 };

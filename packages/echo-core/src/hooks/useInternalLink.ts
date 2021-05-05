@@ -22,7 +22,7 @@ export function useInternalLink(): LinkFunction {
      * @param {string} [params=''] The query parameters present in a link
      * @param {AppLinkOptions} [options={ appMenu: true }] default link on app menu set to true;
      */
-    function Link(linkTo: string, options: Partial<AppLinkOptions> = { appMenu: true, params: '' }): void {
+    function Link(linkTo: string, options: Partial<AppLinkOptions> = { mainMenu: true, params: '' }): void {
         const { online, nativeMessage, eventTracker, params } = options;
 
         if (online && !navigator.onLine) {

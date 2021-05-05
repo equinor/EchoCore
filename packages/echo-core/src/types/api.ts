@@ -2,6 +2,7 @@ import { EchoModuleApi as ModuleApi, ModuleMetaData } from '@equinor/echo-base';
 import { RegisterAppOptions } from '../actions/coreActions/app';
 import { AppKey, EchoPanelOptions, Panel, PanelUI } from './';
 import { RouteBaseProps, WrappedComponent } from './components';
+import { AppLinkOptions } from './registry';
 
 type RegisterApp = (appComponent: WrappedComponent<AppComponentProps>, options?: AppOptions) => void;
 type UnRegisterApp = (key: string) => void;
@@ -77,9 +78,7 @@ export interface EchoAppModuleApiCreator {
     (meta: ModuleMetaData): EchoModuleApi;
 }
 
-export interface AppOptions {
-    appMenu?: boolean;
-    homeScreen?: boolean;
+export interface AppOptions extends AppLinkOptions {
     layoutKey?: string;
     icon?: string;
     description?: string;

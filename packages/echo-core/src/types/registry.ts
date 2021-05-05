@@ -16,19 +16,19 @@ export interface RegistryState {
 }
 
 export interface AppLink extends AppLinkOptions {
-    tile: string;
-    icon?: string;
+    name: string;
+    icon: string;
     path: string;
     description?: string;
 }
 
 export interface AppLinkOptions {
-    altText?: string;
+    shortName?: string;
     homeScreen?: boolean;
     mainMenu?: boolean;
-    appMenu?: boolean;
     params?: string;
     eventTracker?: EventTracker;
+    isVisible?: () => boolean;
     nativeMessage?: NativeMessage;
     online?: boolean;
 }

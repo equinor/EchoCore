@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { checkFunction, filterModulesByEnvironment } from '../../module/utils';
+import { checkFunction, filterExcludePrivateModulesInProduction } from '../../module/utils';
 import { EchoModule } from '../../types/module';
 
 describe('Echo-Base -> utils.ts', () => {
@@ -41,7 +41,7 @@ describe('Echo-Base -> utils.ts', () => {
                 shortName: 'someApp2'
             }
         ] as EchoModule[];
-        const result = filterModulesByEnvironment(appModules, () => false);
+        const result = filterExcludePrivateModulesInProduction(appModules, () => false);
         expect(result).toEqual(appModules);
     });
 
@@ -69,7 +69,7 @@ describe('Echo-Base -> utils.ts', () => {
                 private: true
             }
         ] as EchoModule[];
-        const result = filterModulesByEnvironment(appModules, () => true);
+        const result = filterExcludePrivateModulesInProduction(appModules, () => true);
         expect(result).toEqual(prodModules);
     });
 });

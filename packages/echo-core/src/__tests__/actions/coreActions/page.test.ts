@@ -1,7 +1,7 @@
 import { getRoutesData, registerPage, unRegisterPage } from '../../../actions/coreActions/';
 import { RouteRegistration } from '../../../types';
 
-const test = () => {
+const test = (): null => {
     return null;
 };
 

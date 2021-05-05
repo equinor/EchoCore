@@ -7,6 +7,7 @@ export interface MetaDataBase {
     key: string;
     name: string;
     shortName: string;
+    path: string;
     fileUri: string;
     version: string;
     integrity?: string;

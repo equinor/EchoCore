@@ -21,25 +21,24 @@ import { WrappedComponent } from '../types/components';
  */
 export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
     return (meta: ModuleMetaData): EchoModuleApi => {
-        const { key, name, shortName } = meta;
+        const { name, shortName, path } = meta;
         return {
             meta,
             eventHub,
             registerApp: (component: WrappedComponent<AppComponentProps>, options: AppOptions = {}): void => {
-                const { layoutKey, appMenu, homeScreen, icon, description } = options;
+                const { mainMenu, icon, panels, panelsOptions, ...rest } = options;
                 const appOptions: RegisterAppOptions = {
+                    ...rest,
                     component,
-                    tile: name,
-                    icon,
-                    layoutKey,
-                    path: `/${shortName}`,
-                    key,
-                    description,
-                    appMenu: appMenu === undefined ? true : appMenu ? true : false,
-                    homeScreen
+                    name,
+                    path,
+                    shortName,
+                    key: path,
+                    icon: icon ? icon : 'category',
+                    mainMenu: mainMenu === undefined ? true : mainMenu ? true : false
                 };
                 registerApp(shortName, appOptions);
-                if (options.panels) registerPanels(shortName, options.panels, options.panelsOptions);
+                if (options.panels) registerPanels(shortName, panels, panelsOptions);
             },
             unRegisterApp: (): void => {
                 unRegisterApp(shortName);
