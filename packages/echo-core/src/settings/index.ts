@@ -1,6 +1,11 @@
 import * as globalSettingsActions from './globalSettingsActions';
 import * as persistEchoSetting from './persistEchoSetting';
 import * as plant from './plantSettingsActions';
+export * from './echoModuleSettings';
+export * from './moduleSettings';
+export * from './persistEchoSetting';
+export * from './settingsStore';
+export * from './useSetting';
 
 export const EchoSettings = {
     // Global Settings Actions
@@ -16,8 +21,3 @@ export const EchoSettings = {
     // Persist the EchoSetting
     ...persistEchoSetting
 };
-
-export * from './echoModuleSettings';
-export * from './moduleSettings';
-export * from './settingsStore';
-export * from './useSetting';
