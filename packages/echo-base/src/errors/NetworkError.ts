@@ -30,4 +30,10 @@ export class NetworkError extends BaseError {
     };
 }
 
-export default NetworkError;
+export class BackendError extends NetworkError {}
+
+export class ForbiddenError extends NetworkError {}
+
+export class NotFoundError extends NetworkError {}
+
+export class ValidationError extends NetworkError {}
