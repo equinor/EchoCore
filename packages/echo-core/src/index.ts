@@ -18,7 +18,7 @@ import { useAppModuleState } from './state/useAppModuleState';
 export { EchoEvents, storage } from '@equinor/echo-base';
 export type { ErrorProperties } from '@equinor/echo-base';
 export * from '@equinor/echo-base/lib/errors';
-export * from '@equinor/echo-base/lib/types/error';
+export type { BaseErrorArgs, CommonErrorArgs } from '@equinor/echo-base/lib/types/error';
 export { default as eventHub } from '@equinor/echo-base/lib/utils/eventHub';
 export * from './actions/moduleState';
 export { default as EchoEventHubContext } from './contexts/EchoEventHubContext';
