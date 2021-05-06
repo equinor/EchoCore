@@ -1,3 +1,4 @@
+import * as error from '@equinor/echo-base/lib/errors';
 import * as moduleActions from './actions/moduleState';
 import { EnvironmentVariables } from './configuration/environment';
 import Env from './Env';
@@ -17,6 +18,7 @@ import { useAppModuleState } from './state/useAppModuleState';
 export { EchoEvents, storage } from '@equinor/echo-base';
 export type { ErrorProperties } from '@equinor/echo-base';
 export * from '@equinor/echo-base/lib/errors';
+export * from '@equinor/echo-base/lib/types/error';
 export { default as eventHub } from '@equinor/echo-base/lib/utils/eventHub';
 export * from './actions/moduleState';
 export { default as EchoEventHubContext } from './contexts/EchoEventHubContext';
@@ -56,7 +58,8 @@ export const EchoCore = {
 
     // Exposing all core Hooks
     hooks,
-    moduleState: { ...moduleState, ...moduleActions }
+    moduleState: { ...moduleState, ...moduleActions },
+    error
 };
 
 export default EchoCore;
