@@ -1,5 +1,5 @@
 import { Atom } from '@dbeining/react-atom';
-import BaseError from '@equinor/echo-base/lib/errors/BaseError';
+import { BaseError } from '@equinor/echo-base/lib/errors/BaseError';
 import { User } from '@microsoft/microsoft-graph-types';
 import { AppComponentProps } from './api';
 import { AnyComponent } from './components';

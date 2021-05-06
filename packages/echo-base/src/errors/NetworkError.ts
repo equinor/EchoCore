@@ -1,5 +1,5 @@
 import { CommonErrorArgs } from '../types/error';
-import BaseError from './BaseError';
+import { BaseError } from './BaseError';
 
 export interface NetworkErrorArgs extends CommonErrorArgs {
     exception: Record<string, unknown>;
@@ -30,4 +30,10 @@ export class NetworkError extends BaseError {
     };
 }
 
-export default NetworkError;
+export class BackendError extends NetworkError {}
+
+export class ForbiddenError extends NetworkError {}
+
+export class NotFoundError extends NetworkError {}
+
+export class ValidationError extends NetworkError {}

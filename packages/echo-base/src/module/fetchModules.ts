@@ -1,4 +1,4 @@
-import BaseError from '../errors/BaseError';
+import { BaseError } from '../errors/BaseError';
 import { AppMetadata, AppMetaFetch } from '../types/module';
 import { verifyModulesMeta } from './verify';
 

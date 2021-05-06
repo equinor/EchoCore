@@ -1,4 +1,4 @@
-import BaseError from '../../errors/BaseError';
+import { BaseError } from '../../errors/BaseError';
 
 describe('BaseError', () => {
     const message = 'Base Error Testing';
