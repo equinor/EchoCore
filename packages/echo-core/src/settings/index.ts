@@ -1,27 +1,23 @@
-import { getSettings, getSettingsByKey, setSetting, updateSettingByKey } from './globalSettingsActions';
-import persistEchoSetting from './persistEchoSetting';
-import { getSelectedPlant, setSelectedPlant } from './plantSettingsActions';
+import * as globalSettingsActions from './globalSettingsActions';
+import * as persistEchoSetting from './persistEchoSetting';
+import * as plant from './plantSettingsActions';
+export * from './echoModuleSettings';
+export * from './moduleSettings';
+export * from './persistEchoSetting';
+export * from './settingsStore';
+export * from './useSetting';
 
-class CoreSettings {
+export const EchoSettings = {
     // Global Settings Actions
-    updateSettingByKey = updateSettingByKey;
-    setSetting = setSetting;
-    getSettings = getSettings;
-    getSettingsByKey = getSettingsByKey;
+    ...globalSettingsActions,
 
     /**
      * Plant specific actions to Get and Set Plant date
      * @param {PlantSettings} plantSettings Parameter for both get and set.
      * @memberof CoreSettings
      */
-    plant = {
-        getSelected: getSelectedPlant,
-        setSelected: setSelectedPlant
-    };
+    plant,
 
     // Persist the EchoSetting
-    persistSetting = persistEchoSetting;
-}
-
-const EchoSettings = new CoreSettings();
-export default EchoSettings;
+    ...persistEchoSetting
+};

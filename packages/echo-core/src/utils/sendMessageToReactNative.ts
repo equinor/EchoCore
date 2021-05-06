@@ -1,4 +1,4 @@
-import { TextAtLocation } from '../components/cameraOverlay/tagScanner';
+import { TextAtLocation } from '../types/textLocation';
 
 declare global {
     interface Window {

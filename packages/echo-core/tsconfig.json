@@ -14,9 +14,13 @@
         "isolatedModules": true,
         "noImplicitAny": false ,
         "noEmit": true,
+        "declaration": true,
         "jsx": "react"
     },
    "include": [
       "./src" 
+   ],
+   "exclude": [
+       "./src/__tests__"
    ]
 }

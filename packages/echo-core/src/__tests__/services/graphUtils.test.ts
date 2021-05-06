@@ -1,6 +1,6 @@
 import { AccountInfo, AuthenticationResult } from '@azure/msal-browser';
 import { User } from '@microsoft/microsoft-graph-types';
-import EchoAuthProvider from '../../services/authentication/echoProvider';
+import { EchoAuthProvider } from '../../services/authentication/echoProvider';
 import { graphGetProfile, graphGetProfilePicture } from '../../services/graph/graphUtils';
 
 jest.mock('@azure/msal-browser');

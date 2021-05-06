@@ -4,7 +4,7 @@ import { useLayoutEffect } from 'react';
  * Hook for running the callback once on umount.
  * @param callback The callback to be invoked on unrounding.
  */
-export default function useCleanup(callback: () => void): void {
+export function useCleanup(callback: () => void): void {
     useLayoutEffect(() => {
         return (): void => {
             callback();

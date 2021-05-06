@@ -1,7 +1,7 @@
 import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { GlobalState } from '../types';
-import PanelHandler, { ACTIVE_PANEL_KEY } from './corePanels';
+import { ACTIVE_PANEL_KEY, PanelHandler } from './corePanels';
 /**
  * * Echo Core helper method for setting active panel
  *
