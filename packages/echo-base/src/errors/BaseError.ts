@@ -25,5 +25,3 @@ export class BaseError extends Error {
         this.properties = { ...this.properties, ...values };
     };
 }
-
-export default BaseError;

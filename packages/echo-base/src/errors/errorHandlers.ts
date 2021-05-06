@@ -1,5 +1,5 @@
 import { ErrorInitializerFunction } from '../types/error';
-import BaseError from './BaseError';
+import { BaseError } from './BaseError';
 import {
     BackendError,
     ForbiddenError,
