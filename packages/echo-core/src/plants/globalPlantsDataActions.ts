@@ -2,7 +2,7 @@ import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { Plant, PlantsData } from '../types/plants';
 import { GlobalState } from '../types/state';
-import persistPlantsData from './persistPlantsData';
+import { persistPlantsData } from './persistPlantsData';
 
 /**
  * Function for updating plantsData in global state.

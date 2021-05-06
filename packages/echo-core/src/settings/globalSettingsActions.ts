@@ -2,7 +2,7 @@ import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { Settings } from '../types/settings';
 import { GlobalState } from '../types/state';
-import persistEchoSetting from './persistEchoSetting';
+import { persistEchoSetting } from './persistEchoSetting';
 /**
  * Function used for updating specific settings value in the global state.
  *

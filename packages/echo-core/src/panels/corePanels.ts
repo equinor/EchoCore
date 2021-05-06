@@ -38,6 +38,4 @@ class PanelHandlerClass extends ObserverClass {
         return panels;
     };
 }
-const PanelHandler = new PanelHandlerClass();
-
-export default PanelHandler;
+export const PanelHandler = new PanelHandlerClass();

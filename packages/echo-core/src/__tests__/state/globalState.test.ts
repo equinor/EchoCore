@@ -1,5 +1,5 @@
 import { deref } from '@dbeining/react-atom';
-import defaultGlobalState from '../../state/defaultStates';
+import { defaultGlobalState } from '../../state/defaultStates';
 import { createGlobalApplicationContext, createGlobalState, getCoreContext } from '../../state/globalState';
 
 describe('createGlobalState', () => {

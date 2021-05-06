@@ -2,7 +2,7 @@ import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { GlobalState, Panel } from '../types';
 import { PanelUI } from '../types/ui';
-import PanelHandler, { ACTIVE_PANEL_KEY, ECHO_CORE_SEARCH, PANEL_KEY } from './corePanels';
+import { ACTIVE_PANEL_KEY, ECHO_CORE_SEARCH, PanelHandler, PANEL_KEY } from './corePanels';
 
 export interface EchoPanelRegister {
     panels: Panel[];
@@ -20,7 +20,7 @@ export interface EchoPanelOptions extends PanelUI {
  * @param panels
  * @param options
  */
-function registerPanels(panels: Panel[] = [], options: Partial<EchoPanelOptions> = {}): void {
+export function registerPanels(panels: Panel[] = [], options: Partial<EchoPanelOptions> = {}): void {
     const { addSearch, searchActive, customPanelActive, panelWrapper, panel, panelButton } = options;
 
     const newPanels = PanelHandler.combinePanels(
@@ -53,5 +53,3 @@ function registerPanels(panels: Panel[] = [], options: Partial<EchoPanelOptions>
         );
     }, 200);
 }
-
-export default registerPanels;
