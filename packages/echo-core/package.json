@@ -1,9 +1,9 @@
 {
     "name": "@equinor/echo-core",
-    "version": "0.2.93",
+    "version": "0.2.94",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "./dist/index.js",
-    "types": "./dist/types/index.d.ts",
+    "types": "./dist/index.d.ts",
     "source": "./src/index.ts",
     "scripts": {
         "build": "rollup -c",
@@ -50,6 +50,7 @@
         "@types/jest": "^26.0.20",
         "@types/node": "^14.14.37",
         "@types/react": "^17.0.3",
+        "@types/react-router-dom": "^5.1.7",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
         "babel-jest": "^26.6.3",

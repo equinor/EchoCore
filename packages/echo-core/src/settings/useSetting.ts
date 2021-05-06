@@ -16,7 +16,7 @@ function useSettings(): Settings {
  * @export Hook fom Echo Core
  * @return {*}  {UsePlantSettings}
  */
-export default function usePlantSettings(): PlantSettings {
+export function usePlantSettings(): PlantSettings {
     const { instCode, sapPlantId, plantName, proCoSysPlantId, hasTr2000 } = useSettings().plantSettings;
     return {
         instCode,

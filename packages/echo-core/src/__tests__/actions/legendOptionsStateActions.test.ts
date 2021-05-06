@@ -1,5 +1,5 @@
 import { getLegendOption, setLegendOption } from '../../legend/legendOptionsStateActions';
-import defaultGlobalState from '../../state/defaultStates';
+import { defaultGlobalState } from '../../state/defaultStates';
 import { dispatch, readState } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
 import { GlobalState } from '../../types';

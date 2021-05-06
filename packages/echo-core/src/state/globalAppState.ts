@@ -8,9 +8,7 @@ import { setModuleState } from '../actions/globalStateActions';
  *
  * `For use in Echo Core only.`
  */
-function setSpecificModuleState<S, T, K extends keyof T>(state: S, key: K, data: T[K]): void {
+export function setSpecificModuleState<S, T, K extends keyof T>(state: S, key: K, data: T[K]): void {
     const newState = { ...state, [key]: data };
     setModuleState<S>(newState);
 }
-
-export default setSpecificModuleState;

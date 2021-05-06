@@ -27,11 +27,3 @@ function removeModuleByKey<TKey extends string>(modules: AppModule[], key: TKey)
     console.log(modules, key);
     return [];
 }
-
-// function validateModule(moduleA: AppModule, moduleB?: AppModule): boolean {
-//     if (moduleB) {
-//         return moduleA.name !== moduleB.name;
-//         // move validation
-//     }
-//     return true;
-// }

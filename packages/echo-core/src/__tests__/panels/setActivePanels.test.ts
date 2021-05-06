@@ -1,4 +1,4 @@
-import PanelHandler from '../../panels/corePanels';
+import { PanelHandler } from '../../panels/corePanels';
 import { setActivePanel } from '../../panels/setActivePanels';
 import { readState } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';

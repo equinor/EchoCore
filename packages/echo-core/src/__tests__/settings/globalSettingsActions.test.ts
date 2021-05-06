@@ -1,5 +1,5 @@
 import { getSettings, getSettingsByKey, setSetting, updateSettingByKey } from '../../settings/globalSettingsActions';
-import defaultGlobalState from '../../state/defaultStates';
+import { defaultGlobalState } from '../../state/defaultStates';
 import { dispatch } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
 

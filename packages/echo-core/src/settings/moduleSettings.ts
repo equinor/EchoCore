@@ -1,4 +1,4 @@
-import store, { SettingStore } from './settingsStore';
+import { SettingStore, store } from './settingsStore';
 
 /**
  * Class used for light module settings implementation. For registering proper module setting

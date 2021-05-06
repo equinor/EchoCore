@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import PanelHandler, { ACTIVE_PANEL_KEY, PANEL_KEY } from '../panels/corePanels';
+import { ACTIVE_PANEL_KEY, PanelHandler, PANEL_KEY } from '../panels/corePanels';
 import { dispatch, readState } from '../state/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { GlobalState, Panel, PanelType } from '../types';
 import { PanelUI } from '../types/ui';
-import usePanelUI from './usePanelUI';
+import { usePanelUI } from './usePanelUI';
 
 interface UsePanels {
     modulePanels: Panel[];
@@ -21,7 +21,7 @@ interface UsePanels {
  * , `setActivePanel`, `activePanel`, `isPanelActive` and `panelUI`.
  */
 
-function usePanels(panelType = String(PanelType.left)): UsePanels {
+export function usePanels(panelType = String(PanelType.left)): UsePanels {
     const [modulePanels, setModulePanels] = useState<Panel[]>([]);
     const [activePanel, setPanel] = useState<string>(readState(getCoreContext(), (state): string => state.activePanel));
     const panelUI = usePanelUI();
@@ -67,5 +67,3 @@ function usePanels(panelType = String(PanelType.left)): UsePanels {
 
     return { modulePanels, setActivePanel, activePanel, isPanelActive, panelUI };
 }
-
-export default usePanels;

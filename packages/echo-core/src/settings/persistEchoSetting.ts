@@ -70,5 +70,4 @@ export class PersistEchoSetting {
         this.echoStorage.removeItem(key);
     }
 }
-const persistEchoSetting = new PersistEchoSetting();
-export default persistEchoSetting;
+export const persistEchoSetting = new PersistEchoSetting();

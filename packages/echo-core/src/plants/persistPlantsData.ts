@@ -37,5 +37,4 @@ export class PersistPlantsData {
         return newPlantsData;
     }
 }
-const persistPlantsData = new PersistPlantsData(storage, plantsData);
-export default persistPlantsData;
+export const persistPlantsData = new PersistPlantsData(storage, plantsData);

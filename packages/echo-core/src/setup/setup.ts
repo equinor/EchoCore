@@ -1,9 +1,9 @@
 import { setUserInformation } from '../actions/userInformationActions';
-import PanelHandler from '../panels/corePanels';
-import EchoAuthProvider from '../services/authentication/echoProvider';
+import { PanelHandler } from '../panels/corePanels';
+import { EchoAuthProvider } from '../services/authentication/echoProvider';
 import { graphGetProfile, graphGetProfilePicture } from '../services/graph/graphUtils';
 import { setSetting } from '../settings/globalSettingsActions';
-import persistEchoSetting from '../settings/persistEchoSetting';
+import { persistEchoSetting } from '../settings/persistEchoSetting';
 import { CoreConfig } from '../types/coreConfig';
 
 /**
