@@ -1,4 +1,4 @@
-import NetworkError from '../../errors/NetworkError';
+import { ForbiddenError, NetworkError, NetworkErrorArgs } from '../../errors/NetworkError';
 
 describe('NetworkError', () => {
     const message = 'Network Error Testing';
@@ -10,6 +10,11 @@ describe('NetworkError', () => {
 
     it('should not be logged', () => {
         expect(nwError.hasBeenLogged).toBeFalsy();
+    });
+
+    it('should be correct instanceOf', () => {
+        const forbiddenError = new ForbiddenError({} as NetworkErrorArgs);
+        expect(forbiddenError instanceof ForbiddenError).toBeTruthy();
     });
 
     it('check properties', () => {
