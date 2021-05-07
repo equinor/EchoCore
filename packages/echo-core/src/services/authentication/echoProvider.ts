@@ -25,5 +25,4 @@ export const echoConfig: Configuration = {
  * Based on the @azure/msal-browser package
  * @param config configuration object specific to for echo application
  */
-const EchoAuthProvider = new AuthenticationProvider(echoConfig);
-export default EchoAuthProvider;
+export const EchoAuthProvider = new AuthenticationProvider(echoConfig);

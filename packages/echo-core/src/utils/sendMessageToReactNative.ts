@@ -1,10 +1,5 @@
-export interface TextAtLocation {
-    text: string;
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-}
+import { TextAtLocation } from '../types/textLocation';
+
 declare global {
     interface Window {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

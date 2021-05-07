@@ -10,5 +10,3 @@ export function usePanelUI(): PanelUI {
     const { ui } = useAtom(CoreContext.state);
     return ui;
 }
-
-export default usePanelUI;

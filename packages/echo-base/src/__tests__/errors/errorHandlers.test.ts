@@ -1,9 +1,12 @@
 import { initializeError } from '../../errors/errorHandlers';
-import BackendError from '../../errors/network/BackendError';
-import ForbiddenError from '../../errors/network/ForbiddenError';
-import NotFoundError from '../../errors/network/NotFoundError';
-import ValidationError from '../../errors/network/ValidationError';
-import NetworkError, { NetworkErrorArgs } from '../../errors/NetworkError';
+import {
+    BackendError,
+    ForbiddenError,
+    NetworkError,
+    NetworkErrorArgs,
+    NotFoundError,
+    ValidationError
+} from '../../errors/NetworkError';
 
 describe('handleClientError', () => {
     const args = {

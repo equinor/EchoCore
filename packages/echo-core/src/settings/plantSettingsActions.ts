@@ -2,7 +2,7 @@ import { readState } from '../actions/coreActions/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { PlantSettings } from '../types/settings';
 import { setSetting } from './globalSettingsActions';
-import persistEchoSetting from './persistEchoSetting';
+import { persistEchoSetting } from './persistEchoSetting';
 
 /**
  * Used for setting or updating the selected plant.

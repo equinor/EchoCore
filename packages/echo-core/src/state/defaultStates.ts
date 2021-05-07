@@ -36,7 +36,7 @@ export const components = {
     }
 };
 
-const defaultGlobalState: GlobalState = {
+export const defaultGlobalState: GlobalState = {
     app: {
         error: undefined,
         loading: typeof window !== 'undefined',
@@ -69,5 +69,3 @@ const defaultGlobalState: GlobalState = {
     plantsData,
     legendOptions
 };
-
-export default defaultGlobalState;

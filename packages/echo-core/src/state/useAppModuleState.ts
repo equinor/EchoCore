@@ -8,7 +8,7 @@ import { getCoreState } from './globalState';
  * @param initialState The initial state object used for registering.
  * this parameter is default undefined for preventing initialization on every render.
  */
-export default function useAppModuleState<T>(initialState: T | undefined = undefined): T {
+export function useAppModuleState<T>(initialState: T | undefined = undefined): T {
     const state = useAtom(getCoreState());
 
     useInitial(() => {

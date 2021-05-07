@@ -1,6 +1,6 @@
 import { dispatch } from '../../actions/coreActions/globalActions';
 import { getSettings, getSettingsByKey, setSetting, updateSettingByKey } from '../../settings/globalSettingsActions';
-import defaultGlobalState from '../../state/defaultStates';
+import { defaultGlobalState } from '../../state/defaultStates';
 import { getCoreContext } from '../../state/globalState';
 
 beforeEach(() => {

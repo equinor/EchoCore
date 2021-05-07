@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { AuthenticationProvider } from '../services/authentication/authProvider';
 
-export const useAuthenticate = (
+export function useAuthenticate(
     authProvider: AuthenticationProvider,
     logRequest?: (...args: unknown[]) => void
-): boolean => {
+): boolean {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
@@ -18,6 +18,4 @@ export const useAuthenticate = (
     }, [authProvider, logRequest]);
 
     return isAuthenticated;
-};
-
-export default useAuthenticate;
+}

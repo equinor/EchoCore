@@ -4,5 +4,4 @@ export class SettingStore {
     public moduleSettings: Dict = {};
 }
 
-const store = new SettingStore();
-export default store;
+export const store = new SettingStore();

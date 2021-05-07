@@ -1,6 +1,6 @@
-import BaseError from './BaseError';
+import { BaseError } from './BaseError';
 
-interface ArgumentErrorArgs {
+export interface ArgumentErrorArgs {
     argumentName: string;
 }
 
