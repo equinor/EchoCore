@@ -4,6 +4,9 @@
     "version": "0.0.2",
     "description": "Setup functions for echo web",
     "main": "index.js",
+    "engines" : { 
+        "npm" : "17.11.2" 
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
