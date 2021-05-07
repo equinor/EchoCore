@@ -1,4 +1,4 @@
-import BaseError from '../errors/BaseError';
+import { BaseError } from '../errors';
 
 export class ModulesMetaError extends BaseError {}
 

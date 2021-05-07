@@ -37,7 +37,7 @@
     },
     "dependencies": {
         "@azure/msal-browser": "2.8.0",
-        "@dbeining/react-atom": "^4.1.16"
+        "@dbeining/react-atom": "^4.1.17"
     },
     "devDependencies": {
         "@babel/core": "^7.12.10",

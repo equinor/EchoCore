@@ -16,6 +16,6 @@ export function dispatch(ctx: GlobalStateContext, update: (state: GlobalState) =
  * @param read callback function for reading state parameters.
  */
 export function readState<S>(ctx: GlobalStateContext, read: (state: GlobalState) => S): S {
-    const state = deref(ctx.state);
+    const state = deref<GlobalState>(ctx.state);
     return read(state);
 }

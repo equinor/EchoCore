@@ -1,6 +1,6 @@
-import { readState } from '../state/globalActions';
 import { setSpecificModuleState } from '../state/globalAppState';
 import { getCoreContext } from '../state/globalState';
+import { readState } from './coreActions/globalActions';
 import { setModuleState } from './globalState';
 
 /**

@@ -1,7 +1,7 @@
 import { Atom } from '@dbeining/react-atom';
 import { GlobalState, GlobalStateContext } from '../types';
 import { GlobalsStateActions } from '../types/actions';
-import defaultGlobalState from './defaultStates';
+import { defaultGlobalState } from './defaultStates';
 
 /**
  * Echo Core function for creating the GlobalState object.
