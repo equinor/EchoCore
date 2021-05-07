@@ -4,7 +4,7 @@ import { checkFunction } from './utils';
 import { verifyModulesMeta } from './verify';
 
 /**
- * Loader for fetching Metadata will allays resolve with empty Array
+ * Loader for fetching Metadata will always resolve with empty Array
  * if modules are noe present.
  *
  * @export
@@ -27,7 +27,9 @@ export async function loadMetaData(fetchModules?: ModuleRequester): Promise<Modu
 }
 
 /**
- * Loading modules metadata and loads all modules.
+ * Loading modules metadata with provided fetch method.
+ * Loads all modules if meta data is instance of array.
+ * Will trow ModulesMetaError on invalid modules meta-data is nor returned as an instance of Array.
  *
  * @export
  * @param {ModuleLoader} loader

@@ -5,7 +5,7 @@ import { addOrOverwriteWithKey } from '../utils/state';
 import { dispatch, readState } from './coreActions/globalActions';
 
 /**
- *
+ * For registering the core Main Menu and Search Panel
  *
  * @export
  * @template TKey
@@ -82,9 +82,7 @@ export function setActivePanel(key: string): void {
     });
 }
 /**
- * Echo Core helper method for setting active panel
- * if the setActivePanel is called with same key twice it will close the panel
- * it will also close if called with empty string,
+ * Echo Core helper method for setting active panels related to an module
  *
  * @export
  * @param {string} key to identify which panel to open

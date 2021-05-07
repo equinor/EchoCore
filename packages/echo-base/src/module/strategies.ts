@@ -37,8 +37,8 @@ async function evaluateAllModules(
 }
 
 /**
- * Loading strategy Fetching modules from api or MocApi en then
- * evaluating and installing modules.
+ * Loading strategy Fetching modules from api or MocApi
+ * Then evaluating and installing modules.
  *
  * @export
  * @param {LoadingModuleOptions} options

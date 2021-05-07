@@ -5,10 +5,10 @@
  * @returns A promise leading to the raw text content.
  */
 export async function defaultFetchDependency(url: string, token?: string): Promise<string> {
-    const m = await fetch(url, {
+    const module = await fetch(url, {
         headers: { token },
         method: 'GET',
         cache: 'force-cache'
     });
-    return await m.text();
+    return await module.text();
 }

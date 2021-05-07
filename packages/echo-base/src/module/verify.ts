@@ -6,6 +6,6 @@ export function verifyModulesMeta(modules: ModuleMetaData[]): ModuleMetaData[] {
         modules.length > 0 && persistLocalModuleMeta('EchoModules', modules);
         return modules;
     }
-    console.log('No modules awaitable.');
+    console.info('No modules awaitable.');
     return [];
 }
