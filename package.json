@@ -2,8 +2,8 @@
     "name": "@equinor/echo-core-lerna",
     "version": "0.0.0",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
-    "engines" : { 
-        "npm" : "17.11.2" 
+    "engines": {
+        "npm": "17.11.2"
     },
     "scripts": {
         "echo-test": "jest",
