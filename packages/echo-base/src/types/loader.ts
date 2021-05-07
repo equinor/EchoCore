@@ -1,4 +1,4 @@
-import BaseError from '../errors/BaseError';
+import { BaseError } from '../errors';
 import { EchoModule, ModuleMetaData } from './module';
 
 export class ModuleAppError extends BaseError {}

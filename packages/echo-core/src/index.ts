@@ -1,4 +1,3 @@
-
 import * as error from '@equinor/echo-base/lib/errors';
 import { setLegendOption } from './actions/legendOptions';
 import * as moduleActions from './actions/moduleState';
@@ -14,7 +13,6 @@ import { EchoAuthProvider } from './services/authentication/echoProvider';
 import echoClient from './services/echoClient/echoClient';
 import * as moduleState from './state';
 import { useAppModuleState } from './state/useAppModuleState';
-import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './types';
 
 export * from '@azure/msal-browser';
 export { EchoEvents, storage } from '@equinor/echo-base';
@@ -24,7 +22,7 @@ export type { BaseErrorArgs, CommonErrorArgs } from '@equinor/echo-base/lib/type
 export { default as eventHub } from '@equinor/echo-base/lib/utils/eventHub';
 export * from './actions';
 export * from './actions/moduleState';
-export { EchoEventHubContext, EchoEventHubContext } from './contexts/EchoEventHubContext';
+export * from './contexts';
 export * from './hooks';
 export { useCleanup } from './hooks/useCleanup';
 export { useEchoEventHub, useEventSubscriber } from './hooks/useEchoEventHub';
@@ -32,8 +30,6 @@ export { useInitial } from './hooks/useInitial';
 export { usePanels } from './hooks/usePanels';
 export * from './modules';
 export * from './observers/classObserver';
-export { PanelHandler } from './panels/corePanels';
-export { getPlants, getPlantsData, setPlantsData } from './plants/globalPlantsDataActions';
 export { usePlants, usePlantsData } from './plants/usePlants';
 export { default as EchoEventHubProvider } from './providers/EchoEventHubProvider';
 export { AuthenticationProvider } from './services/authentication/authProvider';
@@ -50,7 +46,6 @@ export { makeUniqBy } from './utils/uniq';
 export const EchoEnv = new Env();
 
 export const EchoCore = {
-    //
     useEchoSetup: useEchoSetup,
     useAppModuleState: useAppModuleState,
     useLegendOptions: useLegendOptions,
@@ -58,8 +53,6 @@ export const EchoCore = {
     useUserPhoto: useUserPhoto,
     useAuthenticate: useAuthenticate,
     setLegendOption: setLegendOption,
-    ECHO_CORE_MAIN: ECHO_CORE_MAIN,
-    ECHO_CORE_SEARCH: ECHO_CORE_SEARCH,
     EchoAuthProvider: EchoAuthProvider,
     EchoClient: echoClient,
 

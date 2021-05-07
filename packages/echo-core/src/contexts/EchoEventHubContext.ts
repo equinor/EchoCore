@@ -8,6 +8,6 @@ export interface EchoEventHubContextInterface {
 /**
  * React Context of the Echo EchoEventHub
  */
-export default createContext<EchoEventHubContextInterface>({
+export const EchoEventHubContext = createContext<EchoEventHubContextInterface>({
     eventHub: {} as EchoEventHub
 });

@@ -6,4 +6,4 @@ import { GlobalStateContext } from '../types/state';
  * React Context of the Echo CoreContext
  * `Echo Framework only`
  */
-export default createContext<GlobalStateContext>(CoreContext);
+export const EchoGlobalStateContext = createContext<GlobalStateContext>(CoreContext);
