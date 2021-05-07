@@ -57,5 +57,3 @@ class EventHub implements EchoEventHub {
     }
 }
 export const eventHub = new EventHub();
-
-export default eventHub;

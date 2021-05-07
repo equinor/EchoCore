@@ -1,6 +1,6 @@
-import eventHub from '@equinor/echo-base/lib/utils/eventHub';
+import { eventHub } from '@equinor/echo-base';
 import React, { ReactNode, useMemo } from 'react';
-import EchoEventHubContext from '../contexts/EchoEventHubContext';
+import { EchoEventHubContext } from '../contexts/EchoEventHubContext';
 
 interface EventHubProviderProps {
     children: ReactNode;

@@ -1,6 +1,6 @@
 import { EchoEventHub, EchoEvents } from '@equinor/echo-base';
 import { useContext, useEffect } from 'react';
-import EchoEventHubContext, { EchoEventHubContextInterface } from '../contexts/EchoEventHubContext';
+import { EchoEventHubContext, EchoEventHubContextInterface } from '../contexts/EchoEventHubContext';
 
 /**
  * The hook returns an instance of EchoEventHub provided by React context API

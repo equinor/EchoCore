@@ -1,5 +1,5 @@
 import { registerCorePanels, setUserInformation } from '../actions';
-import EchoAuthProvider from '../services/authentication/echoProvider';
+import { EchoAuthProvider } from '../services/authentication/echoProvider';
 import { graphGetProfile, graphGetProfilePicture } from '../services/graph/graphUtils';
 import { setSetting } from '../settings/globalSettingsActions';
 import { persistEchoSetting } from '../settings/persistEchoSetting';

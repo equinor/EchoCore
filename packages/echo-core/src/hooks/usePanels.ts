@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { dispatch } from '../state/globalActions';
+import { dispatch } from '../actions/coreActions/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { useGlobalState } from '../state/useGlobalState';
 import { Dict, EchoPanel, GlobalState, Panel, PanelType } from '../types';
@@ -7,7 +7,6 @@ import { PanelUI } from '../types/ui';
 import { combinePanels, getCorePanels } from '../utils/panels';
 import { useActivePanelState } from './useApp';
 import { useCorePanels } from './useCoreComponents';
-
 
 interface UsePanels {
     modulePanels: Panel[];
