@@ -12,5 +12,20 @@ export interface EchoEventHub {
 export type UnsubscribeFunction = () => void;
 
 export enum EchoEvents {
-    PlantChanged = 'plantChanged'
+    PlantChanged = 'plantChanged',
+    Toaster = 'toaster'
+}
+
+export interface EventMap {
+    [custom: string]: unknown;
+}
+
+/**
+ * Listener for module app shell events.
+ */
+export interface Listener<T> {
+    /**
+     * Receives an event of type T.
+     */
+    (arg: T): void;
 }
