@@ -14,6 +14,12 @@ export type UnsubscribeFunction = () => void;
 export enum EchoEvents {
     PlantChanged = 'plantChanged',
     Toaster = 'toaster'
+
+export enum EchoEvents {
+    PlantChanged = 'plantChanged',
+    Toaster = 'toaster'
+}
+
 }
 
 export interface EventMap {
