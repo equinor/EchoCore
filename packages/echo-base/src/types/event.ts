@@ -10,14 +10,14 @@ export interface EchoEventHub {
 }
 
 export enum EchoEvents {
-    PlantChanged = 'plantChanged'
+    PlantChanged = 'plantChanged',
+    Toaster = 'toaster'
 }
 
-
 /**
- * Emitter of module app shell events. 
+ * Emitter of module app shell events.
  */
- export interface ModuleEventEmitter {
+export interface ModuleEventEmitter {
     /**
      * Attaches a new event listener.
      * @param type The type of the event to listen for.
@@ -45,10 +45,9 @@ export interface EventMap {
 /**
  * Listener for module app shell events.
  */
- export interface Listener<T> {
+export interface Listener<T> {
     /**
      * Receives an event of type T.
      */
     (arg: T): void;
 }
-
