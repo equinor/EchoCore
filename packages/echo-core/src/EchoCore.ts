@@ -8,7 +8,7 @@ import { useEchoSetup } from './hooks/useSetup';
 import { useUserPhoto } from './hooks/useUserPhoto';
 import { useUserProfile } from './hooks/useUserProfile';
 import { EchoAuthProvider } from './services/authentication/echoProvider';
-import echoClient from './services/echoClient/echoClient';
+import { echoClient } from './services/echoClient/echoClient';
 import * as moduleState from './state';
 import { useAppModuleState } from './state/useAppModuleState';
 

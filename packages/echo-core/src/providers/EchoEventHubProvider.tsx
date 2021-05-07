@@ -10,5 +10,3 @@ export const EventHubProvider: React.FC<EventHubProviderProps> = ({ children }) 
     const providerPayload = useMemo(() => ({ eventHub }), []);
     return <EchoEventHubContext.Provider value={providerPayload}>{children}</EchoEventHubContext.Provider>;
 };
-
-export default EventHubProvider;

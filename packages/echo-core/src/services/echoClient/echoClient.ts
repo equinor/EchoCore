@@ -1,7 +1,7 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
 import { AuthenticationProvider } from '../authentication/authProvider';
 import { EchoAuthProvider } from '../authentication/echoProvider';
-import BaseClient from '../baseClient/baseClient';
+import { BaseClient } from '../baseClient/baseClient';
 import { echoRequest } from './echoClientConfig';
 
 /**
@@ -13,5 +13,4 @@ export class EchoClient extends BaseClient {
     }
 }
 
-const echoClient = new EchoClient(EchoAuthProvider, echoRequest);
-export default echoClient;
+export const echoClient = new EchoClient(EchoAuthProvider, echoRequest);
