@@ -5,9 +5,6 @@
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
     "sideEffects": false,
-    "engines" : { 
-        "npm" : "17.11.2" 
-    },
     "scripts": {
         "build": "npm run build:commonjs && npm run build:esnext",
         "build:commonjs": "tsc --project tsconfig.json --outDir lib --module commonjs",
