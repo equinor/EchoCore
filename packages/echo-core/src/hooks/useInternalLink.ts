@@ -24,7 +24,6 @@ export function useInternalLink(): Link {
      */
     function Link(linkTo: string, options: Partial<AppLinkOptions> = { mainMenu: true, params: '' }): void {
         const { online, nativeMessage, eventTracker, params } = options;
-
         if (online && !navigator.onLine) {
             eventHub.emit('warning', createOfflineMessage());
             return;
@@ -35,7 +34,8 @@ export function useInternalLink(): Link {
         }
 
         eventTracker && eventTracker('InternalLink', 'Opened', { linkTo: linkTo });
-        history.push(linkTo + params);
+        const linkParams = params ? params : '';
+        history.push(linkTo + linkParams);
     }
 
     return Link;

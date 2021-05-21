@@ -7,6 +7,5 @@ export function addOrOverwrite(modules: Array<AppModule>, module: AppModule): Ap
 }
 
 export function removeModuleByKey<TKey extends string>(modules: AppModule[], key: TKey): AppModule[] {
-    console.log(modules, key);
     return [];
 }

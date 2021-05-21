@@ -13,6 +13,7 @@ import {
 import { RouteRegistration } from '../types';
 import { AppComponentProps, AppOptions, EchoAppModuleApiCreator, EchoModuleApi, PageOptions } from '../types/api';
 import { WrappedComponent } from '../types/components';
+import { getKeyFromPath } from '../utils/path';
 
 /**
  * Return a function for creating the modules api.
@@ -22,6 +23,7 @@ import { WrappedComponent } from '../types/components';
 export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
     return (meta: ModuleMetaData): EchoModuleApi => {
         const { name, shortName, path } = meta;
+        const appKey = getKeyFromPath(path);
         return {
             meta,
             eventHub,
@@ -32,16 +34,16 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                     component,
                     name,
                     path,
-                    shortName,
-                    key: path,
+                    shortName: shortName ? shortName : appKey,
+                    key: appKey,
                     icon: icon ? icon : 'category',
                     mainMenu: mainMenu === undefined ? true : mainMenu ? true : false
                 };
-                registerApp(shortName, appOptions);
-                if (options.panels) registerPanels(shortName, panels, panelsOptions);
+                registerApp(appKey, appOptions);
+                if (options.panels) registerPanels(appKey, panels, panelsOptions);
             },
             unRegisterApp: (): void => {
-                unRegisterApp(shortName);
+                unRegisterApp(appKey);
             },
             registerAppWithKey: registerApp,
             registerPanels,

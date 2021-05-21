@@ -84,6 +84,7 @@ export interface AppOptions extends AppLinkOptions {
     description?: string;
     panels?: Panel[] | Panel;
     panelsOptions?: Partial<EchoPanelOptions>;
+    params?: string;
 }
 
 export interface PageOptions {
