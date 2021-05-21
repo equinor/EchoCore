@@ -8,7 +8,7 @@ export type { BaseErrorArgs, CommonErrorArgs } from '@equinor/echo-base/lib/type
 export * from './actions';
 export * from './actions/moduleState';
 export * from './contexts';
-export * from './Env';
+export * from './EchoEnv';
 export * from './hooks';
 export * from './modules';
 export * from './observers/classObserver';

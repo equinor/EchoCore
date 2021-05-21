@@ -1,6 +1,6 @@
 import { env, isDevelopment, isProduction, setEnv } from './configuration/environment';
 
-export const Env = {
+export const EchoEnv = {
     isDevelopment: isDevelopment,
     isProduction: isProduction,
     env: env,
