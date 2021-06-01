@@ -2,7 +2,7 @@ import { CommonErrorArgs } from '../types/error';
 import { BaseError } from './BaseError';
 
 export interface NetworkErrorArgs extends CommonErrorArgs {
-    exception: Record<string, unknown>;
+    exception?: Record<string, unknown>;
     httpStatusCode: number;
     url: string;
     message?: string;
@@ -30,10 +30,9 @@ export class NetworkError extends BaseError {
     };
 }
 
+export class BadRequest extends NetworkError {}
 export class BackendError extends NetworkError {}
-
 export class ForbiddenError extends NetworkError {}
-
+export class UnauthorizedError extends ForbiddenError {}
 export class NotFoundError extends NetworkError {}
-
 export class ValidationError extends NetworkError {}
