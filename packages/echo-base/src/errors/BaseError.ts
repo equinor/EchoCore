@@ -4,6 +4,9 @@ import { BaseErrorArgs, ErrorProperties } from '../types/error';
  * Base Error class is intended to be used as a base class for every type of Error generated
  * @param message an error message in human readable format
  * @param exception a generated exception provided as a {Record<string, unknown>} type
+ * Add custom properties in exception as desired
+ * like: .exception = { aCustomProperty: 'test custom property' };
+ * access with: .getProperties()['aCustomProperty']
  * @export
  * @class BaseError
  * @extends {Error}
