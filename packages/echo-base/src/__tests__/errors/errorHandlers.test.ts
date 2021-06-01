@@ -10,7 +10,7 @@ import {
     ValidationError
 } from '../../errors/NetworkError';
 
-describe('handleClientError', () => {
+describe('NetworkError, derived types and initializeError', () => {
     function withException(): NetworkErrorArgs {
         const result: NetworkErrorArgs = {
             exception: {
@@ -135,10 +135,8 @@ describe('handleClientError', () => {
         expect(result.getProperties()['aCustomProperty']).toBe(withExceptionCustomProperty.exception?.aCustomProperty);
     });
 
-    it('null exception should return default/custom initializeError error type', () => {
-        const argsWithExceptionNull = withException();
-        argsWithExceptionNull.exception = undefined;
-        const result = initializeError(InternalError, argsWithExceptionNull);
+    it('without exception should return custom InternalError type as default/fallback', () => {
+        const result = initializeError(InternalError, withoutException());
         expect(result instanceof InternalError).toBe(true);
         expect(result.message).toEqual('InternalError 500 http://localhost:3000');
         expect(result.getProperties().dummyProperty).toBe(undefined);
