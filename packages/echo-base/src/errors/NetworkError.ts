@@ -30,7 +30,7 @@ export class NetworkError extends BaseError {
     };
 }
 
-export class BadRequest extends NetworkError {}
+export class BadRequestError extends NetworkError {}
 export class BackendError extends NetworkError {}
 export class ForbiddenError extends NetworkError {}
 export class UnauthorizedError extends ForbiddenError {}
