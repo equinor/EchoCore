@@ -125,7 +125,7 @@ export default class BaseClient {
     async fetchFromUrl(
         url: string,
         accessToken: string,
-        headerOptions: http.RequestOptions,
+        headerOptions: Record<string, unknown | http.RequestOptions>,
         method = 'GET',
         body?: BodyInit,
         signal?: AbortSignal
