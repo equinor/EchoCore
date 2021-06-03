@@ -1,5 +1,6 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
 import { ArgumentError, BaseError, initializeError, NetworkError } from '@equinor/echo-base';
+import * as http from 'http';
 import { AuthenticationProvider } from '../authentication/authProvider';
 
 export class AuthenticationError extends BaseError {}
@@ -76,7 +77,7 @@ export default class BaseClient {
     async fetchWithToken(
         endpoint: string,
         token: string,
-        headerOptions: Record<string, unknown> = {},
+        headerOptions: Record<string, unknown | http.RequestOptions> = {},
         method = 'GET',
         body?: BodyInit,
         signal?: AbortSignal
@@ -124,7 +125,7 @@ export default class BaseClient {
     async fetchFromUrl(
         url: string,
         accessToken: string,
-        headerOptions: Record<string, unknown>,
+        headerOptions: http.RequestOptions,
         method = 'GET',
         body?: BodyInit,
         signal?: AbortSignal
