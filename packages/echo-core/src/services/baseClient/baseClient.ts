@@ -57,7 +57,7 @@ export default class BaseClient {
      */
     async fetch(
         url: string,
-        headerOptions: Record<string, unknown | http.RequestOptions> = {},
+        headerOptions: http.RequestOptions = {},
         method = 'GET',
         body?: BodyInit,
         signal?: AbortSignal
@@ -77,7 +77,7 @@ export default class BaseClient {
     async fetchWithToken(
         endpoint: string,
         token: string,
-        headerOptions: Record<string, unknown | http.RequestOptions> = {},
+        headerOptions: any = {},
         method = 'GET',
         body?: BodyInit,
         signal?: AbortSignal
@@ -125,7 +125,7 @@ export default class BaseClient {
     async fetchFromUrl(
         url: string,
         accessToken: string,
-        headerOptions: Record<string, unknown | http.RequestOptions>,
+        headerOptions: Record<string, unknown>,
         method = 'GET',
         body?: BodyInit,
         signal?: AbortSignal
