@@ -1,7 +1,7 @@
 import { EnvironmentVariables } from './configuration/environment';
 import { EchoCore } from './EchoCore';
 export * from '@azure/msal-browser';
-export { EchoEvents, storage } from '@equinor/echo-base';
+export { EchoEvents, eventHub, storage } from '@equinor/echo-base';
 export type { ErrorProperties } from '@equinor/echo-base';
 export * from '@equinor/echo-base/lib/errors';
 export type { BaseErrorArgs, CommonErrorArgs } from '@equinor/echo-base/lib/types/error';

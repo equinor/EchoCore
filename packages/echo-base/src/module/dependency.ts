@@ -112,7 +112,7 @@ export function getLocalRequire(dependencies: AvailableDependencies = {}) {
     return (moduleName: string): void => requireModule(moduleName, dependencies);
 }
 /**
- * Retiring the current module.
+ * Retrieving the current module.
  *
  * @export
  * @param {ModuleMetaData} { name, fileUri: link, requireRef, integrity }
