@@ -76,7 +76,7 @@ export default class BaseClient {
     async fetchWithToken(
         endpoint: string,
         token: string,
-        headerOptions: Record<string, unknown>,
+        headerOptions: Record<string, unknown> = {},
         method = 'GET',
         body?: BodyInit,
         signal?: AbortSignal
