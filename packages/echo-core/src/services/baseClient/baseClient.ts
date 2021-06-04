@@ -57,7 +57,7 @@ export default class BaseClient {
      */
     async fetch(
         url: string,
-        headerOptions: http.RequestOptions = {},
+        headerOptions: http.RequestOptions | string = {},
         method = 'GET',
         body?: BodyInit,
         signal?: AbortSignal
