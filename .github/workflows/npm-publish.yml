@@ -38,6 +38,6 @@ jobs:
                   npm run lerna-build
 
             - name: Release packages
-              run: npx lerna publish from-package --yes --no-verify-access
+              run: npx lerna publish from-git
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
