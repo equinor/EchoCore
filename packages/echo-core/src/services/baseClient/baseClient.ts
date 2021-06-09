@@ -83,9 +83,11 @@ export default class BaseClient {
     ): Promise<Response> {
         let statusCode = 0;
         try {
+            const initialContentType = { 'Content-Type': 'application/json' };
+            const contentTypeOptions = headerOptions ? headerOptions : initialContentType;
             const headers = {
                 Authorization: 'Bearer ' + token,
-                ...headerOptions
+                ...contentTypeOptions
             };
 
             const response: Response = await fetch(endpoint, {
