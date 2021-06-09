@@ -76,7 +76,7 @@ export default class BaseClient {
     async fetchWithToken(
         endpoint: string,
         token: string,
-        headerOptions: Record<string, unknown> = {},
+        headerOptions: Record<string, unknown> = { 'Content-Type': 'application/json' },
         method = 'GET',
         body?: BodyInit,
         signal?: AbortSignal
@@ -85,8 +85,7 @@ export default class BaseClient {
         try {
             const headers = {
                 Authorization: 'Bearer ' + token,
-                ...headerOptions,
-                ...(body && { 'Content-Type': 'application/json' })
+                ...headerOptions
             };
 
             const response: Response = await fetch(endpoint, {
