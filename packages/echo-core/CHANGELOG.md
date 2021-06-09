@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.2.103 (2021-06-09)
+
+
+
+## 0.2.100 (2021-06-09)
+
+
+### Bug Fixes
+
+* version ([#42](https://github.com/equinor/EchoCore/issues/42)) ([f4f484b](https://github.com/equinor/EchoCore/commit/f4f484b5fcf4c34014d7d503caef438114adf138))
+
+
+
+
+
 ## 0.2.102 (2021-06-09)
 
 
