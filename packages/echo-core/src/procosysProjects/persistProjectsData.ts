@@ -27,7 +27,7 @@ export class PersistProcosysProjectsData {
      * @export
      * @return {*}  {ProcosysProjectsData} localStorage
      */
-    getPlantsDataFromLocalStorage(): ProcosysProjectsData {
+    getProcosysProjectsDataFromLocalStorage(): ProcosysProjectsData {
         let newProcosysProjectsData = this.defaultProcosysProjectsData;
         const data = this.echoStorage.getItem<ProcosysProjectsData>(this.key);
         if (data && typeof data !== 'string') {
