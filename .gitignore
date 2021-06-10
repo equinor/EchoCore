@@ -8,4 +8,5 @@ dist
 lib
 esm
 coverage
+echoCoreDocs
 

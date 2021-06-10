@@ -1,0 +1,27 @@
+name: Publish to GitHub Pages
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out
+              uses: actions/checkout@v2.3.1
+              with:
+                  ref: main
+
+            - name: Generate Docs
+              run: |
+                  npm install
+                  npm run lerna-build
+                  npm run build-docs
+
+            - name: Deploy Docs
+              uses: JamesIves/github-pages-deploy-action@4.1.4
+              with:
+                  branch: echoCoreDocs
+                  folder: echoCoreDocs

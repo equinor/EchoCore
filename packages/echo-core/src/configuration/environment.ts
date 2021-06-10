@@ -10,10 +10,10 @@ let environmentVariableInstance: EnvironmentVariables | undefined;
 
 //setupTests.js mocks this variable, if changed, be sure to update here as well
 export interface EnvironmentVariables {
-    GENERATE_SOURCEMAP: boolean;
-    INLINE_RUNTIME_CHUNK: boolean;
+    GENERATE_SOURCEMAP: boolean | string;
+    INLINE_RUNTIME_CHUNK: boolean | string;
     REACT_APP_DEFAULT_CACHE_LOCATION: string;
-    REACT_APP_LOGGER_ACTIVE: boolean;
+    REACT_APP_LOGGER_ACTIVE: boolean | string;
     REACT_APP_API_URL: string;
     REACT_APP_AZURE_AD_TENNANT: string;
     REACT_APP_AZURE_AD_TENNANT_ID: string;
