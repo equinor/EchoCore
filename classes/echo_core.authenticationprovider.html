@@ -1,0 +1,495 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>AuthenticationProvider | @equinor/echo-core-lerna</title>
+	<meta name="description" content="Documentation for @equinor/echo-core-lerna">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@equinor/echo-core-lerna</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">@equinor/echo-core-lerna</a>
+				</li>
+				<li>
+					<a href="../modules/echo_core.html">echo-core</a>
+				</li>
+				<li>
+					<a href="echo_core.authenticationprovider.html">AuthenticationProvider</a>
+				</li>
+			</ul>
+			<h1>Class AuthenticationProvider</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Echo Core Authentication provider class for creating providers that provide logout-, login- and getAccessToken-methods.
+							Can be extended if needed
+						Based on the @azure/msal-browser package</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>param</dt>
+						<dd><p>@azure/msal-browser Configuration object used for authentication</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>Silent request used for login, can be specified if default is not not enough:</p>
+						</dd>
+						<dt>var</dt>
+						<dd><p>defaultLoginRequest = {
+								account: user,
+								forceRefresh: false,
+								scopes: [&#39;openid&#39;, &#39;profile&#39;, &#39;User.Read&#39;, &#39;offline_access&#39;]
+							};</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">AuthenticationProvider</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="echo_core.authenticationprovider.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="echo_core.authenticationprovider.html#isauthenticated" class="tsd-kind-icon">is<wbr>Authenticated</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="echo_core.authenticationprovider.html#loginrequest" class="tsd-kind-icon">login<wbr>Request</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="echo_core.authenticationprovider.html#publicclient" class="tsd-kind-icon">public<wbr>Client</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="echo_core.authenticationprovider.html#userproperties" class="tsd-kind-icon">user<wbr>Properties</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="echo_core.authenticationprovider.html#aquiretokensilentorredirecttoauthenticate" class="tsd-kind-icon">aquire<wbr>Token<wbr>Silent<wbr>OrRedirect<wbr>ToAuthenticate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="echo_core.authenticationprovider.html#getaccesstoken" class="tsd-kind-icon">get<wbr>Access<wbr>Token</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="echo_core.authenticationprovider.html#handlelogin" class="tsd-kind-icon">handle<wbr>Login</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="echo_core.authenticationprovider.html#login" class="tsd-kind-icon">login</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="echo_core.authenticationprovider.html#logout" class="tsd-kind-icon">logout</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="echo_core.authenticationprovider.html#ssosilentorredirecttoauthenticate" class="tsd-kind-icon">sso<wbr>Silent<wbr>OrRedirect<wbr>ToAuthenticate</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Authentication<wbr>Provider<span class="tsd-signature-symbol">(</span>configuration<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Configuration</span>, loginRequest<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RedirectRequest</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="echo_core.authenticationprovider.html" class="tsd-signature-type" data-tsd-kind="Class">AuthenticationProvider</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/140255a/packages/echo-core/src/services/authentication/authProvider.ts#L28">packages/echo-core/src/services/authentication/authProvider.ts:28</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>configuration: <span class="tsd-signature-type">Configuration</span></h5>
+								</li>
+								<li>
+									<h5>loginRequest: <span class="tsd-signature-type">RedirectRequest</span><span class="tsd-signature-symbol"> = ...</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="echo_core.authenticationprovider.html" class="tsd-signature-type" data-tsd-kind="Class">AuthenticationProvider</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="isauthenticated" class="tsd-anchor"></a>
+					<h3>is<wbr>Authenticated</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Authenticated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/140255a/packages/echo-core/src/services/authentication/authProvider.ts#L28">packages/echo-core/src/services/authentication/authProvider.ts:28</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="loginrequest" class="tsd-anchor"></a>
+					<h3>login<wbr>Request</h3>
+					<div class="tsd-signature tsd-kind-icon">login<wbr>Request<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RedirectRequest</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/140255a/packages/echo-core/src/services/authentication/authProvider.ts#L27">packages/echo-core/src/services/authentication/authProvider.ts:27</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="publicclient" class="tsd-anchor"></a>
+					<h3>public<wbr>Client</h3>
+					<div class="tsd-signature tsd-kind-icon">public<wbr>Client<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PublicClientApplication</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/140255a/packages/echo-core/src/services/authentication/authProvider.ts#L26">packages/echo-core/src/services/authentication/authProvider.ts:26</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="userproperties" class="tsd-anchor"></a>
+					<h3>user<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">user<wbr>Properties<span class="tsd-signature-symbol">:</span> <a href="../interfaces/echo_core.userproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">UserProperties</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/140255a/packages/echo-core/src/services/authentication/authProvider.ts#L25">packages/echo-core/src/services/authentication/authProvider.ts:25</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="aquiretokensilentorredirecttoauthenticate" class="tsd-anchor"></a>
+					<h3>aquire<wbr>Token<wbr>Silent<wbr>OrRedirect<wbr>ToAuthenticate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">aquire<wbr>Token<wbr>Silent<wbr>OrRedirect<wbr>ToAuthenticate<span class="tsd-signature-symbol">(</span>silentRequest<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SilentRequest</span>, redirectRequest<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RedirectRequest</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AuthenticationResult</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/140255a/packages/echo-core/src/services/authentication/authProvider.ts#L90">packages/echo-core/src/services/authentication/authProvider.ts:90</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Authentication provider method that tries to acquire token silently
+										If acquiring token silently is successful, update account and set is authenticated to true
+										If acquiring token silently fails, check if it is because interaction is required and redirect sign in if it is
+									Based on the @azure/msal-browser package</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>silentRequest: <span class="tsd-signature-type">SilentRequest</span></h5>
+								</li>
+								<li>
+									<h5>redirectRequest: <span class="tsd-signature-type">RedirectRequest</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">AuthenticationResult</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>authenticationResult stating if authentication was successful or not</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getaccesstoken" class="tsd-anchor"></a>
+					<h3>get<wbr>Access<wbr>Token</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Access<wbr>Token<span class="tsd-signature-symbol">(</span>silentRequest<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SilentRequest</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/140255a/packages/echo-core/src/services/authentication/authProvider.ts#L134">packages/echo-core/src/services/authentication/authProvider.ts:134</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Authentication provider method for getting the users authentication token
+									Based on the @azure/msal-browser package</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>silentRequest: <span class="tsd-signature-type">SilentRequest</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>valid access token if request was successful, undefined if not.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="handlelogin" class="tsd-anchor"></a>
+					<h3>handle<wbr>Login</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Login<span class="tsd-signature-symbol">(</span>logRequest<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/140255a/packages/echo-core/src/services/authentication/authProvider.ts#L41">packages/echo-core/src/services/authentication/authProvider.ts:41</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Authentication provider method for handling login
+									Based on the @azure/msal-browser package</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> logRequest: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>method for providing log for login authentication outcomes</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">[]</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="login" class="tsd-anchor"></a>
+					<h3>login</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">login<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/140255a/packages/echo-core/src/services/authentication/authProvider.ts#L115">packages/echo-core/src/services/authentication/authProvider.ts:115</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Authentication provider method for forcing redirect login used when no user is already signed in
+									Based on the @azure/msal-browser package</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="logout" class="tsd-anchor"></a>
+					<h3>logout</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">logout<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/140255a/packages/echo-core/src/services/authentication/authProvider.ts#L123">packages/echo-core/src/services/authentication/authProvider.ts:123</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Authentication provider method for signing out a user
+									Based on the @azure/msal-browser package</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ssosilentorredirecttoauthenticate" class="tsd-anchor"></a>
+					<h3>sso<wbr>Silent<wbr>OrRedirect<wbr>ToAuthenticate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">sso<wbr>Silent<wbr>OrRedirect<wbr>ToAuthenticate<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/140255a/packages/echo-core/src/services/authentication/authProvider.ts#L65">packages/echo-core/src/services/authentication/authProvider.ts:65</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Authentication provider method that tries to acquire token silently
+										If acquiring token silently is successful, update account and set is authenticated to true
+										If acquiring token silently fails, check if it is because interaction is required and redirect sign in if it is
+									Based on the @azure/msal-browser package</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/echo_base.html">echo-<wbr>base</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/echo_core.html">echo-<wbr>core</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="echo_core.authenticationprovider.html" class="tsd-kind-icon">Authentication<wbr>Provider</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="echo_core.authenticationprovider.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="echo_core.authenticationprovider.html#isauthenticated" class="tsd-kind-icon">is<wbr>Authenticated</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="echo_core.authenticationprovider.html#loginrequest" class="tsd-kind-icon">login<wbr>Request</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="echo_core.authenticationprovider.html#publicclient" class="tsd-kind-icon">public<wbr>Client</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="echo_core.authenticationprovider.html#userproperties" class="tsd-kind-icon">user<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="echo_core.authenticationprovider.html#aquiretokensilentorredirecttoauthenticate" class="tsd-kind-icon">aquire<wbr>Token<wbr>Silent<wbr>OrRedirect<wbr>ToAuthenticate</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="echo_core.authenticationprovider.html#getaccesstoken" class="tsd-kind-icon">get<wbr>Access<wbr>Token</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="echo_core.authenticationprovider.html#handlelogin" class="tsd-kind-icon">handle<wbr>Login</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="echo_core.authenticationprovider.html#login" class="tsd-kind-icon">login</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="echo_core.authenticationprovider.html#logout" class="tsd-kind-icon">logout</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="echo_core.authenticationprovider.html#ssosilentorredirecttoauthenticate" class="tsd-kind-icon">sso<wbr>Silent<wbr>OrRedirect<wbr>ToAuthenticate</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
