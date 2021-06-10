@@ -30,6 +30,12 @@ export * from './observers/classObserver';
 export { PanelHandler } from './panels/corePanels';
 export { getPlants, getPlantsData, setPlantsData } from './plants/globalPlantsDataActions';
 export { usePlants, usePlantsData } from './plants/usePlants';
+export {
+    getProcosysProjects,
+    getProcosysProjectsData,
+    setProcosysProjectsData
+} from './procosysProjects/globalProjectsDataActions';
+export { useProcosysProjects, useProcosysProjectsData } from './procosysProjects/useProcosysProjects';
 export { default as EchoEventHubProvider } from './providers/EchoEventHubProvider';
 export { AuthenticationProvider } from './services/authentication/authProvider';
 export { default as BaseClient } from './services/baseClient/baseClient';
