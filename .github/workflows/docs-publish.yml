@@ -17,6 +17,7 @@ jobs:
             - name: Generate Docs
               run: |
                   npm install
+                  npm run lerna-install
                   npm run build-docs
 
             - name: Deploy Docs
