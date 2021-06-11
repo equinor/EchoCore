@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AppMetaData | @equinor/echo-core-lerna</title>
+	<title>ProcosysProjectsData | @equinor/echo-core-lerna</title>
 	<meta name="description" content="Documentation for @equinor/echo-core-lerna">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,13 +55,13 @@
 					<a href="../modules.html">@equinor/echo-core-lerna</a>
 				</li>
 				<li>
-					<a href="../modules/echo_base.html">echo-base</a>
+					<a href="../modules/echo_core.html">echo-core</a>
 				</li>
 				<li>
-					<a href="echo_base.appmetadata.html">AppMetaData</a>
+					<a href="echo_core.procosysprojectsdata.html">ProcosysProjectsData</a>
 				</li>
 			</ul>
-			<h1>Interface AppMetaData</h1>
+			<h1>Interface ProcosysProjectsData</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AppMetaData</span>
+						<span class="target">ProcosysProjectsData</span>
 					</li>
 				</ul>
 			</section>
@@ -83,9 +83,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="echo_base.appmetadata.html#homescreen" class="tsd-kind-icon">home<wbr>Screen</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="echo_base.appmetadata.html#icon" class="tsd-kind-icon">icon</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="echo_base.appmetadata.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="echo_core.procosysprojectsdata.html#procosysprojects" class="tsd-kind-icon">procosys<wbr>Projects</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="echo_core.procosysprojectsdata.html#procosysprojectshaserror" class="tsd-kind-icon">procosys<wbr>Projects<wbr>Has<wbr>Error</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,32 +93,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="homescreen" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> home<wbr>Screen</h3>
-					<div class="tsd-signature tsd-kind-icon">home<wbr>Screen<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="procosysprojects" class="tsd-anchor"></a>
+					<h3>procosys<wbr>Projects</h3>
+					<div class="tsd-signature tsd-kind-icon">procosys<wbr>Projects<span class="tsd-signature-symbol">:</span> <a href="echo_core.procosysproject.html" class="tsd-signature-type" data-tsd-kind="Interface">ProcosysProject</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/90eab7f/packages/echo-base/src/types/module.ts#L53">packages/echo-base/src/types/module.ts:53</a></li>
+							<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/90eab7f/packages/echo-core/src/types/procosysProjects.ts#L2">packages/echo-core/src/types/procosysProjects.ts:2</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="icon" class="tsd-anchor"></a>
-					<h3>icon</h3>
-					<div class="tsd-signature tsd-kind-icon">icon<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="procosysprojectshaserror" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> procosys<wbr>Projects<wbr>Has<wbr>Error</h3>
+					<div class="tsd-signature tsd-kind-icon">procosys<wbr>Projects<wbr>Has<wbr>Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/90eab7f/packages/echo-base/src/types/module.ts#L52">packages/echo-base/src/types/module.ts:52</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/90eab7f/packages/echo-base/src/types/module.ts#L51">packages/echo-base/src/types/module.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/equinor/EchoCore/blob/90eab7f/packages/echo-core/src/types/procosysProjects.ts#L3">packages/echo-core/src/types/procosysProjects.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -131,10 +120,10 @@
 					<li class=" ">
 						<a href="../modules.html">Modules</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/echo_base.html">echo-<wbr>base</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/echo_core.html">echo-<wbr>core</a>
 					</li>
 				</ul>
@@ -144,16 +133,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="echo_base.appmetadata.html" class="tsd-kind-icon">App<wbr>Meta<wbr>Data</a>
+						<a href="echo_core.procosysprojectsdata.html" class="tsd-kind-icon">Procosys<wbr>Projects<wbr>Data</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="echo_base.appmetadata.html#homescreen" class="tsd-kind-icon">home<wbr>Screen</a>
+								<a href="echo_core.procosysprojectsdata.html#procosysprojects" class="tsd-kind-icon">procosys<wbr>Projects</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="echo_base.appmetadata.html#icon" class="tsd-kind-icon">icon</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="echo_base.appmetadata.html#name" class="tsd-kind-icon">name</a>
+								<a href="echo_core.procosysprojectsdata.html#procosysprojectshaserror" class="tsd-kind-icon">procosys<wbr>Projects<wbr>Has<wbr>Error</a>
 							</li>
 						</ul>
 					</li>
