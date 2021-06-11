@@ -1,4 +1,7 @@
+import { ProcosysProject } from './procosysProjects';
+
 export interface Settings {
+    procosysProjectSettings: ProcosysProject;
     showTextHighlighting: boolean;
     plantSettings: PlantSettings;
 }

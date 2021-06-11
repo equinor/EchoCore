@@ -4,6 +4,7 @@ import * as plant from './plantSettingsActions';
 export * from './echoModuleSettings';
 export * from './moduleSettings';
 export * from './persistEchoSetting';
+export * from './procosysProjectSettingsActions';
 export * from './settingsStore';
 export * from './useSetting';
 
