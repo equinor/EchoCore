@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.1.2 (2021-06-11)
+
+
+
+## 0.2.105 (2021-06-11)
+
+**Note:** Version bump only for package @equinor/echo-setup
+
+
+
+
+
 ## 0.1.1 (2021-06-11)
 
 
