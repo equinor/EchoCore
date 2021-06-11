@@ -1,5 +1,5 @@
 {
-    "name": "@equinor/echo-core-lerna",
+    "name": "@equinor/echo-core-tools",
     "version": "0.0.0",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "scripts": {

@@ -30,6 +30,8 @@ jobs:
                   npx lerna version --yes --conventional-commits --create-release github
               env:
                   GH_TOKEN: ${{ github.token }}
+            - name: npm 7
+              run: npm i -g npm@7
 
             - name: npm install and build
               run: |
