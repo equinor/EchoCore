@@ -1,7 +1,7 @@
 {
     "name": "@equinor/echo-setup",
     "private": true,
-    "version": "0.0.5",
+    "version": "0.1.0",
     "description": "Setup functions for echo web",
     "main": "index.js",
     "scripts": {

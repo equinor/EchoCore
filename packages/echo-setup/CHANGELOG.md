@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0 (2021-06-11)
+
+
+
+## 0.2.105 (2021-06-11)
+
+
+### Features
+
+* **#43369:** Add procosys project functionality ([#43](https://github.com/equinor/EchoCore/issues/43)) ([90eab7f](https://github.com/equinor/EchoCore/commit/90eab7f549a05ebf27a4ffdf54ff8f16abedfac9)), closes [#43369](https://github.com/equinor/EchoCore/issues/43369)
+
+
+
+
+
 ## 0.0.5 (2021-06-09)
 
 
