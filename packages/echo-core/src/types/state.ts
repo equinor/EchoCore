@@ -6,6 +6,7 @@ import { LegendOptions } from './legend';
 import { AppModule, ModuleAppError } from './modules';
 import { ActivePanel, Panel } from './panel';
 import { PlantsData } from './plants';
+import { ProcosysProjectsData } from './procosysProjects';
 import { RegistryState } from './registry';
 import { Settings } from './settings';
 import { PanelUI, UI } from './ui';
@@ -21,6 +22,7 @@ export interface GlobalState {
     legendOptions: LegendOptions;
     settings: Settings;
     plantsData: PlantsData;
+    procosysProjectsData: ProcosysProjectsData;
     moduleState: EchoCustomState<unknown>;
 }
 export interface GlobalStateContext {

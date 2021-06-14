@@ -1,0 +1,4 @@
+{
+    "entryPoints": ["./packages/echo-base/index.ts", "./packages/echo-core/index.ts"],
+    "out": "echoCoreDocs"
+  }

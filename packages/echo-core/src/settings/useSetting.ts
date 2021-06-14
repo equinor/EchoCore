@@ -1,4 +1,5 @@
 import { useGlobalState } from '../state/useGlobalState';
+import { ProcosysProject } from '../types/procosysProjects';
 import { PlantSettings, Settings } from '../types/settings';
 
 /**
@@ -26,6 +27,7 @@ export function usePlantSettings(): PlantSettings {
         hasTr2000
     };
 }
+
 /**
  * Echo Core hook function for getting the plant stid instCode.
  * @export Hook form Echo Core
@@ -54,4 +56,23 @@ export function useSapPlantIdInstCode(): string {
 export function useProCoSysPlantId(): string {
     const { proCoSysPlantId } = usePlantSettings();
     return proCoSysPlantId;
+}
+
+/**
+ * Echo Core hook function for getting the procosys project settings from echo core state.
+ * @export Hook fom Echo Core
+ * @return {*}  {useProcosysProjectSettings}
+ */
+export function useProcosysProjectSettings(): ProcosysProject {
+    return useSettings().procosysProjectSettings;
+}
+
+/**
+ * Echo Core hook function for getting the selected procosys project code.
+ * @export Hook form Echo Core
+ * @return {*}  {string}
+ */
+export function useProcosysProjectCode(): string {
+    const { projectCode } = useProcosysProjectSettings();
+    return projectCode;
 }

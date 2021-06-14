@@ -13,6 +13,7 @@ export * from './hooks';
 export * from './modules';
 export * from './observers/classObserver';
 export * from './plants/usePlants';
+export * from './procosysProjects';
 export * from './providers';
 export * from './services/authentication/authProvider';
 export * from './services/baseClient/baseClient';

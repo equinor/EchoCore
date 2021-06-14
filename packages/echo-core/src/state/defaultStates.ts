@@ -1,5 +1,6 @@
 import { GlobalState, LegendOptions } from '../types';
 import { PlantsData } from '../types/plants';
+import { ProcosysProject, ProcosysProjectsData } from '../types/procosysProjects';
 import { PlantSettings, Settings } from '../types/settings';
 
 export const legendOptions: LegendOptions = {
@@ -15,13 +16,29 @@ const plantSettings: PlantSettings = {
     plantName: ''
 };
 
+const procosysProjectSettings: ProcosysProject = {
+    projectCode: '',
+    stidDeliveryCode: 0,
+    description: '',
+    isRevProject: '',
+    filter: {
+        value: '',
+        text: ''
+    }
+};
+
 export const settings: Settings = {
     showTextHighlighting: true,
+    procosysProjectSettings,
     plantSettings
 };
 
 export const plantsData: PlantsData = {
     plants: []
+};
+
+export const procosysProjectsData: ProcosysProjectsData = {
+    procosysProjects: []
 };
 
 export const components = {
@@ -67,5 +84,6 @@ export const defaultGlobalState: GlobalState = {
     userPhotoUrl: undefined,
     settings,
     plantsData,
+    procosysProjectsData,
     legendOptions
 };
