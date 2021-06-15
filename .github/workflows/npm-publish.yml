@@ -34,10 +34,8 @@ jobs:
             - name: npm install and build
               run: |
                   npm install
-                  npm run lerna-publish-install
+                  npm run lerna-install
                   npm run lerna-build
-              env:
-                  CI: TRUE
 
             - name: Release packages
               run: npx lerna publish from-git

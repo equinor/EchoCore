@@ -17,10 +17,8 @@ jobs:
             - name: Generate Docs
               run: |
                   npm install
-                  npm run lerna-publish-install
+                  npm run lerna-install
                   npm run build-docs
-              env:
-                  CI: TRUE
 
             - name: Deploy Docs
               uses: JamesIves/github-pages-deploy-action@4.1.4
