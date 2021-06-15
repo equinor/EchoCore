@@ -9,12 +9,14 @@ declare global {
 
 /**
  * Returns the module dependency if present in the AvailableDependencies
+ * This function wil be added to window object so each echo module
+ * can use it to get its dependencies
  *
  * @param {string} name
  * @param {AvailableDependencies} dependencies
  * @return {*}  {*}
  */
-function requireModule(name: string, dependencies: AvailableDependencies): any {
+function getDependency(name: string, dependencies: AvailableDependencies): unknown {
     const dependency = dependencies[name];
     if (!dependency) {
         const error = new Error(`Cannot find module '${name}'`);
@@ -32,7 +34,7 @@ function requireModule(name: string, dependencies: AvailableDependencies): any {
  * @param {ModuleData} [module]
  * @return {*}  {ModuleData}
  */
-function checkModule(name: string, module?: ModuleData): ModuleData {
+function verifyModuleHasSetup(name: string, module?: ModuleData): ModuleData {
     if (!module) {
         console.error('Invalid module found.', name);
     } else if (typeof module.setup !== 'function') {
@@ -59,7 +61,7 @@ function checkModule(name: string, module?: ModuleData): ModuleData {
  * @param {string} [integrity]
  * @return {*}  {(Promise<ModuleData | undefined>)}
  */
-export async function includeScript(
+export async function appendScriptTagToDom(
     name: string,
     fileUri: string,
     depName: string,
@@ -82,7 +84,7 @@ export async function includeScript(
 
         window[depName] = getLocalRequire(dependencies);
 
-        script.onload = (): void => resolve(checkAppAsync(name, script.module));
+        script.onload = (): void => resolve(verifyAppWithModule(name, script.module));
         script.onerror = (): void => reject('could not load');
 
         document.head.appendChild(script);
@@ -97,9 +99,12 @@ export async function includeScript(
  * @param {(ModuleData | Promise<ModuleData>)} [module]
  * @return {*}  {Promise<ModuleData>}
  */
-export async function checkAppAsync(name: string, module?: ModuleData | Promise<ModuleData>): Promise<ModuleData> {
+export async function verifyAppWithModule(
+    name: string,
+    module?: ModuleData | Promise<ModuleData>
+): Promise<ModuleData> {
     const resolvedModule = await Promise.resolve(module);
-    return checkModule(name, resolvedModule);
+    return verifyModuleHasSetup(name, resolvedModule);
 }
 /**
  * Function added to window object for retrieving AvailableDependencies
@@ -109,10 +114,10 @@ export async function checkAppAsync(name: string, module?: ModuleData | Promise<
  * @return {*}
  */
 export function getLocalRequire(dependencies: AvailableDependencies = {}) {
-    return (moduleName: string): void => requireModule(moduleName, dependencies);
+    return (moduleName: string): unknown => getDependency(moduleName, dependencies);
 }
 /**
- * Retrieving the current module.
+ * Will include the the current module. And provide teh module all awaitable dependencies
  *
  * @export
  * @param {ModuleMetaData} { name, fileUri: link, requireRef, integrity }
@@ -125,5 +130,5 @@ export async function includeDependency(
     dependencies?: AvailableDependencies,
     crossOrigin?: string
 ): Promise<ModuleData> {
-    return await includeScript(name, link, requireRef, dependencies, crossOrigin, integrity);
+    return await appendScriptTagToDom(name, link, requireRef, dependencies, crossOrigin, integrity);
 }

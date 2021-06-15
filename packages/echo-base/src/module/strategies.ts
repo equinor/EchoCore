@@ -3,10 +3,16 @@ import { createModules } from './aggregate';
 import { ModulesEvaluationError } from './errors';
 import { loadModules } from './load';
 import { createModuleLoader } from './loader';
-import { filterExcludePrivateModulesInProduction, isProduction } from './utils';
+import { filterExcludePrivateModulesInProduction } from './utils';
+
+function isProduction(): boolean {
+    return process.env.NODE_ENV === 'production';
+}
 
 /**
- *Evaluates modules and filters and compeers oldModules to newModules,
+ * Evaluates modules and filters and compeers oldModules to newModules,
+ * By setting the private flag in the echoModuleManifest to true the module will be removed for the production environment.
+ * This is meant as feature flag when a module is under development.
  *
  * @param {EchoModuleApiCreator} createApi
  * @param {EchoModule[]} newModules

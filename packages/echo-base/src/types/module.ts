@@ -40,6 +40,5 @@ export type AppMetaFetch = () => Promise<ModuleMetaData[]>;
  * The record containing all available dependencies.
  */
 export interface AvailableDependencies {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [name: string]: any;
+    [name: string]: unknown;
 }

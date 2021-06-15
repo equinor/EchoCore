@@ -53,10 +53,6 @@ export function createEmptyApp(meta: ModuleMetaData): EchoModule {
     };
 }
 
-export function isProduction(): boolean {
-    return process.env.NODE_ENV === 'production';
-}
-
 export function filterExcludePrivateModulesInProduction(
     modules: EchoModule[],
     isProduction?: () => boolean
