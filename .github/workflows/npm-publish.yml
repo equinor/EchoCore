@@ -25,11 +25,16 @@ jobs:
                   git config --global user.email "${{ github.actor }}@users.noreply.github.com"
                   git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
+            - name: npm 7
+              run: npm i -g npm@7
+
             - name: npm install and build
               run: |
-                  npm install
-                  npm run lerna-install
+                  npm ci
+                  npm run lerna-publish-install
                   npm run lerna-build
+              env:
+                  CI: TRUE
 
             - name: Bump versions
               run: |
