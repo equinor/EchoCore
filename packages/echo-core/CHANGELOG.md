@@ -27,6 +27,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## 0.2.105 (2021-06-15)
+
+
+
+## 0.2.105 (2021-06-15)
+
+**Note:** Version bump only for package @equinor/echo-core
+
+
+
+
+
 ## 0.2.105 (2021-06-11)
 
 
