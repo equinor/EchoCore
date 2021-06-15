@@ -24,18 +24,19 @@ jobs:
                   git config --global user.name "${{ github.actor }}"
                   git config --global user.email "${{ github.actor }}@users.noreply.github.com"
                   git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-            - name: Bump versions
-              run: |
-                  git checkout main
-                  npx lerna version --yes --conventional-commits --create-release github
-              env:
-                  GH_TOKEN: ${{ github.token }}
 
             - name: npm install and build
               run: |
                   npm install
                   npm run lerna-install
                   npm run lerna-build
+
+            - name: Bump versions
+              run: |
+                  git checkout main
+                  npx lerna version --yes --conventional-commits --create-release github
+              env:
+                  GH_TOKEN: ${{ github.token }}
 
             - name: Release packages
               run: npx lerna publish from-git
