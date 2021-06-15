@@ -1,10 +1,10 @@
+import { dispatch } from '../../actions/coreActions/globalActions';
 import {
     getProcosysProjectCode,
     getSelectedProcosysProject,
     setSelectedProcosysProject
 } from '../../settings/procosysProjectSettingsActions';
 import { defaultGlobalState } from '../../state/defaultStates';
-import { dispatch } from '../../state/globalActions';
 import { getCoreContext } from '../../state/globalState';
 import { ProcosysProject } from '../../types/procosysProjects';
 
