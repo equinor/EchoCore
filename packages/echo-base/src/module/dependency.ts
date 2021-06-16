@@ -117,7 +117,7 @@ export function getLocalRequire(dependencies: AvailableDependencies = {}) {
     return (moduleName: string): unknown => getDependency(moduleName, dependencies);
 }
 /**
- * Will include the the current module. And provide teh module all awaitable dependencies
+ * Will include the current module. And provide the module all awaitable dependencies
  *
  * @export
  * @param {ModuleMetaData} { name, fileUri: link, requireRef, integrity }
@@ -125,7 +125,7 @@ export function getLocalRequire(dependencies: AvailableDependencies = {}) {
  * @param {string} [crossOrigin]
  * @return {*}  {Promise<ModuleData>}
  */
-export async function includeDependency(
+export async function includeModuleWithDependencies(
     { name, fileUri: link, requireRef, integrity }: ModuleMetaData,
     dependencies?: AvailableDependencies,
     crossOrigin?: string
