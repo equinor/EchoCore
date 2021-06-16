@@ -9,7 +9,7 @@ import {
 } from '../types';
 import { createEmptyModule } from '../utils/emptyApp';
 import { getDependencyResolver } from '../utils/getDependencyResolver';
-import { includeDependency } from './dependency';
+import { includeModuleWithDependencies } from './dependency';
 
 const inBrowser = typeof document !== 'undefined';
 
@@ -43,7 +43,9 @@ export function createModuleLoader(
 export function getModuleLoader(getDependencies: AppDependencyGetter, config: DefaultLoaderConfig = {}): ModuleLoader {
     return (meta: ModuleMetaData): Promise<EchoModule> => {
         if (inBrowser && 'requireRef' in meta && meta.requireRef) {
-            return loadModule(meta, getDependencies, (deps) => includeDependency(meta, deps, config.crossOrigin));
+            return loadModule(meta, getDependencies, (deps) =>
+                includeModuleWithDependencies(meta, deps, config.crossOrigin)
+            );
         }
 
         console.warn('Empty Module found!', meta.name);
