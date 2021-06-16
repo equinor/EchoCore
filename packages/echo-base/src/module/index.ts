@@ -2,7 +2,6 @@ export * from './aggregate';
 export * from './create';
 export * from './dependency';
 export * from './errors';
-export * from './fetch';
 export * from './load';
 export * from './loader';
 export * from './persist';
