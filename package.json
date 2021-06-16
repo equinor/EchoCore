@@ -7,6 +7,7 @@
         "core-start": "lerna run start --stream --scope @equinor/echo-core",
         "bump-version": "lerna version --conventional-commits --yes",
         "lerna-install": "lerna exec npm install",
+        "lerna-publish-install": "lerna exec npm ci",
         "bootstrap": "lerna bootstrap",
         "lerna-build": "lerna run build",
         "lerna-link": "lerna exec npm link --scope @equinor/echo-core",
@@ -47,6 +48,5 @@
         "tslib": "^2.2.0",
         "typedoc": "^0.20.35",
         "typescript": "^4.1.2"
-        
     }
 }

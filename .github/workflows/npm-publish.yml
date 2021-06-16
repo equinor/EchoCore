@@ -8,6 +8,9 @@ jobs:
     release-pkg:
         name: Create release
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [15.x]
         steps:
             - uses: actions/checkout@v2
               with:
@@ -26,18 +29,21 @@ jobs:
                   git config --global user.name "${{ github.actor }}"
                   git config --global user.email "${{ github.actor }}@users.noreply.github.com"
                   git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+
+            - name: npm install and build
+              run: |
+                  npm ci
+                  npm run lerna-publish-install
+                  npm run lerna-build
+              env:
+                  CI: TRUE
+
             - name: Bump versions
               run: |
                   git checkout main
                   npx lerna version --yes --conventional-commits --create-release github
               env:
                   GH_TOKEN: ${{ github.token }}
-
-            - name: npm install and build
-              run: |
-                  npm install
-                  npm run lerna-install
-                  npm run lerna-build
 
             - name: Release packages
               run: npx lerna publish from-git
