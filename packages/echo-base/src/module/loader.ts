@@ -7,9 +7,9 @@ import {
     ModuleLoader,
     ModuleMetaData
 } from '../types';
-import { createEmptyModule } from '../utils/emptyApp';
 import { getDependencyResolver } from '../utils/getDependencyResolver';
 import { includeModuleWithDependencies } from './dependency';
+import { createEmptyModule } from './utils';
 
 const inBrowser = typeof document !== 'undefined';
 
