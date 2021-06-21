@@ -11,6 +11,7 @@ import { EchoAuthProvider } from './services/authentication/echoProvider';
 import { echoClient } from './services/echoClient/echoClient';
 import * as moduleState from './state';
 import { useAppModuleState } from './state/useAppModuleState';
+import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './types';
 
 export const EchoCore = {
     useEchoSetup: useEchoSetup,
@@ -26,5 +27,9 @@ export const EchoCore = {
     // Exposing all core Hooks
     hooks,
     moduleState: { ...moduleState, ...moduleActions },
-    error
+    error,
+    keys: {
+        ECHO_CORE_MAIN: ECHO_CORE_MAIN,
+        ECHO_CORE_SEARCH: ECHO_CORE_SEARCH
+    }
 };
