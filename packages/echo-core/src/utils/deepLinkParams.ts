@@ -25,6 +25,5 @@ export const setDeepLinkParams = (param: string, value: string): void => {
     } else {
         queryParams.delete(param);
     }
-    console.log(`${window.location.pathname}?${queryParams}`);
     window.history.replaceState({}, '', `${window.location.pathname}?${queryParams}`);
 };
