@@ -38,6 +38,7 @@ export * from './settings';
 export { useAppModuleState } from './state/useAppModuleState';
 export * from './state/useGlobalState';
 export * from './types';
+export * from './utils/deepLinkParams';
 export { makeUniqBy } from './utils/uniq';
 
 export const EchoEnv = new Env();
