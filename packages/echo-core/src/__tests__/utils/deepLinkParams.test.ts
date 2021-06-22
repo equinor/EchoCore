@@ -1,4 +1,3 @@
-import 'babel-plugin-polyfill-corejs2';
 import { getLinkParams, setDeepLinkParams } from '../../utils/deepLinkParams';
 const { location } = window;
 
