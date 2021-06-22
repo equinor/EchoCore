@@ -8,6 +8,8 @@ module.exports = {
         }
     },
     globals: {
-        crypto: require('crypto')
+        crypto: require('crypto'),
+        _babelPluginPolyfillCorejs2: require('babel-plugin-polyfill-corejs3'),
+        _babelPluginPolyfillRegenerator: require('babel-plugin-polyfill-regenerator')
     }
 };
