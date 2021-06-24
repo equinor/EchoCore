@@ -10,10 +10,10 @@ let environmentVariableInstance: EnvironmentVariables | undefined;
 
 //setupTests.js mocks this variable, if changed, be sure to update here as well
 export interface EnvironmentVariables {
-    GENERATE_SOURCEMAP: boolean | string;
-    INLINE_RUNTIME_CHUNK: boolean | string;
+    GENERATE_SOURCEMAP: boolean;
+    INLINE_RUNTIME_CHUNK: boolean;
     REACT_APP_DEFAULT_CACHE_LOCATION: string;
-    REACT_APP_LOGGER_ACTIVE: boolean | string;
+    REACT_APP_LOGGER_ACTIVE: boolean;
     REACT_APP_API_URL: string;
     REACT_APP_AZURE_AD_TENNANT: string;
     REACT_APP_AZURE_AD_TENNANT_ID: string;
@@ -24,10 +24,10 @@ export interface EnvironmentVariables {
 }
 
 const echoEnv = {
-    GENERATE_SOURCEMAP: process.env.GENERATE_SOURCEMAP,
-    INLINE_RUNTIME_CHUNK: process.env.INLINE_RUNTIME_CHUNK,
+    GENERATE_SOURCEMAP: process.env.GENERATE_SOURCEMAP === 'true',
+    INLINE_RUNTIME_CHUNK: process.env.INLINE_RUNTIME_CHUNK === 'true',
     REACT_APP_DEFAULT_CACHE_LOCATION: process.env.REACT_APP_DEFAULT_CACHE_LOCATION,
-    REACT_APP_LOGGER_ACTIVE: process.env.REACT_APP_LOGGER_ACTIVE,
+    REACT_APP_LOGGER_ACTIVE: process.env.REACT_APP_LOGGER_ACTIVE === 'true',
     REACT_APP_API_URL: process.env.REACT_APP_API_URL,
     REACT_APP_AZURE_AD_TENNANT: process.env.REACT_APP_AZURE_AD_TENNANT,
     REACT_APP_AZURE_AD_TENNANT_ID: process.env.REACT_APP_AZURE_AD_TENNANT_ID,
