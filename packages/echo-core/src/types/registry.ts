@@ -29,18 +29,13 @@ export interface AppLinkOptions {
     params?: string;
     eventTracker?: EventTracker;
     isVisible?: () => boolean;
-    nativeMessage?: NativeMessage;
-    online?: boolean;
+    onClick?: () => void;
+    requiresOnline?: boolean;
 }
 
 type propertyTypes = { [key: string]: string | number | boolean | string[] };
 
 export type EventTracker = (objectName: string, actionName: string, properties: propertyTypes) => void;
-
-export interface NativeMessage {
-    messageType: string;
-    messageValue: boolean;
-}
 
 export interface RouteRegistration extends BaseRouteRegistration {
     component: WrappedComponent<AppComponentProps>;

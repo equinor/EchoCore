@@ -1,7 +1,6 @@
 import { useHistory } from 'react-router';
 import { createOfflineMessage } from '../message/message';
 import { AppLinkOptions } from '../types/registry';
-import { SendMessageToReactNative } from '../utils/sendMessageToReactNative';
 import { useEchoEventHub } from './useEchoEventHub';
 
 type Link = (linkTo: string, options?: AppLinkOptions) => void;
@@ -23,16 +22,13 @@ export function useInternalLink(): Link {
      * @param {AppLinkOptions} [options={ appMenu: true }] default link on app menu set to true;
      */
     function Link(linkTo: string, options: Partial<AppLinkOptions> = { mainMenu: true, params: '' }): void {
-        const { online, nativeMessage, eventTracker, params } = options;
-        if (online && !navigator.onLine) {
+        const { requiresOnline, onClick, eventTracker, params } = options;
+        if (requiresOnline && !navigator.onLine) {
             eventHub.emit('warning', createOfflineMessage());
             return;
         }
 
-        if (nativeMessage) {
-            SendMessageToReactNative(nativeMessage);
-        }
-
+        onClick && onClick();
         eventTracker && eventTracker('InternalLink', 'Opened', { linkTo: linkTo });
         const linkParams = params ? params : '';
         history.push(linkTo + linkParams);
