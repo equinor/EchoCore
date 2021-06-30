@@ -12,3 +12,5 @@ export function useCleanup(callback: () => void): void {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 }
+
+export default useCleanup;

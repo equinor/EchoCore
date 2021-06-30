@@ -6,3 +6,5 @@ export function useLegendOptions(): LegendOptions {
     const { legendOptions } = useAtom(CoreContext.state);
     return { ...legendOptions };
 }
+
+export default useLegendOptions;

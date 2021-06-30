@@ -14,3 +14,5 @@ export function useInitial(callback: (() => void) | (() => Promise<void>)): void
         }
     }, [callback, mounted]);
 }
+
+export default useInitial;

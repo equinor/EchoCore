@@ -11,10 +11,11 @@
         "module": "esnext",
         "moduleResolution": "node",
         "resolveJsonModule": true,
-        "isolatedModules": true,
+        "isolatedModules": false,
         "noImplicitAny": false ,
         "noEmit": true,
-        "declaration": true,
+        "declaration":true,
+        "sourceMap": true,
         "jsx": "react"
     },
    "include": [

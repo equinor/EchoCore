@@ -1,4 +1,4 @@
-import { readState } from '../state/globalActions';
+import { readState } from '../actions/coreActions/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { PlantSettings } from '../types/settings';
 import { setSetting } from './globalSettingsActions';

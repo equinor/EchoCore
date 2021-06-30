@@ -1,4 +1,4 @@
-import { ActivePanel, GlobalState, LegendOptions } from '../types';
+import { GlobalState, LegendOptions } from '../types';
 import { PlantsData } from '../types/plants';
 import { ProcosysProject, ProcosysProjectsData } from '../types/procosysProjects';
 import { PlantSettings, Settings } from '../types/settings';
@@ -57,17 +57,28 @@ export const defaultGlobalState: GlobalState = {
     app: {
         error: undefined,
         loading: typeof window !== 'undefined',
-        layout: 'desktop'
+        layout: 'desktop',
+        activePanelState: {
+            activePanel: '',
+            activeModulePanels: '',
+            isPanelActive: false
+        },
+        activeState: {
+            activeTagNo: '',
+            activeDocumentNo: '',
+            activeFileId: ''
+        }
+    },
+    coreComponents: {
+        panels: {}
     },
     modules: [],
-    panels: [],
     ui: {},
     registry: {
         panels: {},
         routes: {},
         appLinks: {}
     },
-    activePanel: ActivePanel.None,
     moduleState: {},
     userProfile: undefined,
     userPhotoUrl: undefined,

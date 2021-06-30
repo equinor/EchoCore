@@ -9,7 +9,7 @@ export class AuthenticationError extends BaseError {}
  * @param authProvider used for fetching token to be used in fetch
  * @getSilentRequest returns the silent request used to perform the action of fetching the authentication provider token
  */
-export default class BaseClient {
+export class BaseClient {
     private authProvider: AuthenticationProvider;
     private getSilentRequest: (account: AccountInfo) => SilentRequest;
 

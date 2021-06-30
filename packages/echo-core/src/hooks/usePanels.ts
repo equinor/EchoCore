@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ACTIVE_PANEL_KEY, PanelHandler, PANEL_KEY } from '../panels/corePanels';
-import { dispatch, readState } from '../state/globalActions';
+import { dispatch } from '../actions/coreActions/globalActions';
 import { getCoreContext } from '../state/globalState';
-import { GlobalState, Panel, PanelType } from '../types';
+import { useGlobalState } from '../state/useGlobalState';
+import { Dict, EchoPanel, GlobalState, Panel, PanelType } from '../types';
 import { PanelUI } from '../types/ui';
-import { usePanelUI } from './usePanelUI';
+import { combinePanels, getCorePanels } from '../utils/panels';
+import { useActivePanelState } from './useApp';
+import { useCorePanels } from './useCoreComponents';
 
 interface UsePanels {
     modulePanels: Panel[];
@@ -15,30 +17,53 @@ interface UsePanels {
 }
 
 /**
+ *
+ *
+ * @export
+ * @return {*}  {Dict<Panel[]>}
+ */
+export function useGlobalPanels(): Dict<EchoPanel> {
+    return useGlobalState((state: GlobalState) => state.registry.panels);
+}
+
+/**
  * Echo Core hook for for handling panels defaults to left panel.
  * @param panelType can be set to `left`, `right` og `all`.
  * @returns {UsePanels} Returns and object `modulePanel`
  * , `setActivePanel`, `activePanel`, `isPanelActive` and `panelUI`.
  */
-
 export function usePanels(panelType = String(PanelType.left)): UsePanels {
+    const panelsDict = useGlobalPanels();
+    const corePanels = useCorePanels();
     const [modulePanels, setModulePanels] = useState<Panel[]>([]);
-    const [activePanel, setPanel] = useState<string>(readState(getCoreContext(), (state): string => state.activePanel));
-    const panelUI = usePanelUI();
+    const { activePanel, activeModulePanels, ui } = useActivePanelState();
+    const [panelUI, setPanelUI] = useState<PanelUI>({});
     const [isPanelActive, setIsPanelActive] = useState<boolean>(false);
 
+    const setActivePanel = useCallback(
+        (key: string): void => {
+            const newActivePanel =
+                activePanel !== key
+                    ? { activePanel: key, isPanelActive: true }
+                    : { activePanel: key, isPanelActive: false };
+            dispatch(getCoreContext(), (s: GlobalState) => ({
+                ...s,
+                app: {
+                    ...s.app,
+                    activePanelState: { ...s.app.activePanelState, ...newActivePanel }
+                }
+            }));
+        },
+        [activePanel]
+    );
+
     useEffect(() => {
-        function handleUpdatePanels(panels: Panel[]): void {
-            const data = panelType === PanelType.all ? panels : panels.filter((panel) => panel.panelType === panelType);
-            setModulePanels(data);
+        if (ui) {
+            setPanelUI({ ...ui });
+        } else {
+            setPanelUI({});
         }
-
-        const panelId = PanelHandler.addSubscriber(handleUpdatePanels, PANEL_KEY);
-
-        return (): void => {
-            PanelHandler.removeSubscriber(panelId);
-        };
-    }, [panelType]);
+    }, [ui]);
 
     useEffect(() => {
         if (!!modulePanels.find((panel: Panel) => panel.key === activePanel)) setIsPanelActive(true);
@@ -46,24 +71,29 @@ export function usePanels(panelType = String(PanelType.left)): UsePanels {
     }, [activePanel, modulePanels]);
 
     useEffect(() => {
-        function handleActivePanel(key: string): void {
-            setPanel(key);
+        const activeAppPanels = panelsDict[activeModulePanels];
+        if (!activeAppPanels) {
+            const currentCorePanels = getCorePanels(true, corePanels);
+            setModulePanels(
+                panelType === PanelType.all
+                    ? currentCorePanels
+                    : currentCorePanels.filter((panel) => panel.panelType === panelType)
+            );
+            return;
         }
 
-        const activePanelId = PanelHandler.addSubscriber(handleActivePanel, ACTIVE_PANEL_KEY);
+        const { panels, options } = activeAppPanels;
+        const { addSearch, panel, panelButton, panelWrapper } = options;
 
-        return (): void => {
-            PanelHandler.removeSubscriber(activePanelId);
-        };
-    }, []);
-
-    const setActivePanel = useCallback((key: string): void => {
-        dispatch(getCoreContext(), (s: GlobalState) => ({ ...s, activePanel: key }));
-        PanelHandler.notify(
-            readState<string>(getCoreContext(), (state) => state.activePanel),
-            ACTIVE_PANEL_KEY
-        );
-    }, []);
-
+        if (panels) {
+            setPanelUI({ panel, panelButton, panelWrapper });
+            const combinedPanels = combinePanels(panels, addSearch ? addSearch : false, getCorePanels, corePanels);
+            setModulePanels(
+                panelType === PanelType.all
+                    ? combinedPanels
+                    : combinedPanels.filter((panel) => panel.panelType === panelType)
+            );
+        }
+    }, [panelsDict, setActivePanel, panelType, corePanels, activeModulePanels]);
     return { modulePanels, setActivePanel, activePanel, isPanelActive, panelUI };
 }

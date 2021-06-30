@@ -1,7 +1,7 @@
 import { AppComponentProps } from './api';
 import { Dict } from './common';
 import { WrappedComponent } from './components';
-import { Panel } from './panel';
+import { EchoPanel } from './panel';
 
 /**
  * The Echo global app sub-state container for registering application components.
@@ -11,41 +11,39 @@ export interface RegistryState {
      * The registered app components for the router.
      */
     routes: Dict<RouteRegistration>;
-    panels: Dict<Array<Panel>>;
+    panels: Dict<EchoPanel>;
     appLinks: Dict<AppLink>;
 }
 
 export interface AppLink extends AppLinkOptions {
-    tile: string;
+    name: string;
     icon: string;
-    uri: string;
+    path: string;
+    description?: string;
 }
 
 export interface AppLinkOptions {
-    altText?: string;
+    shortName?: string;
     homeScreen?: boolean;
-    appMenu?: boolean;
+    mainMenu?: boolean;
     params?: string;
     eventTracker?: EventTracker;
-    nativeMessage?: NativeMessage;
-    online?: boolean;
+    isVisible?: () => boolean;
+    onClick?: () => void;
+    requiresOnline?: boolean;
 }
 
 type propertyTypes = { [key: string]: string | number | boolean | string[] };
 
 export type EventTracker = (objectName: string, actionName: string, properties: propertyTypes) => void;
 
-export interface NativeMessage {
-    messageType: string;
-    messageValue: boolean;
-}
-
-export interface RouteRegistration extends BaseRegistration {
+export interface RouteRegistration extends BaseRouteRegistration {
     component: WrappedComponent<AppComponentProps>;
-    meta: AppMetaData;
 }
 
-export interface BaseRegistration {
+export interface BaseRouteRegistration {
+    layoutKey?: string;
+    path: string;
     key: string;
 }
 

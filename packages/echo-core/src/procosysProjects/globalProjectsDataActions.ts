@@ -1,4 +1,4 @@
-import { dispatch, readState } from '../state/globalActions';
+import { dispatch, readState } from '../actions/coreActions/globalActions';
 import { getCoreContext } from '../state/globalState';
 import { ProcosysProject, ProcosysProjectsData } from '../types/procosysProjects';
 import { GlobalState } from '../types/state';

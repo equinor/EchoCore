@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-core",
-    "version": "0.2.110",
+    "version": "0.3.0",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -18,7 +18,8 @@
         "test-wo-install": "jest --watchAll",
         "test": "npm ci & jest --watchAll",
         "test-coverage": "npm ci & jest --coverage --watchAll",
-        "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color"
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
+        "build-docs": "npx typedoc --out docs src/index.ts"
     },
     "author": "Echo Core",
     "license": "MIT",
@@ -28,40 +29,34 @@
         "directory": "packages/echo-core"
     },
     "peerDependencies": {
-        "@equinor/echo-base": "^0.2.104",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-router": "^5.2.0",
-        "react-router-dom": "^5.2.0"
+        "@equinor/echo-base": "^0.3.0",
+        "react": ">=17.0.2",
+        "react-dom": ">=17.0.2",
+        "react-router": ">=5.2.0",
+        "react-router-dom": ">=5.2.0"
     },
     "dependencies": {
-        "@azure/msal-browser": "^2.8.0",
-        "@dbeining/react-atom": "^4.1.12"
+        "@azure/msal-browser": "2.8.0",
+        "@dbeining/react-atom": "^4.1.17"
     },
     "devDependencies": {
         "@babel/core": "^7.12.10",
         "@babel/preset-env": "^7.12.11",
         "@babel/preset-react": "^7.12.10",
         "@babel/preset-typescript": "^7.12.7",
-        "@equinor/echo-base": "^0.2.104",
+        "@equinor/echo-base": "^0.3.0",
         "@microsoft/microsoft-graph-types": "^1.20.0",
         "@rollup/plugin-node-resolve": "^11.0.1",
         "@rollup/plugin-typescript": "^8.0.0",
-        "@types/jest": "^26.0.20",
-        "@types/node": "^14.14.37",
         "@types/react": "^17.0.3",
         "@types/react-router-dom": "^5.1.7",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
-        "babel-jest": "^26.6.3",
         "eslint": "^6.6.0",
         "eslint-config-prettier": "^6.11.0",
         "eslint-plugin-prettier": "^3.1.4",
         "eslint-plugin-react": "^7.21.2",
         "eslint-plugin-react-hooks": "^4.1.2",
-        "jest": "^26.6.3",
-        "jest-expo": "^40.0.1",
-        "prettier": "^2.0.5",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-router": "^5.2.0",
@@ -76,6 +71,7 @@
         "rollup-plugin-typescript": "^1.0.1",
         "rollup-plugin-typescript-paths": "^1.2.2",
         "rollup-plugin-typescript2": "^0.29.0",
+        "typedoc": "^0.20.35",
         "typescript": "^4.1.2"
     },
     "files": [

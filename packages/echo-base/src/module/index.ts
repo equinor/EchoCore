@@ -1,8 +1,11 @@
+export * from './aggregate';
+export * from './create';
 export * from './dependency';
-export * from './fetch';
-export * from './fetchModules';
+export * from './errors';
+export * from './load';
 export * from './loader';
 export * from './persist';
+export * from './setup';
+export * from './strategies';
 export * from './utils';
 export * from './verify';
-

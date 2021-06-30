@@ -1,6 +1,6 @@
-import { PlantsData } from '../..';
 import { persistPlantsData } from '../../plants/persistPlantsData';
 import { plantsData } from '../../state/defaultStates';
+import { PlantsData } from '../../types/plants';
 
 const localStore = persistPlantsData;
 

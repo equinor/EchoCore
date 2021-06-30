@@ -1,24 +1,22 @@
 import { Atom } from '@dbeining/react-atom';
-import { BaseError } from '@equinor/echo-base/lib/errors/BaseError';
 import { User } from '@microsoft/microsoft-graph-types';
-import { AppComponentProps } from './api';
-import { AnyComponent } from './components';
+import { GlobalsStateActions } from './actions';
+import { Dict } from './common';
 import { LegendOptions } from './legend';
-import { AppModule } from './modules';
-import { Panel } from './panel';
+import { AppModule, ModuleAppError } from './modules';
+import { ActivePanel, Panel } from './panel';
 import { PlantsData } from './plants';
 import { ProcosysProjectsData } from './procosysProjects';
-import { AppMetaData, RegistryState } from './registry';
+import { RegistryState } from './registry';
 import { Settings } from './settings';
-import { UI } from './ui';
+import { PanelUI, UI } from './ui';
 
 export interface GlobalState {
     app: EchoAppState;
     modules: Array<AppModule>;
+    coreComponents: EchoCoreComponents;
     registry: RegistryState;
-    panels: Array<Panel>;
-    ui: UI;
-    activePanel: string;
+    ui: Dict<UI>;
     userProfile?: User;
     userPhotoUrl?: string;
     legendOptions: LegendOptions;
@@ -29,27 +27,30 @@ export interface GlobalState {
 }
 export interface GlobalStateContext {
     state: Atom<GlobalState>;
+    actions: GlobalsStateActions;
 }
 
 export type EchoCustomState<T> = Partial<T>;
 
-export interface ModuleApi {
-    registerApp: <Key extends string>(
-        name: Key,
-        Component: AnyComponent<AppComponentProps>,
-        meta?: AppMetaData
-    ) => void;
-    unRegisterApp: <Key extends string>(name: Key) => void;
-    registerPanels: <Key extends string>(key: Key, panels: Panel | Array<Panel>) => void;
-    unRegisterPanes: <Key extends string>(key: Key) => void;
+export interface EchoCoreComponents {
+    panels: Dict<Panel>;
 }
 
-export class AppError extends BaseError {}
+export interface CorePanels {
+    mainMenu: Panel;
+    searchPanel: Panel;
+}
 
 /**
  * The Echo global app sub-state container for app information.
  */
 export interface EchoAppState {
+    /*
+     * The key for the active application panel.
+     */
+    activePanelState: ActivePanel;
+    activeState: ActiveState;
+
     /**
      * Information for the layout computation.
      */
@@ -63,7 +64,14 @@ export interface EchoAppState {
     /**
      * Gets an unrecoverable application error, if any.
      */
-    error: AppError | undefined;
+    error: ModuleAppError | undefined;
+}
+
+export interface ActiveState {
+    activeTagNo: string;
+    activeDocumentNo: string;
+    activeFileId: string;
+    ui?: PanelUI;
 }
 
 /**

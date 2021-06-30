@@ -16,7 +16,7 @@ export default [
             format: 'cjs',
             exports: 'named'
         },
-        external: ['react', 'react-dom', 'react-router', '@equinor/echo-base'],
+        external: ['react', 'react-dom', 'react-router', '@equinor/echo-base', '@azure/msal-browser'],
         plugins: [
             tslibResolveId(),
             del({ targets: 'dist/*', runOnce: true }),
@@ -31,10 +31,20 @@ export default [
             commonjs({
                 namedExports: {
                     '@dbeining/react-atom': ['Atom', 'useAtom', 'deref', 'swap'],
-                    tslib: ['__awaiter']
+                    tslib: ['__awaiter', '__rest']
                 }
             }),
             nodeResolve()
         ]
     }
+    // {
+    //     input: pkg.source,
+    //     output: [
+    //         {
+    //             file: pkg.types,
+    //             format: 'es'
+    //         }
+    //     ],
+    //     plugins: [dt()]
+    // }
 ];

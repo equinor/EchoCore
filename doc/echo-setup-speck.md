@@ -1,3 +1,0 @@
-# EchoBase
-
-## Spec

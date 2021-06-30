@@ -9,3 +9,5 @@ export function useUserProfile(): User | undefined {
     const { userProfile } = useAtom(CoreContext.state);
     return userProfile;
 }
+
+export default useUserProfile;

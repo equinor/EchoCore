@@ -1,24 +1,14 @@
-import { App, AppApi, AppApiCreator, MultiApp, SingleApp } from '../types';
+import { EchoModule, EchoModuleApi, EchoModuleApiCreator } from '../types';
 
-export function setupSingleApp(app: SingleApp, api: AppApi): void | Promise<void> {
+export function setupSingleModule(module: EchoModule, api: EchoModuleApi): void | Promise<void> {
     try {
-        const result = app.setup(api);
+        const result = module.setup(api);
         return result;
-    } catch (error) {}
-}
-
-export function setupMultiApps(app: MultiApp, apiFactory: AppApiCreator): void | Promise<void> {
-    try {
-        return app.setup(apiFactory);
-    } catch (e) {
-        console.error(`Error while setting up ${app?.name}.`, e);
+    } catch (error) {
+        console.warn(error);
     }
 }
 
-export function setupApp(app: App, apiFactory: AppApiCreator): void | Promise<void> {
-    if ('bundle' in app) {
-        return setupMultiApps(app as MultiApp, apiFactory);
-    } else {
-        return setupSingleApp(app, apiFactory(app));
-    }
+export function setupModule(module: EchoModule, apiFactory: EchoModuleApiCreator): void | Promise<void> {
+    return setupSingleModule(module, apiFactory(module));
 }

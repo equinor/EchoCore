@@ -1,88 +1,44 @@
-import { ModuleEventEmitter } from "./event";
+import { EchoEventHub } from './event';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export interface SingleAppMetadata {
-    name: string;
-    link: string;
-    requireRef: string;
-    integrity?: string;
-    custom?: any;
-    config?: Record<string, any>;
+export interface ModuleMetaData extends MetaDataBase {
+    requireRef?: string;
 }
-export interface MultiAppsMetadata {
+export interface MetaDataBase {
+    key: string;
     name: string;
-    link: string;
-    bundle: string;
+    shortName: string;
+    path: string;
+    fileUri: string;
+    version: string;
     integrity?: string;
-    custom?: any;
+    private?: boolean;
 }
 
-export type App = SingleApp | MultiApp;
 /**
- * Describes the metadata transported by a Apps.
+ *  Echo Module setup function and meta data combined.
  */
-export type AppMetadata = SingleAppMetadata | MultiAppsMetadata;
-
-/**
- * The metadata for a single app.
- */
-export type SingleApp = AppData & AppMetadata;
-
-/**
- * The metadata for apps containing apps.
- */
-export type MultiApp = MultiAppData & MultiAppsMetadata;
+export type EchoModule = ModuleData & ModuleMetaData;
 
 /**
  * Defines the API accessible from Apps.
  */
-export interface AppApi extends ModuleEventEmitter {
+export interface EchoModuleApi {
     /**
      * Gets the metadata of the current App.
      */
-    meta: AppMetadata;
+    meta: ModuleMetaData;
+    eventHub: EchoEventHub;
 }
 
-export interface RouteRegistration extends BaseRegistration {
-    meta: AppMetaData;
+export interface ModuleData {
+    setup: (api: EchoModuleApi) => void | Promise<void>;
 }
 
-export interface AppMetaData {
-    name: string;
-    icon: string;
-    homeScreen?: boolean;
-}
-
-export interface BaseRegistration {
-    key: string;
-}
-
-export interface AppData {
-    setup: (api: AppApi) => void | Promise<void>;
-}
-export interface MultiAppData {
-    setup: (apiFactory: AppApiCreator) => void | Promise<void>;
-}
-
-export interface EchoPortal {
-    isAuthenticated: boolean;
-}
-
-export type AppMetaFetch = () => Promise<AppMetadata[]>;
-
-
-
-
-/**
- * The creator function for the App API.
- */
-export interface AppApiCreator {
-    (target: AppMetadata): AppApi;
-}
+export type AppMetaFetch = () => Promise<ModuleMetaData[]>;
 
 /**
  * The record containing all available dependencies.
  */
 export interface AvailableDependencies {
-    [name: string]: any;
+    [name: string]: unknown;
 }

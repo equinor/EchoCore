@@ -1,7 +1,7 @@
-import { readState } from '../state/globalActions';
 import { setSpecificModuleState } from '../state/globalAppState';
 import { getCoreContext } from '../state/globalState';
-import { setModuleState } from './globalStateActions';
+import { readState } from './coreActions/globalActions';
+import { setModuleState } from './globalState';
 
 /**
  * update module State with specific parameter

@@ -8,3 +8,4 @@ export function useUserPhoto(): string | undefined {
     const { userPhotoUrl } = useAtom(CoreContext.state);
     return userPhotoUrl;
 }
+export default useUserPhoto;

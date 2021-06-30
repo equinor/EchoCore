@@ -1,4 +1,4 @@
-import { setModuleState } from '../actions/globalStateActions';
+import { setModuleState } from '../actions/globalState';
 
 /**
  * Echo Core Function for updating moduleState by key.
