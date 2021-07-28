@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
 import { AnyComponent } from './components';
-import { PanelUI } from './ui';
+import { Icon, PanelUI } from './ui';
 
 export enum PanelType {
     left = 'left',
@@ -14,7 +13,7 @@ export interface Panel {
     component: AnyComponent<any>;
     key: string;
     label: string;
-    icon: React.FC | string;
+    icon: Icon;
     disabled?: boolean;
 }
 

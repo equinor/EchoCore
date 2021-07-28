@@ -2,6 +2,7 @@ import { AppComponentProps } from './api';
 import { Dict } from './common';
 import { WrappedComponent } from './components';
 import { EchoPanel } from './panel';
+import { Icon } from './ui';
 
 /**
  * The Echo global app sub-state container for registering application components.
@@ -17,7 +18,7 @@ export interface RegistryState {
 
 export interface AppLink extends AppLinkOptions {
     name: string;
-    icon: string;
+    icon: Icon;
     path: string;
     description?: string;
 }
@@ -45,6 +46,9 @@ export interface BaseRouteRegistration {
     layoutKey?: string;
     path: string;
     key: string;
+    name?: string;
+    icon?: Icon;
+    customHederSection?: React.FC;
 }
 
 export interface AppMetaData {
