@@ -7,3 +7,5 @@ export interface PanelUI {
 export type UI = {
     [key: string]: React.CSSProperties | undefined;
 };
+
+export type Icon = React.FC | string;

@@ -1,4 +1,5 @@
 import { EchoModuleApi as ModuleApi, ModuleMetaData } from '@equinor/echo-base';
+import React from 'react';
 import { RegisterAppOptions } from '../actions/coreActions/app';
 import { AppKey, EchoPanelOptions, Panel, PanelUI } from './';
 import { RouteBaseProps, WrappedComponent } from './components';
@@ -85,10 +86,12 @@ export interface AppOptions extends AppLinkOptions {
     panels?: Panel[] | Panel;
     panelsOptions?: Partial<EchoPanelOptions>;
     params?: string;
+    customHeaderSection?: React.FC;
 }
 
 export interface PageOptions {
     layoutKey?: string;
+    customHeaderSection?: React.FC;
 }
 
 /**
