@@ -4,7 +4,6 @@ import { updatePanelUI } from '../actions';
 import {
     registerApp,
     RegisterAppOptions,
-    registerEchoModuleContextProvider,
     registerPage,
     registerPanels,
     unRegisterApp,
@@ -59,8 +58,7 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                 };
                 registerPage(path, page);
             },
-            unRegisterPage,
-            registerEchoModuleContextProvider
+            unRegisterPage
         };
     };
 }

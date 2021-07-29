@@ -1,5 +1,6 @@
 export * from './api';
 export * from './common';
+export * from './context';
 export * from './legend';
 export * from './modules';
 export * from './panel';
@@ -10,4 +11,3 @@ export * from './settings';
 export * from './state';
 export * from './ui';
 export * from './userProperties';
-

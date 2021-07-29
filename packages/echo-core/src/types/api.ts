@@ -3,7 +3,6 @@ import React from 'react';
 import { RegisterAppOptions } from '../actions/coreActions/app';
 import { AppKey, EchoPanelOptions, Panel, PanelUI } from './';
 import { RouteBaseProps, WrappedComponent } from './components';
-import { ContextProvider } from './context';
 import { AppLinkOptions } from './registry';
 
 type RegisterApp = (appComponent: WrappedComponent<AppComponentProps>, options?: AppOptions) => void;
@@ -14,7 +13,6 @@ type UnRegisterPanels = (key: string) => void;
 type UpdatePanelUI = (ui?: PanelUI, key?: string) => void;
 type RegisterPage = (path: string, component: React.FC, options?: PageOptions) => void;
 type UnRegisterPage = (appKey: AppKey) => void;
-type RegisterEchoModuleContextProvider = (contextProvider: ContextProvider) => void;
 declare module '@equinor/echo-base' {
     /**
      *  Api for handling all registration of app, links and panels
@@ -72,7 +70,6 @@ declare module '@equinor/echo-base' {
         updatePanelUI: UpdatePanelUI;
         registerPage: RegisterPage;
         unRegisterPage: UnRegisterPage;
-        registerEchoModuleContextProvider: RegisterEchoModuleContextProvider;
     }
 }
 
