@@ -4,6 +4,9 @@ import { getCoreContext } from '../../../state/globalState';
 import { AppLink, GlobalState, RouteRegistration } from '../../../types';
 
 const testRoute: RouteRegistration = {
+    name: 'app',
+    customHeaderSection: undefined,
+    icon: 'app-icon',
     key: 'app',
     path: '/app',
     component: () => {
@@ -12,7 +15,7 @@ const testRoute: RouteRegistration = {
 };
 
 const appLink: AppLink = {
-    tile: 'app',
+    name: 'app',
     icon: 'app-icon',
     path: '/app'
 };
