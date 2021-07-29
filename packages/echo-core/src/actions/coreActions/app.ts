@@ -5,10 +5,10 @@ import { registerRoute, unRegisterRoute } from './routes';
 export type RegisterAppOptions = RouteRegistration & AppLink;
 
 export function registerApp(appKey: string, options: RegisterAppOptions): void {
-    const { component, path, layoutKey, key, ...rest } = options;
+    const { component, path, layoutKey, key, name, icon, customHederSection, ...rest } = options;
 
-    const appLinkOption: AppLink = { ...rest, path };
-    const appRouteOption: RouteRegistration = { component, path, layoutKey, key };
+    const appLinkOption: AppLink = { ...rest, path, name, icon };
+    const appRouteOption: RouteRegistration = { component, path, layoutKey, key, name, icon, customHederSection };
 
     registerRoute(appKey, appRouteOption);
     registerAppLink(appKey, appLinkOption);
