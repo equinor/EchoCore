@@ -48,7 +48,7 @@ export interface BaseRouteRegistration {
     key: string;
     name?: string;
     icon?: Icon;
-    customHederSection?: React.FC;
+    customHeaderSection?: React.FC;
 }
 
 export interface AppMetaData {
