@@ -2,6 +2,7 @@ import { Atom } from '@dbeining/react-atom';
 import { User } from '@microsoft/microsoft-graph-types';
 import { GlobalsStateActions } from './actions';
 import { Dict } from './common';
+import { ContextProvider } from './context';
 import { LegendOptions } from './legend';
 import { AppModule, ModuleAppError } from './modules';
 import { ActivePanel, Panel } from './panel';
@@ -10,7 +11,6 @@ import { ProcosysProjectsData } from './procosysProjects';
 import { RegistryState } from './registry';
 import { Settings } from './settings';
 import { PanelUI, UI } from './ui';
-
 export interface GlobalState {
     app: EchoAppState;
     modules: Array<AppModule>;
@@ -24,6 +24,7 @@ export interface GlobalState {
     plantsData: PlantsData;
     procosysProjectsData: ProcosysProjectsData;
     moduleState: EchoCustomState<unknown>;
+    contextProvider?: ContextProvider;
 }
 export interface GlobalStateContext {
     state: Atom<GlobalState>;
