@@ -11,6 +11,15 @@ import { ProcosysProjectsData } from './procosysProjects';
 import { RegistryState } from './registry';
 import { Settings } from './settings';
 import { PanelUI, UI } from './ui';
+
+/**
+ * The global state, the hart of Echo. The state contains user related data,
+ * like user info and application settings. This state is not meant to have any search data
+ * or large data sets. The active module is able to use the moduleState or the context provider.
+ *
+ * @export
+ * @interface GlobalState
+ */
 export interface GlobalState {
     app: EchoAppState;
     modules: Array<AppModule>;

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getContextProvider, registerEchoModuleContextProvider } from '../actions/coreActions';
+import { registerEchoModuleContextProvider } from '../actions/coreActions';
 import { useGlobalState } from '../state/useGlobalState';
 import { ContextProvider } from '../types/context';
 import { GlobalState } from '../types/state';
@@ -21,12 +21,12 @@ export function useContextProvider(): ContextProvider | undefined {
  */
 export function useModuleContextProvider(contextProvider: ContextProvider): void {
     useEffect(() => {
-        if (contextProvider !== getContextProvider()) registerEchoModuleContextProvider(contextProvider);
+        registerEchoModuleContextProvider(contextProvider);
     }, [contextProvider]);
 
     useEffect(() => {
         return (): void => {
             registerEchoModuleContextProvider(undefined);
         };
-    });
+    }, []);
 }
