@@ -1,4 +1,4 @@
-import { EchoModuleApi as ModuleApi, ModuleMetaData } from '@equinor/echo-base';
+import { EchoEventHub, EchoModuleApi as ModuleApi, ModuleMetaData } from '@equinor/echo-base';
 import React from 'react';
 import { RegisterAppOptions } from '../actions/coreActions/app';
 import { EchoPanelOptions, Panel, PanelUI } from './';
@@ -22,6 +22,8 @@ declare module '@equinor/echo-base' {
      * @interface EchoModuleApi
      */
     interface EchoModuleApi {
+        meta: ModuleMetaData;
+        eventHub: EchoEventHub;
         /**
          * Used for registration of the main application in a module,
          * based on the modules manifest, this wil provide app on path specified in manifest and link to application,

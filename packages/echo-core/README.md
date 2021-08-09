@@ -6,7 +6,7 @@ Everything a Echo app needs to communicate with the core.
 
 [![Version](https://img.shields.io/npm/v/@equinor/echo-core.svg)](https://npmjs.org/package/@equinor/echo-core)
 [![Downloads/week](https://img.shields.io/npm/dw/@equinor/echo-core.svg)](https://npmjs.org/package/@equinor/echo-core)
-[![License](https://img.shields.io/npm/l/@equinor/echo-core.svg)](https://github.com/equinor/fusion/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/@equinor/echo-core.svg)](https://github.com/equinor/echoCore/blob/master/package.json)
 [![Sisze](https://img.shields.io/bundlephobia/min/@equinor/echo-core)](https://npmjs.org/package/@equinor/echo-core)
 
 ![@equinor/echo-core](https://badgen.net/bundlephobia/minzip/@equinor/echo-core) ![@equinor/echo-core](https://badgen.net/bundlephobia/min/@equinor/echo-core)
@@ -198,9 +198,11 @@ _OBS: Errors when switching branches can happen if link is not unlinked properly
 
 ## Register application components with Setup
 
+Echo is built up around modules, a module can consist of serval applications, It is recommended to keep modules as small as possible preventing long loading times at application/client (Echo) startup. All modules are registered using a setup function exported form the modules entry point. This function is called at Echo startup. The function is called with the `EchoModuleApi`.
+
 ### Register App
 
-Echo is built up around modules, a module can consist of serval applications, It is recommended to keep modules as small as possible preventing long loading times at application/client (Echo) startup. All modules are registered using a setup function exported form the modules entry point. This function is called at Echo startup. The function is called with the EchoModuleApi. The api allows for app registration using `registerApp` as shown below. App registration is used for registration of the main application in a module, based on metadata taken from the modules manifest, the optional parameter can help with configuring the application.
+The api allows for app registration using `registerApp` as shown below. App registration is used for registration of the main application in a module, based on metadata taken from the modules manifest, the optional parameter can help with configuring the application.
 
 ### Register with Key
 
@@ -213,10 +215,9 @@ this lets you manually register an app, so remember some configuration is needed
 
 ### Register Page / Route
 
-Under the hood this is what register app uses. A app is just a page / route with a added component. This can be used to
-register pages which needs noe direct connection.
+Under the hood `registerRoute` is what `registerApp`, `registerAppWithKey`, and `registerPage`, uses. An app is just a route with a added component. `registerPag` can be used to register pages which needs no direct connection.
 
-```TS
+```Typescript
 import { EchoModuleApi, PanelType } from "@equinor/echo-core"
 import { Icon, themeConst } from '@equinor/echo-components';
 import TestModule from "./testModule";
@@ -234,9 +235,9 @@ export function setup(api: EchoModuleApi): void {
 
 ## Manifest
 
-As you can see the code imports a module called `TestModule` the module is registered as an app. The app will register a route and link this using the module manifest. here is an example of a manifest.
+As you can see in the code sample above, `TestModule` module is registered as an app. The app will register a route and link this using the modules appManifest. here is an example of such manifest.
 
-```TS
+```Typescript
         {
             name: 'Test',
             requireRef: '',
@@ -250,7 +251,7 @@ As you can see the code imports a module called `TestModule` the module is regis
 
 # Global State
 
-The global state is meant for application related data. Large data sets wil slow down the performance of the application so keeping this to the minimum is key. Lets take a look at at current global state.
+The global state is meant for application related data. Large data sets will slow down the performance of the application / client so keeping this to the minimum is key. Lets take a look at at current global state.
 
 ```TS
 
@@ -359,3 +360,5 @@ interface RegistryState {
     appLinks: Dict<AppLink>;
 }
 ```
+
+As EchoCore' responsibility is mainly ot provide developers the tools to register and retrieve information form the global state the usage of the `RegistryState` can be found in EchoFramework's documentation which can be found [here](https://github.com/equinor/EchoFramework)
