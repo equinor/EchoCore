@@ -2,7 +2,7 @@
 
 # EchoCore
 
-A monorepo with all tools needed to communicate  with echo framework.
+A monorepo with all tools needed to communicate with echo framework.
 
 ## Introduction
 
