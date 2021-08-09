@@ -12,6 +12,7 @@ export * from './contexts';
 export * from './EchoEnv';
 export * from './hooks';
 export * from './modules';
+export * from './modules/moduleContext';
 export * from './observers/classObserver';
 export * from './plants/usePlants';
 export * from './procosysProjects';

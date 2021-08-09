@@ -1,22 +1,26 @@
 import { getCoreContext } from '../../state/globalState';
-import { EchoPanelOptions, GlobalState, Panel } from '../../types';
+import { EchoPanelOptions, GlobalState, Panel, UnRegisterPanels } from '../../types';
 import { addOrOverwriteWithKey, removeWithKey } from '../../utils/state';
 import { dispatch } from './globalActions';
 
 /**
- * Core Action for registering panels
+ * Core Action for registering panel or panels.
+ * Remember that each panel should have a unique key, if noe this may
+ * result in unwanted results.
+ *
  *
  * @export
  * @template TKey
  * @param {TKey} key
  * @param {(Panel[] | Panel)} [panels=[]]
- * @param {Partial<EchoPanelOptions>} [options={}]
+ * @param {Partial<EchoPanelOptions>} [options]
+ * @return {*}  {unRegisterPanels} function for registering the registered panel.
  */
 export function registerPanels<TKey extends string>(
     key: TKey,
     panels: Panel[] | Panel = [],
     options?: Partial<EchoPanelOptions>
-): void {
+): UnRegisterPanels {
     dispatch(getCoreContext(), (s: GlobalState) => ({
         ...s,
         registry: {
@@ -27,16 +31,21 @@ export function registerPanels<TKey extends string>(
             })
         }
     }));
+    return (): void => {
+        unRegisterPanels(key);
+    };
 }
 
 /**
- * Unregister a panel.
+ * return function of register panel.
+ * Removes the registered panel registered on provided key.
  *
  * @export
  * @template TKey
  * @param {TKey} key
+ * @param {(Panel | Array<Panel>)} panels
  */
-export function unRegisterPanels<TKey extends string>(key: TKey): void {
+function unRegisterPanels<TKey extends string>(key: TKey): void {
     dispatch(getCoreContext(), (s: GlobalState) => ({
         ...s,
         registry: {

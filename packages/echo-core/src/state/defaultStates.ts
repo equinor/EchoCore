@@ -1,4 +1,5 @@
-import { GlobalState, LegendOptions } from '../types';
+import React from 'react';
+import { GlobalState, LegendOptions, ModuleContext } from '../types';
 import { PlantsData } from '../types/plants';
 import { ProcosysProject, ProcosysProjectsData } from '../types/procosysProjects';
 import { PlantSettings, Settings } from '../types/settings';
@@ -58,6 +59,7 @@ export const defaultGlobalState: GlobalState = {
         error: undefined,
         loading: typeof window !== 'undefined',
         layout: 'desktop',
+        activeModuleContextProvider: '',
         activePanelState: {
             activePanel: '',
             activeModulePanels: '',
@@ -79,6 +81,7 @@ export const defaultGlobalState: GlobalState = {
         routes: {},
         appLinks: {}
     },
+    moduleContext: React.createContext({}) as ModuleContext<unknown>,
     moduleState: {},
     userProfile: undefined,
     userPhotoUrl: undefined,

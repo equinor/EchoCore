@@ -1,6 +1,6 @@
+export * from './useApp';
 export * from './useAuthenticate';
 export * from './useCleanup';
-export * from './useContextProvider';
 export * from './useCoreComponents';
 export * from './useEchoEventHub';
 export * from './useInitial';
