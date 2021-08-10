@@ -4,6 +4,7 @@
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "scripts": {
         "echo-test": "jest",
+        "echo-test-coverage": "jest --coverage",
         "core-start": "lerna run start --stream --scope @equinor/echo-core",
         "bump-version": "lerna version --conventional-commits --yes",
         "lerna-install": "lerna exec npm install",
@@ -49,7 +50,7 @@
         "lerna": "^3.1.4",
         "prettier": "^2.0.5",
         "tslib": "^2.2.0",
-        "typedoc": "^0.20.35",
+        "typedoc": "^0.21.5",
         "typescript": "^4.1.2"
     }
 }

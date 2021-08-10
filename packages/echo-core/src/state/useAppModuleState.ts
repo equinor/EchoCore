@@ -1,6 +1,6 @@
 import { useAtom } from '@dbeining/react-atom';
-import { setModuleState } from '../actions/globalState';
 import useInitial from '../hooks/useInitial';
+import { registerModuleState } from '../modules/moduleContext';
 import { getCoreState } from './globalState';
 
 /**
@@ -12,7 +12,7 @@ export function useAppModuleState<T>(initialState: T | undefined = undefined): T
     const state = useAtom(getCoreState());
 
     useInitial(() => {
-        initialState && setModuleState(initialState);
+        initialState && registerModuleState(initialState);
     });
 
     return state.moduleState as T;

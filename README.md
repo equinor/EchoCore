@@ -2,7 +2,13 @@
 
 # EchoCore
 
-A monorepo with all tools needed to communicate  with echo framework.
+A monorepo with all tools needed to communicate with echo framework. the repo contains two packages.
+You can read mor about them in the links below
+
+-   [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
+-   [@equinor/echo-core](https://github.com/equinor/EchoCore/blob/main/packages/echo-core)
+
+---
 
 ## Introduction
 

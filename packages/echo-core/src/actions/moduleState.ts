@@ -1,7 +1,7 @@
 import { setSpecificModuleState } from '../state/globalAppState';
 import { getCoreContext } from '../state/globalState';
-import { readState } from './coreActions/globalActions';
-import { setModuleState } from './globalState';
+import { GlobalState } from '../types/state';
+import { dispatch, readState } from './coreActions/globalActions';
 
 /**
  * update module State with specific parameter
@@ -13,10 +13,16 @@ export function updateSpecificModuleState<T>(key: keyof T, data: T[keyof T]): vo
 }
 /**
  * Update module State.
- * @param data The data for updating the module state.
+ * @param newState The data for updating the module state.
  */
-export function updateModuleState<T>(data: T): void {
-    setModuleState(data);
+export function updateModuleState<T>(newState: Partial<T> | ((state: T) => T)): void {
+    dispatch(getCoreContext(), (state: GlobalState) => ({
+        ...state,
+        moduleState: {
+            ...state.moduleState,
+            ...(typeof newState === 'function' ? newState(state.moduleState as T) : newState)
+        }
+    }));
 }
 
 /**

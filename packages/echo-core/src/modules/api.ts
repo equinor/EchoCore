@@ -7,11 +7,18 @@ import {
     registerPage,
     registerPanels,
     unRegisterApp,
-    unRegisterPage,
-    unRegisterPanels
+    unRegisterPage
 } from '../actions/coreActions';
 import { RouteRegistration } from '../types';
-import { AppComponentProps, AppOptions, EchoAppModuleApiCreator, EchoModuleApi, PageOptions } from '../types/api';
+import {
+    AppComponentProps,
+    AppOptions,
+    EchoAppModuleApiCreator,
+    EchoModuleApi,
+    PageOptions,
+    UnRegisterApp,
+    UnRegisterPage
+} from '../types/api';
 import { WrappedComponent } from '../types/components';
 import { getKeyFromPath } from '../utils/path';
 
@@ -27,7 +34,7 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
         return {
             meta,
             eventHub,
-            registerApp: (component: WrappedComponent<AppComponentProps>, options: AppOptions = {}): void => {
+            registerApp: (component: WrappedComponent<AppComponentProps>, options: AppOptions = {}): UnRegisterApp => {
                 const { mainMenu, icon, panels, panelsOptions, ...rest } = options;
                 const appOptions: RegisterAppOptions = {
                     ...rest,
@@ -41,24 +48,44 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                 };
                 registerApp(appKey, appOptions);
                 if (options.panels) registerPanels(appKey, panels, panelsOptions);
+                return (): void => {
+                    unRegisterApp(appKey);
+                };
             },
-            unRegisterApp: (): void => {
-                unRegisterApp(appKey);
-            },
-            registerAppWithKey: registerApp,
-            registerPanels,
-            unRegisterPanels,
-            updatePanelUI,
-            registerPage: (path: string, component: React.FC, options?: PageOptions): void => {
+            registerAppSubPage: (subPath: string, component: React.FC, options?: PageOptions): UnRegisterPage => {
+                const key = getKeyFromPath(path);
                 const page: RouteRegistration = {
-                    key: path,
+                    key: `${appKey}_${key}`,
+                    path: path + subPath,
+                    component,
+                    ...options
+                };
+                registerPage(path, page);
+                return (): void => {
+                    unRegisterPage(key);
+                };
+            },
+            registerAppWithKey: (appKey: string, options: RegisterAppOptions): UnRegisterApp => {
+                registerApp(appKey, options);
+                return (): void => {
+                    unRegisterApp(appKey);
+                };
+            },
+            registerPanels,
+            updatePanelUI,
+            registerPage: (path: string, component: React.FC, options?: PageOptions): UnRegisterPage => {
+                const key = getKeyFromPath(path);
+                const page: RouteRegistration = {
+                    key,
                     path,
                     component,
                     ...options
                 };
                 registerPage(path, page);
-            },
-            unRegisterPage
+                return (): void => {
+                    unRegisterPage(key);
+                };
+            }
         };
     };
 }
