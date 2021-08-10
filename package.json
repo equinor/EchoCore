@@ -4,6 +4,7 @@
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "scripts": {
         "echo-test": "jest",
+        "echo-test-coverage": "jest --coverage",
         "core-start": "lerna run start --stream --scope @equinor/echo-core",
         "bump-version": "lerna version --conventional-commits --yes",
         "lerna-install": "lerna exec npm install",
