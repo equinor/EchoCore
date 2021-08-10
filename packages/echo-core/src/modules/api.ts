@@ -52,6 +52,19 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                     unRegisterApp(appKey);
                 };
             },
+            registerAppSubPage: (subPath: string, component: React.FC, options?: PageOptions): UnRegisterPage => {
+                const key = getKeyFromPath(path);
+                const page: RouteRegistration = {
+                    key: `${appKey}_${key}`,
+                    path: path + subPath,
+                    component,
+                    ...options
+                };
+                registerPage(path, page);
+                return (): void => {
+                    unRegisterPage(key);
+                };
+            },
             registerAppWithKey: (appKey: string, options: RegisterAppOptions): UnRegisterApp => {
                 registerApp(appKey, options);
                 return (): void => {

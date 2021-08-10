@@ -63,6 +63,7 @@ declare module '@equinor/echo-base' {
         registerPanels: RegisterPanels;
         updatePanelUI: UpdatePanelUI;
         registerPage: RegisterPage;
+        registerAppSubPage: RegisterPage;
     }
 }
 
@@ -80,11 +81,13 @@ export interface AppOptions extends AppLinkOptions {
     panelsOptions?: Partial<EchoPanelOptions>;
     params?: string;
     customHeaderSection?: React.FC;
+    exactPath?: boolean;
 }
 
 export interface PageOptions {
     layoutKey?: string;
     customHeaderSection?: React.FC;
+    exactPath?: boolean;
 }
 
 /**

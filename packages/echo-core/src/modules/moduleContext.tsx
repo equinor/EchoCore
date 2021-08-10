@@ -53,9 +53,9 @@ export function registerModuleStateAndContext<T>(initialState: T, context: React
  * @template T
  * @param {Partial<T>} newModuleState
  */
-export function setModuleState<T>(newModuleState: Partial<T> | ((state: Partial<T>) => T)): void {
+export function setModuleState<T>(newModuleState: Partial<T> | ((state: T) => T)): void {
     dispatch(getCoreContext(), (state: GlobalState) => {
-        const moduleState = state.moduleState;
+        const moduleState = state.moduleState as T;
         return {
             ...state,
             moduleState: {
