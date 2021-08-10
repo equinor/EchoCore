@@ -53,7 +53,7 @@ export function registerModuleStateAndContext<T>(initialState: T, context: React
  * @template T
  * @param {Partial<T>} newModuleState
  */
-export function updateModuleContextState<T>(newModuleState: Partial<T> | ((state: Partial<T>) => T)): void {
+export function setModuleState<T>(newModuleState: Partial<T> | ((state: Partial<T>) => T)): void {
     dispatch(getCoreContext(), (state: GlobalState) => {
         const moduleState = state.moduleState;
         return {
@@ -67,8 +67,21 @@ export function updateModuleContextState<T>(newModuleState: Partial<T> | ((state
 }
 
 /**
+ * update the module context state with a Partial of the registered type.
+ * It is recommended to provide the interface here which is used, thins this wil give
+ * proper type definition.
  *
- *
+ * @export
+ * @template T
+ * @param {Partial<T>} newModuleState
+ * @deprecated
+ */
+
+export function updateModuleContextState<T>(newModuleState: Partial<T> | ((state: Partial<T>) => T)): void {
+    setModuleState(newModuleState);
+}
+
+/**
  * @interface ModuleContextProviderProps
  */
 interface ModuleContextProviderProps {
@@ -76,7 +89,8 @@ interface ModuleContextProviderProps {
 }
 
 /**
- *
+ * The context provider for module's context. Tis provider serves
+ * the module state to all underlying components. See Readme for more info.
  *
  * @export
  * @param {ModuleContextProviderProps} { children }

@@ -198,7 +198,7 @@ _OBS: Errors when switching branches can happen if link is not unlinked properly
 
 ## Register application components with Setup
 
-Echo is built up around modules, a module can consist of serval applications, It is recommended to keep modules as small as possible preventing long loading times at application/client (Echo) startup. All modules are registered using a setup function exported form the modules entry point. This function is called at Echo startup. The function is called with the `EchoModuleApi`.
+Echo is built up around modules, a module can consist of several applications, It is recommended to keep modules as small as possible preventing long loading times at application/client (Echo) startup. All modules are registered using a setup function exported from the modules entry point. This function is called at Echo startup. The function is called with the `EchoModuleApi`.
 
 ### Register App
 
@@ -251,7 +251,7 @@ As you can see in the code sample above, `TestModule` module is registered as an
 
 # Global State
 
-The global state is meant for application related data. Large data sets will slow down the performance of the application / client so keeping this to the minimum is key. Lets take a look at at current global state.
+The global state is meant for application related data. `Large data sets will slow down the performance of the application / client so keeping this to the minimum is key.` Lets take a look at at current global state.
 
 ```TS
 
@@ -320,6 +320,8 @@ updateSpecificModuleState("name", "John");
 ### Module Context and state
 
 The state can be use in conjunction with a context the context is wrapping the whole application this can be sean in `EchoContent.tsx` file in `EchoFramework`. The `ModuleContextProvider` is provided form EchoCore, will always provide the current `moduleState`. This will allow you to use regular react context.
+
+`Use to communicate with panels and header!`
 
 ```TS
 import { ModuleContextProvider } from '@equinor/echo-core';

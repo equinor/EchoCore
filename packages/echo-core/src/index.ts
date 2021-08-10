@@ -24,7 +24,6 @@ export * from './state';
 export * from './types';
 export * from './utils/deepLinkParams';
 export * from './utils/uniq';
-
 export default EchoCore;
 
 declare global {
