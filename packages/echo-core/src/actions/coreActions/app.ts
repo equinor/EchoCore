@@ -11,7 +11,7 @@ export function registerApp(appKey: string, options: RegisterAppOptions): void {
     const appRouteOption: RouteRegistration = {
         component,
         path,
-        layoutKey,
+        layoutKey: layoutKey ? layoutKey : 'defaultApp',
         key,
         name,
         icon,

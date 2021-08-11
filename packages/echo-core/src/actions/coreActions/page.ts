@@ -1,7 +1,11 @@
 import { AppKey, RouteRegistration } from '../../types/registry';
 import { registerRoute, unRegisterRoute } from './routes';
 
-export function registerPage(appKey: AppKey, routeRegistration: RouteRegistration): void {
+export function registerPage(appKey: AppKey, pageRegistration: RouteRegistration): void {
+    const routeRegistration = {
+        ...pageRegistration,
+        layoutKey: pageRegistration.layoutKey ? pageRegistration.layoutKey : 'defaultPage'
+    };
     registerRoute(appKey, routeRegistration);
 }
 

@@ -43,7 +43,7 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                     path,
                     shortName: shortName ? shortName : appKey,
                     key: appKey,
-                    icon: icon ? icon : 'category',
+                    icon: icon ? icon : 'home',
                     mainMenu: mainMenu === undefined ? true : mainMenu ? true : false
                 };
                 registerApp(appKey, appOptions);
