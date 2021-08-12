@@ -4,6 +4,7 @@ export interface Settings {
     procosysProjectSettings: ProcosysProject;
     showTextHighlighting: boolean;
     plantSettings: PlantSettings;
+    showMeasuringPoints: boolean;
 }
 
 export interface PlantSettings {
