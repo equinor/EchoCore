@@ -31,7 +31,8 @@ const procosysProjectSettings: ProcosysProject = {
 export const settings: Settings = {
     showTextHighlighting: true,
     procosysProjectSettings,
-    plantSettings
+    plantSettings, 
+    showMeasuringPoints: false,
 };
 
 export const plantsData: PlantsData = {
