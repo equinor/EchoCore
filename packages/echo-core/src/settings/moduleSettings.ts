@@ -8,7 +8,7 @@ import { SettingStore, store } from './settingsStore';
  * @class ModuleSettings
  * @template T
  */
-export class ModuleSettings<T> {
+export class SimpleModuleSettings<T> {
     protected store: SettingStore;
     public key: string;
 

@@ -9,7 +9,9 @@ import {
     unRegisterApp,
     unRegisterPage
 } from '../actions/coreActions';
-import { RouteRegistration } from '../types';
+import { registerExtension } from '../actions/coreActions/extensions';
+import { registerModuleSetting } from '../actions/coreActions/moduleSettings';
+import { Extension, RouteRegistration } from '../types';
 import {
     AppComponentProps,
     AppOptions,
@@ -85,7 +87,15 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                 return (): void => {
                     unRegisterPage(key);
                 };
-            }
+            },
+            registerExtensions: (extensions: Extension | Extension[]): void => {
+                if (Array.isArray(extensions)) {
+                    extensions.forEach((ex) => registerExtension(ex));
+                } else {
+                    registerExtension(extensions);
+                }
+            },
+            registerModuleSetting
         };
     };
 }

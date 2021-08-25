@@ -1,4 +1,5 @@
-import { ModuleSettings } from './moduleSettings';
+import { SimpleModuleSettings } from './moduleSettings';
+
 /**
  * This is a class meant for the settings module and will probably move when the
  * work on the settings module is in development.
@@ -8,7 +9,7 @@ import { ModuleSettings } from './moduleSettings';
  * @extends {ModuleSettings<T>}
  * @template T
  */
-export class EchoModuleSettings<T> extends ModuleSettings<T> {
+export class EchoModuleSettings<T> extends SimpleModuleSettings<T> {
     constructor(key: string, initialState: T, clear = false) {
         super(key, initialState);
         if (clear) {

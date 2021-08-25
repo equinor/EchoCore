@@ -31,8 +31,8 @@ const procosysProjectSettings: ProcosysProject = {
 export const settings: Settings = {
     showTextHighlighting: true,
     procosysProjectSettings,
-    plantSettings, 
-    showMeasuringPoints: false,
+    plantSettings,
+    showMeasuringPoints: false
 };
 
 export const plantsData: PlantsData = {
@@ -80,7 +80,9 @@ export const defaultGlobalState: GlobalState = {
     registry: {
         panels: {},
         routes: {},
-        appLinks: {}
+        appLinks: {},
+        extensions: {},
+        moduleSettings: {}
     },
     moduleContext: React.createContext({}) as ModuleContext<unknown>,
     moduleState: {},

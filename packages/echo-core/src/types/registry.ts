@@ -1,3 +1,4 @@
+import React from 'react';
 import { AppComponentProps } from './api';
 import { Dict } from './common';
 import { WrappedComponent } from './components';
@@ -14,6 +15,8 @@ export interface RegistryState {
     routes: Dict<RouteRegistration>;
     panels: Dict<EchoPanel>;
     appLinks: Dict<AppLink>;
+    moduleSettings: Dict<ModuleSettings>;
+    extensions: Dict<Extension>;
 }
 
 export interface AppLink extends AppLinkOptions {
@@ -23,6 +26,37 @@ export interface AppLink extends AppLinkOptions {
     description?: string;
 }
 
+export interface ModuleSettings {
+    name: string;
+    key: string;
+    description: string;
+    component: React.FC;
+}
+
+type ExtensionProps<T = {}> = T;
+
+export type ExtensionType =
+    | 'tag'
+    | 'document'
+    | 'mcPack'
+    | 'commPack'
+    | 'checkList'
+    | 'unknown'
+    | 'event'
+    | 'maintenanceRecord'
+    | 'punch'
+    | 'app'
+    | 'module';
+
+export interface Extension {
+    name: string;
+    key: string;
+    extensionTag?: string | string[];
+    description?: string;
+    icon?: string | React.FC;
+    type: ExtensionType;
+    component: React.FC<ExtensionProps>;
+}
 export interface AppLinkOptions {
     shortName?: string;
     homeScreen?: boolean;
