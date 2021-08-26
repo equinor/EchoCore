@@ -1,5 +1,5 @@
 import { useGlobalState } from '../state/useGlobalState';
-import { ProcosysProject, ProcosysProjectsData } from '../types/procosysProjects';
+import { ProcosysProjectCode, ProcosysProjectsData } from '../types/procosysProjects';
 
 /**
  * Hook for returning procosysProjectData from the global state.
@@ -16,6 +16,6 @@ export function useProcosysProjectsData(): ProcosysProjectsData {
  * @export
  * @return {*}  {string[]}
  */
-export function useProcosysProjects(): ProcosysProject[] {
+export function useProcosysProjects(): ProcosysProjectCode[] {
     return useProcosysProjectsData().procosysProjects;
 }

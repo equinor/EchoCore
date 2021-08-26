@@ -1,6 +1,6 @@
 import { readState } from '../actions/coreActions/globalActions';
 import { getCoreContext } from '../state/globalState';
-import { ProcosysProject } from '../types/procosysProjects';
+import { ProcosysProjectCode } from '../types/procosysProjects';
 import { setSetting } from './globalSettingsActions';
 import { persistEchoSetting } from './persistEchoSetting';
 
@@ -10,7 +10,7 @@ import { persistEchoSetting } from './persistEchoSetting';
  * @export Function from Echo Core.
  * @param {ProcosysProjectSettings} procosysProjectSettings selected procosys project data object.
  */
-export function setSelectedProcosysProject(procosysProjectSettings: ProcosysProject): void {
+export function setSelectedProcosysProject(procosysProjectSettings: ProcosysProjectCode): void {
     setSetting({ procosysProjectSettings });
     persistEchoSetting.persistSettingsInLocalStorage({ procosysProjectSettings });
 }
@@ -21,18 +21,9 @@ export function setSelectedProcosysProject(procosysProjectSettings: ProcosysProj
  * @export Function from Echo Core.
  * @return {*}  {string}
  */
-export function getSelectedProcosysProject(): ProcosysProject {
+export function getSelectedProcosysProject(): ProcosysProjectCode {
     return readState(getCoreContext(), (state) => {
         return state.settings.procosysProjectSettings;
     });
 }
 
-/**
- * Used for retrieving the selected procosys project code.
- *
- * @export Function from Echo Core.
- * @return {*}  {string}
- */
-export function getProcosysProjectCode(): string {
-    return getSelectedProcosysProject().projectCode;
-}

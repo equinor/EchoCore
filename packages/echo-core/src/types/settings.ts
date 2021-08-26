@@ -1,7 +1,7 @@
-import { ProcosysProject } from './procosysProjects';
+import { ProcosysProjectCode } from './procosysProjects';
 
 export interface Settings {
-    procosysProjectSettings: ProcosysProject;
+    procosysProjectSettings: ProcosysProjectCode;
     showTextHighlighting: boolean;
     plantSettings: PlantSettings;
     showMeasuringPoints: boolean;

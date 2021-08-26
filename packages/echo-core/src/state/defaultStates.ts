@@ -1,7 +1,7 @@
 import React from 'react';
 import { GlobalState, LegendOptions, ModuleContext } from '../types';
 import { PlantsData } from '../types/plants';
-import { ProcosysProject, ProcosysProjectsData } from '../types/procosysProjects';
+import { ProcosysProjectCode, ProcosysProjectsData } from '../types/procosysProjects';
 import { PlantSettings, Settings } from '../types/settings';
 
 export const legendOptions: LegendOptions = {
@@ -17,16 +17,7 @@ const plantSettings: PlantSettings = {
     plantName: ''
 };
 
-const procosysProjectSettings: ProcosysProject = {
-    projectCode: '',
-    stidDeliveryCode: 0,
-    description: '',
-    isRevProject: '',
-    filter: {
-        value: '',
-        text: ''
-    }
-};
+const procosysProjectSettings = '' as ProcosysProjectCode;
 
 export const settings: Settings = {
     showTextHighlighting: true,

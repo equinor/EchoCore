@@ -1,5 +1,5 @@
 import { useGlobalState } from '../state/useGlobalState';
-import { ProcosysProject } from '../types/procosysProjects';
+import { ProcosysProjectCode } from '../types/procosysProjects';
 import { PlantSettings, Settings } from '../types/settings';
 
 /**
@@ -63,16 +63,6 @@ export function useProCoSysPlantId(): string {
  * @export Hook fom Echo Core
  * @return {*}  {useProcosysProjectSettings}
  */
-export function useProcosysProjectSettings(): ProcosysProject {
+export function useProcosysProjectSettings(): ProcosysProjectCode {
     return useSettings().procosysProjectSettings;
-}
-
-/**
- * Echo Core hook function for getting the selected procosys project code.
- * @export Hook form Echo Core
- * @return {*}  {string}
- */
-export function useProcosysProjectCode(): string {
-    const { projectCode } = useProcosysProjectSettings();
-    return projectCode;
 }
