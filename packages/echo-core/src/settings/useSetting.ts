@@ -63,6 +63,6 @@ export function useProCoSysPlantId(): string {
  * @export Hook fom Echo Core
  * @return {*}  {useProcosysProjectSettings}
  */
-export function useProcosysProjectSettings(): ProcosysProjectCode {
-    return useSettings().procosysProjectSettings;
+export function useSelectedProcosysProject(): ProcosysProjectCode {
+    return useSettings().selectedProcosysProject;
 }

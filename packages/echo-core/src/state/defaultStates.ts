@@ -17,13 +17,13 @@ const plantSettings: PlantSettings = {
     plantName: ''
 };
 
-const procosysProjectSettings = '' as ProcosysProjectCode;
+const selectedProcosysProject = '' as ProcosysProjectCode;
 
 export const settings: Settings = {
     showTextHighlighting: true,
-    procosysProjectSettings,
-    plantSettings, 
-    showMeasuringPoints: false,
+    selectedProcosysProject,
+    plantSettings,
+    showMeasuringPoints: false
 };
 
 export const plantsData: PlantsData = {
