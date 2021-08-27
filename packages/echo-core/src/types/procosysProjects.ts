@@ -3,4 +3,4 @@ export interface ProcosysProjectsData {
     procosysProjectsHasError?: boolean;
 }
 
-export type ProcosysProjectCode = 'string';
+export type ProcosysProjectCode = string;
