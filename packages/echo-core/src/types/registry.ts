@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { AppComponentProps } from './api';
 import { Dict } from './common';
 import { WrappedComponent } from './components';
@@ -33,7 +33,7 @@ export interface ModuleSettings {
     component: React.FC;
 }
 
-type ExtensionProps<T = {}> = T;
+type ExtensionProps<T> = ComponentType<T>;
 
 export type ExtensionType =
     | 'tag'
@@ -55,7 +55,7 @@ export interface Extension {
     description?: string;
     icon?: string | React.FC;
     type: ExtensionType;
-    component: React.FC<ExtensionProps>;
+    component: React.FC<any>;
 }
 export interface AppLinkOptions {
     shortName?: string;
