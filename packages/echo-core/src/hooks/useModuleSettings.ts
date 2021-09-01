@@ -1,6 +1,13 @@
 import { ModuleSettings } from '../types/registry';
 import { useRegistry } from './useRegistry';
 
+/**
+ * Hook for using module settings, with a key, returns modulesettings
+ * for this key or empty array.
+ *
+ * @param key
+ * @returns
+ */
 export function useModuleSettings(key?: string): ModuleSettings[] {
     const { moduleSettings } = useRegistry();
 

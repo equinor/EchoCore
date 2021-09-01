@@ -4,6 +4,13 @@ import { Extension } from '../../types/registry';
 import { GlobalState } from '../../types/state';
 import { dispatch, readState } from './globalActions';
 
+/**
+ * Core Action for registering an extension.
+ * Key is used as an identifier
+ *
+ * @export
+ * @param extension
+ */
 export function registerExtension(extension: Extension): void {
     dispatch(getCoreContext(), (state: GlobalState) => ({
         ...state,

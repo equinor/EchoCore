@@ -2,7 +2,7 @@ import { SettingStore, store } from './settingsStore';
 
 /**
  * Class used for light module settings implementation. For registering proper module setting
- * new functionality wil come when echo is fully prepared for modularity.
+ * new functionality will come when echo is fully prepared for modularity.
  *
  * @export
  * @class ModuleSettings
@@ -18,7 +18,7 @@ export class SimpleModuleSettings<T> {
         this.setup<T>(key, initialState);
     }
     /**
-     * Setter function fro setting the module settings
+     * Setter function for setting the module settings
      * TODO: Persist data in local storage
      * @param {Partial<T>} value
      * @memberof ModuleSettings
@@ -75,7 +75,7 @@ export class SimpleModuleSettings<T> {
             this.store.moduleSettings[key] = initialState;
             this.key = key;
         } else {
-            throw TypeError('Key needs to be uniq!');
+            throw TypeError('Key needs to be unique!');
         }
     }
 }
