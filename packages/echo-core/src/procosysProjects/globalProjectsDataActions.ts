@@ -1,6 +1,6 @@
 import { dispatch, readState } from '../actions/coreActions/globalActions';
 import { getCoreContext } from '../state/globalState';
-import { ProcosysProject, ProcosysProjectsData } from '../types/procosysProjects';
+import { ProcosysProjectCode, ProcosysProjectsData } from '../types/procosysProjects';
 import { GlobalState } from '../types/state';
 import { persistProcosysProjectsData } from './persistProjectsData';
 
@@ -31,6 +31,6 @@ export function getProcosysProjectsData(): Readonly<ProcosysProjectsData> {
  * @export
  * @return {*}  {Readonly<string[]>}
  */
-export function getProcosysProjects(): Readonly<ProcosysProject[]> {
+export function getProcosysProjects(): Readonly<ProcosysProjectCode[]> {
     return getProcosysProjectsData().procosysProjects;
 }

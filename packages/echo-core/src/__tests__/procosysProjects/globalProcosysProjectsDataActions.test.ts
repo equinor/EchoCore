@@ -17,28 +17,7 @@ function initialize(): void {
 }
 
 const mockProcosysProjectsData: ProcosysProjectsData = {
-    procosysProjects: [
-        {
-            projectCode: 'code',
-            stidDeliveryCode: 0,
-            description: 'desc',
-            isRevProject: 'Y',
-            filter: {
-                value: 'code',
-                text: 'code'
-            }
-        },
-        {
-            projectCode: 'code',
-            stidDeliveryCode: 0,
-            description: 'desc',
-            isRevProject: 'Y',
-            filter: {
-                value: 'code',
-                text: 'code'
-            }
-        }
-    ]
+    procosysProjects: ['code1', 'code2']
 };
 
 describe('globalProcosysProjectsDataActions', () => {
