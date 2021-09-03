@@ -10,13 +10,13 @@ export const analytics = {
     createAnalyticsModule
 };
 
-function appInsightsSetUser(userName: string, userId: string): void {
+function setUser(userName: string, userId: string): void {
     const obfuscatedUser = obfuscateUser(userName, userId);
     appInsightsInstance.setAuthenticatedUserContext(obfuscatedUser.id, obfuscatedUser.domain, true);
 }
 
 export const analyticsConfiguration = {
-    appInsightsSetUser,
-    analyticsSetInstCode,
-    analyticsSetUserCompany
+    setUser,
+    setInstCode: analyticsSetInstCode,
+    setUserCompany: analyticsSetUserCompany
 };
