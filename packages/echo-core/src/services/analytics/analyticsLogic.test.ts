@@ -6,7 +6,7 @@ import {
     obfuscateUser,
     upperCaseFirstLetter
 } from './analyticsLogic';
-import { EventName } from './analyticsTypes';
+import { AnalyticsEventName } from './analyticsTypes';
 
 describe('obfuscatedUser', () => {
     it('should return sha1 userId and correct lowercase domain', () => {
@@ -42,12 +42,12 @@ describe('appInsights: lowerCaseFirstLetter', () => {
 
 describe('appInsights: eventNameToString with correct casing', () => {
     it('should convert to ep.AnObject.ClickedAndOpened', () => {
-        const eventName: EventName = { objectName: 'anObject', actionName: 'clickedAndOpened' };
+        const eventName: AnalyticsEventName = { objectName: 'anObject', actionName: 'clickedAndOpened' };
         const actual = eventNameToString('ep', eventName);
         expect(actual).toEqual('ep.AnObject.ClickedAndOpened');
     });
     it('should convert to moduleName to subModule format: ep_moduleName.AnObject.ClickedAndOpened', () => {
-        const eventName: EventName = { objectName: 'anObject', actionName: 'clickedAndOpened' };
+        const eventName: AnalyticsEventName = { objectName: 'anObject', actionName: 'clickedAndOpened' };
         const actual = eventNameToString('ModuleName', eventName);
         expect(actual).toEqual('ep_moduleName.AnObject.ClickedAndOpened');
     });

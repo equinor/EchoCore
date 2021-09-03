@@ -1,5 +1,5 @@
 import sha1 from 'sha1';
-import { EventName } from './analyticsTypes';
+import { AnalyticsEventName } from './analyticsTypes';
 
 export interface ObfuscatedUser {
     id: string;
@@ -20,7 +20,7 @@ export function lowerCaseFirstLetter(value: string): string {
     return value.charAt(0).toLocaleLowerCase() + value.slice(1);
 }
 
-export function eventNameToString(moduleName: string, eventNameItem: EventName): string {
+export function eventNameToString(moduleName: string, eventNameItem: AnalyticsEventName): string {
     const name = appWithModuleName(moduleName);
     return `${name}.${upperCaseFirstLetter(eventNameItem.objectName)}.${upperCaseFirstLetter(
         eventNameItem.actionName

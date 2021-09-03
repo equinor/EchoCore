@@ -1,11 +1,11 @@
-export type propertyTypes = { [key: string]: string | number | boolean | string[] };
+export type AnalyticsPropertyTypes = { [key: string]: string | number | boolean | string[] };
 
 export interface AnalyticsEvent {
-    eventName: EventName;
-    properties: propertyTypes;
+    eventName: AnalyticsEventName;
+    properties: AnalyticsPropertyTypes;
 }
 
-export interface EventName {
+export interface AnalyticsEventName {
     objectName: string;
     actionName: string;
 }

@@ -2,7 +2,7 @@ import { BaseError, ForbiddenError, ValidationError } from '@equinor/echo-base';
 import { IExceptionTelemetry, SeverityLevel } from '@microsoft/applicationinsights-web';
 import { EchoEnv } from '../../EchoEnv';
 import { appWithModuleName, eventNameToString } from './analyticsLogic';
-import { AnalyticsEvent, EventName, propertyTypes } from './analyticsTypes';
+import { AnalyticsEvent, AnalyticsEventName, AnalyticsPropertyTypes } from './analyticsTypes';
 import { appInsightsInstance } from './appInsightWrapper';
 import OfflineTracker from './offlineTracker';
 
@@ -66,7 +66,7 @@ export class AnalyticsModule {
         this.offlineTracker.setOffline();
     }
 
-    trackEventBy(objectName: string, actionName: string, properties: propertyTypes): void {
+    trackEventBy(objectName: string, actionName: string, properties: AnalyticsPropertyTypes): void {
         this.trackEvent(this.createEventLog(objectName, actionName, properties));
     }
 
@@ -126,14 +126,14 @@ export class AnalyticsModule {
         }
     }
 
-    createEventLog(objectName: string, actionName: string, data: propertyTypes): AnalyticsEvent {
+    createEventLog(objectName: string, actionName: string, data: AnalyticsPropertyTypes): AnalyticsEvent {
         return {
             eventName: this.eventName(objectName, actionName),
             properties: data
         } as AnalyticsEvent;
     }
 
-    private eventName(objectName: string, actionName: string): EventName {
+    private eventName(objectName: string, actionName: string): AnalyticsEventName {
         return { objectName: objectName, actionName: actionName };
     }
 }
