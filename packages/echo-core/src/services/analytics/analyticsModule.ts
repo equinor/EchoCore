@@ -98,7 +98,7 @@ export class AnalyticsModule {
         appInsightsInstance.trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
     }
 
-    logErrorToAppInsights(error: Error | BaseError): void {
+    logError(error: Error | BaseError): void {
         if (error instanceof BaseError) {
             if (error.hasBeenLogged) {
                 return;
