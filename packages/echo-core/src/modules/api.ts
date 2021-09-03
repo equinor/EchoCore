@@ -7,11 +7,12 @@ import {
     registerPage,
     registerPanels,
     unRegisterApp,
-    unRegisterPage
+    unRegisterPage,
+    unRegisterPanels
 } from '../actions/coreActions';
 import { registerExtension } from '../actions/coreActions/extensions';
-import { registerModuleSetting } from '../actions/coreActions/moduleSettings';
-import { Extension, RouteRegistration } from '../types';
+import { registerModuleSetting, unRegisterModuleSetting } from '../actions/coreActions/moduleSettings';
+import { Extension, Panel, RouteRegistration } from '../types';
 import {
     AppComponentProps,
     AppOptions,
@@ -37,7 +38,7 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
             meta,
             eventHub,
             registerApp: (component: WrappedComponent<AppComponentProps>, options: AppOptions = {}): UnRegisterApp => {
-                const { mainMenu, icon, panels, panelsOptions, ...rest } = options;
+                const { mainMenu, icon, panels, panelsOptions, moduleSetting, ...rest } = options;
                 const appOptions: RegisterAppOptions = {
                     ...rest,
                     component,
@@ -48,10 +49,29 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                     icon: icon ? icon : 'category',
                     mainMenu: mainMenu === undefined ? true : mainMenu ? true : false
                 };
+
                 registerApp(appKey, appOptions);
-                if (options.panels) registerPanels(appKey, panels, panelsOptions);
+
+                if (panels) {
+                    if (Array.isArray(panels)) {
+                        const appPanels: Panel[] = panels.map((basePanel) => {
+                            const panel = { ...basePanel, key: appKey };
+                            return panel as Panel;
+                        });
+                        registerPanels(appKey, appPanels, panelsOptions);
+                    } else {
+                        registerPanels(appKey, { ...panels, key: appKey }, panelsOptions);
+                    }
+                }
+
+                if (moduleSetting) {
+                    registerModuleSetting({ ...moduleSetting, name, key: appKey });
+                }
+
                 return (): void => {
                     unRegisterApp(appKey);
+                    panels && unRegisterPanels(appKey);
+                    moduleSetting && unRegisterModuleSetting(appKey);
                 };
             },
             registerAppSubPage: (subPath: string, component: React.FC, options?: PageOptions): UnRegisterPage => {

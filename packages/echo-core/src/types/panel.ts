@@ -8,13 +8,17 @@ export enum PanelType {
     all = 'all'
 }
 
-export interface Panel {
+export type AppPanel = BasePanel;
+
+export interface BasePanel {
     panelType: PanelType;
     component: AnyComponent<any>;
-    key: string;
     label: string;
     icon: Icon;
     disabled?: boolean;
+}
+export interface Panel extends BasePanel {
+    key: string;
 }
 
 export interface EchoPanel {

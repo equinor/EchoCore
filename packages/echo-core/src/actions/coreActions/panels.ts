@@ -45,7 +45,7 @@ export function registerPanels<TKey extends string>(
  * @param {TKey} key
  * @param {(Panel | Array<Panel>)} panels
  */
-function unRegisterPanels<TKey extends string>(key: TKey): void {
+export function unRegisterPanels<TKey extends string>(key: TKey): void {
     dispatch(getCoreContext(), (s: GlobalState) => ({
         ...s,
         registry: {

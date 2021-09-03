@@ -3,11 +3,13 @@ import React from 'react';
 import { RegisterAppOptions } from '../actions/coreActions/app';
 import { EchoPanelOptions, Panel, PanelUI } from './';
 import { RouteBaseProps, WrappedComponent } from './components';
-import { AppLinkOptions, Extension, ModuleSettings } from './registry';
+import { AppPanel } from './panel';
+import { AppLinkOptions, AppModuleSettings, Extension, ModuleSettings } from './registry';
 
 export type VoidFunction = () => void;
 export type UnRegisterPage = VoidFunction;
 export type UnRegisterPanels = VoidFunction;
+export type unRegisterModuleSetting = VoidFunction;
 export type UnRegisterApp = VoidFunction;
 export type RegisterApp = (appComponent: WrappedComponent<AppComponentProps>, options?: AppOptions) => UnRegisterApp;
 export type RegisterPanels = (key: string, panels: Panel[], options?: Partial<EchoPanelOptions>) => UnRegisterPanels;
@@ -16,6 +18,7 @@ export type UpdatePanelUI = (ui?: PanelUI, key?: string) => void;
 export type RegisterPage = (path: string, component: React.FC, options?: PageOptions) => UnRegisterPage;
 export type RegisterModuleSettings = (moduleSetting: ModuleSettings) => void;
 export type RegisterExtensions = (extensions: Extension | Extension[]) => void;
+export type UnRegisterExtensions = VoidFunction;
 
 declare module '@equinor/echo-base' {
     /**
@@ -81,11 +84,12 @@ export interface AppOptions extends AppLinkOptions {
     layoutKey?: string;
     icon?: string;
     description?: string;
-    panels?: Panel[] | Panel;
+    panels?: AppPanel[] | AppPanel;
     panelsOptions?: Partial<EchoPanelOptions>;
     params?: string;
     customHeaderSection?: React.FC;
     exactPath?: boolean;
+    moduleSetting?: AppModuleSettings;
 }
 
 export interface PageOptions {
