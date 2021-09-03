@@ -21,14 +21,14 @@ class OfflineTracker {
     setOnline(): OfflineEvent | null {
         this.offline = false;
         const timeOfflineMilliseconds: number = Date.now() - this.offlineStart;
-        let ev: OfflineEvent | null = null;
+        let offlineEvent: OfflineEvent | null = null;
         if (
             this.offlineStart > 0 &&
             timeOfflineMilliseconds > this.offlineThresholdSeconds * 1000 &&
             this.actionsPerformed.length > 0
         ) {
             const minutesOffline = Number((timeOfflineMilliseconds / 1000 / 60).toFixed(2));
-            ev = {
+            offlineEvent = {
                 object: 'Application',
                 action: 'TrackOffline',
                 minutesOffline: minutesOffline,
@@ -37,7 +37,7 @@ class OfflineTracker {
         }
         this.offlineStart = 0;
         this.actionsPerformed = [];
-        return ev;
+        return offlineEvent;
     }
 
     setOffline(): void {

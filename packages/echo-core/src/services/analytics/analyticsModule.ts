@@ -53,11 +53,11 @@ export class AnalyticsModule {
     }
 
     private trackOnline(): void {
-        const evt = this.offlineTracker.setOnline();
-        if (evt) {
-            this.trackEvent2(evt.object, evt.action, {
-                minutesOffline: evt.minutesOffline,
-                actionsPerformed: evt.actionsPerformed
+        const offlineEvent = this.offlineTracker.setOnline();
+        if (offlineEvent) {
+            this.trackEventBy(offlineEvent.object, offlineEvent.action, {
+                minutesOffline: offlineEvent.minutesOffline,
+                actionsPerformed: offlineEvent.actionsPerformed
             });
         }
     }
@@ -66,7 +66,7 @@ export class AnalyticsModule {
         this.offlineTracker.setOffline();
     }
 
-    trackEvent2(objectName: string, actionName: string, properties: propertyTypes): void {
+    trackEventBy(objectName: string, actionName: string, properties: propertyTypes): void {
         this.trackEvent(this.createEventLog(objectName, actionName, properties));
     }
 

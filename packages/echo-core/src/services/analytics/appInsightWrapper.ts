@@ -30,11 +30,11 @@ class AppInsightsWrapper {
         this.appInsights.setAuthenticatedUserContext(obfuscatedUser.id, obfuscatedUser.domain, true);
     }
 
-    trackException(exception: IExceptionTelemetry) {
+    trackException(exception: IExceptionTelemetry): void {
         this.appInsights.trackException(exception);
     }
 
-    trackEvent(event: IEventTelemetry, customProperties?: ICustomProperties | undefined) {
+    trackEvent(event: IEventTelemetry, customProperties?: ICustomProperties | undefined): void {
         this.appInsights.trackEvent(event, customProperties);
     }
 
