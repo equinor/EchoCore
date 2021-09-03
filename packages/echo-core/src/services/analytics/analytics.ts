@@ -1,5 +1,5 @@
+import { obfuscateUser } from './analyticsLogic';
 import { AnalyticsModule, analyticsSetInstCode, analyticsSetUserCompany } from './analyticsModule';
-import { obfuscateUser } from './appInSightsLogic';
 import { appInsightsInstance } from './appInsightWrapper';
 
 function createAnalyticsModule(moduleShortName: string): AnalyticsModule {

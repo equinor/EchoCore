@@ -5,8 +5,8 @@ import {
     ObfuscatedUser,
     obfuscateUser,
     upperCaseFirstLetter
-} from './appInSightsLogic';
-import { EventName } from './appInsightTypes';
+} from './analyticsLogic';
+import { EventName } from './analyticsTypes';
 
 describe('obfuscatedUser', () => {
     it('should return sha1 userId and correct lowercase domain', () => {

@@ -1,8 +1,8 @@
 import { BaseError, ForbiddenError, ValidationError } from '@equinor/echo-base';
 import { IExceptionTelemetry, SeverityLevel } from '@microsoft/applicationinsights-web';
 import { EchoEnv } from '../../EchoEnv';
-import { appWithModuleName, eventNameToString } from './appInSightsLogic';
-import { AnalyticsEvent, EventName, propertyTypes } from './appInsightTypes';
+import { appWithModuleName, eventNameToString } from './analyticsLogic';
+import { AnalyticsEvent, EventName, propertyTypes } from './analyticsTypes';
 import { appInsightsInstance } from './appInsightWrapper';
 import OfflineTracker from './offlineTracker';
 

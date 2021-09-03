@@ -5,7 +5,7 @@ import {
     IExceptionTelemetry
 } from '@microsoft/applicationinsights-web';
 import { EchoEnv } from '../../EchoEnv';
-import { obfuscateUser } from './appInSightsLogic';
+import { obfuscateUser } from './analyticsLogic';
 
 const key = EchoEnv.env().REACT_APP_APPINSIGHTS_INSTRUMENTATIONKEY;
 

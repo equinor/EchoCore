@@ -1,5 +1,5 @@
 import sha1 from 'sha1';
-import { EventName } from './appInsightTypes';
+import { EventName } from './analyticsTypes';
 
 export interface ObfuscatedUser {
     id: string;
