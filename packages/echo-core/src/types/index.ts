@@ -8,5 +8,7 @@ export * from './procosysProjects';
 export * from './registry';
 export * from './settings';
 export * from './state';
+export * from './tag';
+export * from './tagDetails';
 export * from './ui';
 export * from './userProperties';
