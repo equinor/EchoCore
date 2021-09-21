@@ -1,9 +1,10 @@
+import { EchoEvents } from '@equinor/echo-base';
 import { useHistory } from 'react-router';
 import { createOfflineMessage } from '../message/message';
 import { AppLinkOptions } from '../types/registry';
 import { useEchoEventHub } from './useEchoEventHub';
 
-type Link = (linkTo: string, options?: AppLinkOptions) => void;
+export type Link = (linkTo: string, options?: AppLinkOptions) => void;
 
 /**
  *
@@ -23,8 +24,9 @@ export function useInternalLink(): Link {
      */
     function Link(linkTo: string, options: Partial<AppLinkOptions> = { mainMenu: true, params: '' }): void {
         const { requiresOnline, onClick, eventTracker, params } = options;
+
         if (requiresOnline && !navigator.onLine) {
-            eventHub.emit('warning', createOfflineMessage());
+            eventHub.emit(EchoEvents.Toaster, { message: createOfflineMessage() });
             return;
         }
 
