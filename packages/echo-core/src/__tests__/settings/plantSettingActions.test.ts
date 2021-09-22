@@ -4,7 +4,6 @@ import { defaultGlobalState } from '../../state/defaultStates';
 import { getCoreContext } from '../../state/globalState';
 import { PlantSettings } from '../../types';
 
-
 beforeEach(() => {
     initialize();
 });
