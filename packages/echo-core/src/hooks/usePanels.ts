@@ -36,7 +36,7 @@ export function usePanels(panelType = String(PanelType.left)): UsePanels {
     const panelsDict = useGlobalPanels();
     const corePanels = useCorePanels();
     const [modulePanels, setModulePanels] = useState<Panel[]>([]);
-    const { activePanel, activeModulePanels, ui } = useActivePanelState();
+    const { activePanel, activeModulePanels } = useActivePanelState();
     const [panelUI, setPanelUI] = useState<PanelUI>({});
     const [isPanelActive, setIsPanelActive] = useState<boolean>(false);
 
@@ -53,20 +53,33 @@ export function usePanels(panelType = String(PanelType.left)): UsePanels {
                     activePanelState: { ...s.app.activePanelState, ...newActivePanel }
                 }
             }));
+            setPanelUI({});
         },
         [activePanel]
     );
 
     useEffect(() => {
-        if (ui) {
-            setPanelUI({ ...ui });
-        } else {
+        if (activePanel === '') {
             setPanelUI({});
+            return;
         }
-    }, [ui]);
+        const currentActivePanel: Panel | undefined = modulePanels.find((panel: Panel) => panel.key === activePanel);
+        if (currentActivePanel && currentActivePanel.customUiStates) {
+            const activeCustomUiState =
+                currentActivePanel.defaultActiveUiState && !isPanelActive
+                    ? currentActivePanel.defaultActiveUiState
+                    : currentActivePanel?.activeCustomUiState && currentActivePanel?.activeCustomUiState !== ''
+                    ? currentActivePanel?.activeCustomUiState
+                    : 'open';
+            const uiState = currentActivePanel.customUiStates[activeCustomUiState];
+
+            setPanelUI({ ...uiState });
+        }
+    }, [activePanel, isPanelActive, modulePanels]);
 
     useEffect(() => {
-        if (!!modulePanels.find((panel: Panel) => panel.key === activePanel)) setIsPanelActive(true);
+        const currentActivePanel: Panel | undefined = modulePanels.find((panel: Panel) => panel.key === activePanel);
+        if (currentActivePanel) setIsPanelActive(true);
         else setIsPanelActive(false);
     }, [activePanel, modulePanels]);
 
@@ -83,10 +96,9 @@ export function usePanels(panelType = String(PanelType.left)): UsePanels {
         }
 
         const { panels, options } = activeAppPanels;
-        const { addSearch, panel, panelButton, panelWrapper } = options;
+        const { addSearch } = options;
 
         if (panels) {
-            setPanelUI({ panel, panelButton, panelWrapper });
             const combinedPanels = combinePanels(panels, addSearch ? addSearch : false, getCorePanels, corePanels);
             setModulePanels(
                 panelType === PanelType.all
@@ -97,3 +109,5 @@ export function usePanels(panelType = String(PanelType.left)): UsePanels {
     }, [panelsDict, setActivePanel, panelType, corePanels, activeModulePanels]);
     return { modulePanels, setActivePanel, activePanel, isPanelActive, panelUI };
 }
+
+// setPanelUI({ panel, panelButton, panelWrapper });

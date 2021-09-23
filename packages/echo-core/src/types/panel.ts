@@ -8,6 +8,10 @@ export enum PanelType {
     all = 'all'
 }
 
+export interface UiStates {
+    open: PanelUI;
+    [key: string]: PanelUI;
+}
 export interface Panel {
     panelType: PanelType;
     component: AnyComponent<any>;
@@ -15,6 +19,9 @@ export interface Panel {
     label: string;
     icon: Icon;
     disabled?: boolean;
+    customUiStates?: UiStates;
+    activeCustomUiState?: string;
+    defaultActiveUiState?: string;
 }
 
 export interface EchoPanel {
@@ -29,7 +36,7 @@ export interface ActivePanel {
     ui?: PanelUI;
 }
 
-export interface EchoPanelOptions extends PanelUI {
+export interface EchoPanelOptions {
     addSearch: boolean;
 }
 

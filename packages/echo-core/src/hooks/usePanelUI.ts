@@ -10,3 +10,31 @@ export function usePanelUI(): PanelUI {
     const { ui } = useAtom(CoreContext.state);
     return ui;
 }
+
+// const panels = {
+//     test: 'hello',
+//     test2: 'world!'
+// };
+
+// function setActivePanelUI(key: string) {
+//     console.log(key);
+// }
+
+// export function customPanelUI() {
+//     let funcList: Record<string, () => void> = {};
+
+//     Object.keys(panels).forEach((key) => {
+//         funcList = {
+//             ...funcList,
+//             [key]: (): void => {
+//                 setActivePanelUI(key);
+//             }
+//         };
+//     });
+
+//     return funcList;
+// }
+
+// const setPanels = customPanelUI();
+
+// setPanels.test();
