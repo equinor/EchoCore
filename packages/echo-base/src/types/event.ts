@@ -13,6 +13,7 @@ export type UnsubscribeFunction = () => void;
 
 export enum EchoEvents {
     PlantChanged = 'plantChanged',
+    ProcosysProjectChanged = 'procosysProjectChanged',
     Toaster = 'toaster'
 }
 

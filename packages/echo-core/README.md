@@ -12,32 +12,32 @@ Everything a Echo app needs to communicate with the core.
 ![@equinor/echo-core](https://badgen.net/bundlephobia/minzip/@equinor/echo-core) ![@equinor/echo-core](https://badgen.net/bundlephobia/min/@equinor/echo-core)
 ![@equinor/echo-core](https://badgen.net/bundlephobia/dependency-count/@equinor/echo-core)
 
-- [EchoCore](#echocore)
-- [Install](#install)
-    - [NPM](#npm)
-- [Development](#development)
-    - [NPM build](#npm-build)
-    - [NPM build watch](#npm-build-watch)
-- [Writing and running tests](#writing-and-running-tests)
-- [Link echo-core](#link-echo-core)
-  - [YALC Link](#yalc-link)
-    - [installation](#installation)
-    - [Publish](#publish)
-    - [Link / Add](#link--add)
-    - [Update](#update)
-  - [NPM link](#npm-link)
-  - [NPM Unlinking echo-core](#npm-unlinking-echo-core)
-- [Echo Modules](#echo-modules)
-  - [Register application components with Setup](#register-application-components-with-setup)
-    - [Register App](#register-app)
-    - [Register with Key](#register-with-key)
-    - [Panels](#panels)
-    - [Register Page / Route](#register-page--route)
-  - [Manifest](#manifest)
-- [Global State](#global-state)
-  - [Module State / Context](#module-state--context)
-    - [Module Context and state](#module-context-and-state)
-  - [RegistryState](#registrystate)
+-   [EchoCore](#echocore)
+-   [Install](#install)
+    -   [NPM](#npm)
+-   [Development](#development)
+    -   [NPM build](#npm-build)
+    -   [NPM build watch](#npm-build-watch)
+-   [Writing and running tests](#writing-and-running-tests)
+-   [Link echo-core](#link-echo-core)
+    -   [YALC Link](#yalc-link)
+        -   [installation](#installation)
+        -   [Publish](#publish)
+        -   [Link / Add](#link--add)
+        -   [Update](#update)
+    -   [NPM link](#npm-link)
+    -   [NPM Unlinking echo-core](#npm-unlinking-echo-core)
+-   [Echo Modules](#echo-modules)
+    -   [Register application components with Setup](#register-application-components-with-setup)
+        -   [Register App](#register-app)
+        -   [Register with Key](#register-with-key)
+        -   [Panels](#panels)
+        -   [Register Page / Route](#register-page--route)
+    -   [Manifest](#manifest)
+-   [Global State](#global-state)
+    -   [Module State / Context](#module-state--context)
+        -   [Module Context and state](#module-context-and-state)
+    -   [RegistryState](#registrystate)
 
 # Install
 
@@ -364,3 +364,44 @@ interface RegistryState {
 ```
 
 As EchoCore' responsibility is mainly ot provide developers the tools to register and retrieve information form the global state the usage of the `RegistryState` can be found in EchoFramework's documentation which can be found [here](https://github.com/equinor/EchoFramework)
+
+## Analytics
+
+Logging to Application Insights.
+
+Analytics general info in runbook [here](https://github.com/equinor/Echo/blob/master/docs/client-analytics.md)
+
+Create the logging module with:
+
+```TS
+const analyticsLog = analytics.createAnalyticsModule("xld");
+```
+
+Log event with:
+
+```TS
+    analyticsLog.trackEvent(event: AnalyticsEvent)
+    analyticsLog.trackEventBy(objectName: string, actionName: string, properties: AnalyticsPropertyTypes)
+
+    analyticsLog.trackEventBy("Document", "Opened", {docNo: "abc123", fileId: 12345 })
+```
+
+The format in Application Insights will be:
+
+-   appId.Object.Action
+-   appId_subModule.Object.Action
+-   ep.Pdf.Opened
+-   ep_xld.Document.Opened
+-   ep_3d.Viewer.ClickedTag
+
+Error logging should usually not be called directly. Instead use handleError (TODO - update this documentation when we have handleError in core), which will report the error to appInsight.
+
+```TS
+    analyticsLog.logError(error)
+```
+
+Echo-inField should in addition do some configuration, like setting user, instCode and company, which will be supplied with each event.
+
+```TS
+    analyticsConfiguration
+```
