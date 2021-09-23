@@ -1,12 +1,12 @@
 import { BaseError } from '@equinor/echo-base';
-import { EchoCore } from '../../EchoCore';
 import { EchoEnv } from '../../EchoEnv';
+import { echoClient } from '../echoClient/echoClient';
 
 export const baseApiUrl = EchoEnv.env().REACT_APP_API_URL;
 
 export async function request<T>(url: string, requestType: T): Promise<T> {
     EchoEnv.isDevelopment() && console.log('Fetch:', url);
-    const response: Response = await EchoCore.EchoClient.fetch(url);
+    const response: Response = await echoClient.fetch(url);
     const contentType = response.headers.get('content-type');
     EchoEnv.isDevelopment() && console.log(response.status, url);
     if (

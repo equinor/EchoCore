@@ -7,6 +7,7 @@ import { useLegendOptions } from './hooks/useLegendOptions';
 import { useEchoSetup } from './hooks/useSetup';
 import { useUserPhoto } from './hooks/useUserPhoto';
 import { useUserProfile } from './hooks/useUserProfile';
+import * as apis from './services/api';
 import { EchoAuthProvider } from './services/authentication/echoProvider';
 import { echoClient } from './services/echoClient/echoClient';
 import * as moduleState from './state';
@@ -28,6 +29,7 @@ export const EchoCore = {
     hooks,
     moduleState: { ...moduleState, ...moduleActions },
     error,
+    apis,
     keys: {
         ECHO_CORE_MAIN: ECHO_CORE_MAIN,
         ECHO_CORE_SEARCH: ECHO_CORE_SEARCH

@@ -1,15 +1,5 @@
+import { EchoHubPlant } from '../../types/plants';
 import { baseApiUrl, request } from './api-manager';
-
-export interface EchoHubPlant {
-    plantCode: string;
-    installationCode: string;
-    projectDescription: string;
-    plantDirectory: string;
-    operationArea: string;
-    availableInEcho3D: boolean;
-    sapId: number;
-    ayelixSiteId?: number;
-}
 
 /**
  * Fetches plant information from API
