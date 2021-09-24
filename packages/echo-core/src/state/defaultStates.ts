@@ -22,8 +22,7 @@ const selectedProcosysProject = '' as ProcosysProjectCode;
 export const settings: Settings = {
     showTextHighlighting: true,
     selectedProcosysProject,
-    plantSettings,
-    showMeasuringPoints: false
+    plantSettings
 };
 
 export const plantsData: PlantsData = {
