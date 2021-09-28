@@ -10,7 +10,7 @@ import { PlantsData } from './plants';
 import { ProcosysProjectsData } from './procosysProjects';
 import { RegistryState } from './registry';
 import { Settings } from './settings';
-import { PanelUI, UI } from './ui';
+import { UI } from './ui';
 
 /**
  * The global state, the hart of Echo. The state contains user related data,
@@ -84,7 +84,6 @@ export interface ActiveState {
     activeTagNo: string;
     activeDocumentNo: string;
     activeFileId: string;
-    ui?: PanelUI;
 }
 
 /**

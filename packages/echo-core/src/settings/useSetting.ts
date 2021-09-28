@@ -59,9 +59,9 @@ export function useProCoSysPlantId(): string {
 }
 
 /**
- * Echo Core hook function for getting the procosys project settings from echo core state.
+ * Echo Core hook function for getting the procosys project.
  * @export Hook fom Echo Core
- * @return {*}  {useProcosysProjectSettings}
+ * @return {string}  {ProcosysProjectCode}
  */
 export function useSelectedProcosysProject(): ProcosysProjectCode {
     return useSettings().selectedProcosysProject;

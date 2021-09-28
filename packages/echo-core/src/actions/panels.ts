@@ -102,3 +102,36 @@ export function setActiveModulePanels(key: string): void {
         };
     });
 }
+
+/**
+ * When defining panel sates when registering an app.
+ * This function allows you to toggle between them using the key used in the state. *
+ * @export
+ * @param {string} key
+ */
+export function setCustomUIPanelState(key: string): void {
+    dispatch(getCoreContext(), (s: GlobalState) => {
+        const activePanelsKey = s.app.activePanelState.activeModulePanels;
+        const activePanelKey = s.app.activePanelState.activePanel;
+        const panelIndex = s.registry.panels[activePanelsKey].panels.findIndex((panel) => panel.key === activePanelKey);
+
+        if (panelIndex === -1) return s;
+        const panels = s.registry.panels[activePanelsKey].panels;
+        panels[panelIndex].activeCustomUiState = key;
+
+        return {
+            ...s,
+
+            registry: {
+                ...s.registry,
+                panels: {
+                    ...s.registry.panels,
+                    [activePanelsKey]: {
+                        ...s.registry.panels[activePanelsKey],
+                        panels
+                    }
+                }
+            }
+        };
+    });
+}
