@@ -17,7 +17,7 @@ interface UsePanels {
 }
 
 /**
- *
+ * Hook for getting the global panels object
  *
  * @export
  * @return {*}  {Dict<Panel[]>}
@@ -68,8 +68,8 @@ export function usePanels(panelType = String(PanelType.left)): UsePanels {
             const activeCustomUiState =
                 currentActivePanel.defaultActiveUiState && !isPanelActive
                     ? currentActivePanel.defaultActiveUiState
-                    : currentActivePanel?.activeCustomUiState && currentActivePanel?.activeCustomUiState !== ''
-                    ? currentActivePanel?.activeCustomUiState
+                    : currentActivePanel.activeCustomUiState && currentActivePanel.activeCustomUiState !== ''
+                    ? currentActivePanel.activeCustomUiState
                     : 'open';
             const uiState = currentActivePanel.customUiStates[activeCustomUiState];
 
@@ -109,5 +109,3 @@ export function usePanels(panelType = String(PanelType.left)): UsePanels {
     }, [panelsDict, setActivePanel, panelType, corePanels, activeModulePanels]);
     return { modulePanels, setActivePanel, activePanel, isPanelActive, panelUI };
 }
-
-// setPanelUI({ panel, panelButton, panelWrapper });
