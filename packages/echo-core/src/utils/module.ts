@@ -6,6 +6,7 @@ export function addOrOverwrite(modules: Array<AppModule>, module: AppModule): Ap
     return [];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function removeModuleByKey<TKey extends string>(modules: AppModule[], key: TKey): AppModule[] {
     return [];
 }

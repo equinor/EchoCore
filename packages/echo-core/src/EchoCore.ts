@@ -9,6 +9,7 @@ import { useUserPhoto } from './hooks/useUserPhoto';
 import { useUserProfile } from './hooks/useUserProfile';
 import { EchoAuthProvider } from './services/authentication/echoProvider';
 import { echoClient } from './services/echoClient/echoClient';
+import { errorHandler } from './services/errorHandler/errorHandler';
 import * as moduleState from './state';
 import { useAppModuleState } from './state/useAppModuleState';
 import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './types';
@@ -27,6 +28,8 @@ export const EchoCore = {
     // Exposing all core Hooks
     hooks,
     moduleState: { ...moduleState, ...moduleActions },
+    handleErrors: errorHandler.handleErrors,
+    setErrorHandler: errorHandler.setErrorHandler,
     error,
     keys: {
         ECHO_CORE_MAIN: ECHO_CORE_MAIN,
