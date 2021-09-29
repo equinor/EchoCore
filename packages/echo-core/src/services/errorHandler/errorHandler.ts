@@ -7,7 +7,6 @@ interface ErrorHandler {
     handleErrors: ErrorHandlerFunction;
 }
 
-// TODO: Remove when handleErrors is properly moved (and possibly reworked) to Core from EchoPedia
 export const errorHandler = ((): ErrorHandler => {
     let errorHandlerFunction: ErrorHandlerFunction | undefined;
 
