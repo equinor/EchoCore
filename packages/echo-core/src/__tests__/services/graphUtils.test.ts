@@ -24,13 +24,20 @@ const mockedEchoAuthProvider = EchoAuthProvider as jest.Mocked<typeof EchoAuthPr
 beforeEach(() => {
     jest.resetModules();
     jest.clearAllMocks();
+
+    const accountMock = {
+        account: { username: 'test@test.no' }
+    } as unknown;
+
+    mockedEchoAuthProvider.userProperties.account = accountMock as AccountInfo;
 });
 
 const globalConsoleMethod = global.console;
 const globalFetchMethod = window.fetch;
 beforeAll(() => {
-    // removes console log in test run
-    global.console = ({ log: jest.fn(), error: jest.fn() } as unknown) as Console;
+    // overrides console log with a mock in test run
+    const mockConsole = { log: jest.fn(), error: jest.fn() } as unknown;
+    global.console = mockConsole as Console;
 });
 
 afterAll(() => {
@@ -50,9 +57,6 @@ describe('graphGetProfile', () => {
         const mockFetch = jest.fn().mockImplementation(() => mockSuccessResponse);
         window.fetch = mockFetch;
         const accessToken = 'accessToken';
-        mockedEchoAuthProvider.userProperties.account = ({
-            account: { username: 'test@test.no' }
-        } as unknown) as AccountInfo;
 
         mockedEchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate.mockResolvedValue({
             accessToken
@@ -68,9 +72,6 @@ describe('graphGetProfile', () => {
         const mockFetch = jest.fn().mockImplementation(() => mockFailedResponse);
         window.fetch = mockFetch;
         const accessToken = 'accessToken';
-        mockedEchoAuthProvider.userProperties.account = ({
-            account: { username: 'test@test.no' }
-        } as unknown) as AccountInfo;
 
         mockedEchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate.mockResolvedValue({
             accessToken
@@ -84,9 +85,6 @@ describe('graphGetProfile', () => {
     it('should return undefined because token fetch failed', async () => {
         const mockFetch = jest.fn();
         window.fetch = mockFetch;
-        mockedEchoAuthProvider.userProperties.account = ({
-            account: { username: 'test@test.no' }
-        } as unknown) as AccountInfo;
 
         mockedEchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate.mockResolvedValue(null);
 
@@ -123,9 +121,6 @@ describe('graphGetProfilePicture', () => {
         window.URL.createObjectURL = mockCreateObjectURL;
 
         const accessToken = 'accessToken';
-        mockedEchoAuthProvider.userProperties.account = ({
-            account: { username: 'test@test.no' }
-        } as unknown) as AccountInfo;
 
         mockedEchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate.mockResolvedValue({
             accessToken
@@ -142,9 +137,6 @@ describe('graphGetProfilePicture', () => {
         window.fetch = mockFetch;
 
         const accessToken = 'accessToken';
-        mockedEchoAuthProvider.userProperties.account = ({
-            account: { username: 'test@test.no' }
-        } as unknown) as AccountInfo;
 
         mockedEchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate.mockResolvedValue({
             accessToken
@@ -161,9 +153,6 @@ describe('graphGetProfilePicture', () => {
         window.fetch = mockFetch;
 
         const accessToken = 'accessToken';
-        mockedEchoAuthProvider.userProperties.account = ({
-            account: { username: 'test@test.no' }
-        } as unknown) as AccountInfo;
 
         mockedEchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate.mockResolvedValue({
             accessToken
@@ -177,10 +166,6 @@ describe('graphGetProfilePicture', () => {
     it('should return undefined because token fetch failed', async () => {
         const mockFetch = jest.fn();
         window.fetch = mockFetch;
-
-        mockedEchoAuthProvider.userProperties.account = ({
-            account: { username: 'test@test.no' }
-        } as unknown) as AccountInfo;
 
         mockedEchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate.mockResolvedValue(null);
 

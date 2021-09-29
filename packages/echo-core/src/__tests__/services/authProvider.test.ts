@@ -25,7 +25,7 @@ beforeEach(() => {
 const globalConsoleMethod = global.console;
 beforeAll(() => {
     // removes console log in test run
-    global.console = ({ log: jest.fn(), error: jest.fn() } as unknown) as Console;
+    global.console = { log: jest.fn(), error: jest.fn() } as unknown as Console;
 });
 
 afterAll(() => {
