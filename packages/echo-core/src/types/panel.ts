@@ -36,7 +36,7 @@ export interface ActivePanel {
     ui?: PanelUI;
 }
 
-export interface EchoPanelOptions {
+export interface EchoPanelOptions extends PanelUI {
     addSearch: boolean;
 }
 
