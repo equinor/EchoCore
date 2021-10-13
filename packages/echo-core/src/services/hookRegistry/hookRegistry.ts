@@ -1,4 +1,4 @@
-export interface EchopediaHookRegistry {
+export interface EchoHookRegistry {
     registerHook: (hookName: RegisteredHookName, hook: Function) => void;
     getHookByName: (hookName: RegisteredHookName) => Function;
 }
@@ -7,7 +7,7 @@ export enum RegisteredHookName {
     useSetActiveTagNo = 'useSetActiveTagNo'
 }
 
-export const echopediaHookRegistry = ((): EchopediaHookRegistry => {
+export const echoHookRegistry = ((): EchoHookRegistry => {
     const hookRegistry = {};
 
     return {
@@ -22,7 +22,7 @@ export const echopediaHookRegistry = ((): EchopediaHookRegistry => {
                 hookRegistry[hookName] = hook;
             } else {
                 console.error(
-                    `[EchoCore.echopediaHookRegistry.registerHook] Can not set hook: a hook with name ${hookName} is already set.`
+                    `[EchoCore.echoHookRegistry.registerHook] Can not set hook: a hook with name ${hookName} is already set.`
                 );
             }
         },
@@ -31,7 +31,7 @@ export const echopediaHookRegistry = ((): EchopediaHookRegistry => {
          * @param hookName {RegisteredHooks}
          */
         getHookByName: function (hookName: RegisteredHookName): Function {
-            const hookNotFoundErrorMessage = `[EchoCore.echopediaHookRegistry.getHookByName] Can not get hook: there is no hook by the name "${hookName}" registered.`;
+            const hookNotFoundErrorMessage = `[EchoCore.echoHookRegistry.getHookByName] Can not get hook: there is no hook by the name "${hookName}" registered.`;
             if (!hookRegistry[hookName]) {
                 console.error(hookNotFoundErrorMessage);
             }
