@@ -2,7 +2,7 @@ import { echopediaHookRegistry, RegisteredHookName } from '../../../src/services
 
 describe('echopediaHookRegistry', () => {
     describe('registerHook()', () => {
-        it('should register a hook by the passed name', () => {
+        it('should be able to register a hook and get it back from the registry', () => {
             // given
             const mockHook = jest.fn();
 
