@@ -1,3 +1,4 @@
+import { BaseError } from '@equinor/echo-base';
 export interface EchoHookRegistry {
     registerHook: (hookName: RegisteredHookName, hook: Function) => void;
     getHookByName: (hookName: RegisteredHookName) => Function;
@@ -21,9 +22,12 @@ export const echoHookRegistry = ((): EchoHookRegistry => {
             if (!hookRegistry[hookName]) {
                 hookRegistry[hookName] = hook;
             } else {
-                console.error(
-                    `[EchoCore.echoHookRegistry.registerHook] Can not set hook: a hook with name ${hookName} is already set.`
-                );
+                throw new BaseError({
+                    message: `[EchoCore.echoHookRegistry.registerHook] Can not set hook: a hook with name ${hookName} is already set.`,
+                    exception: {
+                        hookName
+                    }
+                });
             }
         },
         /**
@@ -31,12 +35,17 @@ export const echoHookRegistry = ((): EchoHookRegistry => {
          * @param hookName {RegisteredHooks}
          */
         getHookByName: function (hookName: RegisteredHookName): Function {
-            const hookNotFoundErrorMessage = `[EchoCore.echoHookRegistry.getHookByName] Can not get hook: there is no hook by the name "${hookName}" registered.`;
-            if (!hookRegistry[hookName]) {
-                console.error(hookNotFoundErrorMessage);
-            }
-
-            return hookRegistry[hookName];
+            return (
+                hookRegistry[hookName] ||
+                ((): void => {
+                    throw new BaseError({
+                        message: `[EchoCore.echoHookRegistry.getHookByName] Can not get hook: there is no hook by the name "${hookName}" registered.`,
+                        exception: {
+                            hookName
+                        }
+                    });
+                })
+            );
         }
     };
 })();
