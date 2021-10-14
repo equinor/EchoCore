@@ -21,6 +21,7 @@ export { AnalyticsModule } from './services/analytics/analyticsModule';
 export { AnalyticsEvent, AnalyticsEventName, AnalyticsPropertyTypes } from './services/analytics/analyticsTypes';
 export * from './services/authentication/authProvider';
 export * from './services/baseClient/baseClient';
+export { RegisteredHookName } from './services/hookRegistry';
 export * from './settings';
 export * from './state';
 export * from './types';

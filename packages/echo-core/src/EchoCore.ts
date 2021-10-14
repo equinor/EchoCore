@@ -10,6 +10,7 @@ import { useUserProfile } from './hooks/useUserProfile';
 import { EchoAuthProvider } from './services/authentication/echoProvider';
 import { echoClient } from './services/echoClient/echoClient';
 import { errorHandler } from './services/errorHandler/errorHandler';
+import { echoHookRegistry } from './services/hookRegistry';
 import * as moduleState from './state';
 import { useAppModuleState } from './state/useAppModuleState';
 import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './types';
@@ -30,6 +31,7 @@ export const EchoCore = {
     moduleState: { ...moduleState, ...moduleActions },
     handleErrors: errorHandler.handleErrors,
     setErrorHandler: errorHandler.setErrorHandler,
+    echoHookRegistry,
     error,
     keys: {
         ECHO_CORE_MAIN: ECHO_CORE_MAIN,
