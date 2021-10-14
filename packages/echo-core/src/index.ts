@@ -1,3 +1,4 @@
+import { EnvironmentVariables } from './configuration/environment';
 import { EchoCore } from './EchoCore';
 export * from '@azure/msal-browser';
 export { EchoEvents, eventHub, storage } from '@equinor/echo-base';
@@ -27,3 +28,9 @@ export * from './utils/deepLinkParams';
 export * from './utils/uniq';
 
 export default EchoCore;
+
+declare global {
+    interface Window {
+        _env_: EnvironmentVariables;
+    }
+}
