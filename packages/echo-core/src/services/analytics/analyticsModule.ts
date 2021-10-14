@@ -3,7 +3,7 @@ import { IExceptionTelemetry, SeverityLevel } from '@microsoft/applicationinsigh
 import { EchoEnv } from '../../EchoEnv';
 import { appWithModuleName, eventNameToString } from './analyticsLogic';
 import { AnalyticsEvent, AnalyticsEventName, AnalyticsPropertyTypes } from './analyticsTypes';
-import { appInsightsInstance } from './appInsightWrapper';
+import { appInsights } from './appInsightWrapper';
 import OfflineTracker from './offlineTracker';
 
 // Based on Client Analytics Strategy
@@ -95,7 +95,7 @@ export class AnalyticsModule {
             isOnline: navigator.onLine,
             ...event.properties
         };
-        appInsightsInstance.trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
+        appInsights().trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
     }
 
     logError(error: Error | BaseError): void {
@@ -118,7 +118,7 @@ export class AnalyticsModule {
             const errorType = error.name ? error.name : 'unknown';
             const message = error.message ? error.message : '';
 
-            appInsightsInstance.trackException({
+            appInsights().trackException({
                 exception: error,
                 severityLevel: severityLevel,
                 properties: { ...error, sessionKey, errorType, message, module: appWithModuleName(this.moduleName) }

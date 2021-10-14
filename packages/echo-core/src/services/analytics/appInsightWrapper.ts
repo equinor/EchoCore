@@ -7,8 +7,6 @@ import {
 import { EchoEnv } from '../../EchoEnv';
 import { obfuscateUser } from './analyticsLogic';
 
-const key = EchoEnv.env().REACT_APP_APPINSIGHTS_INSTRUMENTATIONKEY;
-
 class AppInsightsWrapper {
     appInsights: ApplicationInsights;
     constructor(appInsightsInstrumentationKey: string) {
@@ -47,4 +45,10 @@ class AppInsightsWrapper {
     }
 }
 
-export const appInsightsInstance = new AppInsightsWrapper(key);
+let appInsightsInstance: undefined | AppInsightsWrapper = undefined;
+
+export function appInsights(): AppInsightsWrapper {
+    if (!appInsightsInstance)
+        appInsightsInstance = new AppInsightsWrapper(EchoEnv.env().REACT_APP_APPINSIGHTS_INSTRUMENTATIONKEY);
+    return appInsightsInstance;
+}
