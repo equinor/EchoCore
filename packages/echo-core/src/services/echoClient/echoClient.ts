@@ -13,4 +13,9 @@ export class EchoClient extends BaseClient {
     }
 }
 
-export const echoClient = new EchoClient(EchoAuthProvider, echoRequest);
+let echoClientInstance: undefined | EchoClient = undefined;
+
+export function echoClient(): EchoClient {
+    if (!echoClientInstance) echoClientInstance = new EchoClient(EchoAuthProvider(), echoRequest);
+    return echoClientInstance;
+}

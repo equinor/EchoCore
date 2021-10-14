@@ -9,11 +9,12 @@ import { graphApiRequest, graphConfig } from './graphConfig';
  * @returns User profile or undefined if user is not authenticated
  */
 export const graphGetProfile = async (): Promise<User | undefined> => {
-    if (!EchoAuthProvider.userProperties.account) return;
+    const authProvider = EchoAuthProvider();
+    if (!authProvider.userProperties.account) return;
 
-    const authenticationResult = await EchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate(
-        graphApiRequest(EchoAuthProvider.userProperties.account),
-        EchoAuthProvider.loginRequest
+    const authenticationResult = await authProvider.aquireTokenSilentOrRedirectToAuthenticate(
+        graphApiRequest(authProvider.userProperties.account),
+        authProvider.loginRequest
     );
 
     if (authenticationResult) {
@@ -30,11 +31,12 @@ export const graphGetProfile = async (): Promise<User | undefined> => {
  * @returns User profile picture or undefined if user is not authenticated
  */
 export const graphGetProfilePicture = async (): Promise<string | undefined> => {
-    if (!EchoAuthProvider.userProperties.account) return;
+    const authProvider = EchoAuthProvider();
+    if (!authProvider.userProperties.account) return;
 
-    const authenticationResult = await EchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate(
-        graphApiRequest(EchoAuthProvider.userProperties.account),
-        EchoAuthProvider.loginRequest
+    const authenticationResult = await authProvider.aquireTokenSilentOrRedirectToAuthenticate(
+        graphApiRequest(authProvider.userProperties.account),
+        authProvider.loginRequest
     );
 
     if (authenticationResult) {

@@ -26,9 +26,9 @@ export async function setup(coreConfig: CoreConfig): Promise<void> {
  * logger function to be used for authentication
  */
 export async function authenticate(coreConfig: CoreConfig): Promise<boolean> {
-    await EchoAuthProvider.handleLogin(coreConfig.authProviderLogFunc);
+    await EchoAuthProvider().handleLogin(coreConfig.authProviderLogFunc);
     getGraphProfile();
-    return EchoAuthProvider.isAuthenticated;
+    return EchoAuthProvider().isAuthenticated;
 }
 
 /**
@@ -36,7 +36,7 @@ export async function authenticate(coreConfig: CoreConfig): Promise<boolean> {
  * If user is not authenticated, then graph information will never be fetched
  */
 export async function getGraphProfile(): Promise<void> {
-    if (EchoAuthProvider.isAuthenticated) {
+    if (EchoAuthProvider().isAuthenticated) {
         const [profile, userPhoto] = await Promise.all([graphGetProfile(), graphGetProfilePicture()]);
         setUserInformation(profile, userPhoto);
     }

@@ -19,7 +19,7 @@ export function useEchoSetup(config: CoreConfig): boolean {
     useInitial(async () => {
         rootLoadingElement && rootLoadingElement.remove();
         await setup(config);
-        setIsAuthenticated(EchoAuthProvider.isAuthenticated);
+        setIsAuthenticated(EchoAuthProvider().isAuthenticated);
         setSetting(persistEchoSetting.getSettingsFromLocalStorage());
     });
 
