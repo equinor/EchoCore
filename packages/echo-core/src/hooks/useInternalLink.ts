@@ -3,7 +3,7 @@ import { createOfflineMessage } from '../message/message';
 import { AppLinkOptions } from '../types/registry';
 import { useEchoEventHub } from './useEchoEventHub';
 
-type Link = (linkTo: string, options?: AppLinkOptions) => void;
+export type Link = (linkTo: string, options?: AppLinkOptions) => void;
 
 /**
  *
