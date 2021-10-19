@@ -6,6 +6,7 @@ import { AnalyticsEvent, AnalyticsEventName, AnalyticsPropertyTypes } from './an
 import { appInsightsInstance } from './appInsightWrapper';
 import OfflineTracker from './offlineTracker';
 
+
 // Based on Client Analytics Strategy
 // https://github.com/equinor/Echo/pull/14/files#diff-1e78f3b1fd220c5050d7497a73068a5e
 // Examples:
@@ -95,7 +96,7 @@ export class AnalyticsModule {
             isOnline: navigator.onLine,
             ...event.properties
         };
-        appInsightsInstance.trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
+        appInsightsInstance().trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
     }
 
     logError(error: Error | BaseError): void {
@@ -118,7 +119,7 @@ export class AnalyticsModule {
             const errorType = error.name ? error.name : 'unknown';
             const message = error.message ? error.message : '';
 
-            appInsightsInstance.trackException({
+            appInsightsInstance().trackException({
                 exception: error,
                 severityLevel: severityLevel,
                 properties: { ...error, sessionKey, errorType, message, module: appWithModuleName(this.moduleName) }
