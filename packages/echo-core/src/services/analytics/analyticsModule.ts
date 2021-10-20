@@ -6,7 +6,6 @@ import { AnalyticsEvent, AnalyticsEventName, AnalyticsPropertyTypes } from './an
 import { appInsightsInstance } from './appInsightWrapper';
 import OfflineTracker from './offlineTracker';
 
-
 // Based on Client Analytics Strategy
 // https://github.com/equinor/Echo/pull/14/files#diff-1e78f3b1fd220c5050d7497a73068a5e
 // Examples:
