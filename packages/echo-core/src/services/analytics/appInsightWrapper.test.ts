@@ -4,7 +4,7 @@ jest.mock('../../configuration/environment', () => {
     return {
         env: jest.fn().mockImplementation(() => {
             return {
-                REACT_APP_APPINSIGHTS_INSTRUMENTATIONKEY: 'REACT_APP_AZURE_AD_CLIENT_ID'
+                REACT_APP_APPINSIGHTS_INSTRUMENTATIONKEY: 'mocked_key'
             };
         }),
         isDevelopment: jest.fn().mockReturnValue(() => {
