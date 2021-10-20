@@ -1,5 +1,5 @@
 import { ITelemetryItem } from '@microsoft/applicationinsights-web';
-import { AnalyticsNameFilterFunc } from './analyticsTypes';
+import { AnalyticsNameFilterFunction } from './analyticsTypes';
 
 let isLogToConsoleEnabled = false;
 let isLogExcludedToConsoleEnabled = false;
@@ -22,7 +22,7 @@ export function telemetryFilterShouldInclude(item: ITelemetryItem): boolean | vo
 }
 
 
-const nameFilters: AnalyticsNameFilterFunc[] = [] as AnalyticsNameFilterFunc[];
+const nameFilters: AnalyticsNameFilterFunction[] = [] as AnalyticsNameFilterFunction[];
 
 /**
  * Add a shouldExclude function callback, 
@@ -38,11 +38,11 @@ const nameFilters: AnalyticsNameFilterFunc[] = [] as AnalyticsNameFilterFunc[];
  * });
  * ```
  */
-export function addTelemetryNameFilter(nameFilterFunc: AnalyticsNameFilterFunc): void {
+export function addTelemetryNameFilter(nameFilterFunc: AnalyticsNameFilterFunction): void {
     nameFilters.push(nameFilterFunc);
 }
 
-export function removeTelemetryNameFilter(nameFilterFunc: AnalyticsNameFilterFunc): void {
+export function removeTelemetryNameFilter(nameFilterFunc: AnalyticsNameFilterFunction): void {
     const index = nameFilters.indexOf(nameFilterFunc, 0);
     if (index > -1) {
         nameFilters.splice(index, 1);

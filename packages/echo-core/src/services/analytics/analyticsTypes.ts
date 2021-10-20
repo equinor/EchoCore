@@ -10,6 +10,6 @@ export interface AnalyticsEventName {
     actionName: string;
 }
 
-export interface AnalyticsNameFilterFunc {
+export interface AnalyticsNameFilterFunction {
     shouldExclude: (name: string) => boolean;
 }
