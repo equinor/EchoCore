@@ -1,6 +1,10 @@
 import { obfuscateUser } from './analyticsLogic';
 import { AnalyticsModule, analyticsSetInstCode, analyticsSetUserCompany } from './analyticsModule';
-import { addTelemetryNameFilter, enableLogTelemetryToConsole, removeTelemetryNameFilter } from './analyticsTelemetryFilter';
+import {
+    addTelemetryNameFilter,
+    enableLogTelemetryToConsole,
+    removeTelemetryNameFilter
+} from './analyticsTelemetryFilter';
 import { appInsightsInstance } from './appInsightWrapper';
 
 function createAnalyticsModule(moduleShortName: string): AnalyticsModule {

@@ -4,9 +4,10 @@ import { AnalyticsNameFilterFunction } from './analyticsTypes';
 let isLogToConsoleEnabled = false;
 let isLogExcludedToConsoleEnabled = false;
 const telemetryLogContext = '[Telemetry]';
-export function telemetryFilterShouldInclude(item: ITelemetryItem): boolean | void {
+const nameFilterFunctions: AnalyticsNameFilterFunction[] = [] as AnalyticsNameFilterFunction[];
+export function telemetryFilterShouldInclude(item: ITelemetryItem): boolean {
     const itemBaseDataName = item.baseData ? item.baseData['name'] : undefined;
-    const shouldExclude = nameFilters.find((filter) => {
+    const shouldExclude = nameFilterFunctions.find((filter) => {
         if (itemBaseDataName && filter.shouldExclude(itemBaseDataName)) {
             return true;
         }
@@ -21,11 +22,8 @@ export function telemetryFilterShouldInclude(item: ITelemetryItem): boolean | vo
     return true;
 }
 
-
-const nameFilters: AnalyticsNameFilterFunction[] = [] as AnalyticsNameFilterFunction[];
-
 /**
- * Add a shouldExclude function callback, 
+ * Add a shouldExclude function callback,
  * and exclude if it returns true for the specific telemetryName
  * @example
  * ```
@@ -38,14 +36,14 @@ const nameFilters: AnalyticsNameFilterFunction[] = [] as AnalyticsNameFilterFunc
  * });
  * ```
  */
-export function addTelemetryNameFilter(nameFilterFunc: AnalyticsNameFilterFunction): void {
-    nameFilters.push(nameFilterFunc);
+export function addTelemetryNameFilter(nameFilterFunction: AnalyticsNameFilterFunction): void {
+    nameFilterFunctions.push(nameFilterFunction);
 }
 
-export function removeTelemetryNameFilter(nameFilterFunc: AnalyticsNameFilterFunction): void {
-    const index = nameFilters.indexOf(nameFilterFunc, 0);
+export function removeTelemetryNameFilter(nameFilterFunction: AnalyticsNameFilterFunction): void {
+    const index = nameFilterFunctions.indexOf(nameFilterFunction, 0);
     if (index > -1) {
-        nameFilters.splice(index, 1);
+        nameFilterFunctions.splice(index, 1);
     }
 }
 
