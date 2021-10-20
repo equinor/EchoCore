@@ -95,7 +95,7 @@ export class AnalyticsModule {
             isOnline: navigator.onLine,
             ...event.properties
         };
-        appInsightsInstance.trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
+        appInsightsInstance().trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
     }
 
     logError(error: Error | BaseError): void {
@@ -118,7 +118,7 @@ export class AnalyticsModule {
             const errorType = error.name ? error.name : 'unknown';
             const message = error.message ? error.message : '';
 
-            appInsightsInstance.trackException({
+            appInsightsInstance().trackException({
                 exception: error,
                 severityLevel: severityLevel,
                 properties: { ...error, sessionKey, errorType, message, module: appWithModuleName(this.moduleName) }

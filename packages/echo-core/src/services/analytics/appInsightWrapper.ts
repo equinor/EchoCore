@@ -6,8 +6,7 @@ import {
 } from '@microsoft/applicationinsights-web';
 import { EchoEnv } from '../../EchoEnv';
 import { obfuscateUser } from './analyticsLogic';
-
-const key = EchoEnv.env().REACT_APP_APPINSIGHTS_INSTRUMENTATIONKEY;
+import { telemetryFilterShouldInclude } from './analyticsTelemetryFilter';
 
 class AppInsightsWrapper {
     appInsights: ApplicationInsights;
@@ -22,6 +21,7 @@ class AppInsightsWrapper {
             }
         });
         this.appInsights.loadAppInsights();
+        this.appInsights.addTelemetryInitializer(telemetryFilterShouldInclude);
         this.appInsights.trackPageView(); // Manually call trackPageView to establish the current user/session/pageView
     }
 
@@ -47,4 +47,10 @@ class AppInsightsWrapper {
     }
 }
 
-export const appInsightsInstance = new AppInsightsWrapper(key);
+let appInsightsWrapper: AppInsightsWrapper | undefined = undefined;
+
+export function appInsightsInstance(): AppInsightsWrapper {
+    if (!appInsightsWrapper)
+        appInsightsWrapper = new AppInsightsWrapper(EchoEnv.env().REACT_APP_APPINSIGHTS_INSTRUMENTATIONKEY);
+    return appInsightsWrapper;
+}
