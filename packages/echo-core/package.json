@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-core",
-    "version": "0.3.26",
+    "version": "0.3.25",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -38,7 +38,7 @@
     "dependencies": {
         "@azure/msal-browser": "2.8.0",
         "@dbeining/react-atom": "^4.1.17",
-        "@microsoft/applicationinsights-web": "^2.6.5",
+        "@microsoft/applicationinsights-web": "^2.7.0",
         "sha1": "^1.1.1"
     },
     "devDependencies": {
