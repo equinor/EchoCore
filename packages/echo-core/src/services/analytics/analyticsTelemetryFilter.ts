@@ -47,6 +47,10 @@ export function removeTelemetryNameFilter(nameFilterFunction: AnalyticsNameFilte
     }
 }
 
+/**
+ * A helper function for turning on logging to console, useful for debugging. Should only be used
+ * locally and not in production.
+ */
 export function enableLogTelemetryToConsole(isIncludedEnabled: boolean, isExcludedEnabled: boolean): void {
     isLogExcludedToConsoleEnabled = isExcludedEnabled;
     isLogToConsoleEnabled = isIncludedEnabled;
