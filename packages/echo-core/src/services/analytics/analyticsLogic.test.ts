@@ -9,7 +9,7 @@ import {
 import { AnalyticsEventName } from './analyticsTypes';
 
 describe('obfuscatedUser', () => {
-    it('should return sha1 userId and correct lowercase domain', () => {
+    it('should return sha256 userId and correct lowercase domain', () => {
         const userId = '328a4ada-128c-4f2b-a78f-93f989be39dc';
         const userName = 'normalUser@EQuinor.COM';
         const actual = obfuscateUser(userName, userId);

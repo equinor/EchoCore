@@ -1,4 +1,4 @@
-import sha1 from 'sha1';
+import sha256 from 'sha256';
 import { AnalyticsEventName } from './analyticsTypes';
 
 export interface ObfuscatedUser {
@@ -9,7 +9,7 @@ export interface ObfuscatedUser {
 //https://github.com/equinor/Echo/blob/master/docs/client-analytics.md
 export function obfuscateUser(userName: string, userId: string): ObfuscatedUser {
     const domain = userName.includes('@') ? userName.split('@')[1].toLowerCase() : 'no domain';
-    return { id: sha1(userId), domain };
+    return { id: sha256(userId), domain };
 }
 
 export function upperCaseFirstLetter(value: string): string {

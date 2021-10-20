@@ -39,7 +39,7 @@
         "@azure/msal-browser": "2.8.0",
         "@dbeining/react-atom": "^4.1.17",
         "@microsoft/applicationinsights-web": "^2.6.5",
-        "sha1": "^1.1.1"
+        "sha256": "^0.2.0"
     },
     "devDependencies": {
         "@babel/core": "^7.12.10",
