@@ -1,27 +1,27 @@
 import { BaseError } from './BaseError';
 import { ForbiddenError } from './NetworkError';
-import { NotAProperErrorObject, toError } from './toError';
+import { ImproperErrorObject, toError } from './toError';
 
 describe('ConvertToErrorIfNeeded', () => {
-    it('Should return error if error', () => {
+    it('should return error if error', () => {
         const error = new Error('error');
         const actual = toError(error);
         expect(actual).toBe(error);
     });
 
-    it('Should return baseError if baseError', () => {
+    it('should return baseError if baseError', () => {
         const error = new BaseError({ message: 'error' });
         const actual = toError(error);
         expect(actual).toBe(error);
     });
 
-    it('Should return correct subType of baseError, eg should NotImplementedError if NotImplementedError', () => {
+    it('should return correct subType of baseError, eg should NotImplementedError if NotImplementedError', () => {
         const error = new ForbiddenError({ httpStatusCode: 403, url: 'https://fakeurl' });
         const actual = toError(error);
         expect(actual).toBe(error);
     });
 
-    it(`Should convert 'string' to NotAProperErrorObject`, () => {
+    it(`should convert 'string' to NotAProperErrorObject`, () => {
         try {
             throw 'this is not a proper error';
         } catch (error) {
@@ -29,7 +29,7 @@ describe('ConvertToErrorIfNeeded', () => {
             const actual = toError(error);
 
             // then
-            const expected = new NotAProperErrorObject({
+            const expected = new ImproperErrorObject({
                 message: 'this is not a proper error',
                 exception: { errorArgumentType: 'string' }
             });
@@ -38,7 +38,7 @@ describe('ConvertToErrorIfNeeded', () => {
         }
     });
 
-    it(`Should convert '42' to NotAProperErrorObject`, () => {
+    it(`should convert '42' to NotAProperErrorObject`, () => {
         try {
             throw 42;
         } catch (error) {
@@ -46,7 +46,7 @@ describe('ConvertToErrorIfNeeded', () => {
             const actual = toError(error);
 
             // then
-            const expected = new NotAProperErrorObject({
+            const expected = new ImproperErrorObject({
                 message: '42',
                 exception: { errorArgumentType: 'number' }
             });
@@ -55,7 +55,7 @@ describe('ConvertToErrorIfNeeded', () => {
         }
     });
 
-    it(`Should convert 'false' to NotAProperErrorObject`, () => {
+    it(`should convert 'false' to NotAProperErrorObject`, () => {
         try {
             throw false;
         } catch (error) {
@@ -63,7 +63,7 @@ describe('ConvertToErrorIfNeeded', () => {
             const actual = toError(error);
 
             // then
-            const expected = new NotAProperErrorObject({
+            const expected = new ImproperErrorObject({
                 message: 'false',
                 exception: { errorArgumentType: 'boolean' }
             });
@@ -72,7 +72,7 @@ describe('ConvertToErrorIfNeeded', () => {
         }
     });
 
-    it(`Should convert 'symbol' to NotAProperErrorObject`, () => {
+    it(`should convert 'symbol' to NotAProperErrorObject`, () => {
         try {
             throw Symbol('key');
         } catch (error) {
@@ -80,7 +80,7 @@ describe('ConvertToErrorIfNeeded', () => {
             const actual = toError(error);
 
             // then
-            const expected = new NotAProperErrorObject({
+            const expected = new ImproperErrorObject({
                 message: 'Symbol(key)',
                 exception: { errorArgumentType: 'symbol' }
             });
@@ -89,7 +89,7 @@ describe('ConvertToErrorIfNeeded', () => {
         }
     });
 
-    it(`Should convert 'object' to NotAProperErrorObject, and keep all properties`, () => {
+    it(`should convert 'object' to NotAProperErrorObject, and keep all properties`, () => {
         try {
             throw { prop1: 'a', name: 'name', message: 'message' };
         } catch (error) {
@@ -97,7 +97,7 @@ describe('ConvertToErrorIfNeeded', () => {
             const actual = toError(error);
 
             // then
-            const expected = new NotAProperErrorObject({
+            const expected = new ImproperErrorObject({
                 message: 'name message',
                 exception: { prop1: 'a', name: 'name', message: 'message a', errorArgumentType: 'object' }
             });
@@ -106,7 +106,7 @@ describe('ConvertToErrorIfNeeded', () => {
         }
     });
 
-    it(`Should convert 'class not extending error' to NotAProperErrorObject, and keep all properties`, () => {
+    it(`should convert 'class not extending error' to NotAProperErrorObject, and keep all properties`, () => {
         try {
             throw new CustomErrorNotExtendingError();
         } catch (error) {
@@ -114,7 +114,7 @@ describe('ConvertToErrorIfNeeded', () => {
             const actual = toError(error);
 
             // then
-            const expected = new NotAProperErrorObject({
+            const expected = new ImproperErrorObject({
                 message: 'name message a',
                 exception: { prop1: 'a', name: 'name', message: 'message a', errorArgumentType: 'object' }
             });

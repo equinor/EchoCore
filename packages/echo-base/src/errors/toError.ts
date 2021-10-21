@@ -1,6 +1,6 @@
 import { BaseError } from './BaseError';
 
-export class NotAProperErrorObject extends BaseError {}
+export class ImproperErrorObject extends BaseError {}
 
 /**
  * Helper method: Useful with Try Catch(error), where error is of type unknown.
@@ -21,8 +21,6 @@ export function toError(error: Error | BaseError | unknown): Error | BaseError {
         errorType === 'boolean' ||
         errorType === 'bigint' ||
         errorType === 'symbol'
-        // 'undefined' |
-        // 'function'
     ) {
         let message = 'unknown';
         switch (errorType) {
@@ -44,7 +42,7 @@ export function toError(error: Error | BaseError | unknown): Error | BaseError {
             default:
                 break;
         }
-        return new NotAProperErrorObject({
+        return new ImproperErrorObject({
             message: message,
             exception: { argumentType: errorType }
         });
@@ -54,15 +52,15 @@ export function toError(error: Error | BaseError | unknown): Error | BaseError {
         const errorAsObject = error as object;
         const properties = { ...errorAsObject } as { [key: string]: unknown };
 
-        const maybeName = (properties['name'] as string) ?? undefined;
-        const maybeMessage = (properties['message'] as string) ?? undefined;
-        const message = ((maybeName ?? '') + ' ' + (maybeMessage ?? '')).trim();
+        const maybeName = (properties['name'] as string) ?? '';
+        const maybeMessage = (properties['message'] as string) ?? '';
+        const message = `${maybeName} ${maybeMessage}`.trim();
 
-        return new NotAProperErrorObject({
+        return new ImproperErrorObject({
             message: message.length > 0 ? message : 'unknown',
             exception: { ...properties, argumentType: errorType }
         });
     }
 
-    return new NotAProperErrorObject({ message: 'unknown', exception: { argumentType: errorType } });
+    return new ImproperErrorObject({ message: 'unknown', exception: { argumentType: errorType } });
 }
