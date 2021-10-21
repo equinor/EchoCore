@@ -3,10 +3,10 @@ import { BaseError } from './BaseError';
 export class NotAProperErrorObject extends BaseError {}
 
 /**
- * Try Catch(error) => error is unknown.
- * Returns same error if it's already an error or if it extends error.
- * Otherwise it converts it to NotAProperErrorObject (with all properties) which extends baseError
- * @param error The error to convert to error if needed
+ * Helper method: Useful with Try Catch(error), where error is of type unknown.
+ * Returns same error if it's already an error (or if it extends error),
+ * otherwise it converts it to type NotAProperErrorObject (with all properties preserved) which extends baseError
+ * @param error The error to convert (if needed)
  * @returns Error or a an object which extends Error.
  */
 export function toError(error: Error | BaseError | unknown): Error | BaseError {
@@ -14,18 +14,18 @@ export function toError(error: Error | BaseError | unknown): Error | BaseError {
         return error;
     }
 
-    const errorArgumentType = typeof error;
+    const errorType = typeof error;
     if (
-        errorArgumentType === 'string' ||
-        errorArgumentType === 'number' ||
-        errorArgumentType === 'boolean' ||
-        errorArgumentType === 'bigint' ||
-        errorArgumentType === 'symbol'
+        errorType === 'string' ||
+        errorType === 'number' ||
+        errorType === 'boolean' ||
+        errorType === 'bigint' ||
+        errorType === 'symbol'
         // 'undefined' |
         // 'function'
     ) {
         let message = 'unknown';
-        switch (errorArgumentType) {
+        switch (errorType) {
             case 'string':
                 message = error as string;
                 break;
@@ -46,23 +46,23 @@ export function toError(error: Error | BaseError | unknown): Error | BaseError {
         }
         return new NotAProperErrorObject({
             message: message,
-            exception: { argumentType: errorArgumentType }
+            exception: { argumentType: errorType }
         });
     }
 
-    if (errorArgumentType === 'object') {
+    if (errorType === 'object') {
         const errorAsObject = error as object;
-        const props = { ...errorAsObject } as { [key: string]: unknown };
+        const properties = { ...errorAsObject } as { [key: string]: unknown };
 
-        const maybeName = (props['name'] as string) ?? undefined;
-        const maybeMessage = (props['message'] as string) ?? undefined;
+        const maybeName = (properties['name'] as string) ?? undefined;
+        const maybeMessage = (properties['message'] as string) ?? undefined;
         const message = ((maybeName ?? '') + ' ' + (maybeMessage ?? '')).trim();
 
         return new NotAProperErrorObject({
             message: message.length > 0 ? message : 'unknown',
-            exception: { ...props, argumentType: errorArgumentType }
+            exception: { ...properties, argumentType: errorType }
         });
     }
 
-    return new NotAProperErrorObject({ message: 'unknown', exception: { argumentType: errorArgumentType } });
+    return new NotAProperErrorObject({ message: 'unknown', exception: { argumentType: errorType } });
 }
