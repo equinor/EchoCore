@@ -2,4 +2,4 @@ export * from './ArgumentError';
 export * from './BaseError';
 export * from './errorHandlers';
 export * from './NetworkError';
-export * from './ToError';
+export * from './toError';
