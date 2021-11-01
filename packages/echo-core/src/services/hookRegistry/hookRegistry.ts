@@ -5,7 +5,10 @@ export interface EchoHookRegistry {
 }
 
 export enum RegisteredHookName {
-    useSetActiveTagNo = 'useSetActiveTagNo'
+    useSetActiveTagNo = 'useSetActiveTagNo',
+    useContextMenuDataInfo = 'useContextMenuDataInfo',
+    useTagData = 'useTagData',
+    useIsContextMenuInfoLoading = 'useIsContextMenuInfoLoading'
 }
 
 export const echoHookRegistry = ((): EchoHookRegistry => {
