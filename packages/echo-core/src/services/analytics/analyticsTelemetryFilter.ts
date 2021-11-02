@@ -6,7 +6,7 @@ let isLogExcludedToConsoleEnabled = false;
 const telemetryLogContext = '[Telemetry]';
 const nameFilterFunctions: AnalyticsNameFilterFunction[] = [] as AnalyticsNameFilterFunction[];
 export function telemetryFilterShouldInclude(telemetryItem: ITelemetryItem): boolean {
-    const itemBaseDataName = telemetryItem.baseData ? telemetryItem.baseData['name'] : 'undefined';
+    const itemBaseDataName = telemetryItem.baseData ? telemetryItem.baseData['name'] : undefined;
     const shouldExclude = nameFilterFunctions.find((filter) => {
         if (itemBaseDataName && filter.shouldExclude(itemBaseDataName, telemetryItem)) {
             return true;
