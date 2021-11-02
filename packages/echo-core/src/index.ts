@@ -16,14 +16,8 @@ export * from './observers/classObserver';
 export * from './plants/usePlants';
 export * from './procosysProjects';
 export * from './providers';
+export * from './services/analytics';
 export { analytics, analyticsConfiguration } from './services/analytics/analytics';
-export { AnalyticsModule } from './services/analytics/analyticsModule';
-export {
-    AnalyticsEvent,
-    AnalyticsEventName,
-    AnalyticsNameFilterFunction,
-    AnalyticsPropertyTypes
-} from './services/analytics/analyticsTypes';
 export * from './services/authentication/authProvider';
 export * from './services/baseClient/baseClient';
 export { RegisteredHookName } from './services/hookRegistry';
