@@ -1,3 +1,5 @@
+import { ITelemetryItem } from '.';
+
 export type AnalyticsPropertyTypes = { [key: string]: string | number | boolean | string[] };
 
 export interface AnalyticsEvent {
@@ -11,5 +13,5 @@ export interface AnalyticsEventName {
 }
 
 export interface AnalyticsNameFilterFunction {
-    shouldExclude: (name: string) => boolean;
+    shouldExclude: (name: string, telemetryItem: ITelemetryItem) => boolean;
 }
