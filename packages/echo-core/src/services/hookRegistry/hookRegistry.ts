@@ -1,24 +1,33 @@
 import { BaseError } from '@equinor/echo-base';
 export interface EchoHookRegistry {
-    registerHook: (hookName: RegisteredHookName, hook: Function) => void;
+    registerHook: (hookRegistryItem: HookRegistryItem) => void;
+    registerMultipleHooks: (hookRegistryList: HookRegistryItem[]) => void;
     getHookByName: (hookName: RegisteredHookName) => Function;
 }
 
 export enum RegisteredHookName {
-    useSetActiveTagNo = 'useSetActiveTagNo'
+    useSetActiveTagNo = 'useSetActiveTagNo',
+    useContextMenuDataInfo = 'useContextMenuDataInfo',
+    useTagData = 'useTagData',
+    useIsContextMenuInfoLoading = 'useIsContextMenuInfoLoading'
 }
+
+type HookRegistryItem = {
+    hookName: RegisteredHookName;
+    hook: Function;
+};
 
 export const echoHookRegistry = ((): EchoHookRegistry => {
     const hookRegistry = {};
 
-    return {
+    return Object.freeze({
         /**
          * Should be only used by EchopediaWeb, when bootstrapping Echo app.
          * Use this method to register a new hook from Echopedia to EchoCore, so it's available for others to use.
          * @param hookName {RegisteredHooks} The hook will be assigned to this key.
          * @param hook {ReactHook} The hook which should be registered.
          */
-        registerHook: function (hookName: RegisteredHookName, hook: Function): void {
+        registerHook: function ({ hookName, hook }: HookRegistryItem): void {
             if (!hookRegistry[hookName]) {
                 hookRegistry[hookName] = hook;
             } else {
@@ -29,6 +38,16 @@ export const echoHookRegistry = ((): EchoHookRegistry => {
                     }
                 });
             }
+        },
+        /**
+         * Should be only used by EchopediaWeb, when bootstrapping Echo app.
+         * Use this method to register a new hooks from Echopedia to EchoCore, so it's available for others to use.
+         * @param hookList {HookRegistryItem[]} key value pairs of the hooks which should be registered.
+         */
+        registerMultipleHooks: function (hookList: HookRegistryItem[]): void {
+            hookList.forEach((registryItem) => {
+                this.registerHook(registryItem);
+            });
         },
         /**
          * Get's the desired hook from the registry. It doesn't call the hook, just returns with it.
@@ -47,5 +66,5 @@ export const echoHookRegistry = ((): EchoHookRegistry => {
                 })
             );
         }
-    };
+    });
 })();

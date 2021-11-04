@@ -8,7 +8,7 @@ describe('echoHookRegistry', () => {
             const mockHook = jest.fn();
 
             // when
-            echoHookRegistry.registerHook(RegisteredHookName.useSetActiveTagNo, mockHook);
+            echoHookRegistry.registerHook({ hookName: RegisteredHookName.useSetActiveTagNo, hook: mockHook });
             const actualHook = echoHookRegistry.getHookByName(RegisteredHookName.useSetActiveTagNo);
 
             // then
@@ -22,8 +22,8 @@ describe('echoHookRegistry', () => {
 
             try {
                 // when
-                echoHookRegistry.registerHook(hookName, mockHook);
-                echoHookRegistry.registerHook(hookName, mockHook);
+                echoHookRegistry.registerHook({ hookName, hook: mockHook });
+                echoHookRegistry.registerHook({ hookName, hook: mockHook });
             } catch (error) {
                 // then
                 expect(error).toEqual(
@@ -35,6 +35,34 @@ describe('echoHookRegistry', () => {
                     })
                 );
             }
+        });
+    });
+
+    describe('registerMultipleHooks()', () => {
+        it('should register multiple hooks in one call', () => {
+            // given
+            const hooksToRegister = [
+                {
+                    hookName: 'randomHook1' as RegisteredHookName,
+                    hook: jest.fn
+                },
+                {
+                    hookName: 'randomHook2' as RegisteredHookName,
+                    hook: jest.fn
+                },
+                {
+                    hookName: 'randomHook3' as RegisteredHookName,
+                    hook: jest.fn
+                }
+            ];
+
+            // when
+            echoHookRegistry.registerMultipleHooks(hooksToRegister);
+
+            // then
+            expect(echoHookRegistry.getHookByName('randomHook1' as RegisteredHookName)).toBeDefined();
+            expect(echoHookRegistry.getHookByName('randomHook2' as RegisteredHookName)).toBeDefined();
+            expect(echoHookRegistry.getHookByName('randomHook3' as RegisteredHookName)).toBeDefined();
         });
     });
 
