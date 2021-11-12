@@ -15,7 +15,7 @@ import * as moduleState from './state';
 import { useAppModuleState } from './state/useAppModuleState';
 import { ECHO_CORE_MAIN, ECHO_CORE_SEARCH } from './types';
 
-export const EchoCore = {
+export const EchoCore = Object.freeze({
     useEchoSetup: useEchoSetup,
     useAppModuleState: useAppModuleState,
     useLegendOptions: useLegendOptions,
@@ -37,4 +37,4 @@ export const EchoCore = {
         ECHO_CORE_MAIN: ECHO_CORE_MAIN,
         ECHO_CORE_SEARCH: ECHO_CORE_SEARCH
     }
-};
+});

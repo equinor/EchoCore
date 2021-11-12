@@ -3,15 +3,15 @@ import { analyticsConfiguration } from './analytics';
 import { telemetryFilterShouldInclude } from './analyticsTelemetryFilter';
 import { AnalyticsNameFilterFunction } from './analyticsTypes';
 
-const telemetryItem: ITelemetryItem = { name: 'name', baseData: { name: 'baseDataName' } };
+const telemetryItemTestData: ITelemetryItem = { name: 'name', baseData: { name: 'baseDataName', uri: 'fakeUri' } };
 
 describe('telemetryFilterShouldInclude & addTelemetryNameFilter', () => {
     it(`should include telemetry item, if no filtering is applied`, () => {
-        const actual = telemetryFilterShouldInclude(telemetryItem);
+        const actual = telemetryFilterShouldInclude(telemetryItemTestData);
         expect(actual).toEqual(true);
     });
 
-    it(`after add filter it should exclude, and after remove filter it shouldn't exclude`, () => {
+    it(`after add filter it should exclude on name, and after remove filter it shouldn't exclude`, () => {
         // given
         const telemetryExcludeFunctionMatch: AnalyticsNameFilterFunction = {
             shouldExclude: (name: string): boolean => name === 'baseDataName'
@@ -19,14 +19,36 @@ describe('telemetryFilterShouldInclude & addTelemetryNameFilter', () => {
 
         // when
         analyticsConfiguration.addTelemetryNameFilter(telemetryExcludeFunctionMatch);
-        const actualExcluded = telemetryFilterShouldInclude(telemetryItem);
+        const actualExcluded = telemetryFilterShouldInclude(telemetryItemTestData);
 
         // then
         expect(actualExcluded).toEqual(false);
 
         // when
         analyticsConfiguration.removeTelemetryNameFilter(telemetryExcludeFunctionMatch);
-        const actualIncluded = telemetryFilterShouldInclude(telemetryItem);
+        const actualIncluded = telemetryFilterShouldInclude(telemetryItemTestData);
+
+        // then
+        expect(actualIncluded).toEqual(true);
+    });
+
+    it(`after add filter it should exclude on telemetryItem.uri.baseData, and after remove filter it shouldn't exclude`, () => {
+        // given
+        const telemetryExcludeFunctionMatch: AnalyticsNameFilterFunction = {
+            shouldExclude: (_name: string, telemetryItem: ITelemetryItem): boolean =>
+                (((telemetryItem?.baseData ?? {})['uri'] as string) ?? '').includes('fakeUri')
+        };
+
+        // when
+        analyticsConfiguration.addTelemetryNameFilter(telemetryExcludeFunctionMatch);
+        const actualExcluded = telemetryFilterShouldInclude(telemetryItemTestData);
+
+        // then
+        expect(actualExcluded).toEqual(false);
+
+        // when
+        analyticsConfiguration.removeTelemetryNameFilter(telemetryExcludeFunctionMatch);
+        const actualIncluded = telemetryFilterShouldInclude(telemetryItemTestData);
 
         // then
         expect(actualIncluded).toEqual(true);
@@ -40,7 +62,7 @@ describe('telemetryFilterShouldInclude & addTelemetryNameFilter', () => {
 
         // when
         analyticsConfiguration.addTelemetryNameFilter(telemetryExcludeFunctionMisMatch);
-        const actualIncluded = telemetryFilterShouldInclude(telemetryItem);
+        const actualIncluded = telemetryFilterShouldInclude(telemetryItemTestData);
 
         // then
         expect(actualIncluded).toEqual(true);
@@ -61,7 +83,7 @@ describe('telemetryFilterShouldInclude & addTelemetryNameFilter', () => {
         // when
         analyticsConfiguration.addTelemetryNameFilter(telemetryExcludeFunctionMisMatch);
         analyticsConfiguration.addTelemetryNameFilter(telemetryExcludeFunctionMatch);
-        const actualExcluded = telemetryFilterShouldInclude(telemetryItem);
+        const actualExcluded = telemetryFilterShouldInclude(telemetryItemTestData);
 
         // then
         expect(actualExcluded).toEqual(false);
