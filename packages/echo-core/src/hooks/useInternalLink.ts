@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { createOfflineMessage } from '../message/message';
 import { AppLinkOptions } from '../types/registry';
 import { useEchoEventHub } from './useEchoEventHub';
