@@ -18,7 +18,9 @@
         "test": "npm ci & jest --watchAll",
         "test-coverage": "npm ci & jest --coverage --watchAll",
         "lint": "eslint --ext .js,.jsx,.ts,.tsx packages --color",
-        "build-docs": "npx typedoc"
+        "build-docs": "npx typedoc",
+        "echo-update-next": "echo-update -c",
+        "echo-update-all": "echo-update -a"
     },
     "author": "Echo Core Team",
     "license": "MIT",
@@ -27,30 +29,30 @@
         "url": "https://github.com/equinor/EchoCore"
     },
     "devDependencies": {
-        "@babel/core": "^7.12.10",
-        "@babel/preset-env": "^7.12.11",
+        "@babel/core": "^7.15.8",
+        "@babel/preset-env": "^7.15.8",
         "@babel/preset-react": "^7.12.10",
         "@babel/preset-typescript": "^7.12.7",
         "@types/jest": "^26.0.20",
-        "@types/node": "^14.14.37",
-        "@types/react": "^17.0.3",
+        "@types/node": "^14.17.27",
+        "@types/react": "^17.0.30",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
         "babel-jest": "^26.6.3",
         "babel-plugin-polyfill-corejs2": "^0.2.2",
-        "babel-plugin-polyfill-corejs3": "^0.2.3",
+        "babel-plugin-polyfill-corejs3": "^0.2.5",
         "babel-plugin-polyfill-regenerator": "^0.2.2",
-        "eslint": "^6.6.0",
+        "eslint": "^8.0.1",
         "eslint-config-prettier": "^6.11.0",
         "eslint-plugin-prettier": "^3.1.4",
-        "eslint-plugin-react": "^7.21.2",
+        "eslint-plugin-react": "^7.26.1",
         "eslint-plugin-react-hooks": "^4.1.2",
-        "jest": "^26.6.3",
+        "jest": "^27.3.1",
         "jest-expo": "^42.1.0",
         "lerna": "^4.0.0",
         "prettier": "^2.0.5",
         "tslib": "^2.2.0",
         "typedoc": "^0.21.5",
-        "typescript": "^4.1.2"
+        "typescript": "^4.4.4"
     }
 }
