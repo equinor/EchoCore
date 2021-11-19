@@ -1,4 +1,5 @@
 module.exports = {
+    testEnvironment: 'jsdom',
     coveragePathIgnorePatterns: [
         'index.ts',
         'packages/echo-core/src/types/*',
