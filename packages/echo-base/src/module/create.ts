@@ -18,7 +18,7 @@ interface StartLoadingModules {
  * @param {LoadingModuleOptions} options
  * @return {*}  {StartLoadingModules}
  */
-export function startLoadingModules(options: LoadingModuleOptions, currentPath: string): StartLoadingModules {
+export function startLoadingModules(options: LoadingModuleOptions): StartLoadingModules {
     const state = {
         loaded: false,
         modules: [],
@@ -39,7 +39,7 @@ export function startLoadingModules(options: LoadingModuleOptions, currentPath: 
         notify();
     };
 
-    fireAndForget(() => standardStrategy(options, setAppModules, currentPath).then(setLoaded, setLoaded));
+    fireAndForget(() => standardStrategy(options, setAppModules).then(setLoaded, setLoaded));
 
     return {
         connect(notifier: EchoModulesLoading): void {

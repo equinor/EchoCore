@@ -23,13 +23,12 @@ const inBrowser = typeof document !== 'undefined';
  * @return {*}  {ModuleLoader}
  */
 export function createModuleLoader(
-    currentPath: string,
     config?: DefaultLoaderConfig,
     dependencies?: AvailableDependencies,
     getDependencies?: AppDependencyGetter
 ): ModuleLoader {
     const getDeps = getDependencyResolver(dependencies, getDependencies);
-    return getModuleLoader(currentPath, getDeps, config);
+    return getModuleLoader(getDeps, config);
 }
 
 /**
@@ -42,19 +41,18 @@ export function createModuleLoader(
  * @return {*}  {ModuleLoader}
  */
 export function getModuleLoader(
-    currentPath: string,
     getDependencies: AppDependencyGetter,
     config: DefaultLoaderConfig = {}
 ): ModuleLoader {
     return (meta: ModuleMetaData): Promise<EchoModule> => {
         const hasRequireRef = inBrowser && 'requireRef' in meta && meta.requireRef;
-        if (hasRequireRef && meta.path === currentPath) {
+        if (hasRequireRef) {
             return loadModule(meta, getDependencies, (deps) =>
                 includeModuleWithDependencies(meta, deps, config.crossOrigin)
             );
         }
 
-        !hasRequireRef && console.warn('Empty Module found!', meta.name);
+        console.warn('Empty Module found!', meta.name);
         return Promise.resolve(createEmptyModule(meta));
     };
 }

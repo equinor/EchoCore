@@ -53,11 +53,9 @@ async function evaluateAllModules(
  */
 export async function standardStrategy(
     options: LoadingModuleOptions,
-    callback: EchoModuleLoaded,
-    currentPath: string
+    callback: EchoModuleLoaded
 ): Promise<void> {
     const loader: ModuleLoader = createModuleLoader(
-        currentPath,
         options.config,
         options.dependencies,
         options.getDependencies
