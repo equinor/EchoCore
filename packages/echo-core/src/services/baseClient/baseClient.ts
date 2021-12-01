@@ -34,7 +34,8 @@ export class BaseClient {
             );
             return authenticationResult ? authenticationResult.accessToken : '';
         } catch (exception) {
-            throw new AuthenticationError({ message: 'failed to authenticate', exception });
+            const typedException = exception as Record<string, unknown>;
+            throw new AuthenticationError({ message: 'failed to authenticate', exception: typedException });
         }
     }
 
@@ -107,10 +108,11 @@ export class BaseClient {
             }
             return response;
         } catch (exception) {
+            const typedException = exception as Record<string, unknown>;
             const errorInstance = initializeError(NetworkError, {
                 httpStatusCode: statusCode,
                 url: endpoint,
-                exception
+                exception: typedException
             });
             throw errorInstance;
         }
