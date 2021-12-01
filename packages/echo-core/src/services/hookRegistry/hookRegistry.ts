@@ -2,7 +2,7 @@ import { BaseError } from '@equinor/echo-base';
 export interface EchoHookRegistry {
     registerHook: (hookRegistryItem: HookRegistryItem) => void;
     registerMultipleHooks: (hookRegistryList: HookRegistryItem[]) => void;
-    getHookByName: (hookName: RegisteredHookName) => Function;
+    getHookByName: (hookName: RegisteredHookName) => EchoCustomHook;
 }
 
 export enum RegisteredHookName {
@@ -14,8 +14,10 @@ export enum RegisteredHookName {
 
 type HookRegistryItem = {
     hookName: RegisteredHookName;
-    hook: Function;
+    hook: EchoCustomHook;
 };
+
+type EchoCustomHook = (...args) => unknown;
 
 export const echoHookRegistry = ((): EchoHookRegistry => {
     const hookRegistry = {};
@@ -53,7 +55,7 @@ export const echoHookRegistry = ((): EchoHookRegistry => {
          * Get's the desired hook from the registry. It doesn't call the hook, just returns with it.
          * @param hookName {RegisteredHooks}
          */
-        getHookByName: function (hookName: RegisteredHookName): Function {
+        getHookByName: function (hookName: RegisteredHookName): EchoCustomHook {
             return (
                 hookRegistry[hookName] ||
                 ((): void => {
