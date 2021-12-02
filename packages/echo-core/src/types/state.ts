@@ -42,7 +42,7 @@ export interface GlobalStateContext {
 
 export type EchoCustomState<T> = Partial<T>;
 
-export type ModuleContext<T = {}> = React.Context<T>;
+export type ModuleContext<T = Record<string, never>> = React.Context<T>;
 
 export interface EchoCoreComponents {
     panels: Dict<Panel>;

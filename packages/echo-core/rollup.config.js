@@ -1,6 +1,6 @@
+import babel from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
 import del from 'rollup-plugin-delete';
 import tslibResolveId from 'rollup-plugin-tslib-resolve-id';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
@@ -24,27 +24,13 @@ export default [
             typescriptPaths(),
             babel({
                 babelrc: false,
+                babelHelpers: 'bundled',
                 presets: [['@babel/preset-env', { modules: false }], ['@babel/preset-react']],
                 extensions,
                 exclude: 'node_modules/**'
             }),
-            commonjs({
-                namedExports: {
-                    '@dbeining/react-atom': ['Atom', 'useAtom', 'deref', 'swap'],
-                    tslib: ['__awaiter', '__rest']
-                }
-            }),
+            commonjs(),
             nodeResolve()
         ]
     }
-    // {
-    //     input: pkg.source,
-    //     output: [
-    //         {
-    //             file: pkg.types,
-    //             format: 'es'
-    //         }
-    //     ],
-    //     plugins: [dt()]
-    // }
 ];

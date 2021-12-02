@@ -19,6 +19,6 @@ export interface EchoApp {
     context: AppContext;
 }
 
-type AppContext = {};
+type AppContext = Record<string, unknown>;
 
 export class ModuleAppError extends BaseError {}
