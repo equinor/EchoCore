@@ -15,7 +15,7 @@ export interface ErrorInitializerFunction<T extends BaseErrorProps, U extends Co
 
 export interface BaseErrorArgs {
     message: string;
-    exception?: Record<string, unknown>;
+    exception?: Record<string, unknown> | Error;
 }
 
 export interface CommonErrorArgs {

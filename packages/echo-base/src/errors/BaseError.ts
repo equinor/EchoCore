@@ -22,9 +22,9 @@ export class BaseError extends Error {
          * https://stackoverflow.com/questions/55065742/implementing-instanceof-checks-for-custom-typescript-error-instances
          * https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
          */
-
         Object.setPrototypeOf(this, new.target.prototype);
-        this.properties = exception ? { ...exception } : {};
+
+        this.properties = getAllProperties(exception);
         this.name = this.constructor.name;
         !message && (this.message = this.name);
     }
@@ -34,4 +34,11 @@ export class BaseError extends Error {
     addProperties = (values: ErrorProperties): void => {
         this.properties = { ...this.properties, ...values };
     };
+}
+
+export function getAllProperties(
+    objectWithProperties: Record<string, unknown> | Error | undefined
+): Record<string, unknown> {
+    const names = objectWithProperties ? Object.getOwnPropertyNames(objectWithProperties) : [];
+    return names.reduce((a, b) => ((a[b] = objectWithProperties[b]), a), {});
 }
