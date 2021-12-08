@@ -1,5 +1,5 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
-import { ArgumentError, BaseError, initializeError, NetworkError } from '@equinor/echo-base';
+import { ArgumentError, BaseError, initializeError, NetworkError, toError } from '@equinor/echo-base';
 import { AuthenticationProvider } from '../authentication/authProvider';
 
 export class AuthenticationError extends BaseError {}
@@ -34,7 +34,8 @@ export class BaseClient {
             );
             return authenticationResult ? authenticationResult.accessToken : '';
         } catch (exception) {
-            throw new AuthenticationError({ message: 'failed to authenticate', exception });
+            const typedException = toError(exception);
+            throw new AuthenticationError(typedException);
         }
     }
 
@@ -107,10 +108,11 @@ export class BaseClient {
             }
             return response;
         } catch (exception) {
+            const typedException = exception as Record<string, unknown>;
             const errorInstance = initializeError(NetworkError, {
                 httpStatusCode: statusCode,
                 url: endpoint,
-                exception
+                exception: typedException
             });
             throw errorInstance;
         }

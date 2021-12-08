@@ -2,7 +2,7 @@ import { Atom } from '@dbeining/react-atom';
 import { User } from '@microsoft/microsoft-graph-types';
 import React from 'react';
 import { GlobalsStateActions } from './actions';
-import { Dict } from './common';
+import { Dict, EmptyObject } from './common';
 import { LegendOptions } from './legend';
 import { AppModule, ModuleAppError } from './modules';
 import { ActivePanel, Panel } from './panel';
@@ -42,7 +42,7 @@ export interface GlobalStateContext {
 
 export type EchoCustomState<T> = Partial<T>;
 
-export type ModuleContext<T = {}> = React.Context<T>;
+export type ModuleContext<T = EmptyObject> = React.Context<T>;
 
 export interface EchoCoreComponents {
     panels: Dict<Panel>;

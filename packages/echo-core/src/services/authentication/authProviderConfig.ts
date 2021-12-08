@@ -1,5 +1,4 @@
-import { AccountInfo, EndSessionRequest, SilentRequest } from '@azure/msal-browser';
-import { RedirectRequest } from '@azure/msal-browser/dist/src/request/RedirectRequest';
+import { AccountInfo, EndSessionRequest, RedirectRequest, SilentRequest } from '@azure/msal-browser';
 
 /**
  * Config method for creating request used for logging out the provided account

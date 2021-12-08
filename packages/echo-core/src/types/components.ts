@@ -13,7 +13,7 @@ export type WrappedComponent<TProps> = ComponentType<Without<TProps, keyof BaseA
  * The props that every registered App component obtains.
  */
 export interface RouteBaseProps<UrlParams = unknown, UrlState = unknown>
-    extends RouteComponentProps<UrlParams, {}, UrlState>,
+    extends RouteComponentProps<UrlParams, Record<string, unknown>, UrlState>,
         BaseAppComponentProps {}
 
 /**

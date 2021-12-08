@@ -1,7 +1,7 @@
 export type ObserverIdentifier = number;
 export interface ObserverInterface {
     id: ObserverIdentifier;
-    callback: Function;
+    callback: (...args) => void;
     type: string;
 }
 class ClassObserver {
@@ -13,7 +13,7 @@ class ClassObserver {
         this.observers = [];
     }
 
-    addSubscriber(callback: Function, type: string): ObserverIdentifier {
+    addSubscriber(callback: (...args) => void, type: string): ObserverIdentifier {
         this.id++;
         const functionCallback = { id: this.id, callback, type };
         this.observers.push(functionCallback);
