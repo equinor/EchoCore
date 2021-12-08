@@ -143,4 +143,8 @@ describe('NetworkError, derived types and initializeError', () => {
     });
 });
 
-class InternalError extends NetworkError {}
+class InternalError extends NetworkError {
+    constructor(args: NetworkErrorArgs) {
+        super({ ...args, name: args.name ?? 'InternalError' });
+    }
+}

@@ -14,6 +14,7 @@ export interface ErrorInitializerFunction<T extends BaseErrorProps, U extends Co
 }
 
 export interface BaseErrorArgs {
+    name?: string;
     message: string;
     exception?: Record<string, unknown> | Error;
 }

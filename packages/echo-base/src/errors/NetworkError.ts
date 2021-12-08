@@ -2,6 +2,7 @@ import { CommonErrorArgs } from '../types/error';
 import { BaseError } from './BaseError';
 
 export interface NetworkErrorArgs extends CommonErrorArgs {
+    name?: string;
     exception?: Record<string, unknown>;
     httpStatusCode: number;
     url: string;
@@ -19,8 +20,8 @@ export interface NetworkErrorArgs extends CommonErrorArgs {
  * @extends {BaseError}
  */
 export class NetworkError extends BaseError {
-    constructor({ message, httpStatusCode, url, exception }: NetworkErrorArgs) {
-        super({ message: message || '', exception });
+    constructor({ name, message, httpStatusCode, url, exception }: NetworkErrorArgs) {
+        super({ name: name ?? 'NetworkError', message: message || '', exception });
         this.addProperties({ url, httpStatusCode });
         !message && (this.message = `${this.name} ${httpStatusCode} ${url}`);
     }
@@ -30,9 +31,34 @@ export class NetworkError extends BaseError {
     };
 }
 
-export class BadRequestError extends NetworkError {}
-export class BackendError extends NetworkError {}
-export class ForbiddenError extends NetworkError {}
-export class UnauthorizedError extends ForbiddenError {}
-export class NotFoundError extends NetworkError {}
-export class ValidationError extends NetworkError {}
+export class BadRequestError extends NetworkError {
+    constructor(args: NetworkErrorArgs) {
+        super({ ...args, name: args.name ?? 'BadRequestError' });
+    }
+}
+
+export class BackendError extends NetworkError {
+    constructor(args: NetworkErrorArgs) {
+        super({ ...args, name: args.name ?? 'BackendError' });
+    }
+}
+export class ForbiddenError extends NetworkError {
+    constructor(args: NetworkErrorArgs) {
+        super({ ...args, name: args.name ?? 'ForbiddenError' });
+    }
+}
+export class UnauthorizedError extends ForbiddenError {
+    constructor(args: NetworkErrorArgs) {
+        super({ ...args, name: args.name ?? 'UnauthorizedError' });
+    }
+}
+export class NotFoundError extends NetworkError {
+    constructor(args: NetworkErrorArgs) {
+        super({ ...args, name: args.name ?? 'NotFoundError' });
+    }
+}
+export class ValidationError extends NetworkError {
+    constructor(args: NetworkErrorArgs) {
+        super({ ...args, name: args.name ?? 'ValidationError' });
+    }
+}

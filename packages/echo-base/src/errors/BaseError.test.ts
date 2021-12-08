@@ -48,7 +48,7 @@ class CustomError extends Error {
     anotherField: string;
     constructor(message: string) {
         super(message);
-        this.name = 'CustomError2';
+        this.name = 'CustomError';
         this.anotherField = 'another value';
     }
 }
@@ -60,7 +60,7 @@ function customErrorExpected(): {
     stack: string;
 } {
     return {
-        name: 'CustomError2',
+        name: 'CustomError',
         anotherField: 'another value',
         message: 'message',
         stack: 'stack'

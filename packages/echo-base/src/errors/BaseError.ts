@@ -15,7 +15,7 @@ export class BaseError extends Error {
     protected properties: ErrorProperties;
     hasBeenLogged = false;
 
-    constructor({ message, exception }: BaseErrorArgs) {
+    constructor({ name, message, exception }: BaseErrorArgs) {
         super(message);
         /**
          * Object.setPrototypeOf(this, new.target.prototype);: to fix instance of:
@@ -25,7 +25,7 @@ export class BaseError extends Error {
         Object.setPrototypeOf(this, new.target.prototype);
 
         this.properties = getAllProperties(exception);
-        this.name = this.constructor.name;
+        this.name = name ?? this.constructor.name;
         !message && (this.message = this.name);
     }
 
