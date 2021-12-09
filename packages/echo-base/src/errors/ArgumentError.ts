@@ -6,7 +6,7 @@ export interface ArgumentErrorArgs {
 
 export class ArgumentError extends BaseError {
     constructor({ argumentName }: ArgumentErrorArgs) {
-        super({ message: argumentName });
+        super({ name: 'ArgumentError', message: argumentName });
     }
 }
 

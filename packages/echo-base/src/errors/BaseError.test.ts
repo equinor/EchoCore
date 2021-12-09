@@ -3,7 +3,7 @@ import { BaseError, getAllProperties } from './BaseError';
 describe('BaseError', () => {
     const message = 'this is a test';
     it('should initialize with correct values', () => {
-        const actualError = new BaseError({ message });
+        const actualError = new BaseError({ name: 'BaseError', message });
         expect(actualError.message).toBe(message);
         expect(actualError.name).toBe('BaseError');
         expect(actualError.stack).toBeTruthy();
@@ -12,7 +12,7 @@ describe('BaseError', () => {
     it('should preserve innerError as properties', () => {
         const innerMessage = 'message';
         const innerException = new CustomError(innerMessage);
-        const actualError = new BaseError({ message, exception: innerException });
+        const actualError = new BaseError({ name: 'BaseError', message, exception: innerException });
         expect(actualError.message).toBe(message);
         expect(actualError.name).toBe('BaseError');
         expect(actualError.stack).toBeTruthy();

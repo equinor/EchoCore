@@ -16,4 +16,16 @@ Everything a Echo web need for enabling micro frontend development.
 
 # Breaking Changes
 
--   v0.5.0: SubClasses of NetworkError will not get the name of the class automatically anymore, but will instead get the parentName if the optional name field is not specified. This to avoid name obfuscation/minify to a single letter in appInsight.
+v0.5.0:
+
+-   SubClasses of BaseError will not get the name of the class automatically anymore, but have to specify it. This to avoid name obfuscation/minify to a single letter in appInsight.
+
+Example implementation:
+
+```
+export class CustomError extends BaseError {
+    constructor(args: ErrorArgs) {
+        super({ ...args, name: 'CustomError' });
+    }
+}
+```
