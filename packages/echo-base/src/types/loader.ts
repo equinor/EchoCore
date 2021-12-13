@@ -1,7 +1,12 @@
 import { BaseError } from '../errors';
+import { ErrorArgs } from './error';
 import { EchoModule, ModuleMetaData } from './module';
 
-export class ModuleAppError extends BaseError {}
+export class ModuleAppError extends BaseError {
+    constructor(args: ErrorArgs) {
+        super({ ...args, name: 'ModuleAppError' });
+    }
+}
 /**
  * Configuration options for the default loader.
  */
