@@ -13,9 +13,13 @@ export interface ErrorInitializerFunction<T extends BaseErrorProps, U extends Co
     (ErrorType: { new (args): T }, args: U): BaseErrorProps;
 }
 
-export interface BaseErrorArgs {
+export interface BaseErrorArgs extends ErrorArgs {
+    name: string;
+}
+
+export interface ErrorArgs {
     message: string;
-    exception?: Record<string, unknown>;
+    exception?: Record<string, unknown> | Error;
 }
 
 export interface CommonErrorArgs {

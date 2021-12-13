@@ -1,4 +1,14 @@
-import { ForbiddenError, NetworkError, NetworkErrorArgs } from '../../errors/NetworkError';
+import { BaseError } from '../../errors';
+import {
+    BackendError,
+    BadRequestError,
+    ForbiddenError,
+    NetworkError,
+    NetworkErrorArgs,
+    NotFoundError,
+    UnauthorizedError,
+    ValidationError
+} from '../../errors/NetworkError';
 
 describe('NetworkError', () => {
     const message = 'Network Error Testing';
@@ -39,5 +49,45 @@ describe('NetworkError', () => {
     it('check BaseError name when message is not empty', () => {
         const ne = new NetworkError({ message, httpStatusCode, url, exception });
         expect(ne.message).not.toEqual(ne.name);
+    });
+});
+
+describe('NetworkError & subclasses', () => {
+    const message = 'Network Error Testing';
+    const httpStatusCode = 500;
+    const url = 'http://localhost:3000';
+    const exception = { NetworkException: 'endpoint is unreachable' };
+
+    const networkArgs = { message, httpStatusCode, url, exception };
+    const expectedProperties = { httpStatusCode, url, ...exception };
+
+    test.each([
+        ['NetworkError', new NetworkError(networkArgs)],
+        ['BadRequestError', new BadRequestError(networkArgs)],
+        ['ForbiddenError', new ForbiddenError(networkArgs)],
+        ['UnauthorizedError', new UnauthorizedError(networkArgs)],
+        ['NotFoundError', new NotFoundError(networkArgs)],
+        ['ValidationError', new ValidationError(networkArgs)],
+        ['BackendError', new BackendError(networkArgs)]
+    ])('%p should preserve default name, message and properties', (firstArg, secondArg) => {
+        const error = secondArg as BaseError;
+        expect(error.name).toBe(firstArg);
+        expect(error.message).toBe(message);
+        expect(error.getProperties()).toStrictEqual(expectedProperties);
+    });
+
+    test.each([
+        ['NetworkError', new NetworkError({ name: 'CustomTestName', ...networkArgs })],
+        ['BadRequestError', new BadRequestError({ name: 'CustomTestName', ...networkArgs })],
+        ['ForbiddenError', new ForbiddenError({ name: 'CustomTestName', ...networkArgs })],
+        ['UnauthorizedError', new UnauthorizedError({ name: 'CustomTestName', ...networkArgs })],
+        ['NotFoundError', new NotFoundError({ name: 'CustomTestName', ...networkArgs })],
+        ['ValidationError', new ValidationError({ name: 'CustomTestName', ...networkArgs })],
+        ['BackendError', new BackendError({ name: 'CustomTestName', ...networkArgs })]
+    ])('%p should preserve _custom_ name, message and properties', (firstArg, secondArg) => {
+        const error = secondArg as BaseError;
+        expect(error.name).toBe('CustomTestName');
+        expect(error.message).toBe(message);
+        expect(error.getProperties()).toStrictEqual(expectedProperties);
     });
 });

@@ -13,3 +13,19 @@ Everything a Echo web need for enabling micro frontend development.
 ![@equinor/echo-base](https://badgen.net/bundlephobia/dependency-count/@equinor/echo-base)
 
 ## Documentation
+
+# Breaking Changes
+
+v0.5.0:
+
+-   SubClasses of BaseError will not get the name of the class automatically anymore, but have to specify it. This to avoid name obfuscation/minify to a single letter in appInsight.
+
+Example implementation:
+
+```
+export class CustomError extends BaseError {
+    constructor(args: ErrorArgs) {
+        super({ ...args, name: 'CustomError' });
+    }
+}
+```

@@ -1,4 +1,4 @@
-import { ModulesEvaluationError } from '../../module/errors';
+import { BaseError } from '../../errors';
 import { standardStrategy } from '../../module/strategies';
 import { EchoModule, EchoModuleApi, EchoModuleApiCreator, LoadingModuleOptions, ModuleMetaData } from '../../types';
 import { eventHub } from '../../utils/eventHub';
@@ -15,22 +15,25 @@ describe('Echo-Base strategies module', () => {
         // Arrange
         const setupMock = jest.fn();
         const callbackMock = jest.fn();
+
         const appModule = [
             {
                 setup: setupMock,
                 key: 'sA1',
                 name: 'someApp',
+                shortName: 'someApp',
+                path: '/',
                 fileUri: 'file.js',
-                version: '1',
-                shortName: 'someApp'
+                version: '1'
             },
             {
                 setup: setupMock,
                 key: 'sA2',
                 name: 'someApp',
+                shortName: 'someApp',
+                path: '/',
                 fileUri: 'file.js',
-                version: '1',
-                shortName: 'someApp'
+                version: '1'
             }
         ] as EchoModule[];
         const loadingOptions: LoadingModuleOptions = {
@@ -76,9 +79,8 @@ describe('Echo-Base strategies module', () => {
     });
 
     it('standardStrategy reports error if failed due to invalid arguments', async () => {
-        const setupMock = jest.fn();
-        const callbackMock = jest.fn();
-        const error = new ModulesEvaluationError({ message: 'oldModules is not iterable' });
+        // given
+        let actualError: BaseError;
         const modules = true as any;
         const invalidLoadModuleOptions: LoadingModuleOptions = {
             createApi: createMockApi(),
@@ -86,9 +88,15 @@ describe('Echo-Base strategies module', () => {
             modules
         };
 
-        await standardStrategy(invalidLoadModuleOptions, callbackMock);
+        // when
+        await standardStrategy(invalidLoadModuleOptions, (error) => (actualError = error));
 
-        expect(setupMock).toHaveBeenCalledTimes(0);
-        expect(callbackMock).toHaveBeenCalledWith(error, []);
+        // then
+        expect(actualError.name).toBe('ModulesEvaluationError');
+        expect(actualError.message).toBe('[strategies.evaluateAllModules] failed');
+
+        const actualProperties = actualError.getProperties();
+        expect(actualProperties['name']).toBe('TypeError');
+        expect(actualProperties['message']).toBe('oldModules is not iterable');
     });
 });

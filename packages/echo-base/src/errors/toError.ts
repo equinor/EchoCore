@@ -1,6 +1,11 @@
+import { ErrorArgs } from '../types/error';
 import { BaseError } from './BaseError';
 
-export class ImproperErrorObject extends BaseError {}
+export class ImproperErrorObject extends BaseError {
+    constructor(args: ErrorArgs) {
+        super({ ...args, name: 'ImproperErrorObject' });
+    }
+}
 
 /**
  * Helper method: Useful with Try Catch(error), where error is of type unknown.

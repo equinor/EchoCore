@@ -38,7 +38,7 @@ async function evaluateAllModules(
             filterExcludePrivateModulesInProduction([...oldModules, ...newModules], isProduction)
         );
     } catch (error) {
-        throw new ModulesEvaluationError(error);
+        throw new ModulesEvaluationError({ message: '[strategies.evaluateAllModules] failed', exception: error });
     }
 }
 
@@ -51,15 +51,8 @@ async function evaluateAllModules(
  * @param {EchoModuleLoaded} callback
  * @return {*}  {Promise<void>}
  */
-export async function standardStrategy(
-    options: LoadingModuleOptions,
-    callback: EchoModuleLoaded
-): Promise<void> {
-    const loader: ModuleLoader = createModuleLoader(
-        options.config,
-        options.dependencies,
-        options.getDependencies
-    );
+export async function standardStrategy(options: LoadingModuleOptions, callback: EchoModuleLoaded): Promise<void> {
+    const loader: ModuleLoader = createModuleLoader(options.config, options.dependencies, options.getDependencies);
     try {
         const fetchedModules = await loadModules(loader, options.fetchModules);
         const allModules = await evaluateAllModules(options.createApi, fetchedModules, options.modules);
