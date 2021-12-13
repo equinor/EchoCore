@@ -15,22 +15,25 @@ describe('Echo-Base strategies module', () => {
         // Arrange
         const setupMock = jest.fn();
         const callbackMock = jest.fn();
+
         const appModule = [
             {
                 setup: setupMock,
                 key: 'sA1',
                 name: 'someApp',
+                shortName: 'someApp',
+                path: '/',
                 fileUri: 'file.js',
-                version: '1',
-                shortName: 'someApp'
+                version: '1'
             },
             {
                 setup: setupMock,
                 key: 'sA2',
                 name: 'someApp',
+                shortName: 'someApp',
+                path: '/',
                 fileUri: 'file.js',
-                version: '1',
-                shortName: 'someApp'
+                version: '1'
             }
         ] as EchoModule[];
         const loadingOptions: LoadingModuleOptions = {
