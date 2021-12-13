@@ -25,8 +25,13 @@ export class BaseError extends Error {
         Object.setPrototypeOf(this, new.target.prototype);
 
         this.properties = getAllProperties(exception);
-        this.name = name ?? this.constructor.name;
-        !message && (this.message = this.name);
+
+        const fallBackNameWillBeObfuscatedInProduction = this.constructor.name;
+        this.name = name ?? fallBackNameWillBeObfuscatedInProduction;
+
+        if (!message) {
+            this.message = this.name;
+        }
     }
 
     getProperties = (): ErrorProperties => this.properties;
@@ -39,6 +44,17 @@ export class BaseError extends Error {
 export function getAllProperties(
     objectWithProperties: Record<string, unknown> | Error | undefined
 ): Record<string, unknown> {
+    if (!objectWithProperties) {
+        return {};
+    }
+
     const names = objectWithProperties ? Object.getOwnPropertyNames(objectWithProperties) : [];
+    if (objectWithProperties instanceof Error && !names.includes('name')) {
+        names.push('name');
+    }
+    if (objectWithProperties instanceof Error && !names.includes('message')) {
+        names.push('message');
+    }
+
     return names.reduce((a, b) => ((a[b] = objectWithProperties[b]), a), {});
 }
