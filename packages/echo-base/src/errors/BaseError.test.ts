@@ -1,26 +1,33 @@
 import { BaseError, getAllProperties } from './BaseError';
 
 describe('BaseError', () => {
-    const message = 'this is a test';
+    const message = 'This is a custom error message for testing';
+
     it('should initialize with correct values', () => {
         const actualError = new BaseError({ name: 'BaseError', message });
+
         expect(actualError.message).toBe(message);
         expect(actualError.name).toBe('BaseError');
         expect(actualError.stack).toBeTruthy();
     });
 
     it('should preserve innerError as properties', () => {
-        const innerMessage = 'message';
-        const innerException = new CustomError(innerMessage);
-        const actualError = new BaseError({ name: 'BaseError', message, exception: innerException });
+        const innerMessage = 'inner message';
+        const innerError = new CustomTestError(innerMessage);
+        const actualError = new BaseError({ name: 'BaseError', message, exception: innerError });
+
         expect(actualError.message).toBe(message);
         expect(actualError.name).toBe('BaseError');
         expect(actualError.stack).toBeTruthy();
 
         const actualProperties = actualError.getProperties();
         actualProperties.stack = actualProperties.stack ? 'stack' : actualProperties.stack;
-        const expected = customErrorExpected();
-        expect(actualProperties).toStrictEqual(expected);
+        expect(actualProperties).toStrictEqual({
+            name: 'CustomTestError',
+            anotherField: 'another value',
+            message: innerMessage,
+            stack: 'stack'
+        });
     });
 });
 
@@ -31,38 +38,30 @@ describe('getAllProperties', () => {
         const actualError = getAllProperties(undefined);
         expect(actualError).toStrictEqual({});
     });
+
     it('should preserve properties of different types', () => {
         const actualError = getAllProperties(input);
         expect(actualError).toStrictEqual(input);
     });
 
     it('should preserve properties of an Error', () => {
-        const actualError = getAllProperties(new CustomError('message'));
-        const expected = customErrorExpected();
+        const actualError = getAllProperties(new CustomTestError('message'));
+
         actualError.stack = actualError.stack ? 'stack' : actualError.stack;
-        expect(actualError).toStrictEqual(expected);
+        expect(actualError).toStrictEqual({
+            name: 'CustomTestError',
+            anotherField: 'another value',
+            message: 'message',
+            stack: 'stack'
+        });
     });
 });
 
-class CustomError extends Error {
+class CustomTestError extends Error {
     anotherField: string;
     constructor(message: string) {
         super(message);
-        this.name = 'CustomError';
+        this.name = 'CustomTestError';
         this.anotherField = 'another value';
     }
-}
-
-function customErrorExpected(): {
-    name: string;
-    anotherField: string;
-    message: string;
-    stack: string;
-} {
-    return {
-        name: 'CustomError',
-        anotherField: 'another value',
-        message: 'message',
-        stack: 'stack'
-    };
 }
