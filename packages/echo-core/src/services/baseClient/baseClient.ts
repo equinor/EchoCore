@@ -1,8 +1,13 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
-import { ArgumentError, BaseError, initializeError, NetworkError, toError } from '@equinor/echo-base';
+import { ArgumentError, BaseError, ErrorArgs, toError } from '@equinor/echo-base';
 import { AuthenticationProvider } from '../authentication/authProvider';
+import { fetchWithTokenLogic } from './fetchWithTokenLogic';
 
-export class AuthenticationError extends BaseError {}
+export class AuthenticationError extends BaseError {
+    constructor(args: ErrorArgs) {
+        super({ ...args, name: 'AuthenticationError' });
+    }
+}
 
 /**
  * Base Client class providing methods for performing a fetch with authentication and acquiring AccessToken.
@@ -34,8 +39,7 @@ export class BaseClient {
             );
             return authenticationResult ? authenticationResult.accessToken : '';
         } catch (exception) {
-            const typedException = toError(exception);
-            throw new AuthenticationError(typedException);
+            throw new AuthenticationError({ message: 'failed to authenticate', exception: toError(exception) });
         }
     }
 
@@ -82,40 +86,7 @@ export class BaseClient {
         body?: BodyInit,
         signal?: AbortSignal
     ): Promise<Response> {
-        let statusCode = 0;
-        try {
-            const headers = {
-                Authorization: 'Bearer ' + token,
-                ...headerOptions
-            };
-
-            const response: Response = await fetch(endpoint, {
-                method,
-                headers,
-                body,
-                signal
-            });
-
-            if (response.status) statusCode = response.status;
-
-            if (response && !response.ok) {
-                const contentType = response.headers.get('content-type');
-                if (contentType && contentType.indexOf('application/json') !== -1) {
-                    throw await response.json();
-                } else {
-                    throw await response.text();
-                }
-            }
-            return response;
-        } catch (exception) {
-            const typedException = exception as Record<string, unknown>;
-            const errorInstance = initializeError(NetworkError, {
-                httpStatusCode: statusCode,
-                url: endpoint,
-                exception: typedException
-            });
-            throw errorInstance;
-        }
+        return await fetchWithTokenLogic(endpoint, token, headerOptions, method, body, signal);
     }
 
     /**
