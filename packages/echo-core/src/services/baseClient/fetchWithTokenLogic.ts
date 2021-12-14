@@ -36,7 +36,9 @@ export async function fetchWithTokenLogic(
                 contentType && contentType.indexOf('application/json') !== -1
                     ? await response.json()
                     : await response.text();
+
             throw initializeError(NetworkError, {
+                message: 'failed response',
                 httpStatusCode: statusCode,
                 url: endpoint,
                 exception: { details: data }
@@ -48,15 +50,11 @@ export async function fetchWithTokenLogic(
             throw exception;
         }
 
-        if (statusCode > 0) {
-            throw initializeError(NetworkError, {
-                httpStatusCode: statusCode,
-                url: endpoint,
-                exception: getAllProperties(toError(exception))
-            });
-        }
-
-        const error = toError(exception);
-        throw error;
+        throw initializeError(NetworkError, {
+            message: 'uncaught exception response',
+            httpStatusCode: statusCode,
+            url: endpoint,
+            exception: getAllProperties(toError(exception))
+        });
     }
 }
