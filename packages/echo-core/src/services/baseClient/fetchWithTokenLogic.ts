@@ -31,14 +31,12 @@ export async function fetchWithTokenLogic(
         if (response.status) statusCode = response.status;
 
         if (response && !response.ok) {
-            console.log('------------------------ failed response');
             const contentType = response.headers.get('content-type');
             const data =
                 contentType && contentType.indexOf('application/json') !== -1
                     ? await response.json()
                     : await response.text();
             throw initializeError(NetworkError, {
-                //message: 'failed response',
                 httpStatusCode: statusCode,
                 url: endpoint,
                 exception: { details: data }
@@ -47,15 +45,8 @@ export async function fetchWithTokenLogic(
         return response;
     } catch (exception) {
         if (exception instanceof NetworkError) {
-            console.log('------------------------ rethrow', exception);
             throw exception;
         }
-
-        console.log('------------------------ throw new!!!!!!!!!!!!', {
-            httpStatusCode: statusCode,
-            url: endpoint,
-            exception: getAllProperties(toError(exception))
-        });
 
         if (statusCode > 0) {
             throw initializeError(NetworkError, {
