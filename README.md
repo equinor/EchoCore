@@ -5,7 +5,7 @@
 A monorepo with all tools needed to communicate with echo framework. the repo contains two packages.
 You can read more about them in the links below.
 
-Also see **breaking changes** (new since v0.5.0):
+**Breaking changes** (new readme section since v0.5.0), see:
 
 -   [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
 -   [@equinor/echo-core](https://github.com/equinor/EchoCore/blob/main/packages/echo-core)
