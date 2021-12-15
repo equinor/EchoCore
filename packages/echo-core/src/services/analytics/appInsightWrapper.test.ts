@@ -1,5 +1,15 @@
 import { appInsightsInstance } from './appInsightWrapper';
 
+jest.mock('@microsoft/applicationinsights-web', () => {
+    return {
+        ApplicationInsights: class MockClass {
+            loadAppInsights = jest.fn();
+            addTelemetryInitializer = jest.fn();
+            trackPageView = jest.fn();
+        }
+    };
+});
+
 jest.mock('../../configuration/environment', () => {
     return {
         env: jest.fn().mockImplementation(() => {
