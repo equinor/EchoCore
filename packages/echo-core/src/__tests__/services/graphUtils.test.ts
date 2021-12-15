@@ -33,7 +33,6 @@ beforeEach(() => {
 });
 
 const globalConsoleMethod = global.console;
-const globalFetchMethod = window.fetch;
 beforeAll(() => {
     // overrides console log with a mock in test run
     const mockConsole = { log: jest.fn(), error: jest.fn() } as unknown;
@@ -42,10 +41,11 @@ beforeAll(() => {
 
 afterAll(() => {
     global.console = globalConsoleMethod;
-    window.fetch = globalFetchMethod;
 });
 
 describe('graphGetProfile', () => {
+    const fetchMock = jest.spyOn(window, 'fetch');
+
     it('should successfully fetch graph profile', async () => {
         const user = {
             displayName: 'test',
@@ -54,8 +54,7 @@ describe('graphGetProfile', () => {
         } as User;
 
         const mockSuccessResponse = { ok: true, json: () => Promise.resolve(user) } as Response;
-        const mockFetch = jest.fn().mockImplementation(() => mockSuccessResponse);
-        window.fetch = mockFetch;
+        fetchMock.mockImplementation(() => Promise.resolve(mockSuccessResponse));
         const accessToken = 'accessToken';
 
         mockedEchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate.mockResolvedValue({
@@ -63,14 +62,13 @@ describe('graphGetProfile', () => {
         } as AuthenticationResult);
 
         const graphProfile = await graphGetProfile();
-        expect(mockFetch).toBeCalled();
+        expect(fetchMock).toBeCalled();
         expect(graphProfile).toStrictEqual(user);
     });
 
     it('should try to fetch graph profile, but response is not successful so profile is undefined', async () => {
         const mockFailedResponse = { ok: false } as Response;
-        const mockFetch = jest.fn().mockImplementation(() => mockFailedResponse);
-        window.fetch = mockFetch;
+        fetchMock.mockImplementation(() => Promise.resolve(mockFailedResponse));
         const accessToken = 'accessToken';
 
         mockedEchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate.mockResolvedValue({
@@ -78,13 +76,13 @@ describe('graphGetProfile', () => {
         } as AuthenticationResult);
 
         const graphProfile = await graphGetProfile();
-        expect(mockFetch).toBeCalled();
+        expect(fetchMock).toBeCalled();
         expect(graphProfile).toBe(undefined);
     });
 
     it('should return undefined because token fetch failed', async () => {
         const mockFetch = jest.fn();
-        window.fetch = mockFetch;
+        fetchMock.mockImplementation = mockFetch;
 
         mockedEchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate.mockResolvedValue(null);
 
@@ -95,7 +93,7 @@ describe('graphGetProfile', () => {
 
     it('should return undefined because no account is present on auth provider', async () => {
         const mockFetch = jest.fn();
-        window.fetch = mockFetch;
+        fetchMock.mockImplementation = mockFetch;
         mockedEchoAuthProvider.userProperties.account = null;
 
         const aquireTokenSilentOrRedirectToAuthenticateSpy = jest.spyOn(
@@ -111,10 +109,11 @@ describe('graphGetProfile', () => {
 });
 
 describe('graphGetProfilePicture', () => {
+    const fetchMock = jest.spyOn(window, 'fetch');
+
     it('should successfully fetch graph picture url', async () => {
         const mockSuccessResponse = { ok: true, blob: () => Promise.resolve(new Blob()) } as Response;
-        const mockFetch = jest.fn().mockImplementation(() => mockSuccessResponse);
-        window.fetch = mockFetch;
+        fetchMock.mockImplementation(() => Promise.resolve(mockSuccessResponse));
 
         const pictureUrl = 'blob:thisAwesomeImage';
         const mockCreateObjectURL = jest.fn().mockImplementation(() => pictureUrl);
@@ -127,14 +126,13 @@ describe('graphGetProfilePicture', () => {
         } as AuthenticationResult);
 
         const graphProfileUrl = await graphGetProfilePicture();
-        expect(mockFetch).toBeCalled();
+        expect(fetchMock).toBeCalled();
         expect(graphProfileUrl).toStrictEqual(pictureUrl);
     });
 
     it('should try to fetch graph profile picture, but response is not successful so picture url is undefined', async () => {
         const mockSuccessResponse = { ok: false } as Response;
-        const mockFetch = jest.fn().mockImplementation(() => mockSuccessResponse);
-        window.fetch = mockFetch;
+        fetchMock.mockImplementation(() => Promise.resolve(mockSuccessResponse));
 
         const accessToken = 'accessToken';
 
@@ -143,14 +141,13 @@ describe('graphGetProfilePicture', () => {
         } as AuthenticationResult);
 
         const graphProfileUrl = await graphGetProfilePicture();
-        expect(mockFetch).toBeCalled();
+        expect(fetchMock).toBeCalled();
         expect(graphProfileUrl).toBe(undefined);
     });
 
     it('should try to fetch graph profile picture, but response does not contain picture url, so return value is undefined', async () => {
         const mockSuccessResponse = { ok: false, blob: () => Promise.reject() } as Response;
-        const mockFetch = jest.fn().mockImplementation(() => mockSuccessResponse);
-        window.fetch = mockFetch;
+        fetchMock.mockImplementation(() => Promise.resolve(mockSuccessResponse));
 
         const accessToken = 'accessToken';
 
@@ -159,13 +156,13 @@ describe('graphGetProfilePicture', () => {
         } as AuthenticationResult);
 
         const graphProfileUrl = await graphGetProfilePicture();
-        expect(mockFetch).toBeCalled();
+        expect(fetchMock).toBeCalled();
         expect(graphProfileUrl).toBe(undefined);
     });
 
     it('should return undefined because token fetch failed', async () => {
         const mockFetch = jest.fn();
-        window.fetch = mockFetch;
+        fetchMock.mockImplementation = mockFetch;
 
         mockedEchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate.mockResolvedValue(null);
 
@@ -176,7 +173,7 @@ describe('graphGetProfilePicture', () => {
 
     it('should return undefined because no account is present on auth provider', async () => {
         const mockFetch = jest.fn();
-        window.fetch = mockFetch;
+        fetchMock.mockImplementation = mockFetch;
         mockedEchoAuthProvider.userProperties.account = null;
 
         const aquireTokenSilentOrRedirectToAuthenticateSpy = jest.spyOn(

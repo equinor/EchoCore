@@ -4,8 +4,9 @@ import { fetchWithTokenLogic } from './fetchWithTokenLogic';
 describe('fetchWithTokenLogic: throw error tests', () => {
     const url = 'https://fakeTestUrl';
     const token = 'token';
+    const fetchMock = jest.spyOn(window, 'fetch'); // we just put a spyOn it once - we don't define any mocked implementation yet - that is handled by the local test
     it('200 should return with ok response object', async () => {
-        global.fetch = jest.fn(() => mockedResponse({ status: 200 })) as jest.Mock;
+        fetchMock.mockReturnValue(mockedResponse({ status: 200 })); // handling the actual mock response here + don't need to re-mock (and overwrite) fetch
 
         const response = await fetchWithTokenLogic(url, token);
 
@@ -14,7 +15,7 @@ describe('fetchWithTokenLogic: throw error tests', () => {
     });
 
     it('201 should return with ok response object', async () => {
-        global.fetch = jest.fn(() => mockedResponse({ status: 201 })) as jest.Mock;
+        fetchMock.mockReturnValue(mockedResponse({ status: 201 }));
 
         const response = await fetchWithTokenLogic(url, token);
 
@@ -23,7 +24,7 @@ describe('fetchWithTokenLogic: throw error tests', () => {
     });
 
     it('401 should throw unauthorized exception', async () => {
-        global.fetch = jest.fn(() => mockedResponse({ status: 401 })) as jest.Mock;
+        fetchMock.mockReturnValue(mockedResponse({ status: 401 }));
 
         let error: NetworkError | undefined = undefined;
         try {
@@ -39,7 +40,7 @@ describe('fetchWithTokenLogic: throw error tests', () => {
 
     //Unit test for demonstration of expect().toThrowError, which only checks if the message is correct
     it('403 rejects should throw forbidden exception', async () => {
-        global.fetch = jest.fn(() => mockedResponse({ status: 401 })) as jest.Mock;
+        fetchMock.mockReturnValue(mockedResponse({ status: 401 }));
 
         const errorWhereOnlyMessageWillBeVerified = new UnauthorizedError({
             message: 'failed response',
@@ -54,7 +55,7 @@ describe('fetchWithTokenLogic: throw error tests', () => {
 
     it(`reject with an Error should throw networkError with 'uncaught exception response' message`, async () => {
         const innerErrorMessage = 'TypeError - test';
-        global.fetch = jest.fn(() => Promise.reject(new Error(innerErrorMessage))) as jest.Mock;
+        fetchMock.mockReturnValue(Promise.reject(new Error(innerErrorMessage)));
 
         let error: NetworkError | undefined = undefined;
         try {
@@ -71,7 +72,7 @@ describe('fetchWithTokenLogic: throw error tests', () => {
 
     it(`reject with a string instead of an error should throw error with 'uncaught exception response' message`, async () => {
         const innerErrorMessage = 'expected to fail';
-        global.fetch = jest.fn(() => Promise.reject(innerErrorMessage)) as jest.Mock;
+        fetchMock.mockReturnValue(Promise.reject(innerErrorMessage));
 
         let error: NetworkError | undefined = undefined;
         try {
@@ -87,7 +88,11 @@ describe('fetchWithTokenLogic: throw error tests', () => {
     });
 });
 
-function mockedResponse(args: { status: number; json?: Record<string, unknown>; text?: string }) {
+async function mockedResponse(args: {
+    status: number;
+    json?: Record<string, unknown>;
+    text?: string;
+}): Promise<Response> {
     const { status, json, text } = args;
     return Promise.resolve({
         json: () => (json ? Promise.resolve(json) : undefined),
@@ -95,5 +100,5 @@ function mockedResponse(args: { status: number; json?: Record<string, unknown>; 
         status,
         ok: status >= 200 && status < 300,
         headers: { get: (): string => (json ? 'application/json' : 'text/plain') }
-    });
+    } as unknown as Response);
 }

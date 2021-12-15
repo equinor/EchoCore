@@ -13,6 +13,16 @@ jest.mock('../../configuration/environment', () => {
     };
 });
 
+jest.mock('@microsoft/applicationinsights-web', () => {
+    return {
+        ApplicationInsights: class MockClass {
+            loadAppInsights = jest.fn();
+            addTelemetryInitializer = jest.fn();
+            trackPageView = jest.fn();
+        }
+    };
+});
+
 describe('appInsightsInstance', () => {
     it('should return same instance each time', () => {
         const instance1 = appInsightsInstance();
