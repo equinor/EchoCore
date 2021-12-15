@@ -13,6 +13,7 @@ Everything a Echo app needs to communicate with the core.
 ![@equinor/echo-core](https://badgen.net/bundlephobia/dependency-count/@equinor/echo-core)
 
 -   [EchoCore](#echocore)
+-   [Breaking Changes](#Breaking-Changes)
 -   [Install](#install)
     -   [NPM](#npm)
 -   [Development](#development)
@@ -38,6 +39,20 @@ Everything a Echo app needs to communicate with the core.
     -   [Module State / Context](#module-state--context)
         -   [Module Context and state](#module-context-and-state)
     -   [RegistryState](#registrystate)
+
+# Breaking Changes
+
+v0.5.0:
+
+See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
+
+-   Errors are not exported through echo-core anymore, but from echo-base. Exporting them from both caused type errors when using instanceof, which caused difficult bug to debug. Import all error types from echo-base instead, BaseError, ToError, NetworkError, etc.
+
+```
+import { BaseError, NetworkError, toError } from '@equinor/echo-base';
+```
+
+-   BaseClient.fetchWithToken throws error as before if response.ok is false. But the error.message was changed to 'failed response' or 'uncaught exception response' to easier distinguish the error types.
 
 # Install
 

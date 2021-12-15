@@ -1,4 +1,4 @@
-import { BaseError } from '@equinor/echo-base';
+import { BaseError, ErrorArgs } from '@equinor/echo-base';
 import { Component } from 'react';
 import { Panel } from './panel';
 
@@ -21,4 +21,8 @@ export interface EchoApp {
 
 type AppContext = Record<string, unknown>;
 
-export class ModuleAppError extends BaseError {}
+export class ModuleAppError extends BaseError {
+    constructor(args: ErrorArgs) {
+        super({ ...args, name: 'ModuleAppError' });
+    }
+}
