@@ -41,7 +41,7 @@ describe('fetchWithTokenLogic: throw error tests', () => {
 
     //Unit test for demonstration of expect().toThrowError, which only checks if the message is correct
     it('403 rejects should throw forbidden exception', async () => {
-        fetchMock.mockReturnValue(mockedResponse({ status: 401 }));
+        fetchMock.mockReturnValue(mockedResponse({ status: 403 }));
 
         const errorWhereOnlyMessageWillBeVerified = new UnauthorizedError({
             message: 'failed response',
