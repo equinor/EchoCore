@@ -1,4 +1,5 @@
 import { ComponentType } from 'react';
+import { StaticContext } from 'react-router';
 import { RouteComponentProps } from 'react-router-dom';
 import { Without } from './common';
 
@@ -13,7 +14,7 @@ export type WrappedComponent<TProps> = ComponentType<Without<TProps, keyof BaseA
  * The props that every registered App component obtains.
  */
 export interface RouteBaseProps<UrlParams = unknown, UrlState = unknown>
-    extends RouteComponentProps<UrlParams, Record<string, unknown>, UrlState>,
+    extends RouteComponentProps<UrlParams, StaticContext, UrlState>,
         BaseAppComponentProps {}
 
 /**

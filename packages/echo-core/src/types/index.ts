@@ -1,5 +1,6 @@
 export * from './api';
 export * from './common';
+export * from './components';
 export * from './legend';
 export * from './modules';
 export * from './panel';
