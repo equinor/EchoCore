@@ -1,4 +1,5 @@
 import { EchoLocalStorage } from '../types/storage';
+import { parseJsonWithDate } from './jsonParseUtils';
 
 export const storage: EchoLocalStorage = {
     setItem: <T>(key: string, data: T) => {
@@ -14,7 +15,7 @@ export const storage: EchoLocalStorage = {
         if (!data) return undefined;
 
         try {
-            return JSON.parse(data) as T;
+            return parseJsonWithDate(data) as T;
         } catch {
             return data;
         }
