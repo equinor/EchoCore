@@ -21,6 +21,7 @@ module.exports = {
             statements: 90
         }
     },
+    setupFilesAfterEnv: ['./packages/echo-core/setupTests.js'],
     globals: {
         crypto: require('crypto'),
         _babelPluginPolyfillCorejs2: require('babel-plugin-polyfill-corejs3'),
