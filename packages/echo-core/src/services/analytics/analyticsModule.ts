@@ -48,11 +48,13 @@ export class AnalyticsModule {
 
         const offlineThresholdSeconds = 20;
         this.offlineTracker = new OfflineTracker(offlineThresholdSeconds, !navigator.onLine);
-        window.addEventListener('online', () => this.trackOnline);
-        window.addEventListener('offline', () => this.trackOffline);
+        window.addEventListener('online', () => this.trackOnline());
+        window.addEventListener('offline', () => this.trackOffline());
     }
 
     private trackOnline(): void {
+        // WILL REMOVE THIS WHEN PR IS APPROVED
+        console.log('TRACKING ONLINE --------------------------------');
         const offlineEvent = this.offlineTracker.setOnline();
         if (offlineEvent) {
             this.trackEventBy(offlineEvent.object, offlineEvent.action, {
@@ -63,6 +65,8 @@ export class AnalyticsModule {
     }
 
     private trackOffline(): void {
+        // WILL REMOVE THIS WHEN PR IS APPROVED
+        console.log('TRACKING OFFLINE --------------------------------');
         this.offlineTracker.setOffline();
     }
 
