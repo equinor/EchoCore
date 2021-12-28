@@ -35,7 +35,7 @@
         "react-router-dom": ">=5.2.0"
     },
     "dependencies": {
-        "@azure/msal-browser": "^2.19.0",
+        "@azure/msal-browser": "^2.20.0",
         "@dbeining/react-atom": "^4.1.17",
         "@microsoft/applicationinsights-web": "^2.7.1",
         "sha1": "^1.1.1"
