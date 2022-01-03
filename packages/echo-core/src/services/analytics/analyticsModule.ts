@@ -48,8 +48,8 @@ export class AnalyticsModule {
 
         const offlineThresholdSeconds = 20;
         this.offlineTracker = new OfflineTracker(offlineThresholdSeconds, !navigator.onLine);
-        window.addEventListener('online', () => this.trackOnline);
-        window.addEventListener('offline', () => this.trackOffline);
+        window.addEventListener('online', () => this.trackOnline());
+        window.addEventListener('offline', () => this.trackOffline());
     }
 
     private trackOnline(): void {
