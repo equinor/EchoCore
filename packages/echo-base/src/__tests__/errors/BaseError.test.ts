@@ -2,30 +2,25 @@ import { BaseError } from '../../errors';
 
 describe('BaseError', () => {
     const message = 'Base Error Testing';
-    const exception = { UnhandledException: 'source unknown' };
+    const innerError = { UnhandledException: 'source unknown' };
 
-    const baseError = new BaseError({ message, exception });
+    const baseError = new BaseError({ name: 'BaseError', message, innerError });
 
     it('should not be logged', () => {
         expect(baseError.hasBeenLogged).toBeFalsy();
     });
 
-    it('check properties', () => {
-        const properties = {
-            UnhandledException: 'source unknown',
-            extra: 123
-        };
-        baseError.addProperties({ extra: 123 });
-        expect(baseError.getProperties()).toEqual(properties);
+    it('check innerError properties', () => {
+        expect(baseError.getInnerError()).toEqual(innerError);
     });
 
     it('check BaseError name when message is empty', () => {
-        const be = new BaseError({ message: '', exception });
+        const be = new BaseError({ name: 'BaseError', message: '', innerError });
         expect(be.message).toEqual(be.name);
     });
 
     it('check BaseError name when message is not empty', () => {
-        const be = new BaseError({ message, exception });
+        const be = new BaseError({ name: 'BaseError', message, innerError });
         expect(be.message).not.toEqual(be.name);
     });
 });

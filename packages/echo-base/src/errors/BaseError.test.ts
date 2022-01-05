@@ -11,16 +11,16 @@ describe('BaseError', () => {
         expect(actualError.stack).toBeTruthy();
     });
 
-    it('should preserve innerError as properties', () => {
+    it('should preserve innerError with properties', () => {
         const innerMessage = 'inner message';
         const innerError = new CustomTestError(innerMessage);
-        const actualError = new BaseError({ name: 'BaseError', message, exception: innerError });
+        const actualError = new BaseError({ name: 'BaseError', message, innerError });
 
         expect(actualError.message).toBe(message);
         expect(actualError.name).toBe('BaseError');
         expect(actualError.stack).toBeTruthy();
 
-        const actualProperties = actualError.getProperties();
+        const actualProperties = actualError.getProperties()['innerError'];
         actualProperties.stack = actualProperties.stack ? 'stack' : actualProperties.stack;
         expect(actualProperties).toStrictEqual({
             name: 'CustomTestError',

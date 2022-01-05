@@ -34,21 +34,22 @@ describe('NetworkError, derived types and initializeError', () => {
         const result = initializeError(NetworkError, { ...argWithException, httpStatusCode: 400 });
         expect(result instanceof ValidationError).toBe(true);
         expect(result.message).toEqual('ValidationError 400 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).not.toBe(true);
+        expect(result.tryToFindPropertyByName('dummyProperty')).not.toBe(true);
     });
 
     it('400 with exception should return BackendError', () => {
         const result = initializeError(NetworkError, { ...withException(), httpStatusCode: 400 });
         expect(result instanceof BackendError).toBe(true);
         expect(result.message).toEqual('BackendError 400 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).toBe(true);
+        expect(result.tryToFindPropertyByName('dummyProperty')).toBe(true);
     });
 
     it('400 without exception should return BadRequest', () => {
         const result = initializeError(NetworkError, { ...withoutException(), httpStatusCode: 400 });
         expect(result instanceof BadRequestError).toBe(true);
         expect(result.message).toEqual('BadRequestError 400 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).toBe(undefined);
+        const dummyProp = result.getProperties()['dummyProperty'];
+        expect(dummyProp).toBe(undefined);
     });
 
     it('401 with exception should return UnauthorizedError with a specific message', () => {
@@ -110,7 +111,7 @@ describe('NetworkError, derived types and initializeError', () => {
         const result = initializeError(NetworkError, withException());
         expect(result instanceof BackendError).toBe(true);
         expect(result.message).toEqual('BackendError 500 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).toBe(true);
+        expect(result.tryToFindPropertyByName('dummyProperty')).toBe(true);
     });
 
     it('other status codes without exception should return NetworkError as default', () => {
@@ -118,7 +119,7 @@ describe('NetworkError, derived types and initializeError', () => {
         expect(result instanceof BackendError).not.toBe(true);
         expect(result instanceof NetworkError).toBe(true);
         expect(result.message).toEqual('NetworkError 500 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).toBe(undefined);
+        expect(result.tryToFindPropertyByName('dummyProperty')).toBe(undefined);
     });
 
     it('should return url as property', () => {
@@ -132,14 +133,16 @@ describe('NetworkError, derived types and initializeError', () => {
         const withExceptionCustomProperty = withException();
         withExceptionCustomProperty.exception = { aCustomProperty: 'test custom property' };
         const result = initializeError(NetworkError, withExceptionCustomProperty);
-        expect(result.getProperties()['aCustomProperty']).toBe(withExceptionCustomProperty.exception?.aCustomProperty);
+        expect(result.tryToFindPropertyByName('aCustomProperty')).toBe(
+            withExceptionCustomProperty.exception?.aCustomProperty
+        );
     });
 
     it('without exception should return custom InternalError type as default/fallback', () => {
         const result = initializeError(InternalError, withoutException());
         expect(result instanceof InternalError).toBe(true);
         expect(result.message).toEqual('InternalError 500 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).toBe(undefined);
+        expect(result.tryToFindPropertyByName('dummyProperty')).toBe(undefined);
     });
 });
 
