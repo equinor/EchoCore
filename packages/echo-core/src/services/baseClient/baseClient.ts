@@ -39,7 +39,7 @@ export class BaseClient {
             );
             return authenticationResult ? authenticationResult.accessToken : '';
         } catch (exception) {
-            throw new AuthenticationError({ message: 'failed to authenticate', exception: toError(exception) });
+            throw new AuthenticationError({ message: 'failed to authenticate', innerError: toError(exception) });
         }
     }
 
