@@ -1,9 +1,9 @@
-import { BaseError, ForbiddenError, ValidationError } from '@equinor/echo-base';
-import { IExceptionTelemetry, SeverityLevel } from '@microsoft/applicationinsights-web';
+import { BaseError } from '@equinor/echo-base';
 import { EchoEnv } from '../../EchoEnv';
 import { appWithModuleName, eventNameToString } from './analyticsLogic';
 import { AnalyticsEvent, AnalyticsEventName, AnalyticsPropertyTypes } from './analyticsTypes';
 import { appInsightsInstance } from './appInsightWrapper';
+import { errorToExceptionTelemetry } from './errorToExceptionTelemetry';
 import OfflineTracker from './offlineTracker';
 
 // Based on Client Analytics Strategy
@@ -111,18 +111,14 @@ export class AnalyticsModule {
             console.log('with properties:');
             console.log({ ...error });
         } else {
-            let severityLevel = SeverityLevel.Error;
-            if (error instanceof ForbiddenError) severityLevel = SeverityLevel.Verbose;
-            else if (error instanceof ValidationError) severityLevel = SeverityLevel.Warning;
-
-            const errorType = error.name ? error.name : 'unknown';
-            const message = error.message ? error.message : '';
-
-            appInsightsInstance().trackException({
-                exception: error,
-                severityLevel: severityLevel,
-                properties: { ...error, sessionKey, errorType, message, module: appWithModuleName(this.moduleName) }
-            } as IExceptionTelemetry);
+            const exceptionTelemetry = errorToExceptionTelemetry({
+                error,
+                sessionKey,
+                instCode,
+                userCompany,
+                moduleName: appWithModuleName(this.moduleName)
+            });
+            appInsightsInstance().trackException(exceptionTelemetry);
         }
     }
 
