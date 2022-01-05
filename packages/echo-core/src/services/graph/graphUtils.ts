@@ -65,10 +65,6 @@ export const getUserProfile = async (endpoint: string, token: string): Promise<U
         headers: headers
     };
 
-    if (isDevelopment() || env().REACT_APP_LOGGER_ACTIVE) {
-        console.log('request for user profile made to Graph API at: ' + new Date().toString());
-    }
-
     const response: Response = await fetch(endpoint, options);
     if (response && response.ok) {
         profile = response.json() as User;
