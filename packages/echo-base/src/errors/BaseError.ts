@@ -57,7 +57,6 @@ export class BaseError extends Error {
 }
 
 //TODO check if we have unitTest for missing property should return undefined
-//TODO check nested nested property
 export function tryToFindPropertyByName(
     object: Record<string, unknown> | Error,
     propertyName: string

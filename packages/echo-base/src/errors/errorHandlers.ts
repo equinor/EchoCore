@@ -1,4 +1,3 @@
-import { ErrorInitializerFunction } from '../types/error';
 import { BaseError } from './BaseError';
 import {
     BackendError,
@@ -12,7 +11,7 @@ import {
 } from './NetworkError';
 
 /**
- * Tries to initialize an error to specific type.
+ * Tries to initialize network error based on httpStatusCode, defaults to networkError.
  * Returns:
  * @type {ValidationError} if 400 and with property exception.title which includes value 'validation'
  * @type {UnauthorizedError} if 401
@@ -21,16 +20,12 @@ import {
  * @type {BackendError} if it includes property exception (since echopedia api returns an error with this format)
  * @type {BadRequestError} if 400
  * Fall backs to ErrorType with @type {NetworkError} as base, if none of the above constraints are fulfilled
- * @param ErrorType Default error type to return if no match
  * @param args Arguments to initialize error with. Add custom properties in args.exception as desired,
  * like: .exception = { aCustomProperty: 'test custom property' };
- * access with: .getProperties()['aCustomProperty']
+ * access with: tryToFindPropertyByName('aCustomProperty') or .getInnerErrorProperties()['aCustomProperty']
  * @returns Specific error type with base as type
  */
-export const initializeError: ErrorInitializerFunction<NetworkError, NetworkErrorArgs> = (
-    ErrorType,
-    args
-): BaseError => {
+export function initializeNetworkError(args: NetworkErrorArgs): BaseError {
     switch (args.httpStatusCode) {
         case 400:
             if (args.exception?.title && (args.exception?.title as string).toLowerCase().includes('validation'))
@@ -48,5 +43,5 @@ export const initializeError: ErrorInitializerFunction<NetworkError, NetworkErro
     if (args.httpStatusCode > 0 && args.httpStatusCode < 550 && args.exception) return new BackendError(args); //our backEnd return a json property called exception.
     if (args.httpStatusCode == 400) return new BadRequestError(args);
 
-    return new ErrorType(args);
-};
+    return new NetworkError(args);
+}
