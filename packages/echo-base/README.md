@@ -14,7 +14,21 @@ Everything a Echo web need for enabling micro frontend development.
 
 ## Documentation
 
+# What's new
+
+v0.6.0:
+
+-   Fixed error reporting to application insights, it now properly reports all properties including innerErrorsProperties.
+-   Fixed baseError, it now properly supports nested innerErrors. Exception/inner Error used to overwrite each others property if they had the same name.
+
 # Breaking Changes
+
+v0.6.0:
+
+-   Renamed `initializeError` to `initializeNetworkError` and simplified it. It now only takes `NetworkErrorArgs` as argument.
+-   `BaseError` now properly support nested (and nested-nested) errors with argument `innerError`.  
+    Earlier properties with the same name would overwrite each other.  
+    `exception` argument renamed to `innerError`, of type `Record<string, unknown> | Error`
 
 v0.5.0:
 
