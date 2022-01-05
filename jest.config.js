@@ -14,6 +14,7 @@ module.exports = {
         'packages/echo-base/lib/*',
         'packages/echo-base/src/errors/network*'
     ],
+    modulePathIgnorePatterns: ['.yalc'],
     collectCoverageFrom: ['packages/**/*.{js,jsx,ts,tsx}', '!<rootDir>/node_modules/'],
     coverageThreshold: {
         global: {
