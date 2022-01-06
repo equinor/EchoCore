@@ -10,7 +10,3 @@ export interface ErrorArgs {
 export interface CommonErrorArgs {
     [key: string]: unknown;
 }
-
-export interface BaseErrorProps extends Error {
-    hasBeenLogged: boolean;
-}

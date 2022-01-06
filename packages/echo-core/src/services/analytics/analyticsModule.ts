@@ -90,6 +90,7 @@ export class AnalyticsModule {
             sessionKey,
             instCode,
             userCompany,
+            moduleName: this.moduleName,
             appVersion: 'Echopedia v' + EchoEnv.env().REACT_APP_AZURE_BUILD_NUMBER,
             context: event.eventName.objectName,
             isOnline: navigator.onLine,
