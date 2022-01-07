@@ -11,6 +11,7 @@ export interface EchoEventHub {
 
 export type UnsubscribeFunction = () => void;
 
+// TODO: Remove this. Moved to EchoFramework.
 export enum EchoEvents {
     PlantChanged = 'plantChanged',
     ProcosysProjectChanged = 'procosysProjectChanged',
