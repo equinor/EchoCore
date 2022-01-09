@@ -1,4 +1,4 @@
-import { BaseError, getAllProperties } from './BaseError';
+import { BaseError, getAllProperties, tryToFindPropertyByName } from './BaseError';
 
 describe('BaseError', () => {
     const message = 'This is a custom error message for testing';
@@ -20,14 +20,27 @@ describe('BaseError', () => {
         expect(actualError.name).toBe('BaseError');
         expect(actualError.stack).toBeTruthy();
 
-        const actualProperties = actualError.getProperties()['innerError'];
+        const actualProperties = actualError.getInnerErrorProperties();
         actualProperties.stack = actualProperties.stack ? 'stack' : actualProperties.stack;
         expect(actualProperties).toStrictEqual({
             name: 'CustomTestError',
-            anotherField: 'another value',
+            anotherProperty: 'another value',
             message: innerMessage,
             stack: 'stack'
         });
+    });
+
+    it(`should generate frontEnd errorTraceId if it doesn't already exist`, () => {
+        const actualError = new BaseError({ name: 'BaseError', message });
+
+        expect(actualError.errorTraceId).toBe('frontEnd_ignore');
+    });
+
+    it(`should preserve errorTraceId of innerError/backEnd if it exist`, () => {
+        const innerError = { errors: { errorTraceId: 'backendStackTraceId' } };
+        const actualError = new BaseError({ name: 'BaseError', message, innerError });
+
+        expect(actualError.errorTraceId).toBe('backendStackTraceId');
     });
 });
 
@@ -50,18 +63,67 @@ describe('getAllProperties', () => {
         actualError.stack = actualError.stack ? 'stack' : actualError.stack;
         expect(actualError).toStrictEqual({
             name: 'CustomTestError',
-            anotherField: 'another value',
+            anotherProperty: 'another value',
             message: 'message',
             stack: 'stack'
         });
     });
 });
 
+describe('tryToFindPropertyByName', () => {
+    const message = 'This is a custom error message for testing';
+
+    it('should find message on baseError', () => {
+        const error = new BaseError({ name: 'BaseError', message });
+        const actualPropertyMessage = tryToFindPropertyByName(error, 'message');
+        expect(actualPropertyMessage).toBe(message);
+    });
+
+    it('should find first message on baseError instead of message on innerError', () => {
+        const error = new BaseError({
+            name: 'BaseError',
+            message,
+            innerError: new BaseError({ name: 'inner', message: 'test' })
+        });
+        const actualPropertyMessage = tryToFindPropertyByName(error, 'message');
+        expect(actualPropertyMessage).toBe(message);
+    });
+
+    it(`should return undefined if property doesn't exist`, () => {
+        const error = new BaseError({
+            name: 'BaseError',
+            message
+        });
+        const actualPropertyMessage = tryToFindPropertyByName(error, 'message2');
+        expect(actualPropertyMessage).toBe(undefined);
+    });
+
+    it('should find property on nested innerError of type Record', () => {
+        const error = new BaseError({
+            name: 'BaseError',
+            message,
+            innerError: { errors: { innerProperty: 1 } }
+        });
+        const actualPropertyMessage = tryToFindPropertyByName(error, 'innerProperty');
+        expect(actualPropertyMessage).toBe(1);
+    });
+
+    it('should find property on nested innerError of type customError', () => {
+        const error = new BaseError({
+            name: 'BaseError',
+            message,
+            innerError: new CustomTestError('test')
+        });
+        const actualPropertyMessage = tryToFindPropertyByName(error, 'anotherProperty');
+        expect(actualPropertyMessage).toBe('another value');
+    });
+});
+
 class CustomTestError extends Error {
-    anotherField: string;
+    anotherProperty: string;
     constructor(message: string) {
         super(message);
         this.name = 'CustomTestError';
-        this.anotherField = 'another value';
+        this.anotherProperty = 'another value';
     }
 }

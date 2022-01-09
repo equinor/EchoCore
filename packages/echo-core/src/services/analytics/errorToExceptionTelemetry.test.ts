@@ -16,6 +16,7 @@ describe('errorToExceptionTelemetry', () => {
 
         const nestedInnerError1 = new CustomBaseError({ message: 'inner 1 message', error: nestedInnerError2 });
         nestedInnerError1.stack = 'ignore';
+        nestedInnerError1.errorTraceId = 'ignore';
 
         const outerError = new BaseError({
             name: 'BaseError',
@@ -23,6 +24,7 @@ describe('errorToExceptionTelemetry', () => {
             innerError: nestedInnerError1
         });
         outerError.stack = 'ignore';
+        outerError.errorTraceId = 'ignore';
         //when
         const actual = errorToExceptionTelemetry({ error: outerError, ...defaultArgs });
 
@@ -35,6 +37,7 @@ describe('errorToExceptionTelemetry', () => {
                 name: 'BaseError',
                 message: 'outer message',
                 stack: 'ignore',
+                errorTraceId: 'ignore',
 
                 innerError: {
                     customBaseField: 'public1',
@@ -42,6 +45,7 @@ describe('errorToExceptionTelemetry', () => {
                     message: 'inner 1 message',
                     name: 'CustomBaseError',
                     stack: 'ignore',
+                    errorTraceId: 'ignore',
 
                     innerError: {
                         anotherField: 'another value',

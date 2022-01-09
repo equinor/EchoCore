@@ -34,11 +34,12 @@ describe('NetworkError', () => {
             message: 'Network Error Testing',
             name: 'NetworkError',
             innerError: getAllProperties(exception),
-            stack: 'stack'
+            stack: 'ignore',
+            errorTraceId: 'frontEnd_ignore'
         };
 
         const actualProperties = nwError.getProperties();
-        actualProperties.stack = 'stack';
+        actualProperties.stack = 'ignore';
         expect(actualProperties).toEqual(properties);
     });
 
@@ -64,7 +65,14 @@ describe('NetworkError & subclasses', () => {
     const exception = { NetworkException: 'endpoint is unreachable' };
 
     const networkArgs = { message, httpStatusCode, url, exception };
-    const expectedProperties = { message, httpStatusCode, url, innerError: exception, stack: 'stack' };
+    const expectedProperties = {
+        message,
+        httpStatusCode,
+        url,
+        innerError: exception,
+        stack: 'ignore',
+        errorTraceId: 'frontEnd_ignore'
+    };
 
     test.each([
         ['NetworkError', new NetworkError(networkArgs)],
@@ -79,7 +87,7 @@ describe('NetworkError & subclasses', () => {
         expect(error.name).toBe(firstArg);
         expect(error.message).toBe(message);
         const properties = error.getProperties();
-        properties.stack = 'stack';
+        properties.stack = 'ignore';
         expect(properties).toStrictEqual({ name: firstArg, ...expectedProperties });
     });
 
@@ -97,7 +105,7 @@ describe('NetworkError & subclasses', () => {
         expect(error.message).toBe(message);
 
         const properties = error.getProperties();
-        properties.stack = 'stack';
+        properties.stack = 'ignore';
         expect(properties).toStrictEqual({ name: 'CustomTestName', ...expectedProperties });
     });
 });

@@ -1,4 +1,5 @@
 import { BaseErrorArgs } from '../types/error';
+import { randomId } from './randomHelper';
 
 /**
  * Base Error class is intended to be used as a base class for every type of Error generated
@@ -14,6 +15,7 @@ import { BaseErrorArgs } from '../types/error';
 export class BaseError extends Error {
     protected innerError?: Record<string, unknown> | Error;
     hasBeenLogged = false;
+    errorTraceId: string;
 
     constructor({ name, message, innerError }: BaseErrorArgs) {
         super(message);
@@ -30,6 +32,7 @@ export class BaseError extends Error {
         Object.setPrototypeOf(this, new.target.prototype);
 
         this.innerError = innerError;
+        this.fixMissingStackTraceId(innerError);
 
         const fallBackNameWillBeObfuscatedInProduction = this.constructor.name;
         this.name = name ?? fallBackNameWillBeObfuscatedInProduction;
@@ -39,24 +42,56 @@ export class BaseError extends Error {
         }
     }
 
+    private fixMissingStackTraceId(innerErrorMaybeWithTraceId: Error | Record<string, unknown>): void {
+        if (this.errorTraceId) return;
+
+        const maybeErrorTraceIdFromBackend = tryToFindPropertyByName(
+            innerErrorMaybeWithTraceId,
+            'errorTraceId'
+        ) as string;
+        this.errorTraceId = maybeErrorTraceIdFromBackend ?? `frontEnd_${randomId()}`;
+    }
+
+    /**
+     * Recursively converts all properties to type of Record<string, unknown>
+     * @returns The converted properties as Record<string, unknown>, or an empty object
+     */
+    getProperties(): Record<string, unknown> {
+        return getAllProperties(this);
+    }
+
+    /**
+     * Returns the innerError or undefined
+     * @returns innerError or undefined
+     */
     getInnerError(): Record<string, unknown> | Error | undefined {
         return this.innerError;
     }
 
-    getInnerErrorProperties(): Record<string, unknown> | Error {
+    /**
+     * Recursively converts all properties of innerError to type of Record<string, unknown>
+     * @returns The converted properties of innerError as Record<string, unknown>, or an empty object
+     */
+    getInnerErrorProperties(): Record<string, unknown> {
         return getAllProperties(this.innerError);
     }
 
-    getProperties(): Record<string, unknown> | Error {
-        return getAllProperties(this);
-    }
-
+    /**
+     * Tries to find a property with the specified propertyName
+     * @param propertyName the name of the property to find
+     * @returns the value of the property found or undefined
+     */
     tryToFindPropertyByName(propertyName: string): unknown | undefined {
         return tryToFindPropertyByName(this, propertyName);
     }
 }
 
-//TODO check if we have unitTest for missing property should return undefined
+/**
+ * Tries to find a property with the specified propertyName on the object
+ * @param object the object to search
+ * @param propertyName the name of the property to find
+ * @returns the value of the property found or undefined
+ */
 export function tryToFindPropertyByName(
     object: Record<string, unknown> | Error,
     propertyName: string
@@ -67,17 +102,28 @@ export function tryToFindPropertyByName(
         return value;
     }
 
-    const innerProperties = properties['innerError'] as Record<string, unknown>; //TODO check that this is working after prod build obfuscation
-    if (innerProperties) {
-        return tryToFindPropertyByName(innerProperties, propertyName);
-    }
+    const propertyNames = properties ? Object.getOwnPropertyNames(properties) : [];
+    let maybeFound: unknown = undefined;
+    propertyNames.forEach((name) => {
+        const innerProperties = object[name];
+        const valueType = typeof innerProperties;
+        if (!maybeFound && valueType === 'object') {
+            maybeFound = tryToFindPropertyByName(innerProperties, propertyName);
+        }
+    });
+    return maybeFound;
+
+    // const innerProperties = properties['innerError'] as Record<string, unknown>;
+    // if (innerProperties) {
+    //     return tryToFindPropertyByName(innerProperties, propertyName);
+    // }
 }
 
 /**
  * Converts an object to a Record<string, unknown>.
  * Useful for logging errors to AppInsight, and preserve all properties of an Error.
  * Supports custom Error which has public or private fields. Will ignore any functions on the Error object.
- * It does not support cycling error references.
+ * It does not support cycling references (A -> B -> A).
  * @param objectWithProperties an object containing properties
  * @returns a record containing all properties of the object
  */

@@ -1,4 +1,4 @@
-import { getAllProperties, initializeError, NetworkError, toError } from '@equinor/echo-base';
+import { getAllProperties, initializeNetworkError, NetworkError, toError } from '@equinor/echo-base';
 
 /**
  * Fetch with specific accessToken.
@@ -37,7 +37,7 @@ export async function fetchWithTokenLogic(
                     ? await response.json()
                     : await response.text();
 
-            throw initializeError(NetworkError, {
+            throw initializeNetworkError({
                 message: 'failed response',
                 httpStatusCode: statusCode,
                 url: endpoint,
@@ -50,7 +50,7 @@ export async function fetchWithTokenLogic(
             throw exception;
         }
 
-        throw initializeError(NetworkError, {
+        throw initializeNetworkError({
             message: 'uncaught exception response',
             httpStatusCode: statusCode,
             url: endpoint,

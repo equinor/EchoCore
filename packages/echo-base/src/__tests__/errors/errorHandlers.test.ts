@@ -10,7 +10,7 @@ import {
     ValidationError
 } from '../../errors/NetworkError';
 
-describe('NetworkError, derived types and initializeError', () => {
+describe('NetworkError, derived types and initializeNetworkError', () => {
     function withException(): NetworkErrorArgs {
         const result: NetworkErrorArgs = {
             exception: {
@@ -41,15 +41,16 @@ describe('NetworkError, derived types and initializeError', () => {
         const result = initializeNetworkError({ ...withException(), httpStatusCode: 400 });
         expect(result instanceof BackendError).toBe(true);
         expect(result.message).toEqual('BackendError 400 http://localhost:3000');
-        expect(result.tryToFindPropertyByName('dummyProperty')).toBe(true);
+        const actualDummyProperty = result.tryToFindPropertyByName('dummyProperty');
+        expect(actualDummyProperty).toBe(true);
     });
 
     it('400 without exception should return BadRequest', () => {
         const result = initializeNetworkError({ ...withoutException(), httpStatusCode: 400 });
         expect(result instanceof BadRequestError).toBe(true);
         expect(result.message).toEqual('BadRequestError 400 http://localhost:3000');
-        const dummyProp = result.getProperties()['dummyProperty'];
-        expect(dummyProp).toBe(undefined);
+        const actualDummyProperty = result.getProperties()['dummyProperty'];
+        expect(actualDummyProperty).toBe(undefined);
     });
 
     it('401 with exception should return UnauthorizedError with a specific message', () => {
