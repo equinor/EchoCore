@@ -19,7 +19,9 @@ Everything a Echo web need for enabling micro frontend development.
 v0.6.0:
 
 -   Fixed error reporting to application insights, it now properly reports all properties including innerErrorsProperties.
--   Fixed baseError, it now properly supports nested innerErrors. Exception/inner Error used to overwrite each others property if they had the same name.
+-   Fixed `baseError`, it now properly supports nested innerErrors. Exception/inner Error used to overwrite each others property if they had the same name.
+-   `BaseError` now has errorTraceId, either from backEnd, or a unique frontEnd id
+-   `BaseError` helper methods added for getting properties or propertyByName
 
 # Breaking Changes
 

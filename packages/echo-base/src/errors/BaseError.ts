@@ -22,7 +22,7 @@ export class BaseError extends Error {
 
         // Maintains proper stack trace for where our error was thrown (only available on V8)
         if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, BaseError);
+            Error.captureStackTrace(this, BaseError); //TODO Ove preserve stack trace of innerError?
         }
         /**
          * Object.setPrototypeOf(this, new.target.prototype);: to fix instance of:
@@ -32,7 +32,7 @@ export class BaseError extends Error {
         Object.setPrototypeOf(this, new.target.prototype);
 
         this.innerError = innerError;
-        this.fixMissingStackTraceId(innerError);
+        this.fixMissingErrorTraceId(innerError);
 
         const fallBackNameWillBeObfuscatedInProduction = this.constructor.name;
         this.name = name ?? fallBackNameWillBeObfuscatedInProduction;
@@ -42,7 +42,7 @@ export class BaseError extends Error {
         }
     }
 
-    private fixMissingStackTraceId(innerErrorMaybeWithTraceId: Error | Record<string, unknown>): void {
+    private fixMissingErrorTraceId(innerErrorMaybeWithTraceId: Error | Record<string, unknown>): void {
         if (this.errorTraceId) return;
 
         const maybeErrorTraceIdFromBackend = tryToFindPropertyByName(

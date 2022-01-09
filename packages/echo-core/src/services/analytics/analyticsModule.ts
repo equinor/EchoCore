@@ -117,7 +117,7 @@ export class AnalyticsModule {
         } else {
             const exceptionTelemetry = errorToExceptionTelemetry({
                 error,
-                ...this.staticErrorProperties, //TODO
+                ...this.staticErrorProperties, //TODO Ove test this
                 sessionKey,
                 instCode,
                 userCompany,

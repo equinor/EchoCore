@@ -37,10 +37,10 @@ describe('BaseError', () => {
     });
 
     it(`should preserve errorTraceId of innerError/backEnd if it exist`, () => {
-        const innerError = { errors: { errorTraceId: 'backendStackTraceId' } };
+        const innerError = { errors: { errorTraceId: 'backendErrorTraceId' } };
         const actualError = new BaseError({ name: 'BaseError', message, innerError });
 
-        expect(actualError.errorTraceId).toBe('backendStackTraceId');
+        expect(actualError.errorTraceId).toBe('backendErrorTraceId');
     });
 });
 
