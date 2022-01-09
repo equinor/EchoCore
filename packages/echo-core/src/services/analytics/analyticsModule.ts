@@ -43,8 +43,15 @@ export function analyticsSetUserCompany(company: string): void {
 export class AnalyticsModule {
     moduleName: string;
     offlineTracker: OfflineTracker;
-    constructor(moduleName: string) {
+    staticEventProperties?: AnalyticsPropertyTypes;
+    staticErrorProperties?: AnalyticsPropertyTypes;
+    constructor(
+        moduleName: string,
+        args?: { staticEventProperties?: AnalyticsPropertyTypes; staticErrorProperties?: AnalyticsPropertyTypes }
+    ) {
         this.moduleName = moduleName;
+        this.staticEventProperties = args?.staticEventProperties;
+        this.staticErrorProperties = args?.staticErrorProperties;
 
         const offlineThresholdSeconds = 20;
         this.offlineTracker = new OfflineTracker(offlineThresholdSeconds, !navigator.onLine);
@@ -73,29 +80,25 @@ export class AnalyticsModule {
     trackEvent(event: AnalyticsEvent): void {
         this.offlineTracker.addOfflineAction(eventNameToString(this.moduleName, event.eventName));
 
+        const payload = {
+            ...event.properties,
+            ...this.staticEventProperties,
+            sessionKey,
+            moduleName: this.moduleName, //TODO rename to module again?
+            instCode,
+            userCompany,
+            isOnline: navigator.onLine,
+            context: event.eventName.objectName,
+            appVersion: 'Echopedia v' + EchoEnv.env().REACT_APP_AZURE_BUILD_NUMBER
+        };
+
         if (!EchoEnv.isProduction()) {
             if (EchoEnv.env().REACT_APP_LOGGER_ACTIVE) {
-                console.log(
-                    'appInsightsLog: ',
-                    eventNameToString(this.moduleName, event.eventName),
-                    instCode,
-                    userCompany,
-                    event.properties
-                );
+                console.log('appInsightsLog: ', eventNameToString(this.moduleName, event.eventName), payload);
             }
             return;
         }
 
-        const payload = {
-            sessionKey,
-            instCode,
-            userCompany,
-            moduleName: this.moduleName,
-            appVersion: 'Echopedia v' + EchoEnv.env().REACT_APP_AZURE_BUILD_NUMBER,
-            context: event.eventName.objectName,
-            isOnline: navigator.onLine,
-            ...event.properties
-        };
         appInsightsInstance().trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
     }
 
@@ -114,6 +117,7 @@ export class AnalyticsModule {
         } else {
             const exceptionTelemetry = errorToExceptionTelemetry({
                 error,
+                ...this.staticErrorProperties, //TODO
                 sessionKey,
                 instCode,
                 userCompany,
