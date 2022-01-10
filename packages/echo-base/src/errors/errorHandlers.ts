@@ -20,8 +20,8 @@ import {
  * @type {BackendError} if it includes property exception (since echopedia api returns an error with this format)
  * @type {BadRequestError} if 400
  * Fall backs to ErrorType with @type {NetworkError} as base, if none of the above constraints are fulfilled
- * @param args Arguments to initialize error with. Add custom properties in args.exception as desired,
- * like: .exception = { aCustomProperty: 'test custom property' };
+ * @param args Arguments to initialize error with. Add InnerError or custom properties in args.innerError as desired,
+ * like: innerError = { new NetworkError(...) } or innerError = { aCustomProperty: 'test custom property' };
  * access with: tryToFindPropertyByName('aCustomProperty') or .getInnerErrorProperties()['aCustomProperty']
  * @returns Specific error type with base as type
  */

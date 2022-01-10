@@ -43,18 +43,15 @@ export class BaseError extends Error {
         }
     }
 
-    private fixMissingErrorTraceId(innerErrorMaybeWithTraceId: Error | Record<string, unknown>): void {
+    private fixMissingErrorTraceId(innerError: Error | Record<string, unknown>): void {
         if (this.errorTraceId) return;
 
-        const maybeErrorTraceIdFromBackend = tryToFindPropertyByName(
-            innerErrorMaybeWithTraceId,
-            'errorTraceId'
-        ) as string;
+        const maybeErrorTraceIdFromBackend = tryToFindPropertyByName(innerError, 'errorTraceId') as string;
         this.errorTraceId = maybeErrorTraceIdFromBackend ?? `frontEnd_${randomId()}`;
     }
 
     /**
-     * Recursively converts all properties to type of Record<string, unknown>
+     * Recursively converts all properties (included nested innerErrors) to type of Record<string, unknown>
      * @returns The converted properties as Record<string, unknown>, or an empty object
      */
     getProperties(): Record<string, unknown> {
@@ -78,7 +75,7 @@ export class BaseError extends Error {
     }
 
     /**
-     * Tries to find a property with the specified propertyName
+     * Tries to find a property with the specified propertyName.
      * @param propertyName the name of the property to find
      * @returns the value of the property found or undefined
      */
@@ -113,11 +110,6 @@ export function tryToFindPropertyByName(
         }
     });
     return maybeFound;
-
-    // const innerProperties = properties['innerError'] as Record<string, unknown>;
-    // if (innerProperties) {
-    //     return tryToFindPropertyByName(innerProperties, propertyName);
-    // }
 }
 
 /**

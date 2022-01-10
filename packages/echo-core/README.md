@@ -427,6 +427,15 @@ Echo-inField should in addition do some configuration, like setting user, instCo
 
 ## Error handling
 
+Error Reporting to application insight.  
+Register a helper function `errorHandler` like this:
+
+```TS
+export const errorHandler = (exception: Error | BaseError): void => {
+    EchoCore.handleErrors(exception, myModuleAnalyticsModule);
+};
+```
+
 `BaseError` extends `Error`, and is recommended to use instead of `Error`
 
 -   It makes sure that that the error is only logged once to appInsights
