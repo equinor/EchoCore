@@ -1,4 +1,4 @@
-import { BaseError, getAllProperties, tryToFindPropertyByName } from './BaseError';
+import { BaseError, findPropertyByName, getAllProperties } from './BaseError';
 
 describe('BaseError', () => {
     const message = 'This is a custom error message for testing';
@@ -70,12 +70,12 @@ describe('getAllProperties', () => {
     });
 });
 
-describe('tryToFindPropertyByName', () => {
+describe('findPropertyByName', () => {
     const message = 'This is a custom error message for testing';
 
     it('should find message on baseError', () => {
         const error = new BaseError({ name: 'BaseError', message });
-        const actualPropertyMessage = tryToFindPropertyByName(error, 'message');
+        const actualPropertyMessage = findPropertyByName(error, 'message');
         expect(actualPropertyMessage).toBe(message);
     });
 
@@ -85,7 +85,7 @@ describe('tryToFindPropertyByName', () => {
             message,
             innerError: new BaseError({ name: 'inner', message: 'test' })
         });
-        const actualPropertyMessage = tryToFindPropertyByName(error, 'message');
+        const actualPropertyMessage = findPropertyByName(error, 'message');
         expect(actualPropertyMessage).toBe(message);
     });
 
@@ -94,7 +94,7 @@ describe('tryToFindPropertyByName', () => {
             name: 'BaseError',
             message
         });
-        const actualPropertyMessage = tryToFindPropertyByName(error, 'message2');
+        const actualPropertyMessage = findPropertyByName(error, 'message2');
         expect(actualPropertyMessage).toBe(undefined);
     });
 
@@ -104,7 +104,7 @@ describe('tryToFindPropertyByName', () => {
             message,
             innerError: { errors: { innerProperty: 1 } }
         });
-        const actualPropertyMessage = tryToFindPropertyByName(error, 'innerProperty');
+        const actualPropertyMessage = findPropertyByName(error, 'innerProperty');
         expect(actualPropertyMessage).toBe(1);
     });
 
@@ -114,7 +114,7 @@ describe('tryToFindPropertyByName', () => {
             message,
             innerError: new CustomTestError('test')
         });
-        const actualPropertyMessage = tryToFindPropertyByName(error, 'anotherProperty');
+        const actualPropertyMessage = findPropertyByName(error, 'anotherProperty');
         expect(actualPropertyMessage).toBe('another value');
     });
 });

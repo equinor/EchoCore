@@ -46,7 +46,7 @@ export class BaseError extends Error {
     private fixMissingErrorTraceId(innerError: Error | Record<string, unknown>): void {
         if (this.errorTraceId) return;
 
-        const maybeErrorTraceIdFromBackend = tryToFindPropertyByName(innerError, 'errorTraceId') as string;
+        const maybeErrorTraceIdFromBackend = findPropertyByName(innerError, 'errorTraceId') as string;
         this.errorTraceId = maybeErrorTraceIdFromBackend ?? `frontEnd_${randomId()}`;
     }
 
@@ -75,24 +75,27 @@ export class BaseError extends Error {
     }
 
     /**
-     * Tries to find a property with the specified propertyName.
+     * Find a property with the specified propertyName.
      * @param propertyName the name of the property to find
+     * @param deepSearch default true, also search nested objects
      * @returns the value of the property found or undefined
      */
-    tryToFindPropertyByName(propertyName: string): unknown | undefined {
-        return tryToFindPropertyByName(this, propertyName);
+    findPropertyByName(propertyName: string, deepSearch = true): unknown | undefined {
+        return findPropertyByName(this, propertyName, deepSearch);
     }
 }
 
 /**
- * Tries to find a property with the specified propertyName on the object
+ * Find a property with the specified propertyName on the object
  * @param object the object to search
  * @param propertyName the name of the property to find
+ * @param deepSearch default true, also search nested objects
  * @returns the value of the property found or undefined
  */
-export function tryToFindPropertyByName(
+export function findPropertyByName(
     object: Record<string, unknown> | Error,
-    propertyName: string
+    propertyName: string,
+    deepSearch = true
 ): unknown | undefined {
     const properties = getAllProperties(object);
     const value = properties[propertyName];
@@ -100,15 +103,18 @@ export function tryToFindPropertyByName(
         return value;
     }
 
-    const propertyNames = properties ? Object.getOwnPropertyNames(properties) : [];
     let maybeFound: unknown = undefined;
-    propertyNames.forEach((name) => {
-        const innerProperties = object[name];
-        const valueType = typeof innerProperties;
-        if (!maybeFound && valueType === 'object') {
-            maybeFound = tryToFindPropertyByName(innerProperties, propertyName);
-        }
-    });
+
+    if (deepSearch) {
+        const propertyNames = properties ? Object.getOwnPropertyNames(properties) : [];
+        propertyNames.forEach((name) => {
+            const innerProperties = object[name];
+            const valueType = typeof innerProperties;
+            if (!maybeFound && valueType === 'object') {
+                maybeFound = findPropertyByName(innerProperties, propertyName);
+            }
+        });
+    }
     return maybeFound;
 }
 

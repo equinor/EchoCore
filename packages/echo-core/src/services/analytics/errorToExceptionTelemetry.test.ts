@@ -41,7 +41,7 @@ describe('errorToExceptionTelemetry', () => {
         };
         expect(actual).toEqual(expected);
     });
-    it(`ExceptionTelemetry should log all all properties of error and 2 nested inner Errors of different types`, () => {
+    it(`ExceptionTelemetry should log all properties of error and 2 nested inner Errors of different types`, () => {
         // setup
         const nestedInnerError2 = new CustomInnerError('inner 2 message');
         nestedInnerError2.stack = 'ignore';
