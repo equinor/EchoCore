@@ -84,7 +84,7 @@ export class AnalyticsModule {
             ...event.properties,
             ...this.staticEventProperties,
             sessionKey,
-            moduleName: this.moduleName, //TODO rename to module again?
+            moduleName: this.moduleName,
             instCode,
             userCompany,
             isOnline: navigator.onLine,
@@ -117,11 +117,11 @@ export class AnalyticsModule {
         } else {
             const exceptionTelemetry = errorToExceptionTelemetry({
                 error,
-                ...this.staticErrorProperties, //TODO Ove test this
                 sessionKey,
                 instCode,
                 userCompany,
-                moduleName: appWithModuleName(this.moduleName)
+                moduleName: appWithModuleName(this.moduleName),
+                staticErrorProperties: this.staticErrorProperties
             });
             appInsightsInstance().trackException(exceptionTelemetry);
         }

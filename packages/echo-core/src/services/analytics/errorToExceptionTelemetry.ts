@@ -7,6 +7,7 @@ import {
     ValidationError
 } from '@equinor/echo-base';
 import { IExceptionTelemetry, SeverityLevel } from '@microsoft/applicationinsights-web';
+import { AnalyticsPropertyTypes } from '.';
 
 export function errorToExceptionTelemetry(args: {
     error: Error | BaseError;
@@ -14,7 +15,8 @@ export function errorToExceptionTelemetry(args: {
     moduleName: string;
     instCode: string;
     userCompany: string;
-}): IExceptionTelemetry {
+    staticErrorProperties?: AnalyticsPropertyTypes;
+}) {
     const error = args.error;
 
     const errorType = error.name ? error.name : 'unknown';
@@ -30,6 +32,7 @@ export function errorToExceptionTelemetry(args: {
             instCode: args.instCode,
             userCompany: args.userCompany,
             ...allProperties,
+            ...args.staticErrorProperties,
             errorType,
             message
         }

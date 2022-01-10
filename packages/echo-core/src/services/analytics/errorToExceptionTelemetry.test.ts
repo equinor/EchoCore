@@ -9,7 +9,39 @@ const defaultArgs = {
 };
 
 describe('errorToExceptionTelemetry', () => {
-    it(`should log all all properties of error and 2 nested inner Errors of different types`, () => {
+    it(`ExceptionTelemetry should log properties including staticErrorProperties`, () => {
+        // setup
+        const message = 'error message';
+        const name = 'errorName';
+        const outerError = new BaseError({
+            name,
+            message
+        });
+        outerError.stack = 'ignore';
+        outerError.errorTraceId = 'ignore';
+
+        const staticErrorProperties = { staticProp1: 1, staticProp2: 'prop2' };
+
+        //when
+        const actual = errorToExceptionTelemetry({ error: outerError, ...defaultArgs, staticErrorProperties });
+
+        //then
+        const expected = {
+            exception: outerError,
+            properties: {
+                ...defaultArgs,
+                errorType: name,
+                name,
+                message,
+                stack: 'ignore',
+                errorTraceId: 'ignore',
+                ...staticErrorProperties
+            },
+            severityLevel: 3
+        };
+        expect(actual).toEqual(expected);
+    });
+    it(`ExceptionTelemetry should log all all properties of error and 2 nested inner Errors of different types`, () => {
         // setup
         const nestedInnerError2 = new CustomInnerError('inner 2 message');
         nestedInnerError2.stack = 'ignore';

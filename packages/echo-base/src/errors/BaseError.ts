@@ -22,8 +22,9 @@ export class BaseError extends Error {
 
         // Maintains proper stack trace for where our error was thrown (only available on V8)
         if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, BaseError); //TODO Ove preserve stack trace of innerError?
+            Error.captureStackTrace(this, BaseError);
         }
+
         /**
          * Object.setPrototypeOf(this, new.target.prototype);: to fix instance of:
          * https://stackoverflow.com/questions/55065742/implementing-instanceof-checks-for-custom-typescript-error-instances
