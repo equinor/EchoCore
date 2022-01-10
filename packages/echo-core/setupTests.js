@@ -10,6 +10,6 @@ Object.defineProperty(window, 'crypto', {
 
 jest.mock('../echo-base/src/errors/randomHelper', () => {
     return {
-        randomId: jest.fn(() => 'ignore')
+        randomId: jest.fn(() => 'mocked-static-id-9999')
     };
 });

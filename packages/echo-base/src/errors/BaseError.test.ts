@@ -33,7 +33,7 @@ describe('BaseError', () => {
     it(`should generate frontEnd errorTraceId if it doesn't already exist`, () => {
         const actualError = new BaseError({ name: 'BaseError', message });
 
-        expect(actualError.errorTraceId).toBe('frontEnd_ignore');
+        expect(actualError.errorTraceId).toBe('frontEnd_mocked-static-id-9999');
     });
 
     it(`should preserve errorTraceId of innerError/backEnd if it exist`, () => {

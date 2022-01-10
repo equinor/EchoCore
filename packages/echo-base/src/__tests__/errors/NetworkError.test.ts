@@ -35,7 +35,7 @@ describe('NetworkError', () => {
             name: 'NetworkError',
             innerError: getAllProperties(exception),
             stack: 'ignore',
-            errorTraceId: 'frontEnd_ignore'
+            errorTraceId: 'frontEnd_mocked-static-id-9999'
         };
 
         const actualProperties = nwError.getProperties();
@@ -71,7 +71,7 @@ describe('NetworkError & subclasses', () => {
         url,
         innerError: exception,
         stack: 'ignore',
-        errorTraceId: 'frontEnd_ignore'
+        errorTraceId: 'frontEnd_mocked-static-id-9999'
     };
 
     test.each([
