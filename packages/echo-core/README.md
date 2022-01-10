@@ -42,6 +42,10 @@ Everything a Echo app needs to communicate with the core.
 
 # Breaking Changes
 
+v0.6.0:
+
+See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
+
 v0.5.0:
 
 See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
