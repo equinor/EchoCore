@@ -10,9 +10,14 @@ import { dispatch, readState } from './coreActions/globalActions';
  * @param {Partial<LegendOptions>} { isActive: boolean; selectedLegendType: string; }
  */
 export function setLegendOption(legendOptions: Partial<LegendOptions>): void {
-    eventHub.emit(EchoEvents.LegendTypeChanged, {
-        newLegendType: legendOptions.selectedLegendType
-    });
+    const currentLegendType = getLegendOption().selectedLegendType;
+
+    if (legendOptions.selectedLegendType && currentLegendType != legendOptions.selectedLegendType) {
+        eventHub.emit(EchoEvents.LegendTypeChanged, {
+            newLegendType: legendOptions.selectedLegendType
+        });
+    }
+
     dispatch(getCoreContext(), (state: GlobalState) => {
         return {
             ...state,

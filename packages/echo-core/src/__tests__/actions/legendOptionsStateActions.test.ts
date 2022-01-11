@@ -5,17 +5,16 @@ import { defaultGlobalState } from '../../state/defaultStates';
 import { getCoreContext } from '../../state/globalState';
 import { EchoEvents, GlobalState } from '../../types';
 
-beforeEach(() => {
-    initialize();
-});
-
 function initialize(): void {
     dispatch(getCoreContext(), () => defaultGlobalState);
 }
 
 describe('legendOptionsStateActions', () => {
+    beforeEach(() => {
+        initialize();
+    });
     describe('setLegendOption', () => {
-        it('should set legend option state and dispatch a legendChanged event', () => {
+        it('should set legend option state and dispatch a legendTypeChanged event', () => {
             // given
             let actualEventHubPayload;
             const legendOptionToSet = { isActive: false, selectedLegendType: 'testLegendType' };
@@ -31,6 +30,29 @@ describe('legendOptionsStateActions', () => {
             expect(actualEventHubPayload).toEqual({
                 newLegendType: 'testLegendType'
             });
+            unsubscribe();
+        });
+
+        it('should set legend option state when only setting `isActive` and not emit `legendTypeChanged` event ', () => {
+            // given
+            let actualEventHubPayload;
+            const legendOptionToSet = { isActive: false };
+            const expectedLegendOptions = {
+                ...legendOptionToSet,
+                selectedLegendType: 'Stid'
+            };
+            const unsubscribe = eventHub.subscribe(EchoEvents.LegendTypeChanged, (payload) => {
+                actualEventHubPayload = payload;
+            });
+
+            // when
+            setLegendOption(legendOptionToSet);
+
+            // then
+            expect(expectedLegendOptions).toEqual(
+                readState(getCoreContext(), (state: GlobalState) => state.legendOptions)
+            );
+            expect(actualEventHubPayload).not.toBeDefined();
             unsubscribe();
         });
     });
