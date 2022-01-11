@@ -33,7 +33,7 @@ describe('legendOptionsStateActions', () => {
             unsubscribe();
         });
 
-        it('should set legend option state when only setting `isActive` and not emit `legendTypeChanged` event ', () => {
+        it(`should not emit legendTypeChanged if legendType hasn't been changed`, () => {
             // given
             let actualEventHubPayload;
             const legendOptionToSet = { isActive: false };
