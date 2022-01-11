@@ -37,8 +37,8 @@ async function evaluateAllModules(
             createApi,
             filterExcludePrivateModulesInProduction([...oldModules, ...newModules], isProduction)
         );
-    } catch (error) {
-        throw new ModulesEvaluationError({ message: '[strategies.evaluateAllModules] failed', exception: error });
+    } catch (innerError) {
+        throw new ModulesEvaluationError({ message: '[strategies.evaluateAllModules] failed', innerError });
     }
 }
 

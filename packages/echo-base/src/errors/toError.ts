@@ -49,7 +49,7 @@ export function toError(error: Error | BaseError | unknown): Error | BaseError {
         }
         return new ImproperErrorObject({
             message: message,
-            exception: { argumentType: errorType }
+            innerError: { argumentType: errorType }
         });
     }
 
@@ -63,9 +63,9 @@ export function toError(error: Error | BaseError | unknown): Error | BaseError {
 
         return new ImproperErrorObject({
             message: message.length > 0 ? message : 'unknown',
-            exception: { ...properties, argumentType: errorType }
+            innerError: { ...properties, argumentType: errorType }
         });
     }
 
-    return new ImproperErrorObject({ message: 'unknown', exception: { argumentType: errorType } });
+    return new ImproperErrorObject({ message: 'unknown', innerError: { argumentType: errorType } });
 }

@@ -1,9 +1,9 @@
-import { BaseError, ForbiddenError, ValidationError } from '@equinor/echo-base';
-import { IExceptionTelemetry, SeverityLevel } from '@microsoft/applicationinsights-web';
+import { BaseError } from '@equinor/echo-base';
 import { EchoEnv } from '../../EchoEnv';
 import { appWithModuleName, eventNameToString } from './analyticsLogic';
 import { AnalyticsEvent, AnalyticsEventName, AnalyticsPropertyTypes } from './analyticsTypes';
 import { appInsightsInstance } from './appInsightWrapper';
+import { errorToExceptionTelemetry } from './errorToExceptionTelemetry';
 import OfflineTracker from './offlineTracker';
 
 // Based on Client Analytics Strategy
@@ -43,8 +43,15 @@ export function analyticsSetUserCompany(company: string): void {
 export class AnalyticsModule {
     moduleName: string;
     offlineTracker: OfflineTracker;
-    constructor(moduleName: string) {
+    staticEventProperties?: AnalyticsPropertyTypes;
+    staticErrorProperties?: AnalyticsPropertyTypes;
+    constructor(
+        moduleName: string,
+        args?: { staticEventProperties?: AnalyticsPropertyTypes; staticErrorProperties?: AnalyticsPropertyTypes }
+    ) {
         this.moduleName = moduleName;
+        this.staticEventProperties = args?.staticEventProperties;
+        this.staticErrorProperties = args?.staticErrorProperties;
 
         const offlineThresholdSeconds = 20;
         this.offlineTracker = new OfflineTracker(offlineThresholdSeconds, !navigator.onLine);
@@ -73,28 +80,25 @@ export class AnalyticsModule {
     trackEvent(event: AnalyticsEvent): void {
         this.offlineTracker.addOfflineAction(eventNameToString(this.moduleName, event.eventName));
 
+        const payload = {
+            ...event.properties,
+            ...this.staticEventProperties,
+            sessionKey,
+            moduleName: this.moduleName,
+            instCode,
+            userCompany,
+            isOnline: navigator.onLine,
+            context: event.eventName.objectName,
+            appVersion: 'Echopedia v' + EchoEnv.env().REACT_APP_AZURE_BUILD_NUMBER
+        };
+
         if (!EchoEnv.isProduction()) {
             if (EchoEnv.env().REACT_APP_LOGGER_ACTIVE) {
-                console.log(
-                    'appInsightsLog: ',
-                    eventNameToString(this.moduleName, event.eventName),
-                    instCode,
-                    userCompany,
-                    event.properties
-                );
+                console.log('appInsightsLog: ', eventNameToString(this.moduleName, event.eventName), payload);
             }
             return;
         }
 
-        const payload = {
-            sessionKey,
-            instCode,
-            userCompany,
-            appVersion: 'Echopedia v' + EchoEnv.env().REACT_APP_AZURE_BUILD_NUMBER,
-            context: event.eventName.objectName,
-            isOnline: navigator.onLine,
-            ...event.properties
-        };
         appInsightsInstance().trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
     }
 
@@ -111,18 +115,15 @@ export class AnalyticsModule {
             console.log('with properties:');
             console.log({ ...error });
         } else {
-            let severityLevel = SeverityLevel.Error;
-            if (error instanceof ForbiddenError) severityLevel = SeverityLevel.Verbose;
-            else if (error instanceof ValidationError) severityLevel = SeverityLevel.Warning;
-
-            const errorType = error.name ? error.name : 'unknown';
-            const message = error.message ? error.message : '';
-
-            appInsightsInstance().trackException({
-                exception: error,
-                severityLevel: severityLevel,
-                properties: { ...error, sessionKey, errorType, message, module: appWithModuleName(this.moduleName) }
-            } as IExceptionTelemetry);
+            const exceptionTelemetry = errorToExceptionTelemetry({
+                error,
+                sessionKey,
+                instCode,
+                userCompany,
+                moduleName: appWithModuleName(this.moduleName),
+                staticErrorProperties: this.staticErrorProperties
+            });
+            appInsightsInstance().trackException(exceptionTelemetry);
         }
     }
 

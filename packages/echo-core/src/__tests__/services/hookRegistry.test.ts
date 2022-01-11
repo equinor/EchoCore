@@ -28,10 +28,8 @@ describe('echoHookRegistry', () => {
                 // then
                 expect(error).toEqual(
                     new BaseError({
-                        message: `[EchoCore.echoHookRegistry.registerHook] Can not set hook: a hook with name ${hookName} is already set.`,
-                        exception: {
-                            hookName
-                        }
+                        name: 'BaseError',
+                        message: `[EchoCore.echoHookRegistry.registerHook] Can not set hook: a hook with name ${hookName} is already set.`
                     })
                 );
             }
@@ -79,10 +77,8 @@ describe('echoHookRegistry', () => {
                 // then
                 expect(error).toEqual(
                     new BaseError({
-                        message: `[EchoCore.echoHookRegistry.getHookByName] Can not get hook: there is no hook by the name "${hookName}" registered.`,
-                        exception: {
-                            hookName
-                        }
+                        name: 'BaseError',
+                        message: `[EchoCore.echoHookRegistry.getHookByName] Can not get hook: there is no hook by the name "${hookName}" registered.`
                     })
                 );
             }

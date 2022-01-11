@@ -68,7 +68,7 @@ describe('fetchWithTokenLogic: throw error tests', () => {
         expect(error instanceof NetworkError).toBe(true);
         expect(error?.message).toBe('uncaught exception response');
         expect(error?.getUrl()).toBe(url);
-        expect(error?.getProperties()['message']).toBe(innerErrorMessage);
+        expect(error?.getInnerErrorProperties()['message']).toBe(innerErrorMessage);
     });
 
     it(`reject with a string instead of an error should throw error with 'uncaught exception response' message`, async () => {
@@ -85,7 +85,7 @@ describe('fetchWithTokenLogic: throw error tests', () => {
         expect(error instanceof NetworkError).toBe(true);
         expect(error?.message).toBe('uncaught exception response');
         expect(error?.getUrl()).toBe(url);
-        expect(error?.getProperties()['message']).toBe(innerErrorMessage);
+        expect(error?.getInnerErrorProperties()['message']).toBe(innerErrorMessage);
     });
 });
 

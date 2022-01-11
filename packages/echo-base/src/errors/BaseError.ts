@@ -1,4 +1,5 @@
-import { BaseErrorArgs, ErrorProperties } from '../types/error';
+import { BaseErrorArgs } from '../types/error';
+import { randomId } from './randomHelper';
 
 /**
  * Base Error class is intended to be used as a base class for every type of Error generated
@@ -12,11 +13,18 @@ import { BaseErrorArgs, ErrorProperties } from '../types/error';
  * @extends {Error}
  */
 export class BaseError extends Error {
-    protected properties: ErrorProperties;
+    protected innerError?: Record<string, unknown> | Error;
     hasBeenLogged = false;
+    errorTraceId: string;
 
-    constructor({ name, message, exception }: BaseErrorArgs) {
+    constructor({ name, message, innerError }: BaseErrorArgs) {
         super(message);
+
+        // Maintains proper stack trace for where our error was thrown (only available on V8)
+        if (Error.captureStackTrace) {
+            Error.captureStackTrace(this, BaseError);
+        }
+
         /**
          * Object.setPrototypeOf(this, new.target.prototype);: to fix instance of:
          * https://stackoverflow.com/questions/55065742/implementing-instanceof-checks-for-custom-typescript-error-instances
@@ -24,7 +32,8 @@ export class BaseError extends Error {
          */
         Object.setPrototypeOf(this, new.target.prototype);
 
-        this.properties = getAllProperties(exception);
+        this.innerError = innerError;
+        this.fixMissingErrorTraceId(innerError);
 
         const fallBackNameWillBeObfuscatedInProduction = this.constructor.name;
         this.name = name ?? fallBackNameWillBeObfuscatedInProduction;
@@ -34,13 +43,89 @@ export class BaseError extends Error {
         }
     }
 
-    getProperties = (): ErrorProperties => this.properties;
+    private fixMissingErrorTraceId(innerError: Error | Record<string, unknown>): void {
+        if (this.errorTraceId) return;
 
-    addProperties = (values: ErrorProperties): void => {
-        this.properties = { ...this.properties, ...values };
-    };
+        const maybeErrorTraceIdFromBackend = findPropertyByName(innerError, 'errorTraceId') as string;
+        this.errorTraceId = maybeErrorTraceIdFromBackend ?? `frontEnd_${randomId()}`;
+    }
+
+    /**
+     * Recursively converts all properties (included nested innerErrors) to type of Record<string, unknown>
+     * @returns The converted properties as Record<string, unknown>, or an empty object
+     */
+    getProperties(): Record<string, unknown> {
+        return getAllProperties(this);
+    }
+
+    /**
+     * Returns the innerError or undefined
+     * @returns innerError or undefined
+     */
+    getInnerError(): Record<string, unknown> | Error | undefined {
+        return this.innerError;
+    }
+
+    /**
+     * Recursively converts all properties of innerError to type of Record<string, unknown>
+     * @returns The converted properties of innerError as Record<string, unknown>, or an empty object
+     */
+    getInnerErrorProperties(): Record<string, unknown> {
+        return getAllProperties(this.innerError);
+    }
+
+    /**
+     * Find a property with the specified propertyName.
+     * @param propertyName the name of the property to find
+     * @param deepSearch default true, also search nested objects
+     * @returns the value of the property found or undefined
+     */
+    findPropertyByName(propertyName: string, deepSearch = true): unknown | undefined {
+        return findPropertyByName(this, propertyName, deepSearch);
+    }
 }
 
+/**
+ * Find a property with the specified propertyName on the object
+ * @param object the object to search
+ * @param propertyName the name of the property to find
+ * @param deepSearch default true, also search nested objects
+ * @returns the value of the property found or undefined
+ */
+export function findPropertyByName(
+    object: Record<string, unknown> | Error,
+    propertyName: string,
+    deepSearch = true
+): unknown | undefined {
+    const properties = getAllProperties(object);
+    const value = properties[propertyName];
+    if (value) {
+        return value;
+    }
+
+    let maybeFound: unknown = undefined;
+
+    if (deepSearch) {
+        const propertyNames = properties ? Object.getOwnPropertyNames(properties) : [];
+        propertyNames.forEach((name) => {
+            const innerProperties = object[name];
+            const valueType = typeof innerProperties;
+            if (!maybeFound && valueType === 'object') {
+                maybeFound = findPropertyByName(innerProperties, propertyName);
+            }
+        });
+    }
+    return maybeFound;
+}
+
+/**
+ * Converts an object to a Record<string, unknown>.
+ * Useful for logging errors to AppInsight, and preserve all properties of an Error.
+ * Supports custom Error which has public or private fields. Will ignore any functions on the Error object.
+ * It does not support cycling references (A -> B -> A).
+ * @param objectWithProperties an object containing properties
+ * @returns a record containing all properties of the object
+ */
 export function getAllProperties(
     objectWithProperties: Record<string, unknown> | Error | undefined
 ): Record<string, unknown> {
@@ -56,5 +141,19 @@ export function getAllProperties(
         names.push('message');
     }
 
-    return names.reduce((a, b) => ((a[b] = objectWithProperties[b]), a), {});
+    const object = objectWithProperties as Record<string, unknown>;
+
+    const rec: Record<string, unknown> = {};
+    names.forEach((name) => {
+        const value = object[name];
+        const valueType = typeof value;
+        if (valueType === 'function' || name === 'hasBeenLogged') {
+            //ignore
+        } else if (value instanceof Error) {
+            rec[name] = getAllProperties(value);
+        } else {
+            rec[name] = value;
+        }
+    });
+    return rec;
 }
