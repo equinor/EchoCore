@@ -42,6 +42,10 @@ Everything a Echo app needs to communicate with the core.
 
 # Breaking Changes
 
+v0.6.0:
+
+See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
+
 v0.5.0:
 
 See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
@@ -419,4 +423,45 @@ Echo-inField should in addition do some configuration, like setting user, instCo
 
 ```TS
     analyticsConfiguration
+```
+
+## Error handling
+
+Error Reporting to application insight.  
+Register a helper function `errorHandler` like this:
+
+```TS
+export const errorHandler = (exception: Error | BaseError): void => {
+    EchoCore.handleErrors(exception, myModuleAnalyticsModule);
+};
+```
+
+`BaseError` extends `Error`, and is recommended to use instead of `Error`
+
+-   It makes sure that that the error is only logged once to appInsights
+-   All properties of `BaseError` are logged to AppInsights, even if they are private
+-   It supports `innerError`, either as type `Error` or `Record<string, unknown>`
+
+Use the `toError` helper function for converting a caught unknown to a proper Error object.
+
+It's recommended to extend `BaseError`, and decorate it with extra properties, as seen in the example below.
+
+Example of a customError and typical error flow.
+
+```TS
+    export class PdfError extends BaseError {
+        docNo: string;
+        constructor(args: { message: string; docNo: string; innerError?: Error }) {
+            super({ name: 'PdfError', message: args.message, innerError: args.innerError });
+            this.docNo = args.docNo;
+        }
+    }
+    ...
+
+    try {
+        loadPdf();
+    } catch(error) {
+        throw new PdfError({ message:"load pdf failed", docNo: "a-73", innerError: toError(error) });
+    }
+}
 ```

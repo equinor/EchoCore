@@ -1,4 +1,4 @@
-import { BaseError } from '../../errors';
+import { BaseError, getAllProperties } from '../../errors';
 import {
     BackendError,
     BadRequestError,
@@ -27,14 +27,20 @@ describe('NetworkError', () => {
         expect(forbiddenError instanceof ForbiddenError).toBeTruthy();
     });
 
-    it('check properties', () => {
+    it('check NetworkError properties', () => {
         const properties = {
             httpStatusCode,
             url,
-            ...exception
+            message: 'Network Error Testing',
+            name: 'NetworkError',
+            innerError: getAllProperties(exception),
+            stack: 'ignore',
+            errorTraceId: 'frontEnd_mocked-static-id-9999'
         };
 
-        expect(nwError.getProperties()).toEqual(properties);
+        const actualProperties = nwError.getProperties();
+        actualProperties.stack = 'ignore';
+        expect(actualProperties).toEqual(properties);
     });
 
     it('check properties getUrl method', () => {
@@ -59,7 +65,14 @@ describe('NetworkError & subclasses', () => {
     const exception = { NetworkException: 'endpoint is unreachable' };
 
     const networkArgs = { message, httpStatusCode, url, exception };
-    const expectedProperties = { httpStatusCode, url, ...exception };
+    const expectedProperties = {
+        message,
+        httpStatusCode,
+        url,
+        innerError: exception,
+        stack: 'ignore',
+        errorTraceId: 'frontEnd_mocked-static-id-9999'
+    };
 
     test.each([
         ['NetworkError', new NetworkError(networkArgs)],
@@ -73,7 +86,9 @@ describe('NetworkError & subclasses', () => {
         const error = secondArg as BaseError;
         expect(error.name).toBe(firstArg);
         expect(error.message).toBe(message);
-        expect(error.getProperties()).toStrictEqual(expectedProperties);
+        const properties = error.getProperties();
+        properties.stack = 'ignore';
+        expect(properties).toStrictEqual({ name: firstArg, ...expectedProperties });
     });
 
     test.each([
@@ -88,6 +103,9 @@ describe('NetworkError & subclasses', () => {
         const error = secondArg as BaseError;
         expect(error.name).toBe('CustomTestName');
         expect(error.message).toBe(message);
-        expect(error.getProperties()).toStrictEqual(expectedProperties);
+
+        const properties = error.getProperties();
+        properties.stack = 'ignore';
+        expect(properties).toStrictEqual({ name: 'CustomTestName', ...expectedProperties });
     });
 });

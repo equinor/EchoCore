@@ -7,3 +7,9 @@ Object.defineProperty(window, 'fetch', {
 Object.defineProperty(window, 'crypto', {
     value: { getRandomValues: mGetRandomValues }
 });
+
+jest.mock('../echo-base/src/errors/randomHelper', () => {
+    return {
+        randomId: jest.fn(() => 'mocked-static-id-9999')
+    };
+});

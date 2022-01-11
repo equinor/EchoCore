@@ -18,8 +18,8 @@ export async function loadMetaData(fetchModules?: ModuleRequester): Promise<Modu
     ) {
         try {
             return verifyModulesMeta(await fetchModules());
-        } catch (error) {
-            throw new ModulesMetaError({ message: '[loadMetaData] failed', exception: error });
+        } catch (innerError) {
+            throw new ModulesMetaError({ message: '[loadMetaData] failed', innerError });
         }
     }
 

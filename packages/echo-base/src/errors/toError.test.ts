@@ -10,7 +10,7 @@ describe('ConvertToErrorIfNeeded', () => {
     });
 
     it('should return baseError if baseError', () => {
-        const error = new BaseError({ message: 'error' });
+        const error = new BaseError({ name: 'BaseError', message: 'error' });
         const actual = toError(error);
         expect(actual).toBe(error);
     });
@@ -31,7 +31,7 @@ describe('ConvertToErrorIfNeeded', () => {
             // then
             const expected = new ImproperErrorObject({
                 message: 'this is not a proper error',
-                exception: { errorArgumentType: 'string' }
+                innerError: { errorArgumentType: 'string' }
             });
 
             expect(actual).toStrictEqual(expected);
@@ -48,7 +48,7 @@ describe('ConvertToErrorIfNeeded', () => {
             // then
             const expected = new ImproperErrorObject({
                 message: '42',
-                exception: { errorArgumentType: 'number' }
+                innerError: { errorArgumentType: 'number' }
             });
 
             expect(actual).toStrictEqual(expected);
@@ -65,7 +65,7 @@ describe('ConvertToErrorIfNeeded', () => {
             // then
             const expected = new ImproperErrorObject({
                 message: 'false',
-                exception: { errorArgumentType: 'boolean' }
+                innerError: { errorArgumentType: 'boolean' }
             });
 
             expect(actual).toStrictEqual(expected);
@@ -82,7 +82,7 @@ describe('ConvertToErrorIfNeeded', () => {
             // then
             const expected = new ImproperErrorObject({
                 message: 'Symbol(key)',
-                exception: { errorArgumentType: 'symbol' }
+                innerError: { errorArgumentType: 'symbol' }
             });
 
             expect(actual).toStrictEqual(expected);
@@ -99,7 +99,7 @@ describe('ConvertToErrorIfNeeded', () => {
             // then
             const expected = new ImproperErrorObject({
                 message: 'name message',
-                exception: { prop1: 'a', name: 'name', message: 'message a', errorArgumentType: 'object' }
+                innerError: { prop1: 'a', name: 'name', message: 'message a', errorArgumentType: 'object' }
             });
 
             expect(actual).toStrictEqual(expected);
@@ -116,7 +116,7 @@ describe('ConvertToErrorIfNeeded', () => {
             // then
             const expected = new ImproperErrorObject({
                 message: 'name message a',
-                exception: { prop1: 'a', name: 'name', message: 'message a', errorArgumentType: 'object' }
+                innerError: { prop1: 'a', name: 'name', message: 'message a', errorArgumentType: 'object' }
             });
 
             expect(actual).toStrictEqual(expected);

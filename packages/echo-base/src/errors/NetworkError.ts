@@ -20,14 +20,17 @@ export interface NetworkErrorArgs extends CommonErrorArgs {
  * @extends {BaseError}
  */
 export class NetworkError extends BaseError {
+    url: string;
+    httpStatusCode: number;
     constructor({ name, message, httpStatusCode, url, exception }: NetworkErrorArgs) {
-        super({ name: name ?? 'NetworkError', message: message || '', exception });
-        this.addProperties({ url, httpStatusCode });
+        super({ name: name ?? 'NetworkError', message: message || '', innerError: exception });
+        this.url = url;
+        this.httpStatusCode = httpStatusCode;
         !message && (this.message = `${this.name} ${httpStatusCode} ${url}`);
     }
 
     getUrl = (): string => {
-        return this.properties.url as string;
+        return this.url;
     };
 }
 

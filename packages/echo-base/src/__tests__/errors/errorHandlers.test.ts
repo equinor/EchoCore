@@ -1,4 +1,4 @@
-import { initializeError } from '../../errors/errorHandlers';
+import { initializeNetworkError } from '../../errors/errorHandlers';
 import {
     BackendError,
     BadRequestError,
@@ -10,7 +10,7 @@ import {
     ValidationError
 } from '../../errors/NetworkError';
 
-describe('NetworkError, derived types and initializeError', () => {
+describe('NetworkError, derived types and initializeNetworkError', () => {
     function withException(): NetworkErrorArgs {
         const result: NetworkErrorArgs = {
             exception: {
@@ -31,28 +31,30 @@ describe('NetworkError, derived types and initializeError', () => {
         const argWithException = withException();
         argWithException.exception.dummyProperty = false;
         argWithException.exception.title = 'Validation';
-        const result = initializeError(NetworkError, { ...argWithException, httpStatusCode: 400 });
+        const result = initializeNetworkError({ ...argWithException, httpStatusCode: 400 });
         expect(result instanceof ValidationError).toBe(true);
         expect(result.message).toEqual('ValidationError 400 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).not.toBe(true);
+        expect(result.findPropertyByName('dummyProperty')).not.toBe(true);
     });
 
     it('400 with exception should return BackendError', () => {
-        const result = initializeError(NetworkError, { ...withException(), httpStatusCode: 400 });
+        const result = initializeNetworkError({ ...withException(), httpStatusCode: 400 });
         expect(result instanceof BackendError).toBe(true);
         expect(result.message).toEqual('BackendError 400 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).toBe(true);
+        const actualDummyProperty = result.findPropertyByName('dummyProperty');
+        expect(actualDummyProperty).toBe(true);
     });
 
     it('400 without exception should return BadRequest', () => {
-        const result = initializeError(NetworkError, { ...withoutException(), httpStatusCode: 400 });
+        const result = initializeNetworkError({ ...withoutException(), httpStatusCode: 400 });
         expect(result instanceof BadRequestError).toBe(true);
         expect(result.message).toEqual('BadRequestError 400 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).toBe(undefined);
+        const actualDummyProperty = result.getProperties()['dummyProperty'];
+        expect(actualDummyProperty).toBe(undefined);
     });
 
     it('401 with exception should return UnauthorizedError with a specific message', () => {
-        const result = initializeError(NetworkError, {
+        const result = initializeNetworkError({
             ...withException(),
             message: 'SpecificErrorMessage',
             httpStatusCode: 401
@@ -61,7 +63,7 @@ describe('NetworkError, derived types and initializeError', () => {
         expect(result.message).toEqual('SpecificErrorMessage');
     });
     it('401 without exception should return UnauthorizedError with a specific message', () => {
-        const result = initializeError(NetworkError, {
+        const result = initializeNetworkError({
             ...withoutException(),
             message: 'SpecificErrorMessage',
             httpStatusCode: 401
@@ -71,7 +73,7 @@ describe('NetworkError, derived types and initializeError', () => {
     });
 
     it('403 with exception should return ForbiddenError with a specific message', () => {
-        const result = initializeError(NetworkError, {
+        const result = initializeNetworkError({
             ...withException(),
             message: 'SpecificErrorMessage',
             httpStatusCode: 403
@@ -87,7 +89,7 @@ describe('NetworkError, derived types and initializeError', () => {
             url: 'https://echo-dummy.com',
             exception: null
         };
-        const result = initializeError(NetworkError, noExceptionArgs);
+        const result = initializeNetworkError(noExceptionArgs);
         expect(result instanceof ForbiddenError).toBe(true);
         expect(result.message).toEqual(noExceptionArgs.message);
         expect((result as ForbiddenError).getUrl()).toEqual(noExceptionArgs.url);
@@ -95,35 +97,35 @@ describe('NetworkError, derived types and initializeError', () => {
     });
 
     it('404 with exception should return NetworkError with NotFoundError message', () => {
-        const result = initializeError(NetworkError, { ...withException(), httpStatusCode: 404 });
+        const result = initializeNetworkError({ ...withException(), httpStatusCode: 404 });
         expect(result instanceof NotFoundError).toBe(true);
         expect(result.message).toEqual('NotFoundError 404 http://localhost:3000');
     });
 
     it('404 without exception should return NetworkError with NotFoundError message', () => {
-        const result = initializeError(NetworkError, { ...withoutException(), httpStatusCode: 404 });
+        const result = initializeNetworkError({ ...withoutException(), httpStatusCode: 404 });
         expect(result instanceof NotFoundError).toBe(true);
         expect(result.message).toEqual('NotFoundError 404 http://localhost:3000');
     });
 
     it('other status codes with exception should return NetworkError with BackendError as default', () => {
-        const result = initializeError(NetworkError, withException());
+        const result = initializeNetworkError(withException());
         expect(result instanceof BackendError).toBe(true);
         expect(result.message).toEqual('BackendError 500 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).toBe(true);
+        expect(result.findPropertyByName('dummyProperty')).toBe(true);
     });
 
     it('other status codes without exception should return NetworkError as default', () => {
-        const result = initializeError(NetworkError, withoutException());
+        const result = initializeNetworkError(withoutException());
         expect(result instanceof BackendError).not.toBe(true);
         expect(result instanceof NetworkError).toBe(true);
         expect(result.message).toEqual('NetworkError 500 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).toBe(undefined);
+        expect(result.findPropertyByName('dummyProperty')).toBe(undefined);
     });
 
     it('should return url as property', () => {
         const noExceptionArgs = withException();
-        const result = initializeError(NetworkError, noExceptionArgs);
+        const result = initializeNetworkError(noExceptionArgs);
         expect((result as NetworkError).getUrl()).toEqual(noExceptionArgs.url);
         expect(result.getProperties()['url']).toBe(noExceptionArgs.url);
     });
@@ -131,20 +133,9 @@ describe('NetworkError, derived types and initializeError', () => {
     it('with exception should have custom property', () => {
         const withExceptionCustomProperty = withException();
         withExceptionCustomProperty.exception = { aCustomProperty: 'test custom property' };
-        const result = initializeError(NetworkError, withExceptionCustomProperty);
-        expect(result.getProperties()['aCustomProperty']).toBe(withExceptionCustomProperty.exception?.aCustomProperty);
-    });
-
-    it('without exception should return custom InternalError type as default/fallback', () => {
-        const result = initializeError(InternalError, withoutException());
-        expect(result instanceof InternalError).toBe(true);
-        expect(result.message).toEqual('InternalError 500 http://localhost:3000');
-        expect(result.getProperties().dummyProperty).toBe(undefined);
+        const result = initializeNetworkError(withExceptionCustomProperty);
+        expect(result.findPropertyByName('aCustomProperty')).toBe(
+            withExceptionCustomProperty.exception?.aCustomProperty
+        );
     });
 });
-
-class InternalError extends NetworkError {
-    constructor(args: NetworkErrorArgs) {
-        super({ ...args, name: args.name ?? 'InternalError' });
-    }
-}

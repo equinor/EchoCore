@@ -35,10 +35,7 @@ export const echoHookRegistry = ((): EchoHookRegistry => {
             } else {
                 throw new BaseError({
                     name: 'HookAlreadyExistsError',
-                    message: `[EchoCore.echoHookRegistry.registerHook] Can not set hook: a hook with name ${hookName} is already set.`,
-                    exception: {
-                        hookName
-                    }
+                    message: `[EchoCore.echoHookRegistry.registerHook] Can not set hook: a hook with name ${hookName} is already set.`
                 });
             }
         },
@@ -62,10 +59,7 @@ export const echoHookRegistry = ((): EchoHookRegistry => {
                 ((): void => {
                     throw new BaseError({
                         name: 'InvalidHookNameError',
-                        message: `[EchoCore.echoHookRegistry.getHookByName] Can not get hook: there is no hook by the name "${hookName}" registered.`,
-                        exception: {
-                            hookName
-                        }
+                        message: `[EchoCore.echoHookRegistry.getHookByName] Can not get hook: there is no hook by the name "${hookName}" registered.`
                     });
                 })
             );

@@ -1,3 +1,4 @@
+import { AnalyticsPropertyTypes } from '.';
 import { obfuscateUser } from './analyticsLogic';
 import { AnalyticsModule, analyticsSetInstCode, analyticsSetUserCompany } from './analyticsModule';
 import {
@@ -7,8 +8,14 @@ import {
 } from './analyticsTelemetryFilter';
 import { appInsightsInstance } from './appInsightWrapper';
 
-function createAnalyticsModule(moduleShortName: string): AnalyticsModule {
-    return new AnalyticsModule(moduleShortName);
+function createAnalyticsModule(
+    moduleShortName: string,
+    args?: {
+        staticEventProperties?: AnalyticsPropertyTypes;
+        staticErrorProperties?: AnalyticsPropertyTypes;
+    }
+): AnalyticsModule {
+    return new AnalyticsModule(moduleShortName, args);
 }
 
 export const analytics = {

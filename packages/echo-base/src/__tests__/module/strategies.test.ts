@@ -95,7 +95,7 @@ describe('Echo-Base strategies module', () => {
         expect(actualError.name).toBe('ModulesEvaluationError');
         expect(actualError.message).toBe('[strategies.evaluateAllModules] failed');
 
-        const actualProperties = actualError.getProperties();
+        const actualProperties = actualError.getInnerErrorProperties();
         expect(actualProperties['name']).toBe('TypeError');
         expect(actualProperties['message']).toBe('oldModules is not iterable');
     });
