@@ -1,8 +1,9 @@
+import { eventHub } from '@equinor/echo-base';
 import { dispatch, readState } from '../../actions/coreActions/globalActions';
 import { getLegendOption, setLegendOption } from '../../actions/legendOptions';
 import { defaultGlobalState } from '../../state/defaultStates';
 import { getCoreContext } from '../../state/globalState';
-import { GlobalState } from '../../types';
+import { EchoEvents, GlobalState } from '../../types';
 
 beforeEach(() => {
     initialize();
@@ -13,37 +14,50 @@ function initialize(): void {
 }
 
 describe('legendOptionsStateActions', () => {
-    const expectedLegendOptions = {
-        isActive: false,
-        selectedLegendType: 'test'
-    };
-
     describe('setLegendOption', () => {
-        it('should set legend option state', () => {
-            setLegendOption({ isActive: false, selectedLegendType: 'test' });
-            expect(expectedLegendOptions).toEqual(
-                readState(getCoreContext(), (state: GlobalState) => state.legendOptions)
-            );
-        });
+        it('should set legend option state and dispatch a legendChanged event', () => {
+            // given
+            let actualEventHubPayload;
+            const legendOptionToSet = { isActive: false, selectedLegendType: 'testLegendType' };
+            const unsubscribe = eventHub.subscribe(EchoEvents.LegendTypeChanged, (payload) => {
+                actualEventHubPayload = payload;
+            });
 
-        it('should show default global state', () => {
-            expectedLegendOptions.isActive = true;
-            expectedLegendOptions.selectedLegendType = 'Stid';
-            expect(expectedLegendOptions).toEqual(
-                readState(getCoreContext(), (state: GlobalState) => state.legendOptions)
-            );
+            // when
+            setLegendOption(legendOptionToSet);
+
+            // then
+            expect(legendOptionToSet).toEqual(readState(getCoreContext(), (state: GlobalState) => state.legendOptions));
+            expect(actualEventHubPayload).toEqual({
+                newLegendType: 'testLegendType'
+            });
+            unsubscribe();
         });
     });
 
     describe('getLegendOptions', () => {
-        it('should get legend option state', () => {
-            const result = getLegendOption();
-            expect(expectedLegendOptions).toEqual(result);
-        });
-
         it('should get default legend from global state', () => {
             const result = getLegendOption();
-            expect(readState(getCoreContext(), (state: GlobalState) => state.legendOptions)).toEqual(result);
+            expect(result).toEqual({
+                isActive: true,
+                selectedLegendType: 'Stid'
+            });
+        });
+
+        it('should get legend option state', () => {
+            // given
+            setLegendOption({
+                selectedLegendType: 'aDifferentLegendType'
+            });
+
+            // when
+            const result = getLegendOption();
+
+            // then
+            expect(result).toEqual({
+                isActive: true,
+                selectedLegendType: 'aDifferentLegendType'
+            });
         });
     });
 });
