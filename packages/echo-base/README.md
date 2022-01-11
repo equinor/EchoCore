@@ -32,6 +32,7 @@ v0.6.0:
     Earlier properties with the same name would overwrite each other.  
     `exception` argument renamed to `innerError`, of type `Record<string, unknown> | Error`
 - Moved `EchoEvents` enum to `EchoCore`.
+- Changed types for `EventHub` event keys in all functions from `string | EchoEvents` to `string` only.
 
 v0.5.0:
 
