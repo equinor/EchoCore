@@ -6,12 +6,12 @@
 export interface EchoEventHub {
     emit<T>(key: string, payload: T): void;
     subscribe<T>(key: string, handler: (payload: T) => void): UnsubscribeFunction;
-    subscribeMany<T>(keys: Array<string | EchoEvents>, handler: (payload: T) => void): UnsubscribeFunction;
+    subscribeMany<T>(keys: Array<string>, handler: (payload: T) => void): UnsubscribeFunction;
 }
 
 export type UnsubscribeFunction = () => void;
 
-// TODO: Remove this. Moved to EchoFramework.
+// TODO: Remove this one with the next major release - moved to EchoCore to make Base more generic.
 export enum EchoEvents {
     PlantChanged = 'plantChanged',
     ProcosysProjectChanged = 'procosysProjectChanged',

@@ -1,7 +1,7 @@
 import { EnvironmentVariables } from './configuration/environment';
 import { EchoCore } from './EchoCore';
 export * from '@azure/msal-browser';
-export { EchoEvents, eventHub, storage } from '@equinor/echo-base';
+export { eventHub, storage } from '@equinor/echo-base';
 export * from './actions';
 export * from './actions/moduleState';
 export type { EnvironmentVariables } from './configuration/environment';
