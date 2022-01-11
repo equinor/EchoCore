@@ -12,51 +12,36 @@ Everything a Echo app needs to communicate with the core.
 ![@equinor/echo-core](https://badgen.net/bundlephobia/minzip/@equinor/echo-core) ![@equinor/echo-core](https://badgen.net/bundlephobia/min/@equinor/echo-core)
 ![@equinor/echo-core](https://badgen.net/bundlephobia/dependency-count/@equinor/echo-core)
 
--   [EchoCore](#echocore)
--   [Breaking Changes](#Breaking-Changes)
--   [Install](#install)
-    -   [NPM](#npm)
--   [Development](#development)
-    -   [NPM build](#npm-build)
-    -   [NPM build watch](#npm-build-watch)
--   [Writing and running tests](#writing-and-running-tests)
--   [Link echo-core](#link-echo-core)
-    -   [YALC Link](#yalc-link)
-        -   [installation](#installation)
-        -   [Publish](#publish)
-        -   [Link / Add](#link--add)
-        -   [Update](#update)
-    -   [NPM link](#npm-link)
-    -   [NPM Unlinking echo-core](#npm-unlinking-echo-core)
--   [Echo Modules](#echo-modules)
-    -   [Register application components with Setup](#register-application-components-with-setup)
-        -   [Register App](#register-app)
-        -   [Register with Key](#register-with-key)
-        -   [Panels](#panels)
-        -   [Register Page / Route](#register-page--route)
-    -   [Manifest](#manifest)
--   [Global State](#global-state)
-    -   [Module State / Context](#module-state--context)
-        -   [Module Context and state](#module-context-and-state)
-    -   [RegistryState](#registrystate)
-
-# Breaking Changes
-
-v0.6.0:
-
-See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
-
-v0.5.0:
-
-See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
-
--   Errors are not exported through echo-core anymore, but from echo-base. Exporting them from both caused type errors when using instanceof, which caused difficult bug to debug. Import all error types from echo-base instead, BaseError, ToError, NetworkError, etc.
-
-```
-import { BaseError, NetworkError, toError } from '@equinor/echo-base';
-```
-
--   BaseClient.fetchWithToken throws error as before if response.ok is false. But the error.message was changed to 'failed response' or 'uncaught exception response' to easier distinguish the error types.
+- [EchoCore](#echocore)
+- [Install](#install)
+    - [NPM](#npm)
+- [Development](#development)
+    - [NPM build](#npm-build)
+    - [NPM build watch](#npm-build-watch)
+- [Writing and running tests](#writing-and-running-tests)
+- [Link echo-core](#link-echo-core)
+  - [YALC Link](#yalc-link)
+    - [installation](#installation)
+    - [Publish](#publish)
+    - [Link / Add](#link--add)
+    - [Update](#update)
+  - [NPM link](#npm-link)
+  - [NPM Unlinking echo-core](#npm-unlinking-echo-core)
+- [Echo Modules](#echo-modules)
+  - [Register application components with Setup](#register-application-components-with-setup)
+    - [Register App](#register-app)
+    - [Register with Key](#register-with-key)
+    - [Panels](#panels)
+    - [Register Page / Route](#register-page--route)
+  - [Manifest](#manifest)
+- [Global State](#global-state)
+  - [Module State / Context](#module-state--context)
+    - [Module Context and state](#module-context-and-state)
+  - [RegistryState](#registrystate)
+  - [Analytics](#analytics)
+  - [Error handling](#error-handling)
+- [What's new](#whats-new)
+- [Breaking Changes](#breaking-changes)
 
 # Install
 
@@ -465,3 +450,25 @@ Example of a customError and typical error flow.
     }
 }
 ```
+# What's new
+
+v0.6.0:
+
+-   `setLegendOption()` now also emits `LegendTypeChanged` event on EventHub if the legend type has been changed.
+# Breaking Changes
+
+v0.6.0:
+
+See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
+
+v0.5.0:
+
+See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
+
+-   Errors are not exported through echo-core anymore, but from echo-base. Exporting them from both caused type errors when using instanceof, which caused difficult bug to debug. Import all error types from echo-base instead, BaseError, ToError, NetworkError, etc.
+
+```
+import { BaseError, NetworkError, toError } from '@equinor/echo-base';
+```
+
+-   BaseClient.fetchWithToken throws error as before if response.ok is false. But the error.message was changed to 'failed response' or 'uncaught exception response' to easier distinguish the error types.

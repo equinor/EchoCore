@@ -6,16 +6,10 @@
 export interface EchoEventHub {
     emit<T>(key: string, payload: T): void;
     subscribe<T>(key: string, handler: (payload: T) => void): UnsubscribeFunction;
-    subscribeMany<T>(keys: Array<string | EchoEvents>, handler: (payload: T) => void): UnsubscribeFunction;
+    subscribeMany<T>(keys: Array<string>, handler: (payload: T) => void): UnsubscribeFunction;
 }
 
 export type UnsubscribeFunction = () => void;
-
-export enum EchoEvents {
-    PlantChanged = 'plantChanged',
-    ProcosysProjectChanged = 'procosysProjectChanged',
-    Toaster = 'toaster'
-}
 
 export interface EventMap {
     [custom: string]: unknown;
