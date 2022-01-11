@@ -11,13 +11,6 @@ export interface EchoEventHub {
 
 export type UnsubscribeFunction = () => void;
 
-// TODO: Remove this one with the next major release - moved to EchoCore to make Base more generic.
-export enum EchoEvents {
-    PlantChanged = 'plantChanged',
-    ProcosysProjectChanged = 'procosysProjectChanged',
-    Toaster = 'toaster'
-}
-
 export interface EventMap {
     [custom: string]: unknown;
 }
