@@ -108,6 +108,17 @@ describe('findPropertyByName', () => {
         expect(actualPropertyMessage).toBe(1);
     });
 
+    it('should not find property on nested innerError if deepSearch is false', () => {
+        const error = new BaseError({
+            name: 'BaseError',
+            message,
+            innerError: { errors: { innerProperty: 1 } }
+        });
+        const deepSearch = false;
+        const actualPropertyMessage = findPropertyByName(error, 'innerProperty', deepSearch);
+        expect(actualPropertyMessage).toBe(undefined);
+    });
+
     it('should find property on nested innerError of type customError', () => {
         const error = new BaseError({
             name: 'BaseError',
