@@ -1,4 +1,5 @@
 export * from './appLinks';
+export * from './legendOptions';
 export * from './module';
 export * from './moduleState';
 export * from './panels';
