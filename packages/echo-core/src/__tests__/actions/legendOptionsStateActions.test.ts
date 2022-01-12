@@ -17,7 +17,7 @@ describe('legendOptionsStateActions', () => {
         it('should set legend option state and dispatch a legendTypeChanged event', () => {
             // given
             let actualEventHubPayload;
-            const legendOptionToSet = { isActive: false, selectedLegendType: 'testLegendType' };
+            const legendOptionToSet = { isActive: false, selectedLegendType: 'testLegendType', toggledStatuses: [] };
             const unsubscribe = eventHub.subscribe(EchoEvents.LegendTypeChanged, (payload) => {
                 actualEventHubPayload = payload;
             });
@@ -39,7 +39,8 @@ describe('legendOptionsStateActions', () => {
             const legendOptionToSet = { isActive: false };
             const expectedLegendOptions = {
                 ...legendOptionToSet,
-                selectedLegendType: 'Stid'
+                selectedLegendType: 'Stid',
+                toggledStatuses: []
             };
             const unsubscribe = eventHub.subscribe(EchoEvents.LegendTypeChanged, (payload) => {
                 actualEventHubPayload = payload;
@@ -62,7 +63,8 @@ describe('legendOptionsStateActions', () => {
             const result = getLegendOption();
             expect(result).toEqual({
                 isActive: true,
-                selectedLegendType: 'Stid'
+                selectedLegendType: 'Stid',
+                toggledStatuses: []
             });
         });
 
@@ -78,7 +80,8 @@ describe('legendOptionsStateActions', () => {
             // then
             expect(result).toEqual({
                 isActive: true,
-                selectedLegendType: 'aDifferentLegendType'
+                selectedLegendType: 'aDifferentLegendType',
+                toggledStatuses: []
             });
         });
     });

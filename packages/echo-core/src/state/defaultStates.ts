@@ -6,7 +6,8 @@ import { PlantSettings, Settings } from '../types/settings';
 
 export const legendOptions: LegendOptions = {
     isActive: true,
-    selectedLegendType: 'Stid'
+    selectedLegendType: 'Stid',
+    toggledStatuses: []
 };
 
 const plantSettings: PlantSettings = {
