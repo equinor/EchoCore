@@ -44,7 +44,7 @@ v0.6.0:
     Earlier properties with the same name would overwrite each other.  
     `exception` argument renamed to `innerError`, of type `Record<string, unknown> | Error`
 -   `BaseError` doesn't add properties directly onto itself anymore, but uses nested errors with argument `innerError`.
--   Instead of `BaseError.allProperties()["someCustomProperty"]` use `BaseError.findPropertyByName("someCustomProperty")`. Since we noe use `innerError` of type `Error` or Record<string, unknown>, the property have moved from baseError[property] to baseError.innerError[property].
+-   Instead of `BaseError.allProperties()["someCustomProperty"]` use `BaseError.findPropertyByName("someCustomProperty")`. Since we now use `innerError` of type `Error` or Record<string, unknown>, the property has been moved from baseError[property] to baseError.innerError[property].
 -   Moved `EchoEvents` enum to `EchoCore`.
 -   Changed types for `EventHub` event keys in all functions from `string | EchoEvents` to `string` only.
 
