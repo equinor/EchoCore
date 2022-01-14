@@ -381,7 +381,7 @@ Create the logging module with:
 const analyticsLog = analytics.createAnalyticsModule("xld");
 ```
 
-Optional static event or error properties can also be attached to all event or errors with:
+Optional static event or error properties can also be attached to all events or errors with:
 
 ```TS
 const analyticsLog = analytics.createAnalyticsModule("xld", { staticEventProperties: {ver: 1.01}, staticErrorProperties: {ver: 1.01} });
