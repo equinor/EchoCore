@@ -23,6 +23,18 @@ v0.6.0:
 -   `BaseError` now has errorTraceId, either from backEnd, or a unique frontEnd id
 -   `BaseError` helper methods added for getting properties or propertyByName
 
+It's recommended to create your own error types, extending BaseError, and decorate it with your own fields:
+
+```TS
+    export class PdfError extends BaseError {
+        docNo: string;
+        constructor(args: { message: string; docNo: string; innerError?: Error }) {
+            super({ name: 'PdfError', message: args.message, innerError: args.innerError });
+            this.docNo = args.docNo;
+        }
+    }
+```
+
 # Breaking Changes
 
 v0.6.0:
@@ -31,8 +43,10 @@ v0.6.0:
 -   `BaseError` now properly support nested (and nested-nested) errors with argument `innerError`.  
     Earlier properties with the same name would overwrite each other.  
     `exception` argument renamed to `innerError`, of type `Record<string, unknown> | Error`
-- Moved `EchoEvents` enum to `EchoCore`.
-- Changed types for `EventHub` event keys in all functions from `string | EchoEvents` to `string` only.
+-   `BaseError` doesn't add properties directly onto itself anymore, but uses nested errors with argument `innerError`.
+-   Instead of `BaseError.allProperties()["someCustomProperty"]` use `BaseError.findPropertyByName("someCustomProperty")`. Since we now use `innerError` of type `Error` or Record<string, unknown>, the property has been moved from baseError[property] to baseError.innerError[property].
+-   Moved `EchoEvents` enum to `EchoCore`.
+-   Changed types for `EventHub` event keys in all functions from `string | EchoEvents` to `string` only.
 
 v0.5.0:
 
