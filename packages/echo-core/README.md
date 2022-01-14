@@ -12,36 +12,36 @@ Everything a Echo app needs to communicate with the core.
 ![@equinor/echo-core](https://badgen.net/bundlephobia/minzip/@equinor/echo-core) ![@equinor/echo-core](https://badgen.net/bundlephobia/min/@equinor/echo-core)
 ![@equinor/echo-core](https://badgen.net/bundlephobia/dependency-count/@equinor/echo-core)
 
-- [EchoCore](#echocore)
-- [Install](#install)
-    - [NPM](#npm)
-- [Development](#development)
-    - [NPM build](#npm-build)
-    - [NPM build watch](#npm-build-watch)
-- [Writing and running tests](#writing-and-running-tests)
-- [Link echo-core](#link-echo-core)
-  - [YALC Link](#yalc-link)
-    - [installation](#installation)
-    - [Publish](#publish)
-    - [Link / Add](#link--add)
-    - [Update](#update)
-  - [NPM link](#npm-link)
-  - [NPM Unlinking echo-core](#npm-unlinking-echo-core)
-- [Echo Modules](#echo-modules)
-  - [Register application components with Setup](#register-application-components-with-setup)
-    - [Register App](#register-app)
-    - [Register with Key](#register-with-key)
-    - [Panels](#panels)
-    - [Register Page / Route](#register-page--route)
-  - [Manifest](#manifest)
-- [Global State](#global-state)
-  - [Module State / Context](#module-state--context)
-    - [Module Context and state](#module-context-and-state)
-  - [RegistryState](#registrystate)
-  - [Analytics](#analytics)
-  - [Error handling](#error-handling)
-- [What's new](#whats-new)
-- [Breaking Changes](#breaking-changes)
+-   [EchoCore](#echocore)
+-   [Install](#install)
+    -   [NPM](#npm)
+-   [Development](#development)
+    -   [NPM build](#npm-build)
+    -   [NPM build watch](#npm-build-watch)
+-   [Writing and running tests](#writing-and-running-tests)
+-   [Link echo-core](#link-echo-core)
+    -   [YALC Link](#yalc-link)
+        -   [installation](#installation)
+        -   [Publish](#publish)
+        -   [Link / Add](#link--add)
+        -   [Update](#update)
+    -   [NPM link](#npm-link)
+    -   [NPM Unlinking echo-core](#npm-unlinking-echo-core)
+-   [Echo Modules](#echo-modules)
+    -   [Register application components with Setup](#register-application-components-with-setup)
+        -   [Register App](#register-app)
+        -   [Register with Key](#register-with-key)
+        -   [Panels](#panels)
+        -   [Register Page / Route](#register-page--route)
+    -   [Manifest](#manifest)
+-   [Global State](#global-state)
+    -   [Module State / Context](#module-state--context)
+        -   [Module Context and state](#module-context-and-state)
+    -   [RegistryState](#registrystate)
+    -   [Analytics](#analytics)
+    -   [Error handling](#error-handling)
+-   [What's new](#whats-new)
+-   [Breaking Changes](#breaking-changes)
 
 # Install
 
@@ -381,6 +381,12 @@ Create the logging module with:
 const analyticsLog = analytics.createAnalyticsModule("xld");
 ```
 
+Optional static event or error properties can also be attached to all event or errors with:
+
+```TS
+const analyticsLog = analytics.createAnalyticsModule("xld", { staticEventProperties: {ver: 1.01}, staticErrorProperties: {ver: 1.01} });
+```
+
 Log event with:
 
 ```TS
@@ -450,11 +456,14 @@ Example of a customError and typical error flow.
     }
 }
 ```
+
 # What's new
 
 v0.6.0:
 
 -   `setLegendOption()` now also emits `LegendTypeChanged` event on EventHub if the legend type has been changed.
+-   `analytics.createAnalyticsModule` now supports static event or error properties
+
 # Breaking Changes
 
 v0.6.0:
