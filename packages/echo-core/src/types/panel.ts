@@ -18,6 +18,7 @@ export interface Panel {
     key: string;
     label: string;
     icon: Icon;
+    isToggleButtonVisible?: (() => boolean) | boolean;
     disabled?: boolean;
     customUiStates?: UiStates;
     activeCustomUiState?: string;
