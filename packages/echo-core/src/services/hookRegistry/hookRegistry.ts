@@ -9,7 +9,9 @@ export enum RegisteredHookName {
     useSetActiveTagNo = 'useSetActiveTagNo',
     useContextMenuDataInfo = 'useContextMenuDataInfo',
     useTagData = 'useTagData',
-    useIsContextMenuInfoLoading = 'useIsContextMenuInfoLoading'
+    useIsContextMenuInfoLoading = 'useIsContextMenuInfoLoading',
+    useSetActiveCommPackNo = 'useSetActiveCommPackNo',
+    useSetActiveMcPackNo = 'useSetActiveMcPackNo'
 }
 
 type HookRegistryItem = {
