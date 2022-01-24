@@ -3,12 +3,13 @@ import React from 'react';
 import { RegisterAppOptions } from '../actions/coreActions/app';
 import { EchoPanelOptions, Panel, PanelUI } from './';
 import { RouteBaseProps, WrappedComponent } from './components';
-import { AppLinkOptions } from './registry';
+import { AppLinkOptions } from './registry/registry';
 
 export type VoidFunction = () => void;
 export type UnRegisterPage = VoidFunction;
 export type UnRegisterPanels = VoidFunction;
 export type UnRegisterApp = VoidFunction;
+export type UnRegisterExtension = VoidFunction;
 export type RegisterApp = (appComponent: WrappedComponent<AppComponentProps>, options?: AppOptions) => UnRegisterApp;
 export type RegisterPanels = (key: string, panels: Panel[], options?: Partial<EchoPanelOptions>) => UnRegisterPanels;
 export type RegisterAppWithKey = (key: string, options: RegisterAppOptions) => UnRegisterApp;
@@ -64,6 +65,7 @@ declare module '@equinor/echo-base' {
         updatePanelUI: UpdatePanelUI;
         registerPage: RegisterPage;
         registerAppSubPage: RegisterPage;
+        registerAppContextualNavIcon: any;
     }
 }
 

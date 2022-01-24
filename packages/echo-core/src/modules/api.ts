@@ -4,6 +4,7 @@ import { updatePanelUI } from '../actions';
 import {
     registerApp,
     RegisterAppOptions,
+    registerExtension,
     registerPage,
     registerPanels,
     unRegisterApp,
@@ -20,6 +21,7 @@ import {
     UnRegisterPage
 } from '../types/api';
 import { WrappedComponent } from '../types/components';
+import { ExtendableComponentName } from '../types/registry/extension.types';
 import { getKeyFromPath } from '../utils/path';
 
 /**
@@ -85,6 +87,14 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                 return (): void => {
                     unRegisterPage(key);
                 };
+            },
+            registerAppContextualNavIcon: (iconName: string, isVisible: (...args) => boolean): void => {
+                registerExtension({
+                    key: 'myFirstExtension',
+                    extends: ExtendableComponentName.ContextualNavigationList,
+                    iconName,
+                    isVisible
+                });
             }
         };
     };

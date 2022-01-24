@@ -1,4 +1,5 @@
 import { registerCorePanels, setUserInformation } from '../actions';
+import { registerMultipleExtensions } from '../actions/coreActions';
 import { EchoAuthProvider } from '../services/authentication/echoProvider';
 import { graphGetProfile, graphGetProfilePicture } from '../services/graph/graphUtils';
 import { setSetting } from '../settings/globalSettingsActions';
@@ -17,6 +18,9 @@ import { CoreConfig } from '../types/coreConfig';
 export async function setup(coreConfig: CoreConfig): Promise<void> {
     await authenticate(coreConfig);
     registerCorePanels(coreConfig.leftPanel, coreConfig.rightPanel);
+    if (coreConfig.extensions) {
+        registerMultipleExtensions(coreConfig.extensions);
+    }
     setSetting(persistEchoSetting.getSettingsFromLocalStorage());
 }
 

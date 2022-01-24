@@ -2,6 +2,7 @@ import React from 'react';
 import { GlobalState, LegendOptions, ModuleContext } from '../types';
 import { PlantsData } from '../types/plants';
 import { ProcosysProjectCode, ProcosysProjectsData } from '../types/procosysProjects';
+import { ExtensionRegistry } from '../types/registry/extension.types';
 import { PlantSettings, Settings } from '../types/settings';
 
 export const legendOptions: LegendOptions = {
@@ -71,7 +72,8 @@ export const defaultGlobalState: GlobalState = {
     registry: {
         panels: {},
         routes: {},
-        appLinks: {}
+        appLinks: {},
+        extensions: {} as ExtensionRegistry
     },
     moduleContext: React.createContext({}) as ModuleContext<unknown>,
     moduleState: {},

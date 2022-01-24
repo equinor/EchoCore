@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { createOfflineMessage } from '../message/message';
-import { AppLinkOptions } from '../types/registry';
+import { AppLinkOptions } from '../types/registry/registry';
 import { useEchoEventHub } from './useEchoEventHub';
 
 export type Link = (linkTo: string, options?: AppLinkOptions) => void;

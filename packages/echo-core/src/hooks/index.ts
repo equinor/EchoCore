@@ -3,6 +3,7 @@ export * from './useAuthenticate';
 export * from './useCleanup';
 export * from './useCoreComponents';
 export * from './useEchoEventHub';
+export * from './useExtension';
 export * from './useInitial';
 export * from './useInternalLink';
 export * from './useLegendOptions';

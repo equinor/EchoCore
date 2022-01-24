@@ -7,7 +7,7 @@ export * from './modules';
 export * from './panel';
 export * from './plants';
 export * from './procosysProjects';
-export * from './registry';
+export * from './registry/registry';
 export * from './settings';
 export * from './state';
 export * from './ui';
