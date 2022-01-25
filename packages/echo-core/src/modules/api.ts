@@ -88,11 +88,17 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                     unRegisterPage(key);
                 };
             },
-            registerAppContextualNavIcon: (iconName: string, isVisible: (...args) => boolean): void => {
+            registerAppContextualNavIcon: (args: {
+                component?: any;
+                iconName?: string;
+                isVisible?: (...args) => boolean;
+            }): void => {
+                const { component, iconName, isVisible } = args;
                 registerExtension({
                     key: 'myFirstExtension',
                     extends: ExtendableComponentName.ContextualNavigationList,
                     iconName,
+                    component,
                     isVisible
                 });
             }

@@ -15,6 +15,7 @@ interface ExtensionWithComponent extends ExtensionBase {
 interface ExtensionBase {
     key: string;
     extends: ExtendableComponentName;
+    appPath?: string;
     isVisible?: ((...args) => boolean) | boolean;
     [T: string]: unknown;
 }
