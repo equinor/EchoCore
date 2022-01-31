@@ -2,9 +2,12 @@ import { BaseError } from '@equinor/echo-base';
 export interface EchoHookRegistry {
     registerHook: (hookRegistryItem: HookRegistryItem) => void;
     registerMultipleHooks: (hookRegistryList: HookRegistryItem[]) => void;
-    getHookByName: (hookName: RegisteredHookName) => EchoCustomHook;
+    getHookByName: (hookName: RegisteredHookName | string) => EchoCustomHook;
 }
 
+/**
+ * @deprecated This enum method should not be used. Use RegisteredHookName from EchoFramework instead.
+ */
 export enum RegisteredHookName {
     useSetActiveTagNo = 'useSetActiveTagNo',
     useContextMenuDataInfo = 'useContextMenuDataInfo',
@@ -13,7 +16,7 @@ export enum RegisteredHookName {
 }
 
 type HookRegistryItem = {
-    hookName: RegisteredHookName;
+    hookName: RegisteredHookName | string;
     hook: EchoCustomHook;
 };
 
@@ -53,7 +56,7 @@ export const echoHookRegistry = ((): EchoHookRegistry => {
          * Get's the desired hook from the registry. It doesn't call the hook, just returns with it.
          * @param hookName {RegisteredHooks}
          */
-        getHookByName: function (hookName: RegisteredHookName): EchoCustomHook {
+        getHookByName: function (hookName: RegisteredHookName | string): EchoCustomHook {
             return (
                 hookRegistry[hookName] ||
                 ((): void => {
