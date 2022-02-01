@@ -32,7 +32,7 @@ export function registerExtension(extension: ExtensionRegistration): UnRegisterE
     };
 }
 
-export function registerMultipleExtensions(extensions: ExtensionRegistration[]): void {
+export function registerMultipleExtensions(extensions: ExtensionRegistration[] = []): void {
     extensions.forEach((extensionRegistration) => {
         registerExtension(extensionRegistration);
     });

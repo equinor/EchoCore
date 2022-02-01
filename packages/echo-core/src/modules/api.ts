@@ -5,6 +5,7 @@ import {
     registerApp,
     RegisterAppOptions,
     registerExtension,
+    registerMultipleExtensions,
     registerPage,
     registerPanels,
     unRegisterApp,
@@ -23,6 +24,7 @@ import {
 import { WrappedComponent } from '../types/components';
 import { ExtendableComponentName } from '../types/registry/extension.types';
 import { getKeyFromPath } from '../utils/path';
+import { generateRandomId } from '../utils/randomIdGenerator';
 
 /**
  * Return a function for creating the modules api.
@@ -37,7 +39,7 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
             meta,
             eventHub,
             registerApp: (component: WrappedComponent<AppComponentProps>, options: AppOptions = {}): UnRegisterApp => {
-                const { mainMenu, icon, panels, panelsOptions, ...rest } = options;
+                const { mainMenu, icon, panels, panelsOptions, extensions, ...rest } = options;
                 const appOptions: RegisterAppOptions = {
                     ...rest,
                     component,
@@ -46,10 +48,11 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                     shortName: shortName ? shortName : appKey,
                     key: appKey,
                     icon: icon ? icon : 'category',
-                    mainMenu: mainMenu === undefined ? true : mainMenu ? true : false
+                    mainMenu: mainMenu === undefined ? true : mainMenu
                 };
                 registerApp(appKey, appOptions);
                 if (options.panels) registerPanels(appKey, panels, panelsOptions);
+                if (options.extensions) registerMultipleExtensions(extensions);
                 return (): void => {
                     unRegisterApp(appKey);
                 };
@@ -95,7 +98,7 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
             }): void => {
                 const { component, iconName, isVisible } = args;
                 registerExtension({
-                    key: 'myFirstExtension',
+                    key: generateRandomId(),
                     extends: ExtendableComponentName.ContextualNavigationList,
                     iconName,
                     component,

@@ -3,6 +3,7 @@ import React from 'react';
 import { RegisterAppOptions } from '../actions/coreActions/app';
 import { EchoPanelOptions, Panel, PanelUI } from './';
 import { RouteBaseProps, WrappedComponent } from './components';
+import { ExtensionRegistration } from './registry/extension.types';
 import { AppLinkOptions } from './registry/registry';
 
 export type VoidFunction = () => void;
@@ -80,6 +81,7 @@ export interface AppOptions extends AppLinkOptions {
     icon?: string;
     description?: string;
     panels?: Panel[] | Panel;
+    extensions?: ExtensionRegistration[];
     panelsOptions?: Partial<EchoPanelOptions>;
     params?: string;
     customHeaderSection?: React.FC;
