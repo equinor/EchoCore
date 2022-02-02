@@ -24,7 +24,6 @@ import {
 import { WrappedComponent } from '../types/components';
 import { ExtendableComponentName } from '../types/registry/extension.types';
 import { getKeyFromPath } from '../utils/path';
-import { generateRandomId } from '../utils/randomIdGenerator';
 
 /**
  * Return a function for creating the modules api.
@@ -33,7 +32,7 @@ import { generateRandomId } from '../utils/randomIdGenerator';
  */
 export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
     return (meta: ModuleMetaData): EchoModuleApi => {
-        const { name, shortName, path } = meta;
+        const { name, shortName, path, key } = meta;
         const appKey = getKeyFromPath(path);
         return {
             meta,
@@ -91,20 +90,36 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                     unRegisterPage(key);
                 };
             },
-            registerAppContextualNavIcon: (args: {
-                component?: any;
-                iconName?: string;
-                isVisible?: (...args) => boolean;
-            }): void => {
-                const { component, iconName, isVisible } = args;
+            registerAppContextualNavIcon: (
+                args: RegisterAppContextualNavIconArgs | RegisterAppContextualNavIconWithIconArgs
+            ): void => {
+                const { component, iconName, label, isVisible } = args;
                 registerExtension({
-                    key: generateRandomId(),
+                    key: `${key}-contextual-nav-icon`,
                     extends: ExtendableComponentName.ContextualNavigationList,
                     iconName,
                     component,
+                    label,
+                    appPath: path,
                     isVisible
                 });
             }
         };
     };
+}
+
+interface RegisterAppContextualNavIconArgs extends RegisterAppContextualNavIconBaseArgs {
+    component: any;
+    label?: never;
+    iconName?: never;
+}
+
+interface RegisterAppContextualNavIconWithIconArgs extends RegisterAppContextualNavIconBaseArgs {
+    component?: never;
+    iconName: string;
+    label: string;
+}
+
+interface RegisterAppContextualNavIconBaseArgs {
+    isVisible?: (...args) => boolean;
 }

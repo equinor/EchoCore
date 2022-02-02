@@ -28,7 +28,6 @@ interface ContextualNavLinkOptionsBase extends ExtensionBase {
 interface ExtensionBase {
     key: string;
     extends: ExtendableComponentName;
-    isVisible?: (...args) => boolean;
     [key: string]: unknown;
 }
 
