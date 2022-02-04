@@ -21,7 +21,6 @@ export { RegisteredHookName } from './services/hookRegistry';
 export * from './settings';
 export * from './state';
 export * from './types';
-export { ExtendableComponentName } from './types/registry/extension.types';
 export * from './utils/deepLinkParams';
 export * from './utils/uniq';
 

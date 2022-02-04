@@ -1,4 +1,4 @@
-import { ExtendableComponentName, ExtensionRegistration } from '../types/registry/extension.types';
+import { ExtensionRegistration } from '../types/registry/extension.types';
 import { useRegistry } from './useRegistry';
 
 /**
@@ -9,8 +9,13 @@ import { useRegistry } from './useRegistry';
  * @param options
  * @returns
  */
-export function useExtensionsByComponentName(componentName: ExtendableComponentName): ExtensionRegistration[] {
+export function useExtensionsByComponentName(componentName: string): ExtensionRegistration[] {
     const { extensions } = useRegistry();
 
-    return extensions[componentName];
+    if (!extensions[componentName]) {
+        console.warn(`[EchoCore.Extensions]: no registered extensions for component name ${componentName}.`);
+        return [];
+    } else {
+        return extensions[componentName];
+    }
 }

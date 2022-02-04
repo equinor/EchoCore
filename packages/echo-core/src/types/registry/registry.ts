@@ -5,6 +5,9 @@ import { EchoPanel } from '../panel';
 import { Icon } from '../ui';
 import { ExtensionRegistry } from './extension.types';
 
+export { ContextualAppLinkExtensionOptions } from './contextualAppLink.types';
+export { ExtensionRegistration } from './extension.types';
+
 /**
  * The Echo global app sub-state container for registering application components.
  */

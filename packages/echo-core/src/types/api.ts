@@ -16,6 +16,7 @@ export type RegisterPanels = (key: string, panels: Panel[], options?: Partial<Ec
 export type RegisterAppWithKey = (key: string, options: RegisterAppOptions) => UnRegisterApp;
 export type UpdatePanelUI = (ui?: PanelUI, key?: string) => void;
 export type RegisterPage = (path: string, component: React.FC, options?: PageOptions) => UnRegisterPage;
+type RegisterContextualAppLink = (args: RegisterContextualAppLinkArg) => void;
 
 declare module '@equinor/echo-base' {
     /**
@@ -66,7 +67,7 @@ declare module '@equinor/echo-base' {
         updatePanelUI: UpdatePanelUI;
         registerPage: RegisterPage;
         registerAppSubPage: RegisterPage;
-        registerAppContextualNavIcon: any;
+        registerContextualAppLink: RegisterContextualAppLink;
     }
 }
 
@@ -98,3 +99,21 @@ export interface PageOptions {
  * The props used by a App component.
  */
 export type AppComponentProps<T = unknown, S = unknown> = RouteBaseProps<T, S>;
+
+type RegisterContextualAppLinkArg = ContextualAppLinkComponentArg | ContextualAppLinkArg;
+interface ContextualAppLinkComponentArg extends RegisterContextualAppLinkBaseArg {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    component: React.FC<any>;
+    label?: never;
+    iconName?: never;
+}
+
+interface ContextualAppLinkArg extends RegisterContextualAppLinkBaseArg {
+    component?: never;
+    iconName: string;
+    label: string;
+}
+
+interface RegisterContextualAppLinkBaseArg {
+    isVisible?: (...args) => boolean;
+}

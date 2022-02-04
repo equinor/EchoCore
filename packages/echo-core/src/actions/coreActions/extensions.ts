@@ -1,6 +1,5 @@
 import { getCoreContext } from '../../state/globalState';
 import { UnRegisterExtension } from '../../types/api';
-import { ExtendableComponentName } from '../../types/registry/extension.types';
 import { GlobalState } from '../../types/state';
 import { ExtensionRegistration } from './../../types/registry/extension.types';
 import { dispatch } from './globalActions';
@@ -44,7 +43,7 @@ export function registerMultipleExtensions(extensions: ExtensionRegistration[] =
  *
  * @param {string} key
  */
-function unRegisterExtension(componentName: ExtendableComponentName, extensionKey: string): void {
+function unRegisterExtension(componentName: string, extensionKey: string): void {
     dispatch(getCoreContext(), (state: GlobalState) => {
         const originalExtensionsArray = state.registry.extensions[componentName] || [];
         const updatedExtensionArray = originalExtensionsArray.filter((item) => item.key !== extensionKey);

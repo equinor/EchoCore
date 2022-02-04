@@ -22,8 +22,8 @@ import {
     UnRegisterPage
 } from '../types/api';
 import { WrappedComponent } from '../types/components';
-import { ExtendableComponentName } from '../types/registry/extension.types';
 import { getKeyFromPath } from '../utils/path';
+import { ContextualAppLinkExtensionOptions } from './../types/registry/contextualAppLink.types';
 
 /**
  * Return a function for creating the modules api.
@@ -90,36 +90,20 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                     unRegisterPage(key);
                 };
             },
-            registerAppContextualNavIcon: (
-                args: RegisterAppContextualNavIconArgs | RegisterAppContextualNavIconWithIconArgs
-            ): void => {
-                const { component, iconName, label, isVisible } = args;
-                registerExtension({
-                    key: `${key}-contextual-nav-icon`,
-                    extends: ExtendableComponentName.ContextualNavigationList,
+            registerContextualAppLink: ({ component, iconName, label, isVisible }): void => {
+                const registrationOptions: ContextualAppLinkExtensionOptions = {
                     iconName,
-                    component,
                     label,
-                    appPath: path,
-                    isVisible
+                    appPath: path
+                };
+                registerExtension({
+                    key,
+                    extends: 'ContextualAppLinks',
+                    component,
+                    isVisible,
+                    options: registrationOptions
                 });
             }
         };
     };
-}
-
-interface RegisterAppContextualNavIconArgs extends RegisterAppContextualNavIconBaseArgs {
-    component: any;
-    label?: never;
-    iconName?: never;
-}
-
-interface RegisterAppContextualNavIconWithIconArgs extends RegisterAppContextualNavIconBaseArgs {
-    component?: never;
-    iconName: string;
-    label: string;
-}
-
-interface RegisterAppContextualNavIconBaseArgs {
-    isVisible?: (...args) => boolean;
 }
