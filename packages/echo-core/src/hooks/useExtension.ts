@@ -3,7 +3,6 @@ import { useRegistry } from './useRegistry';
 
 /**
  * Get all the registered extensions for a given component.
- *
  * @param {string} componentName
  * @returns {ExtensionRegistration[]}
  */
