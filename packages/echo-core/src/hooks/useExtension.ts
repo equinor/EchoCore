@@ -2,12 +2,10 @@ import { ExtensionRegistration } from '../types/registry/extension.types';
 import { useRegistry } from './useRegistry';
 
 /**
- * Hook for using extensions by passing a type and options (key or tags)
- * Example: Show all notification types with a tag of "tag" as in stid tag.
+ * Get all the registered extensions for a given component.
  *
- * @param type
- * @param options
- * @returns
+ * @param {string} componentName
+ * @returns {ExtensionRegistration[]}
  */
 export function useExtensionsByComponentName(componentName: string): ExtensionRegistration[] {
     const { extensions } = useRegistry();

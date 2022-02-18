@@ -6,10 +6,16 @@ import { dispatch } from './globalActions';
 
 /**
  * Core Action for registering an extension.
- * Key is used as an identifier
- *
- * @export
- * @param extension
+ * Extensions always tie to a specific component in echopedia: with these, it is possible
+ * to augment and extend pre-defined, existing components in the echopediaWeb main app.
+ * @param extension The extension to register;
+ * @param {string} extension.key  Unique key to identify the extension.
+ * @param {string} extension.extends The name of the component that would use this extension.
+ * @param {React.FC} extension.component The React component to be used by the extended component
+ * @param {callback} extension.isVisible May be used by the extended component: if the given extension should be rendered or not.
+ * @param {Record<string, unknown>} extension.options May be used by the extended component: additional, custom options to use,
+ * if needed by the extendable component
+ * @returns {UnRegisterExtension} A function to clear the given registration from the core state.
  */
 export function registerExtension(extension: ExtensionRegistration): UnRegisterExtension {
     const extendableComponentName = extension.extends;
@@ -31,10 +37,13 @@ export function registerExtension(extension: ExtensionRegistration): UnRegisterE
     };
 }
 
-export function registerMultipleExtensions(extensions: ExtensionRegistration[] = []): void {
+export function registerMultipleExtensions(extensions: ExtensionRegistration[] = []): UnRegisterExtension[] {
+    const unregisterFunctions: UnRegisterExtension[] = [];
     extensions.forEach((extensionRegistration) => {
-        registerExtension(extensionRegistration);
+        unregisterFunctions.push(registerExtension(extensionRegistration));
     });
+
+    return unregisterFunctions;
 }
 
 /**
