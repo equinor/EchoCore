@@ -17,6 +17,7 @@ export type RegisterAppWithKey = (key: string, options: RegisterAppOptions) => U
 export type UpdatePanelUI = (ui?: PanelUI, key?: string) => void;
 export type RegisterPage = (path: string, component: React.FC, options?: PageOptions) => UnRegisterPage;
 type RegisterContextualAppLink = (args: RegisterContextualAppLinkArg) => void;
+type RegisterExtension = (args: ExtensionRegistration) => UnRegisterExtension;
 
 declare module '@equinor/echo-base' {
     /**
@@ -69,7 +70,7 @@ declare module '@equinor/echo-base' {
         registerAppSubPage: RegisterPage;
         /**
          * Register a link to the given Echo App in EchopediaWeb's application links component,
-         * to open a given tag in it.
+         * to open a given tag with it.
          *
          * @param {RegisterContextualAppLinkArg} options
          * @param {React.FC<any>} options.component
@@ -78,6 +79,23 @@ declare module '@equinor/echo-base' {
          * @param {(...args) => boolean} options.isVisible
          */
         registerContextualAppLink: RegisterContextualAppLink;
+        /**
+         * Core Action for registering an extension.
+         * Extensions always tie to a specific component in echopedia: with these, it is possible
+         * to augment and extend pre-defined, existing components in the echopediaWeb main app.
+         *
+         * To get all extensions for a given component, use the useExtensions() hook.
+         *
+         * @param extension The extension to register;
+         * @param {string} extension.key  Unique key to identify the extension.
+         * @param {string} extension.extends The registered name of the component that would use this extension.
+         * @param {React.FC} extension.component React component to be used by the extended component
+         * @param {callback} extension.isVisible May be used by the extended component: if the given extension should be rendered or not.
+         * @param {Record<string, unknown>} extension.options May be used by the extended component: additional, custom options to use,
+         * if needed by the extendable component
+         * @returns {UnRegisterExtension} A function to clear the given registration from the core state.
+         */
+        registerExtension: RegisterExtension;
     }
 }
 

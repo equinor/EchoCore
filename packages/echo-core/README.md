@@ -12,36 +12,35 @@ Everything a Echo app needs to communicate with the core.
 ![@equinor/echo-core](https://badgen.net/bundlephobia/minzip/@equinor/echo-core) ![@equinor/echo-core](https://badgen.net/bundlephobia/min/@equinor/echo-core)
 ![@equinor/echo-core](https://badgen.net/bundlephobia/dependency-count/@equinor/echo-core)
 
--   [EchoCore](#echocore)
--   [Install](#install)
-    -   [NPM](#npm)
--   [Development](#development)
-    -   [NPM build](#npm-build)
-    -   [NPM build watch](#npm-build-watch)
--   [Writing and running tests](#writing-and-running-tests)
--   [Link echo-core](#link-echo-core)
-    -   [YALC Link](#yalc-link)
-        -   [installation](#installation)
-        -   [Publish](#publish)
-        -   [Link / Add](#link--add)
-        -   [Update](#update)
-    -   [NPM link](#npm-link)
-    -   [NPM Unlinking echo-core](#npm-unlinking-echo-core)
--   [Echo Modules](#echo-modules)
-    -   [Register application components with Setup](#register-application-components-with-setup)
-        -   [Register App](#register-app)
-        -   [Register with Key](#register-with-key)
-        -   [Panels](#panels)
-        -   [Register Page / Route](#register-page--route)
-    -   [Manifest](#manifest)
--   [Global State](#global-state)
-    -   [Module State / Context](#module-state--context)
-        -   [Module Context and state](#module-context-and-state)
-    -   [RegistryState](#registrystate)
-    -   [Analytics](#analytics)
-    -   [Error handling](#error-handling)
--   [What's new](#whats-new)
--   [Breaking Changes](#breaking-changes)
+- [EchoCore](#echocore)
+- [Install](#install)
+    - [NPM](#npm)
+- [Development](#development)
+    - [NPM build](#npm-build)
+    - [NPM build watch](#npm-build-watch)
+- [Writing and running tests](#writing-and-running-tests)
+- [Link echo-core](#link-echo-core)
+  - [YALC Link](#yalc-link)
+    - [installation](#installation)
+    - [Publish](#publish)
+    - [Link / Add](#link--add)
+    - [Update](#update)
+  - [NPM link](#npm-link)
+  - [NPM Unlinking echo-core](#npm-unlinking-echo-core)
+- [Echo Modules](#echo-modules)
+  - [Register application components with Setup](#register-application-components-with-setup)
+    - [Register App](#register-app)
+    - [Register with Key](#register-with-key)
+    - [Panels](#panels)
+    - [Extensions](#extensions)
+    - [Register Page / Route](#register-page--route)
+  - [Manifest](#manifest)
+- [Global State](#global-state)
+  - [Module State / Context](#module-state--context)
+    - [Module Context and state](#module-context-and-state)
+  - [RegistryState](#registrystate)
+  - [Analytics](#analytics)
+  - [Error handling](#error-handling)
 
 # Install
 
@@ -217,6 +216,60 @@ this lets you manually register an app, so remember some configuration is needed
 
 `registerPanels` is for registering panels with a provided key. This key must correspond to a path which is registered. The path is used to trigger the loading ot the panels automatically. if not it need to be triggered by the `setActiveModulePanels` Action.Application panels can also be added when using `registerApp`, this can be done trough the AppOptions.
 
+### Extensions
+
+Extensions are meant to extend or augment existing components in the EchopediaWeb core application.
+
+_Example:_
+
+A list of application links (both internal and external) can be found in EchopediaWeb's search results, in a `TagItem`'s header. With the help of these app links you can open this given tag in an internal or external app.
+This component is extendable, meaning that it can be augmented, with the given Echo Module's link when registering an Echo Module to the core application.
+
+Here's how it's done, by using the dedicated `registerContextualAppLink()` function:
+```ts
+// Register a simple, icon button component.
+// It will handle simple linking to your app with the tag.
+export function setup(api: EchoModuleApi): void {
+    api.registerPage('/myEchoModule', MyEchoModule);
+    api.registerContextualAppLink({
+        label: 'Open in Awesome Echo App',
+        iconName: 'rotate_3d' // accepts EDS icon names
+    });
+}
+
+// Register a custom, more complex component, which uses it's logic to navigate to your app.
+import { MyCustomLinkButton } from './MyCustomLinkButton'
+
+export function setup(api: EchoModuleApi): void {
+    api.registerPage('/myEchoModule', MyEchoModule);
+    api.registerContextualAppLink({
+        component: MyCustomLinkButton
+    });
+}
+```
+
+The above mentioned extensions are utilized by `ContextualAppLinks`, which can be found in EchoFramework. Check it out to learn more about it!
+
+It is also possible to register a custom extension either by using `registerApp` through `AppOptions` or by using the `setup` function, `EchoModuleApi`:
+```ts
+export function setup(api: EchoModuleApi): void {
+    api.registerPage('/myEchoModule', MyEchoModule);
+    api.registerExtension({
+        key: 'unique-key',
+        extends: 'PredifenedComponentName',
+        component: MyCustomComponent,
+        options: {
+            listOfUsers: [ 'Mary Sue', 'John Doe' ]
+            isApproved: false,
+            ...
+        }
+    })
+}
+```
+A component can have any number of extensions.
+
+Extensions are stored in the `GlobalState.registry.extensions`;
+
 ### Register Page / Route
 
 Under the hood `registerRoute` is what `registerApp`, `registerAppWithKey`, and `registerPage`, uses. An app is just a route with a added component. `registerPag` can be used to register pages which needs no direct connection.
@@ -359,15 +412,7 @@ A context can be registered by using the `registerModuleContext` function provid
 
 This is the the Echo global app sub-state container for registering application components. This state is the most important state of the whole application and contains all routes, panels and appLinks.
 
-```TS
-interface RegistryState {
-    routes: Dict<RouteRegistration;
-    panels: Dict<EchoPanel>;
-    appLinks: Dict<AppLink>;
-}
-```
-
-As EchoCore' responsibility is mainly ot provide developers the tools to register and retrieve information form the global state the usage of the `RegistryState` can be found in EchoFramework's documentation which can be found [here](https://github.com/equinor/EchoFramework)
+As EchoCore' responsibility is mainly to provide developers the tools to register and retrieve information form the global state the usage of the `RegistryState` can be found in EchoFramework's documentation which can be found [here](https://github.com/equinor/EchoFramework)
 
 ## Analytics
 
@@ -456,28 +501,3 @@ Example of a customError and typical error flow.
     }
 }
 ```
-
-# What's new
-
-v0.6.0:
-
--   `setLegendOption()` now also emits `LegendTypeChanged` event on EventHub if the legend type has been changed.
--   `analytics.createAnalyticsModule` now supports static event or error properties
-
-# Breaking Changes
-
-v0.6.0:
-
-See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
-
-v0.5.0:
-
-See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
-
--   Errors are not exported through echo-core anymore, but from echo-base. Exporting them from both caused type errors when using instanceof, which caused difficult bug to debug. Import all error types from echo-base instead, BaseError, ToError, NetworkError, etc.
-
-```
-import { BaseError, NetworkError, toError } from '@equinor/echo-base';
-```
-
--   BaseClient.fetchWithToken throws error as before if response.ok is false. But the error.message was changed to 'failed response' or 'uncaught exception response' to easier distinguish the error types.

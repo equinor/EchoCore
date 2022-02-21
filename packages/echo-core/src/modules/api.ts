@@ -19,11 +19,13 @@ import {
     EchoModuleApi,
     PageOptions,
     UnRegisterApp,
+    UnRegisterExtension,
     UnRegisterPage
 } from '../types/api';
 import { WrappedComponent } from '../types/components';
 import { getKeyFromPath } from '../utils/path';
 import { ContextualAppLinkExtensionOptions } from './../types/registry/contextualAppLink.types';
+import { ExtensionRegistration } from './../types/registry/extension.types';
 
 /**
  * Return a function for creating the modules api.
@@ -103,6 +105,9 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                     isVisible,
                     options: registrationOptions
                 });
+            },
+            registerExtension: (args: ExtensionRegistration): UnRegisterExtension => {
+                return registerExtension(args);
             }
         };
     };
