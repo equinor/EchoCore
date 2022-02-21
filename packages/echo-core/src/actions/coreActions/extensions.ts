@@ -1,7 +1,7 @@
 import { getCoreContext } from '../../state/globalState';
 import { UnRegisterExtension } from '../../types/api';
 import { GlobalState } from '../../types/state';
-import { ExtensionRegistration } from './../../types/registry/extension.types';
+import { ExtensionRegistration, ExtensionRegistry } from './../../types/registry/extension.types';
 import { dispatch } from './globalActions';
 
 /**
@@ -20,14 +20,19 @@ import { dispatch } from './globalActions';
 export function registerExtension(extension: ExtensionRegistration): UnRegisterExtension {
     const extendableComponentName = extension.extends;
     dispatch(getCoreContext(), (state: GlobalState) => {
-        const originalExtensionsArray = state.registry.extensions[extendableComponentName] || [];
+        const updatedExtensionArray = createUpdatedExtensionArray(
+            extension,
+            state.registry.extensions,
+            extendableComponentName
+        );
+
         return {
             ...state,
             registry: {
                 ...state.registry,
                 extensions: {
                     ...state.registry.extensions,
-                    [extendableComponentName]: [...originalExtensionsArray, extension]
+                    [extendableComponentName]: updatedExtensionArray
                 }
             }
         };
@@ -35,6 +40,26 @@ export function registerExtension(extension: ExtensionRegistration): UnRegisterE
     return (): void => {
         unRegisterExtension(extendableComponentName, extension.key);
     };
+}
+
+function createUpdatedExtensionArray(
+    extensionToRegister: ExtensionRegistration,
+    extensionRegistry: ExtensionRegistry,
+    extendableComponentName: string
+): ExtensionRegistration[] {
+    let updatedExtensionsArray: ExtensionRegistration[] = [];
+    const originalExtensionsArray = extensionRegistry[extendableComponentName] || [];
+    const newKeyAlreadyExists = originalExtensionsArray.map((item) => item.key).includes(extensionToRegister.key);
+
+    if (newKeyAlreadyExists) {
+        console.error(
+            `[Echo.Core.RegisterExtension] Ignoring extension registration with key "${extensionToRegister.key}" to component "${extendableComponentName}": an extension with this key already exists for this component.`
+        );
+    } else {
+        updatedExtensionsArray = [...originalExtensionsArray, extensionToRegister];
+    }
+
+    return updatedExtensionsArray;
 }
 
 /**

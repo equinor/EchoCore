@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react-hooks';
 import { registerMultipleExtensions } from '../../actions/coreActions';
 import { useExtensionsByComponentName } from '../../hooks/useExtension';
 import { ExtensionRegistration } from './../../types/registry/extension.types';
@@ -40,10 +40,16 @@ describe('useExtensionsByComponentName()', () => {
                 key: 'key-2'
             }
         ];
-        const unregisterFunctions = registerMultipleExtensions(extensionsToRegister);
+        let unregisterFunctions;
+        act(() => {
+            unregisterFunctions = registerMultipleExtensions(extensionsToRegister);
+        });
 
         // when
-        const { result } = renderHook(() => useExtensionsByComponentName(extendableComponentName));
+        let result;
+        act(() => {
+            result = renderHook(() => useExtensionsByComponentName(extendableComponentName)).result;
+        });
 
         // then
         expect(result.current).toStrictEqual([
@@ -64,6 +70,10 @@ describe('useExtensionsByComponentName()', () => {
             }
         ]);
 
-        unregisterFunctions.forEach((unregisterExtension) => unregisterExtension());
+        unregisterFunctions.forEach((unregisterExtension) => {
+            act(() => {
+                unregisterExtension();
+            });
+        });
     });
 });

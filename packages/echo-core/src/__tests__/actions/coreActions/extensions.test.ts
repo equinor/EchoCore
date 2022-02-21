@@ -78,9 +78,11 @@ describe('extensions', () => {
                 ]
             });
 
+            // when
             unregisterFunctions[0]();
             unregisterFunctions[2]();
 
+            // then
             expect(getExtensions()).toStrictEqual({
                 MyFavEchopediaWebComponent: [
                     {
@@ -98,8 +100,11 @@ describe('extensions', () => {
                 ]
             });
 
+            // when
             unregisterFunctions[1]();
             unregisterFunctions[3]();
+
+            // then
             expect(getExtensions()).toStrictEqual({
                 MyFavEchopediaWebComponent: [],
                 TheBestEchopediaWebComponent: []

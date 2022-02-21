@@ -67,6 +67,16 @@ declare module '@equinor/echo-base' {
         updatePanelUI: UpdatePanelUI;
         registerPage: RegisterPage;
         registerAppSubPage: RegisterPage;
+        /**
+         * Register a link to the given Echo App in EchopediaWeb's application links component,
+         * to open a given tag in it.
+         *
+         * @param {RegisterContextualAppLinkArg} options
+         * @param {React.FC<any>} options.component
+         * @param {string} options.iconName
+         * @param {string} options.label
+         * @param {(...args) => boolean} options.isVisible
+         */
         registerContextualAppLink: RegisterContextualAppLink;
     }
 }
@@ -101,6 +111,7 @@ export interface PageOptions {
 export type AppComponentProps<T = unknown, S = unknown> = RouteBaseProps<T, S>;
 
 type RegisterContextualAppLinkArg = ContextualAppLinkComponentArg | ContextualAppLinkArg;
+
 interface ContextualAppLinkComponentArg extends RegisterContextualAppLinkBaseArg {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     component: React.FC<any>;
