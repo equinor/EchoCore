@@ -4,6 +4,14 @@ Object.defineProperty(window, 'fetch', {
     value: jest.fn()
 });
 
+Object.defineProperty(window.console, 'error', {
+    value: jest.fn()
+});
+
+Object.defineProperty(window.console, 'warn', {
+    value: jest.fn()
+});
+
 Object.defineProperty(window, 'crypto', {
     value: { getRandomValues: mGetRandomValues }
 });

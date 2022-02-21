@@ -47,8 +47,8 @@ function createUpdatedExtensionArray(
     extensionRegistry: ExtensionRegistry,
     extendableComponentName: string
 ): ExtensionRegistration[] {
-    let updatedExtensionsArray: ExtensionRegistration[] = [];
     const originalExtensionsArray = extensionRegistry[extendableComponentName] || [];
+    let updatedExtensionsArray: ExtensionRegistration[] = originalExtensionsArray;
     const newKeyAlreadyExists = originalExtensionsArray.map((item) => item.key).includes(extensionToRegister.key);
 
     if (newKeyAlreadyExists) {

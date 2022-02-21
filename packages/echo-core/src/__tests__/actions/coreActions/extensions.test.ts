@@ -17,11 +17,34 @@ describe('extensions', () => {
                 ]
             });
 
+            // when
             unregisterExtension();
             registeredExtensions = getExtensions();
+
+            // then
             expect(registeredExtensions).toStrictEqual({
                 MyFavEchopediaWebComponent: []
             });
+        });
+
+        it('should ignore the registration if the passed key already exists', () => {
+            // when
+            const unregisterExtension = registerExtension(extension);
+            registerExtension(extension);
+            const registeredExtensions = getExtensions();
+            const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+            // then
+            expect(registeredExtensions).toEqual({
+                MyFavEchopediaWebComponent: [
+                    { component: mockComponent, extends: 'MyFavEchopediaWebComponent', key: 'unique-key' }
+                ]
+            });
+            expect(consoleSpy).toHaveBeenCalledWith(
+                '[Echo.Core.RegisterExtension] Ignoring extension registration with key "unique-key" to component "MyFavEchopediaWebComponent": an extension with this key already exists for this component.'
+            );
+
+            unregisterExtension();
         });
     });
 
