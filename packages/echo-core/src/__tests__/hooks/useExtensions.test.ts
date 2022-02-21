@@ -8,11 +8,11 @@ describe('useExtensionsByComponentName()', () => {
         return null;
     };
 
-    const extandableComponentName = 'MyFavEchopediaWebComponent';
+    const extendableComponentName = 'MyFavEchopediaWebComponent';
 
     const extension: ExtensionRegistration = {
         key: 'key-0',
-        extends: extandableComponentName,
+        extends: extendableComponentName,
         component: mockComponent
     };
     it('should get all extensions associated with a component name', () => {
@@ -43,23 +43,23 @@ describe('useExtensionsByComponentName()', () => {
         const unregisterFunctions = registerMultipleExtensions(extensionsToRegister);
 
         // when
-        const { result } = renderHook(() => useExtensionsByComponentName(extandableComponentName));
+        const { result } = renderHook(() => useExtensionsByComponentName(extendableComponentName));
 
         // then
         expect(result.current).toStrictEqual([
             {
                 key: 'key-0',
-                extends: extandableComponentName,
+                extends: extendableComponentName,
                 component: mockComponent
             },
             {
                 key: 'key-1',
-                extends: extandableComponentName,
+                extends: extendableComponentName,
                 component: mockComponent
             },
             {
                 key: 'key-2',
-                extends: extandableComponentName,
+                extends: extendableComponentName,
                 component: mockComponent
             }
         ]);
