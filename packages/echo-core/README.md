@@ -266,6 +266,8 @@ export function setup(api: EchoModuleApi): void {
     })
 }
 ```
+Each extendable component utilizes it's extensions in a unique way: if you want to use `registerExtension()` function, make sure you're familiar with the required `options` for the given, extendable component.
+
 A component can have any number of extensions.
 
 Extensions are stored in the `GlobalState.registry.extensions`;
