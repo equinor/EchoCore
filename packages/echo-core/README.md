@@ -218,17 +218,18 @@ this lets you manually register an app, so remember some configuration is needed
 
 ### Extensions
 
-Extensions are meant to extend or augment existing components in the EchopediaWeb core application.
+Extensions are meant to extend or augment different, existing components in the EchopediaWeb core application or in EchoFramework - this gives the system flexibility.
+How the given extensions are handled is always up to the extendable component. EchoCore just provides the architecture for this.
 
 _Example:_
 
-A list of application links (both internal and external) can be found in EchopediaWeb's search results, in a `TagItem`'s header. With the help of these app links you can open this given tag in an internal or external app.
-This component is extendable, meaning that it can be augmented, with the given Echo Module's link when registering an Echo Module to the core application.
+There's a list of application links (both internal and external) in EchopediaWeb's Tag search results, in a `TagItem`'s header - with this we can open a tag in a different app.
+This component was built to be extendable: it will connect EchoCore state and render additional links based on the registered extensions for this component in EchoCore.
 
-Here's how it's done, by using the dedicated `registerContextualAppLink()` function:
+Here's how an EchoModule can register it's own link into this particular component, with the help of a dedicated `registerContextualAppLink()` function:
 ```ts
 // Register a simple, icon button component.
-// It will handle simple linking to your app with the tag.
+// It will handle simple linking to your app with the given tag.
 export function setup(api: EchoModuleApi): void {
     api.registerPage('/myEchoModule', MyEchoModule);
     api.registerContextualAppLink({
@@ -237,7 +238,7 @@ export function setup(api: EchoModuleApi): void {
     });
 }
 
-// Register a custom, more complex component, which uses it's logic to navigate to your app.
+// For more complex scenarios: Register a custom button component, which uses it's own logic to navigate to your app.
 import { MyCustomLinkButton } from './MyCustomLinkButton'
 
 export function setup(api: EchoModuleApi): void {
@@ -248,7 +249,7 @@ export function setup(api: EchoModuleApi): void {
 }
 ```
 
-The above mentioned extensions are utilized by `ContextualAppLinks`, which can be found in EchoFramework. Check it out to learn more about it!
+The above mentioned extensions are utilized by `ContextualAppLinks` component, which can be found in [EchoFramework](https://github.com/equinor/EchoFramework). Check it out to learn more about it!
 
 It is also possible to register a custom extension either by using `registerApp` through `AppOptions` or by using the `setup` function, `EchoModuleApi`:
 ```ts
@@ -257,8 +258,8 @@ export function setup(api: EchoModuleApi): void {
     api.registerExtension({
         key: 'unique-key',
         extends: 'PredifenedComponentName',
-        component: MyCustomComponent,
-        options: {
+        component: MyCustomExtensionComponent,
+        options: { // custom options used by the extendable component
             listOfUsers: [ 'Mary Sue', 'John Doe' ]
             isApproved: false,
             ...
@@ -269,6 +270,8 @@ export function setup(api: EchoModuleApi): void {
 Each extendable component utilizes it's extensions in a unique way: if you want to use `registerExtension()` function, make sure you're familiar with the required `options` for the given, extendable component.
 
 A component can have any number of extensions.
+
+The `useExtensions()` hook can help you with getting all the registered extensions for a given component.
 
 Extensions are stored in the `GlobalState.registry.extensions`;
 
