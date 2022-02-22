@@ -41,6 +41,7 @@ Everything a Echo app needs to communicate with the core.
   - [RegistryState](#registrystate)
   - [Analytics](#analytics)
   - [Error handling](#error-handling)
+- [Changelog](#changelog)
 
 # Install
 
@@ -506,3 +507,7 @@ Example of a customError and typical error flow.
     }
 }
 ```
+
+# Changelog
+
+You can found the changelog [here](https://github.com/equinor/EchoCore/blob/main/CHANGELOG.md).
