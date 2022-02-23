@@ -73,10 +73,11 @@ declare module '@equinor/echo-base' {
          * to open a given tag with it.
          *
          * @param {RegisterContextualAppLinkArg} options
-         * @param {React.FC<any>} options.component
-         * @param {string} options.iconName
-         * @param {string} options.label
-         * @param {(...args) => boolean} options.isVisible
+         * @param {React.FC<any>} options.component React component to be used by the extended component. If this is passed the `iconName` and `label` params can be omitted.
+         * If you don't pass a component, use iconName and label params to render a built in, simple icon button. It will navigate to your EchoModule's link passing Tag id, and plant inst code.
+         * @param {string} options.iconName Use this together with `label` param: EDS icon name for a simple, built in icon-button.
+         * @param {string} options.label Use this together with `iconName` param: A label to show on the App Link's icon button hover.
+         * @param {(...args) => boolean} options.isVisible Optional function to determine when the icon button should be visible. Get's all props passed to the App Link component.
          */
         registerContextualAppLink: RegisterContextualAppLink;
         /**
