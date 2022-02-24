@@ -53,7 +53,7 @@ function createUpdatedExtensionArray(
 
     if (newKeyAlreadyExists) {
         console.error(
-            `[Echo.Core.RegisterExtension] Ignoring extension registration with key "${extensionToRegister.key}" to component "${extendableComponentName}": an extension with this key already exists for this component.`
+            `[Echo.Core.RegisterExtension] Ignoring extension registration with key "${extensionToRegister.key}" for component "${extendableComponentName}": an extension with this key already exists for this component.`
         );
     } else {
         updatedExtensionsArray = [...originalExtensionsArray, extensionToRegister];

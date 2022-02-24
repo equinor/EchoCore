@@ -1,7 +1,7 @@
 import { registerExtension, registerMultipleExtensions } from '../../../actions/coreActions/extensions';
 import { readState } from '../../../actions/coreActions/globalActions';
 import { getCoreContext } from '../../../state/globalState';
-import { ExtensionRegistration } from './../../../types/registry/extension.types';
+import { ExtensionRegistration, ExtensionRegistry } from './../../../types/registry/extension.types';
 
 describe('extensions', () => {
     describe('registerExtension()', () => {
@@ -32,7 +32,9 @@ describe('extensions', () => {
             const unregisterExtension = registerExtension(extension);
             registerExtension(extension);
             const registeredExtensions = getExtensions();
-            const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+            const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {
+                /** */
+            });
 
             // then
             expect(registeredExtensions).toEqual({
@@ -41,17 +43,33 @@ describe('extensions', () => {
                 ]
             });
             expect(consoleSpy).toHaveBeenCalledWith(
-                '[Echo.Core.RegisterExtension] Ignoring extension registration with key "unique-key" to component "MyFavEchopediaWebComponent": an extension with this key already exists for this component.'
+                '[Echo.Core.RegisterExtension] Ignoring extension registration with key "unique-key" for component "MyFavEchopediaWebComponent": an extension with this key already exists for this component.'
             );
 
             unregisterExtension();
         });
+
+        it('should handle multiple calls of one given unregister function', () => {
+            // given
+            const unregisterExtension = registerExtension(extension);
+
+            // when
+            unregisterExtension();
+            unregisterExtension();
+            const registeredExtensions = getExtensions();
+
+            // then
+            expect(registeredExtensions).toStrictEqual({
+                MyFavEchopediaWebComponent: []
+            });
+        });
     });
 
     describe('registerMultipleExtensions()', () => {
-        it('should register and unregister multiple extensions', () => {
-            // given
-            const extensionsToRegister: ExtensionRegistration[] = [
+        let extensionsToRegister: ExtensionRegistration[];
+
+        beforeEach(() => {
+            extensionsToRegister = [
                 {
                     ...extension
                 },
@@ -69,7 +87,8 @@ describe('extensions', () => {
                     extends: 'TheBestEchopediaWebComponent'
                 }
             ];
-
+        });
+        it('should register and unregister multiple extensions', () => {
             // when
             const unregisterFunctions = registerMultipleExtensions(extensionsToRegister);
 
@@ -136,7 +155,7 @@ describe('extensions', () => {
     });
 });
 
-const mockComponent = () => {
+const mockComponent = (): null => {
     return null;
 };
 
@@ -146,6 +165,6 @@ const extension: ExtensionRegistration = {
     component: mockComponent
 };
 
-function getExtensions() {
+function getExtensions(): ExtensionRegistry {
     return readState(getCoreContext(), (state) => state.registry.extensions);
 }
