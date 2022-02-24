@@ -1,3 +1,4 @@
+import { BaseError } from '@equinor/echo-base';
 import { registerExtension, registerMultipleExtensions } from '../../../actions/coreActions/extensions';
 import { readState } from '../../../actions/coreActions/globalActions';
 import { getCoreContext } from '../../../state/globalState';
@@ -28,24 +29,25 @@ describe('extensions', () => {
         });
 
         it('should ignore the registration if the passed key already exists', () => {
+            // given
+            expect.assertions(1);
+            const expectedError = new BaseError({
+                name: 'EchoExtensionKeyAlreadyExistsError',
+                message: `[Echo.Core.RegisterExtension] Duplicate registration with key "unique-key" for component "MyFavEchopediaWebComponent": an extension with this key already exists for this component.`,
+                innerError: {
+                    extensionKey: 'unique-key',
+                    extendableComponentName: 'extendableComponentName'
+                }
+            });
             // when
             const unregisterExtension = registerExtension(extension);
-            registerExtension(extension);
-            const registeredExtensions = getExtensions();
-            const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {
-                /** */
-            });
 
             // then
-            expect(registeredExtensions).toEqual({
-                MyFavEchopediaWebComponent: [
-                    { component: mockComponent, extends: 'MyFavEchopediaWebComponent', key: 'unique-key' }
-                ]
-            });
-            expect(consoleSpy).toHaveBeenCalledWith(
-                '[Echo.Core.RegisterExtension] Ignoring extension registration with key "unique-key" for component "MyFavEchopediaWebComponent": an extension with this key already exists for this component.'
-            );
-
+            try {
+                registerExtension(extension);
+            } catch (error) {
+                expect(error).toEqual(expectedError);
+            }
             unregisterExtension();
         });
 

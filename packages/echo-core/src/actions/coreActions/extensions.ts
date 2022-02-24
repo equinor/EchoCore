@@ -1,3 +1,4 @@
+import { BaseError } from '@equinor/echo-base';
 import { getCoreContext } from '../../state/globalState';
 import { UnRegisterExtension } from '../../types/api';
 import { GlobalState } from '../../types/state';
@@ -15,6 +16,7 @@ import { dispatch } from './globalActions';
  * @param {callback} extension.isVisible May be used by the extended component: if the given extension should be rendered or not.
  * @param {Record<string, unknown>} extension.options May be used by the extended component: additional, custom options to use,
  * if needed by the extendable component
+ * @throws {BaseError} EchoExtensionKeyAlreadyExistsError: if the supplied extension.key is already in use for this component
  * @returns {UnRegisterExtension} A function to clear the given registration from the core state.
  */
 export function registerExtension(extension: ExtensionRegistration): UnRegisterExtension {
@@ -52,9 +54,14 @@ function createUpdatedExtensionArray(
     const newKeyAlreadyExists = originalExtensionsArray.map((item) => item.key).includes(extensionToRegister.key);
 
     if (newKeyAlreadyExists) {
-        console.error(
-            `[Echo.Core.RegisterExtension] Ignoring extension registration with key "${extensionToRegister.key}" for component "${extendableComponentName}": an extension with this key already exists for this component.`
-        );
+        throw new BaseError({
+            name: 'EchoExtensionKeyAlreadyExistsError',
+            message: `[Echo.Core.RegisterExtension] Duplicate registration with key "${extensionToRegister.key}" for component "${extendableComponentName}": an extension with this key already exists for this component.`,
+            innerError: {
+                extensionKey: extensionToRegister.key,
+                extendableComponentName: extendableComponentName
+            }
+        });
     } else {
         updatedExtensionsArray = [...originalExtensionsArray, extensionToRegister];
     }
