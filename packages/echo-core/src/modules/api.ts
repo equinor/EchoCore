@@ -4,6 +4,8 @@ import { updatePanelUI } from '../actions';
 import {
     registerApp,
     RegisterAppOptions,
+    registerExtension,
+    registerMultipleExtensions,
     registerPage,
     registerPanels,
     unRegisterApp,
@@ -17,10 +19,13 @@ import {
     EchoModuleApi,
     PageOptions,
     UnRegisterApp,
+    UnRegisterExtension,
     UnRegisterPage
 } from '../types/api';
 import { WrappedComponent } from '../types/components';
 import { getKeyFromPath } from '../utils/path';
+import { ContextualAppLinkExtensionOptions } from './../types/registry/contextualAppLink.types';
+import { ExtensionRegistration } from './../types/registry/extension.types';
 
 /**
  * Return a function for creating the modules api.
@@ -29,13 +34,13 @@ import { getKeyFromPath } from '../utils/path';
  */
 export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
     return (meta: ModuleMetaData): EchoModuleApi => {
-        const { name, shortName, path } = meta;
+        const { name, shortName, path, key } = meta;
         const appKey = getKeyFromPath(path);
         return {
             meta,
             eventHub,
             registerApp: (component: WrappedComponent<AppComponentProps>, options: AppOptions = {}): UnRegisterApp => {
-                const { mainMenu, icon, panels, panelsOptions, ...rest } = options;
+                const { mainMenu, icon, panels, panelsOptions, extensions, ...rest } = options;
                 const appOptions: RegisterAppOptions = {
                     ...rest,
                     component,
@@ -44,10 +49,11 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                     shortName: shortName ? shortName : appKey,
                     key: appKey,
                     icon: icon ? icon : 'category',
-                    mainMenu: mainMenu === undefined ? true : mainMenu ? true : false
+                    mainMenu: mainMenu === undefined ? true : mainMenu
                 };
                 registerApp(appKey, appOptions);
                 if (options.panels) registerPanels(appKey, panels, panelsOptions);
+                if (options.extensions) registerMultipleExtensions(extensions);
                 return (): void => {
                     unRegisterApp(appKey);
                 };
@@ -85,6 +91,23 @@ export function createEchoAppModuleApi(): EchoAppModuleApiCreator {
                 return (): void => {
                     unRegisterPage(key);
                 };
+            },
+            registerContextualAppLink: ({ component, iconName, label, isVisible }): void => {
+                const registrationOptions: ContextualAppLinkExtensionOptions = {
+                    iconName,
+                    label,
+                    appPath: path
+                };
+                registerExtension({
+                    key,
+                    extends: 'ContextualAppLinks',
+                    component,
+                    isVisible,
+                    options: registrationOptions
+                });
+            },
+            registerExtension: (args: ExtensionRegistration): UnRegisterExtension => {
+                return registerExtension(args);
             }
         };
     };

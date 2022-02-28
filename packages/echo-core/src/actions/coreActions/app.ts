@@ -1,4 +1,4 @@
-import { AppLink, RouteRegistration } from '../../types/registry';
+import { AppLink, RouteRegistration } from '../../types/registry/registry';
 import { registerAppLink, unRegisterAppLink } from '../appLinks';
 import { registerRoute, unRegisterRoute } from './routes';
 

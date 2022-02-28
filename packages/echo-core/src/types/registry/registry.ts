@@ -1,8 +1,12 @@
-import { AppComponentProps } from './api';
-import { Dict } from './common';
-import { WrappedComponent } from './components';
-import { EchoPanel } from './panel';
-import { Icon } from './ui';
+import { AppComponentProps } from '../api';
+import { Dict } from '../common';
+import { WrappedComponent } from '../components';
+import { EchoPanel } from '../panel';
+import { Icon } from '../ui';
+import { ExtensionRegistry } from './extension.types';
+
+export { ContextualAppLinkExtensionOptions } from './contextualAppLink.types';
+export { ExtensionRegistration } from './extension.types';
 
 /**
  * The Echo global app sub-state container for registering application components.
@@ -14,6 +18,7 @@ export interface RegistryState {
     routes: Dict<RouteRegistration>;
     panels: Dict<EchoPanel>;
     appLinks: Dict<AppLink>;
+    extensions: ExtensionRegistry;
 }
 
 export interface AppLink extends AppLinkOptions {

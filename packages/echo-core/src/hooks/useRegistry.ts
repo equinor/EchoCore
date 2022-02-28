@@ -1,6 +1,6 @@
 import { useGlobalState } from '../state/useGlobalState';
 import { GlobalState } from '../types';
-import { AppLink, RegistryState, RouteRegistration } from '../types/registry';
+import { AppLink, RegistryState, RouteRegistration } from '../types/registry/registry';
 
 export function useRegistry(): RegistryState {
     return useGlobalState((state: GlobalState) => state.registry);

@@ -1,4 +1,4 @@
-import { AppKey, RouteRegistration } from '../../types/registry';
+import { AppKey, RouteRegistration } from '../../types/registry/registry';
 import { registerRoute, unRegisterRoute } from './routes';
 
 export function registerPage(appKey: AppKey, routeRegistration: RouteRegistration): void {
