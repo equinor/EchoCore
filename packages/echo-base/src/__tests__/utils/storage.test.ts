@@ -53,7 +53,7 @@ describe('Storage', () => {
             });
             storage.setItem<string>('foo', 'bar');
 
-            expect(localStorage.setItem).toBeCalledWith('foo', 'bar');
+            expect(localStorage.setItem).toBeCalledWith('foo', JSON.stringify('bar'));
             expect(localStorage.setItem).toHaveBeenCalledTimes(1);
         });
 
