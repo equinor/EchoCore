@@ -15,7 +15,11 @@ describe('Storage', () => {
         it('should get the correct string from localStorage', () => {
             // given
             const valueToSet = 'bar';
-            (localStorage.getItem as jest.Mock).mockReturnValueOnce(valueToSet);
+            let valueInLocalStorage: string;
+            (localStorage.getItem as jest.Mock).mockImplementationOnce(() => valueInLocalStorage);
+            (localStorage.setItem as jest.Mock).mockImplementationOnce(
+                (key: string, value: string) => (valueInLocalStorage = value)
+            );
             storage.setItem<string>('foo', valueToSet);
 
             // when
@@ -27,8 +31,12 @@ describe('Storage', () => {
 
         it('should get the correct object from localStorage', () => {
             // given
-            const valueToSet = { foo: 'bar' };
-            (localStorage.getItem as jest.Mock).mockReturnValueOnce(valueToSet);
+            const valueToSet = { foo: 'bar', aDate: new Date() };
+            let valueInLocalStorage: string;
+            (localStorage.getItem as jest.Mock).mockImplementationOnce(() => valueInLocalStorage);
+            (localStorage.setItem as jest.Mock).mockImplementationOnce(
+                (key: string, value: string) => (valueInLocalStorage = value)
+            );
             storage.setItem<{ foo: string }>('foo', valueToSet);
 
             // when
@@ -41,7 +49,11 @@ describe('Storage', () => {
         it('should get the correct boolean from localStorage', () => {
             // given
             const valueToSet = true;
-            (localStorage.getItem as jest.Mock).mockReturnValueOnce(valueToSet);
+            let valueInLocalStorage: string;
+            (localStorage.getItem as jest.Mock).mockImplementationOnce(() => valueInLocalStorage);
+            (localStorage.setItem as jest.Mock).mockImplementationOnce(
+                (key: string, value: string) => (valueInLocalStorage = value)
+            );
             storage.setItem<boolean>('foo', valueToSet);
 
             // when
@@ -54,7 +66,11 @@ describe('Storage', () => {
         it('should get the correct number from localStorage', () => {
             // given
             const valueToSet = 1234;
-            (localStorage.getItem as jest.Mock).mockReturnValueOnce(valueToSet);
+            let valueInLocalStorage: string;
+            (localStorage.getItem as jest.Mock).mockImplementationOnce(() => valueInLocalStorage);
+            (localStorage.setItem as jest.Mock).mockImplementationOnce(
+                (key: string, value: string) => (valueInLocalStorage = value)
+            );
             storage.setItem<number>('foo', valueToSet);
 
             // when
@@ -67,7 +83,11 @@ describe('Storage', () => {
         it('should get the correct date from localStorage', () => {
             // given
             const valueToSet = new Date();
-            (localStorage.getItem as jest.Mock).mockReturnValueOnce(valueToSet);
+            let valueInLocalStorage: string;
+            (localStorage.getItem as jest.Mock).mockImplementationOnce(() => valueInLocalStorage);
+            (localStorage.setItem as jest.Mock).mockImplementationOnce(
+                (key: string, value: string) => (valueInLocalStorage = value)
+            );
             storage.setItem<Date>('foo', valueToSet);
 
             // when
