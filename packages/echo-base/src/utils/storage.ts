@@ -3,11 +3,7 @@ import { parseJsonWithDate } from './jsonParseUtils';
 
 export const storage: EchoLocalStorage = {
     setItem: <T>(key: string, data: T) => {
-        if (typeof data === 'string') {
-            localStorage.setItem(key, data);
-        } else {
-            localStorage.setItem(key, JSON.stringify(data));
-        }
+        localStorage.setItem(key, JSON.stringify(data));
     },
 
     getItem: <T>(key: string) => {

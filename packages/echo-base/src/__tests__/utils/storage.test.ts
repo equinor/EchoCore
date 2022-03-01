@@ -1,71 +1,94 @@
 import { storage } from '../../utils/storage';
 
 describe('Storage', () => {
-    function mockLocalStorage<T>(mockObj: T): T {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (window as any).__defineGetter__('localStorage', () => mockObj);
-        return mockObj;
-    }
-    describe('EchoLocalStorage', () => {
-        it('getItem string from local storage', () => {
-            const localStorage = mockLocalStorage({
-                getItem: jest.fn(() => 'bar')
-            });
-            const result = storage.getItem<string>('foo');
-            expect(result).toEqual('bar');
-            expect(localStorage.getItem).toHaveBeenCalledTimes(1);
-        });
-
-        it('getItem from local storage', () => {
-            const item = { item: 'bar' };
-            const localStorage = mockLocalStorage({
-                getItem: jest.fn(() => JSON.stringify(item))
-            });
-            const result = storage.getItem<{ item: string }>('foo');
-
-            expect(result).toEqual(item);
-            expect(localStorage.getItem).toHaveBeenCalledTimes(1);
-        });
-
-        it('getItem from local storage as undefined', () => {
-            const localStorage = mockLocalStorage({
-                getItem: jest.fn(() => undefined)
-            });
-            const result = storage.getItem('foo');
-
-            expect(undefined).toEqual(result);
-            expect(localStorage.getItem).toHaveBeenCalledTimes(1);
-        });
-
-        it('removeItem has been called with key', () => {
-            const localStorage = mockLocalStorage({
+    beforeEach(() => {
+        Object.defineProperty(window, 'localStorage', {
+            value: {
+                setItem: jest.fn(),
+                getItem: jest.fn(),
                 removeItem: jest.fn()
-            });
+            }
+        });
+    });
+
+    function mockLocalStorage() {
+        let valueInLocalStorage: string;
+        (localStorage.getItem as jest.Mock).mockImplementationOnce(() => valueInLocalStorage);
+        (localStorage.setItem as jest.Mock).mockImplementationOnce(
+            (key: string, value: string) => (valueInLocalStorage = value)
+        );
+    }
+
+    describe('EchoLocalStorage', () => {
+        it('should get the correct string from localStorage', () => {
+            // given
+            const valueToSet = 'bar';
+            mockLocalStorage();
+            storage.setItem<string>('foo', valueToSet);
+
+            // when
+            const actual = storage.getItem<string>('foo');
+
+            // then
+            expect(actual).toEqual(valueToSet);
+        });
+
+        it('should get the correct object from localStorage', () => {
+            // given
+            const valueToSet = { foo: 'bar', aDate: new Date() };
+            mockLocalStorage();
+            storage.setItem<{ foo: string }>('foo', valueToSet);
+
+            // when
+            const actual = storage.getItem<{ foo: string }>('foo');
+
+            // then
+            expect(actual).toEqual(valueToSet);
+        });
+
+        it('should get the correct boolean from localStorage', () => {
+            // given
+            const valueToSet = true;
+            mockLocalStorage();
+            storage.setItem<boolean>('foo', valueToSet);
+
+            // when
+            const actual = storage.getItem<boolean>('foo');
+
+            // then
+            expect(actual).toEqual(valueToSet);
+        });
+
+        it('should get the correct number from localStorage', () => {
+            // given
+            const valueToSet = 1234;
+            mockLocalStorage();
+            storage.setItem<number>('foo', valueToSet);
+
+            // when
+            const actual = storage.getItem<number>('foo');
+
+            // then
+            expect(actual).toEqual(valueToSet);
+        });
+
+        it('should get the correct date from localStorage', () => {
+            // given
+            const valueToSet = new Date();
+            mockLocalStorage();
+            storage.setItem<Date>('foo', valueToSet);
+
+            // when
+            const actual = storage.getItem<Date>('foo');
+
+            // then
+            expect(actual).toEqual(valueToSet);
+        });
+
+        it('should call localStorage.removeItem with the given key', () => {
             storage.removeItem('foo');
 
-            expect(localStorage.removeItem).toBeCalledWith('foo');
-            expect(localStorage.removeItem).toHaveBeenCalledTimes(1);
-        });
-
-        it('setItem has been called with key and string', () => {
-            const localStorage = mockLocalStorage({
-                setItem: jest.fn()
-            });
-            storage.setItem<string>('foo', 'bar');
-
-            expect(localStorage.setItem).toBeCalledWith('foo', 'bar');
-            expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-        });
-
-        it('setItem has been called with key and data', () => {
-            const data = { item: 'bar' };
-            const localStorage = mockLocalStorage({
-                setItem: jest.fn()
-            });
-            storage.setItem('foo', data);
-
-            expect(localStorage.setItem).toBeCalledWith('foo', JSON.stringify(data));
-            expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+            expect(localStorage.removeItem).toHaveBeenCalledWith('foo');
         });
     });
 });
