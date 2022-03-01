@@ -77,7 +77,7 @@ describe('Storage', () => {
             expect(actual).toEqual(valueToSet);
         });
 
-        it('removeItem has been called with key', () => {
+        it('should call localStorage.removeItem with the given key', () => {
             storage.removeItem('foo');
 
             expect(localStorage.removeItem).toHaveBeenCalledWith('foo');
