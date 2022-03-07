@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-core",
-    "version": "0.6.8",
+    "version": "0.6.9",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -30,7 +30,7 @@
         "directory": "packages/echo-core"
     },
     "peerDependencies": {
-        "@equinor/echo-base": "^0.6.3",
+        "@equinor/echo-base": "^0.6.4",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-router-dom": "^5.3.0"
@@ -46,7 +46,7 @@
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-react": "^7.16.7",
         "@babel/preset-typescript": "^7.16.7",
-        "@equinor/echo-base": "^0.6.3",
+        "@equinor/echo-base": "^0.6.4",
         "@microsoft/microsoft-graph-types": "^2.14.0",
         "@rollup/plugin-babel": "^5.3.1",
         "@rollup/plugin-commonjs": "^21.0.2",
