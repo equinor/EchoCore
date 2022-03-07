@@ -10,6 +10,9 @@ export interface MetaDataBase {
     path: string;
     fileUri: string;
     version: string;
+    devFileUri?: string;
+    qaFileUri?: string;
+    testFileUri?: string;
     integrity?: string;
     private?: boolean;
 }
