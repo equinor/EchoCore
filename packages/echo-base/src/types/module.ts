@@ -2,6 +2,9 @@ import { EchoEventHub } from './event';
 
 export interface ModuleMetaData extends MetaDataBase {
     requireRef?: string;
+    devFileUri?: string;
+    qaFileUri?: string;
+    testFileUri?: string;
 }
 export interface MetaDataBase {
     key: string;
@@ -10,9 +13,6 @@ export interface MetaDataBase {
     path: string;
     fileUri: string;
     version: string;
-    devFileUri?: string;
-    qaFileUri?: string;
-    testFileUri?: string;
     integrity?: string;
     private?: boolean;
 }
