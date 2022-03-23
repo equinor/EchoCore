@@ -130,6 +130,5 @@ export async function includeModuleWithDependencies(
     dependencies?: AvailableDependencies,
     crossOrigin?: string
 ): Promise<ModuleData> {
-    appendScriptTagToDom(name, link, requireRef, dependencies, crossOrigin, integrity).catch(() => console.error);
     return appendScriptTagToDom(name, link, requireRef, dependencies, crossOrigin, integrity);
 }
