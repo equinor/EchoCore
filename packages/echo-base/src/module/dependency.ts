@@ -85,7 +85,7 @@ export async function appendScriptTagToDom(
         window[depName] = getLocalRequire(dependencies);
 
         script.onload = (): void => resolve(verifyAppWithModule(name, script.module));
-        script.onerror = (): void => reject('could not load');
+        script.onerror = (): void => reject(`Could not load module ${name}`);
 
         document.head.appendChild(script);
     });
@@ -130,5 +130,5 @@ export async function includeModuleWithDependencies(
     dependencies?: AvailableDependencies,
     crossOrigin?: string
 ): Promise<ModuleData> {
-    return await appendScriptTagToDom(name, link, requireRef, dependencies, crossOrigin, integrity);
+    return appendScriptTagToDom(name, link, requireRef, dependencies, crossOrigin, integrity);
 }

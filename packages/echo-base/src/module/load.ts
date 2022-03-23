@@ -1,4 +1,4 @@
-import { EchoModule, ModuleLoader, ModuleMetaData, ModuleRequester } from '../types';
+import { EchoModule, ModuleData, ModuleLoader, ModuleMetaData, ModuleRequester } from '../types';
 import { ModulesMetaError } from './errors';
 import { checkFunction } from './utils';
 import { verifyModulesMeta } from './verify';
@@ -39,8 +39,24 @@ export async function loadMetaData(fetchModules?: ModuleRequester): Promise<Modu
 export async function loadModules(loader: ModuleLoader, fetchModules?: ModuleRequester): Promise<Array<EchoModule>> {
     const modules = await loadMetaData(fetchModules);
     if (modules instanceof Array) {
-        return await Promise.all(modules.map(loader));
+        const settledModulePromises = await Promise.allSettled(modules.map(loader));
+        consoleLogErrorsForRejectedModules(settledModulePromises);
+        return getResolvedModules(settledModulePromises);
     } else {
         throw new ModulesMetaError({ message: 'Invalid modules meta-data, argument is not an Array' });
     }
+}
+
+function getResolvedModules(
+    results: PromiseSettledResult<ModuleData & ModuleMetaData>[]
+): (ModuleData & ModuleMetaData)[] {
+    return results
+        .filter((result) => result.status === 'fulfilled')
+        .map((result: PromiseFulfilledResult<ModuleData & ModuleMetaData>) => result.value);
+}
+
+function consoleLogErrorsForRejectedModules(results: PromiseSettledResult<ModuleData & ModuleMetaData>[]): void {
+    results
+        .filter((result) => result.status === 'rejected')
+        .forEach(({ reason }: PromiseRejectedResult) => console.error(reason));
 }
