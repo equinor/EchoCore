@@ -85,9 +85,7 @@ export async function appendScriptTagToDom(
         window[depName] = getLocalRequire(dependencies);
 
         script.onload = (): void => resolve(verifyAppWithModule(name, script.module));
-        script.onerror = (): void => {
-            reject(`Could not load module ${name}`);
-        };
+        script.onerror = (): void => reject(`Could not load module ${name}`);
 
         document.head.appendChild(script);
     });
