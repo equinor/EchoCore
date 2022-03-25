@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createOfflineMessage } from '../message/message';
 import { AppLinkOptions } from '../types/registry/registry';
 import { useEchoEventHub } from './useEchoEventHub';
@@ -12,7 +12,7 @@ export type Link = (linkTo: string, options?: AppLinkOptions) => void;
  * @return {Link} a Link function for linking to internal applications,
  */
 export function useInternalLink(): Link {
-    const history = useHistory();
+    const navigate = useNavigate();
     const { eventHub } = useEchoEventHub();
 
     /**
@@ -31,7 +31,7 @@ export function useInternalLink(): Link {
         onClick && onClick();
         eventTracker && eventTracker('InternalLink', 'Opened', { linkTo: linkTo });
         const linkParams = params ? params : '';
-        history.push(linkTo + linkParams);
+        navigate(linkTo + linkParams);
     }
 
     return Link;
