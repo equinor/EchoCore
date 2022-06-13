@@ -23,6 +23,7 @@ describe('analyticsModule preserve basic properties', () => {
         expect(payload['appVersion']).toBeDefined();
         expect(payload['isOnline']).toBeDefined();
 
+        //event props
         expect(payload['property1']).toBe('prop1');
         expect(payload['property2']).toBe(17);
 
