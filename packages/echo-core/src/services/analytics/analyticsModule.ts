@@ -45,7 +45,7 @@ export function analyticsSetInstCode(plantInstCode: string): void {
  * @param company company logged with all events
  */
 export function analyticsSetUserCompany(company: string): void {
-    userCompany = company.startsWith('X-') ? company.replace('X-', '') : 'Equinor';
+    userCompany = company.toUpperCase().startsWith('X-') ? company.substring(2) : 'Equinor';
 }
 
 /**
@@ -91,7 +91,20 @@ export class AnalyticsModule {
     trackEvent(event: AnalyticsEvent): void {
         this.offlineTracker.addOfflineAction(eventNameToString(this.moduleName, event.eventName));
 
-        const payload = {
+        const payload = this.createAnalyticsPayload(event);
+
+        if (!EchoEnv.isProduction()) {
+            if (EchoEnv.env().REACT_APP_LOGGER_ACTIVE) {
+                console.log('appInsightsLog: ', eventNameToString(this.moduleName, event.eventName), payload);
+            }
+            return;
+        }
+
+        appInsightsInstance().trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
+    }
+
+    createAnalyticsPayload(event: AnalyticsEvent): AnalyticsPropertyTypes {
+        return {
             ...event.properties,
             ...this.staticEventProperties,
             instCode,
@@ -103,15 +116,6 @@ export class AnalyticsModule {
             context: event.eventName.objectName,
             appVersion: 'Echopedia v' + EchoEnv.env().REACT_APP_AZURE_BUILD_NUMBER
         };
-
-        if (!EchoEnv.isProduction()) {
-            if (EchoEnv.env().REACT_APP_LOGGER_ACTIVE) {
-                console.log('appInsightsLog: ', eventNameToString(this.moduleName, event.eventName), payload);
-            }
-            return;
-        }
-
-        appInsightsInstance().trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
     }
 
     logError(error: Error | BaseError): void {
