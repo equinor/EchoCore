@@ -1,6 +1,7 @@
 import { Atom } from '@dbeining/react-atom';
 import { User } from '@microsoft/microsoft-graph-types';
 import React from 'react';
+import { UserProfileBeta } from '../services/graph/graphTypes';
 import { GlobalsStateActions } from './actions';
 import { Dict, EmptyObject } from './common';
 import { LegendOptions } from './legend';
@@ -27,6 +28,7 @@ export interface GlobalState {
     registry: RegistryState;
     ui: Dict<UI>;
     userProfile?: User;
+    userProfileBeta?: UserProfileBeta;
     userPhotoUrl?: string;
     legendOptions: LegendOptions;
     settings: Settings;

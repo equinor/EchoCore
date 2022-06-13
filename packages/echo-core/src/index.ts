@@ -17,6 +17,7 @@ export * from './services/analytics';
 export { analytics, analyticsConfiguration } from './services/analytics/analytics';
 export * from './services/authentication/authProvider';
 export * from './services/baseClient/baseClient';
+export { UserProfileBeta } from './services/graph/graphTypes';
 export { RegisteredHookName } from './services/hookRegistry';
 export * from './settings';
 export * from './state';

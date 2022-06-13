@@ -1,7 +1,9 @@
+import { AuthenticationResult } from '@azure/msal-browser';
 import { User } from '@microsoft/microsoft-graph-types';
 import { env, isDevelopment } from '../../configuration/environment';
 import { EchoAuthProvider } from '../authentication/echoProvider';
 import { graphApiRequest, graphConfig } from './graphConfig';
+import { UserProfileBeta } from './graphTypes';
 
 /**
  * Graph method for fetching a users profile
@@ -9,19 +11,19 @@ import { graphApiRequest, graphConfig } from './graphConfig';
  * @returns User profile or undefined if user is not authenticated
  */
 export const graphGetProfile = async (): Promise<User | undefined> => {
-    if (!EchoAuthProvider.userProperties.account) return;
+    const authenticationResult = await authenticate();
 
-    const authenticationResult = await EchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate(
-        graphApiRequest(EchoAuthProvider.userProperties.account),
-        EchoAuthProvider.loginRequest
-    );
+    return authenticationResult
+        ? await graphGet<User>(graphConfig.graphProfileEndpoint, authenticationResult.accessToken)
+        : undefined;
+};
 
-    if (authenticationResult) {
-        const userProfile = await getUserProfile(graphConfig.graphProfileEndpoint, authenticationResult.accessToken);
-        return userProfile;
-    } else {
-        return;
-    }
+export const graphGetProfileBeta = async (): Promise<UserProfileBeta | undefined> => {
+    const authenticationResult = await authenticate();
+
+    return authenticationResult
+        ? await graphGet<UserProfileBeta>(graphConfig.graphProfileExtendedEndpoint, authenticationResult.accessToken)
+        : undefined;
 };
 
 /**
@@ -30,32 +32,23 @@ export const graphGetProfile = async (): Promise<User | undefined> => {
  * @returns User profile picture or undefined if user is not authenticated
  */
 export const graphGetProfilePicture = async (): Promise<string | undefined> => {
-    if (!EchoAuthProvider.userProperties.account) return;
+    const authenticationResult = await authenticate();
 
-    const authenticationResult = await EchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate(
+    return authenticationResult
+        ? await getUserProfilePicture(graphConfig.graphProfilePictureEndpoint, authenticationResult.accessToken)
+        : undefined;
+};
+
+async function authenticate(): Promise<AuthenticationResult | null> {
+    if (!EchoAuthProvider.userProperties.account) return null;
+
+    return await EchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate(
         graphApiRequest(EchoAuthProvider.userProperties.account),
         EchoAuthProvider.loginRequest
     );
+}
 
-    if (authenticationResult) {
-        const userProfilePictureUrl = await getUserProfilePicture(
-            graphConfig.graphProfilePictureEndpoint,
-            authenticationResult.accessToken
-        );
-        return userProfilePictureUrl;
-    } else {
-        return;
-    }
-};
-
-/**
- * Graph method that calls fetch user profile from graph api and handles response
- * @param endpoint graph endpoint to call, based on graph config values
- * @param token users access token used in graph fetch call
- * @returns User profile or undefined if response is not successful
- */
-export const getUserProfile = async (endpoint: string, token: string): Promise<User | undefined> => {
-    let profile: User | undefined = undefined;
+export async function graphGet<T>(endpoint: string, token: string): Promise<T | undefined> {
     const headers = new Headers();
     const bearer = `Bearer ${token}`;
     headers.append('Authorization', bearer);
@@ -67,11 +60,11 @@ export const getUserProfile = async (endpoint: string, token: string): Promise<U
 
     const response: Response = await fetch(endpoint, options);
     if (response && response.ok) {
-        profile = response.json() as User;
+        return await response.json();
     }
 
-    return profile;
-};
+    return undefined;
+}
 
 /**
  * Graph method that calls profile picture endpoint on graph api and handles response

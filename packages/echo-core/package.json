@@ -1,6 +1,6 @@
 {
     "name": "@equinor/echo-core",
-    "version": "0.6.11",
+    "version": "0.6.12",
     "description": "Echo Core - Core functionality for the echo.equinor.com",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -47,7 +47,8 @@
         "@babel/preset-react": "^7.16.7",
         "@babel/preset-typescript": "^7.16.7",
         "@equinor/echo-base": "^0.6.8",
-        "@microsoft/microsoft-graph-types": "^2.16.0",
+        "@microsoft/microsoft-graph-types": "^2.20.0",
+        "@microsoft/microsoft-graph-types-beta": "^0.29.0-preview",
         "@rollup/plugin-babel": "^5.3.1",
         "@rollup/plugin-commonjs": "^21.0.2",
         "@rollup/plugin-node-resolve": "^13.1.3",
