@@ -20,10 +20,21 @@ import OfflineTracker from './offlineTracker';
 
 let instCode = '';
 let userCompany = '';
+const globalAnalyticsProperties: AnalyticsPropertyTypes = {};
+
+/**
+ * Sets a global property which is logged with all events and errors
+ * @param property.key the property name to be logged
+ * @param property.value the value of the property
+ */
+export function addGlobalAnalyticsProperty(property: { key: string; value: string | number | boolean }): void {
+    globalAnalyticsProperties[property.key] = property.value;
+}
 
 /**
  * Sets the instCode logged with all events, set globally for analytics modules
  * @param plantInstCode instCode logged with all events
+ * @deprecated use addGlobalAnalyticsProperty instead
  */
 export function analyticsSetInstCode(plantInstCode: string): void {
     instCode = plantInstCode;
@@ -83,10 +94,11 @@ export class AnalyticsModule {
         const payload = {
             ...event.properties,
             ...this.staticEventProperties,
-            sessionKey,
-            moduleName: this.moduleName,
             instCode,
             userCompany,
+            ...globalAnalyticsProperties,
+            sessionKey,
+            moduleName: this.moduleName,
             isOnline: navigator.onLine,
             context: event.eventName.objectName,
             appVersion: 'Echopedia v' + EchoEnv.env().REACT_APP_AZURE_BUILD_NUMBER
@@ -121,7 +133,7 @@ export class AnalyticsModule {
                 instCode,
                 userCompany,
                 moduleName: appWithModuleName(this.moduleName),
-                staticErrorProperties: this.staticErrorProperties
+                staticErrorProperties: { ...this.staticErrorProperties, ...globalAnalyticsProperties }
             });
             appInsightsInstance().trackException(exceptionTelemetry);
         }

@@ -1,6 +1,11 @@
 import { AnalyticsPropertyTypes } from '.';
 import { obfuscateUser } from './analyticsLogic';
-import { AnalyticsModule, analyticsSetInstCode, analyticsSetUserCompany } from './analyticsModule';
+import {
+    addGlobalAnalyticsProperty,
+    AnalyticsModule,
+    analyticsSetInstCode,
+    analyticsSetUserCompany
+} from './analyticsModule';
 import {
     addTelemetryNameFilter,
     enableLogTelemetryToConsole,
@@ -29,8 +34,9 @@ function setUser(userName: string, userId: string): void {
 
 export const analyticsConfiguration = {
     setUser,
-    setInstCode: analyticsSetInstCode,
+    setInstCode: analyticsSetInstCode, //TODO delete after we have upgraded to new core and deleted this from echopedia
     setUserCompany: analyticsSetUserCompany,
+    addGlobalAnalyticsProperty,
     addTelemetryNameFilter,
     removeTelemetryNameFilter,
     enableLogTelemetryToConsole

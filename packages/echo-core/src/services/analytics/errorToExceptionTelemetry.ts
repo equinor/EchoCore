@@ -27,12 +27,12 @@ export function errorToExceptionTelemetry(args: {
         exception: error,
         severityLevel: getErrorSeverity(error),
         properties: {
-            sessionKey: args.sessionKey,
-            moduleName: args.moduleName,
             instCode: args.instCode,
             userCompany: args.userCompany,
             ...allProperties,
             ...args.staticErrorProperties,
+            sessionKey: args.sessionKey,
+            moduleName: args.moduleName,
             errorType,
             message
         }
