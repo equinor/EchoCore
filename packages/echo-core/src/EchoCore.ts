@@ -7,6 +7,7 @@ import { useLegendOptions } from './hooks/useLegendOptions';
 import { useEchoSetup } from './hooks/useSetup';
 import { useUserPhoto } from './hooks/useUserPhoto';
 import { useUserProfile } from './hooks/useUserProfile';
+import useUserProfileBeta from './hooks/useUserProfileBeta';
 import { EchoAuthProvider } from './services/authentication/echoProvider';
 import { echoClient } from './services/echoClient/echoClient';
 import { errorHandler } from './services/errorHandler/errorHandler';
@@ -20,6 +21,7 @@ export const EchoCore = Object.freeze({
     useAppModuleState: useAppModuleState,
     useLegendOptions: useLegendOptions,
     useUserProfile: useUserProfile,
+    useUserProfileBeta,
     useUserPhoto: useUserPhoto,
     useAuthenticate: useAuthenticate,
     setLegendOption: setLegendOption,

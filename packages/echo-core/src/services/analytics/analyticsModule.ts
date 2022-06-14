@@ -20,10 +20,21 @@ import OfflineTracker from './offlineTracker';
 
 let instCode = '';
 let userCompany = '';
+const globalAnalyticsProperties: AnalyticsPropertyTypes = {};
+
+/**
+ * Sets a global property which is logged with all events and errors
+ * @param property.key the property name to be logged
+ * @param property.value the value of the property
+ */
+export function addGlobalAnalyticsProperty(property: { key: string; value: string | number | boolean }): void {
+    globalAnalyticsProperties[property.key] = property.value;
+}
 
 /**
  * Sets the instCode logged with all events, set globally for analytics modules
  * @param plantInstCode instCode logged with all events
+ * @deprecated use addGlobalAnalyticsProperty instead
  */
 export function analyticsSetInstCode(plantInstCode: string): void {
     instCode = plantInstCode;
@@ -34,7 +45,7 @@ export function analyticsSetInstCode(plantInstCode: string): void {
  * @param company company logged with all events
  */
 export function analyticsSetUserCompany(company: string): void {
-    userCompany = company.startsWith('X-') ? company.replace('X-', '') : 'Equinor';
+    userCompany = company.toUpperCase().startsWith('X-') ? company.substring(2) : 'Equinor';
 }
 
 /**
@@ -80,17 +91,7 @@ export class AnalyticsModule {
     trackEvent(event: AnalyticsEvent): void {
         this.offlineTracker.addOfflineAction(eventNameToString(this.moduleName, event.eventName));
 
-        const payload = {
-            ...event.properties,
-            ...this.staticEventProperties,
-            sessionKey,
-            moduleName: this.moduleName,
-            instCode,
-            userCompany,
-            isOnline: navigator.onLine,
-            context: event.eventName.objectName,
-            appVersion: 'Echopedia v' + EchoEnv.env().REACT_APP_AZURE_BUILD_NUMBER
-        };
+        const payload = this.createAnalyticsPayload(event);
 
         if (!EchoEnv.isProduction()) {
             if (EchoEnv.env().REACT_APP_LOGGER_ACTIVE) {
@@ -100,6 +101,21 @@ export class AnalyticsModule {
         }
 
         appInsightsInstance().trackEvent({ name: eventNameToString(this.moduleName, event.eventName) }, payload);
+    }
+
+    createAnalyticsPayload(event: AnalyticsEvent): AnalyticsPropertyTypes {
+        return {
+            ...event.properties,
+            ...this.staticEventProperties,
+            instCode,
+            userCompany,
+            ...globalAnalyticsProperties,
+            sessionKey,
+            moduleName: this.moduleName,
+            isOnline: navigator.onLine,
+            context: event.eventName.objectName,
+            appVersion: 'Echopedia v' + EchoEnv.env().REACT_APP_AZURE_BUILD_NUMBER
+        };
     }
 
     logError(error: Error | BaseError): void {
@@ -121,7 +137,7 @@ export class AnalyticsModule {
                 instCode,
                 userCompany,
                 moduleName: appWithModuleName(this.moduleName),
-                staticErrorProperties: this.staticErrorProperties
+                staticErrorProperties: { ...this.staticErrorProperties, ...globalAnalyticsProperties }
             });
             appInsightsInstance().trackException(exceptionTelemetry);
         }

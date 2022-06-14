@@ -1,7 +1,7 @@
 import { registerCorePanels, setUserInformation } from '../actions';
 import { registerMultipleExtensions } from '../actions/coreActions';
 import { EchoAuthProvider } from '../services/authentication/echoProvider';
-import { graphGetProfile, graphGetProfilePicture } from '../services/graph/graphUtils';
+import { graphGetProfile, graphGetProfileBeta, graphGetProfilePicture } from '../services/graph/graphUtils';
 import { setSetting } from '../settings/globalSettingsActions';
 import { persistEchoSetting } from '../settings/persistEchoSetting';
 import { CoreConfig } from '../types/coreConfig';
@@ -41,7 +41,11 @@ export async function authenticate(coreConfig: CoreConfig): Promise<boolean> {
  */
 export async function getGraphProfile(): Promise<void> {
     if (EchoAuthProvider.isAuthenticated) {
-        const [profile, userPhoto] = await Promise.all([graphGetProfile(), graphGetProfilePicture()]);
-        setUserInformation(profile, userPhoto);
+        const [profile, profileBeta, userPhoto] = await Promise.all([
+            graphGetProfile(),
+            graphGetProfileBeta(),
+            graphGetProfilePicture()
+        ]);
+        setUserInformation(profile, profileBeta, userPhoto);
     }
 }

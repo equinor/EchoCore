@@ -2,11 +2,13 @@ import { AccountInfo, SilentRequest } from '@azure/msal-browser';
 
 export const graphConfig: GraphConfig = {
     graphProfileEndpoint: 'https://graph.microsoft.com/v1.0/me',
+    graphProfileExtendedEndpoint: 'https://graph.microsoft.com/beta/me/profile',
     graphProfilePictureEndpoint: 'https://graph.microsoft.com/v1.0/me/photo/$value'
 };
 
 interface GraphConfig {
     graphProfileEndpoint: string;
+    graphProfileExtendedEndpoint: string;
     graphProfilePictureEndpoint: string;
 }
 
