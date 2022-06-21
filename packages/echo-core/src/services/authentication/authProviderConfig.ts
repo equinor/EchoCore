@@ -17,7 +17,7 @@ export const logoutRequest = (user: AccountInfo): EndSessionRequest => {
  * Based on the @azure/msal-browser package
  */
 export const defaultLoginRequest: RedirectRequest = {
-    scopes: ['openid', 'profile', 'User.Read', 'offline_access'],
+    scopes: ['.default'],
     prompt: 'select_account'
 };
 
@@ -30,6 +30,6 @@ export const loginSilentlyRequest = (user: AccountInfo): SilentRequest => {
     return {
         account: user,
         forceRefresh: false,
-        scopes: ['openid', 'profile', 'User.Read', 'offline_access']
+        scopes: ['.default']
     };
 };
