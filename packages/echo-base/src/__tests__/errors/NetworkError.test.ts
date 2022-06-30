@@ -29,6 +29,7 @@ describe('NetworkError', () => {
 
     it('check NetworkError properties', () => {
         const properties = {
+            hasBeenLogged: false,
             httpStatusCode,
             url,
             message: 'Network Error Testing',
@@ -67,6 +68,7 @@ describe('NetworkError & subclasses', () => {
     const networkArgs = { message, httpStatusCode, url, exception };
     const expectedProperties = {
         message,
+        hasBeenLogged: false,
         httpStatusCode,
         url,
         innerError: exception,
