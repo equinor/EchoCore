@@ -22,6 +22,7 @@ export function errorToExceptionTelemetry(args: {
     const errorType = error.name ? error.name : 'unknown';
     const message = error.message ? error.message : '';
     const allProperties = getAllProperties(error);
+    delete allProperties['hasBeenLogged']; //we don't want to log this
 
     return {
         exception: error,

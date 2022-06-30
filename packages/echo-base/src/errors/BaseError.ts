@@ -98,9 +98,8 @@ export function findPropertyByName(
     deepSearch = true
 ): unknown | undefined {
     const properties = getAllProperties(object);
-    const value = properties[propertyName];
-    if (value) {
-        return value;
+    if (properties.hasOwnProperty(propertyName)) {
+        return properties[propertyName];
     }
 
     let maybeFound: unknown = undefined;
@@ -147,7 +146,7 @@ export function getAllProperties(
     names.forEach((name) => {
         const value = object[name];
         const valueType = typeof value;
-        if (valueType === 'function' || name === 'hasBeenLogged') {
+        if (valueType === 'function') {
             //ignore
         } else if (value instanceof Error) {
             rec[name] = getAllProperties(value);

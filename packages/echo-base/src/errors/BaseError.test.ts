@@ -79,6 +79,23 @@ describe('findPropertyByName', () => {
         expect(actualPropertyMessage).toBe(message);
     });
 
+    it('should return found boolean with value false and true', () => {
+        const error = new BaseError({ name: 'BaseError', message });
+        expect(findPropertyByName(error, 'hasBeenLogged')).toBe(false);
+        error.hasBeenLogged = true;
+        expect(findPropertyByName(error, 'hasBeenLogged')).toBe(true);
+    });
+
+    it('should return found string which has empty value', () => {
+        const error = new BaseError({
+            name: 'BaseError',
+            message,
+            innerError: { stringProperty: '', nestedObject: { innerStringProperty: '' } }
+        });
+        expect(findPropertyByName(error, 'stringProperty')).toBe('');
+        expect(findPropertyByName(error, 'innerStringProperty')).toBe('');
+    });
+
     it('should find first message on baseError instead of message on innerError', () => {
         const error = new BaseError({
             name: 'BaseError',
