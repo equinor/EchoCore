@@ -123,10 +123,13 @@ export function findPropertyByName(
  * Supports custom Error which has public or private fields. Will ignore any functions on the Error object.
  * It does not support cycling references (A -> B -> A).
  * @param objectWithProperties an object containing properties
+ * @param args.ignoreEquals ignore/omit any property that equals this (case insensitive)
+ * @param args.ignoreIncludes ignore/omit any property that includes this (case insensitive)
  * @returns a record containing all properties of the object
  */
 export function getAllProperties(
-    objectWithProperties: Record<string, unknown> | Error | undefined
+    objectWithProperties: Record<string, unknown> | object | undefined,
+    args?: { ignoreEquals?: string[]; ignoreIncludes?: string[] }
 ): Record<string, unknown> {
     if (!objectWithProperties) {
         return {};
@@ -146,13 +149,29 @@ export function getAllProperties(
     names.forEach((name) => {
         const value = object[name];
         const valueType = typeof value;
-        if (valueType === 'function') {
+        if (valueType === 'function' || isPropertyIgnored(name, args)) {
             //ignore
-        } else if (value instanceof Error) {
-            rec[name] = getAllProperties(value);
+        } else if (typeof value === 'object') {
+            rec[name] = getAllProperties(value, args);
         } else {
             rec[name] = value;
         }
     });
     return rec;
+}
+
+function isPropertyIgnored(name: string, args?: { ignoreEquals?: string[]; ignoreIncludes?: string[] }) {
+    if (!args) {
+        return false;
+    }
+
+    name = name.toLocaleLowerCase();
+
+    if (args.ignoreIncludes && args.ignoreIncludes.some((item) => name.includes(item.toLocaleLowerCase()))) {
+        return true;
+    }
+
+    if (args.ignoreEquals && args.ignoreEquals.some((item) => name === item.toLocaleLowerCase())) {
+        return true;
+    }
 }
