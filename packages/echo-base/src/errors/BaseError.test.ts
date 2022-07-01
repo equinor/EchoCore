@@ -70,6 +70,20 @@ describe('getAllProperties', () => {
     });
 });
 
+describe('getAllProperties.ignore', () => {
+    it('ignoreEquals should ignore all properties specified, including nested object', () => {
+        const input = { abc: 'a', bcd: 1, cde: { nestedProp: 'prop1', abc: '123' } };
+        const actualError = getAllProperties(input, { ignoreEquals: ['abc', 'bcd'] });
+        expect(actualError).toStrictEqual({ cde: { nestedProp: 'prop1' } });
+    });
+
+    it('ignoreIncludes should ignore all properties specified, including nested object', () => {
+        const input = { abc: 'a', bcd: 1, ddd: { nestedProp: 'prop1', bc: '123' } };
+        const actualError = getAllProperties(input, { ignoreIncludes: ['a', 'c'] });
+        expect(actualError).toStrictEqual({ ddd: { nestedProp: 'prop1' } });
+    });
+});
+
 describe('findPropertyByName', () => {
     const message = 'This is a custom error message for testing';
 
