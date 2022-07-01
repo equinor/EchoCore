@@ -82,6 +82,12 @@ describe('getAllProperties.ignore', () => {
         const actualError = getAllProperties(input, { ignoreIncludes: ['a', 'c'] });
         expect(actualError).toStrictEqual({ ddd: { nestedProp: 'prop1' } });
     });
+
+    it('ignore should handle both equals and includes at the same time, and it should be case insensitive', () => {
+        const input = { stack: 'a', bcd: 1, ddd: { innerStack: 'prop1', Y: '1', N: '0' } };
+        const actualError = getAllProperties(input, { ignoreIncludes: ['stack'], ignoreEquals: ['y'] });
+        expect(actualError).toStrictEqual({ bcd: 1, ddd: { N: '0' } });
+    });
 });
 
 describe('findPropertyByName', () => {

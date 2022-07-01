@@ -149,7 +149,7 @@ export function getAllProperties(
     names.forEach((name) => {
         const value = object[name];
         const valueType = typeof value;
-        if (valueType === 'function' || shouldIgnore(name, args)) {
+        if (valueType === 'function' || isPropertyIgnored(name, args)) {
             //ignore
         } else if (typeof value === 'object') {
             rec[name] = getAllProperties(value, args);
@@ -160,18 +160,18 @@ export function getAllProperties(
     return rec;
 }
 
-function shouldIgnore(name: string, args?: { ignoreEquals?: string[]; ignoreIncludes?: string[] }) {
+function isPropertyIgnored(name: string, args?: { ignoreEquals?: string[]; ignoreIncludes?: string[] }) {
     if (!args) {
         return false;
     }
 
     name = name.toLocaleLowerCase();
 
-    if (args.ignoreEquals && args.ignoreEquals.some((item) => name === item.toLocaleLowerCase())) {
+    if (args.ignoreIncludes && args.ignoreIncludes.some((item) => name.includes(item.toLocaleLowerCase()))) {
         return true;
     }
 
-    if (args.ignoreIncludes && args.ignoreIncludes.some((item) => name.includes(item.toLocaleLowerCase()))) {
+    if (args.ignoreEquals && args.ignoreEquals.some((item) => name === item.toLocaleLowerCase())) {
         return true;
     }
 }
