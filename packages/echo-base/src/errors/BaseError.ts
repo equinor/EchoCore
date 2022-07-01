@@ -149,11 +149,11 @@ export function getAllProperties(
     names.forEach((name) => {
         const value = object[name];
         const valueType = typeof value;
-        if (valueType === 'function') {
+        if (valueType === 'function' || shouldIgnore(name, args)) {
             //ignore
-        } else if (typeof value === 'object' && !shouldIgnore(name, args)) {
+        } else if (typeof value === 'object') {
             rec[name] = getAllProperties(value, args);
-        } else if (!shouldIgnore(name, args)) {
+        } else {
             rec[name] = value;
         }
     });
