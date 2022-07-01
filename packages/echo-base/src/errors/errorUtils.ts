@@ -33,14 +33,12 @@ function isBaseError(error: Error): error is BaseError {
 
 function isNetworkError(error: Error): error is NetworkError {
     const httpStatusCode = findPropertyByName(error, 'httpStatusCode');
-    //httpStatusCode 0 means there was network problems / missing connection
-    return httpStatusCode >= 0 || error.name === NetworkError.name;
+    return isNetworkErrorByHttpCode(httpStatusCode) || error.name === NetworkError.name;
 }
 
 function isBackendError(error: Error): error is BackendError {
     const httpStatusCode = findPropertyByName(error, 'httpStatusCode');
-    //httpStatusCode > 0 means we got a response from the server
-    return httpStatusCode > 0 || error.name === BackendError.name;
+    return isServerResponseByHttpCode(httpStatusCode) || error.name === BackendError.name;
 }
 
 function isForbiddenError(error: Error): error is ForbiddenError {
@@ -56,4 +54,12 @@ function isUnauthorizedError(error: Error): error is UnauthorizedError {
 function isNotFoundError(error: Error): error is NotFoundError {
     const httpStatusCode = findPropertyByName(error, 'httpStatusCode');
     return httpStatusCode === 404 || error.name === NotFoundError.name;
+}
+
+function isServerResponseByHttpCode(httpStatusCode: number | unknown): boolean {
+    return httpStatusCode > 0;
+}
+
+function isNetworkErrorByHttpCode(httpStatusCode: number | unknown): boolean {
+    return httpStatusCode >= 0;
 }
