@@ -23,6 +23,11 @@ export function errorToExceptionTelemetry(args: {
     const message = error.message ? error.message : '';
     const allProperties = getAllProperties(error);
     delete allProperties['hasBeenLogged']; //we don't want to log this
+    let innerError = allProperties['innerError'] as Record<string, unknown>;
+    while (innerError) {
+        delete innerError['hasBeenLogged']; //we don't want to log this
+        innerError = innerError['innerError'] as Record<string, unknown>;
+    }
 
     return {
         exception: error,
