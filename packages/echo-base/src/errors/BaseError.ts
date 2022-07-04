@@ -93,7 +93,7 @@ export class BaseError extends Error {
  * @returns the value of the property found or undefined
  */
 export function findPropertyByName(
-    object: Record<string, unknown> | Error,
+    object: Record<string, unknown> | object,
     propertyName: string,
     deepSearch = true
 ): unknown | undefined {
