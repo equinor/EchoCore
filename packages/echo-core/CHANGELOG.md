@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v0.6.11 (next version - edit this when releasing)
+
+### Fix
+
+- Fixed fetch JSON parsing on error. Validation error is now parsed properly and attached as innerError.
+  
 ## v0.6.10
 
 ### Added
