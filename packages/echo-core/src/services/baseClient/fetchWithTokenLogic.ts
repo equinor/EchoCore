@@ -31,17 +31,21 @@ export async function fetchWithTokenLogic(
         if (response.status) statusCode = response.status;
 
         if (response && !response.ok) {
-            const contentType = response.headers.get('content-type');
-            const data =
-                contentType && contentType.indexOf('application/json') !== -1
-                    ? await response.json()
-                    : await response.text();
+            const data = await response.text();
+            let jsonData: Record<string, unknown> | undefined = undefined;
+            try {
+                //checking response.contentType for json data is not always reliable, let's try to parse it to json instead
+                jsonData = JSON.parse(data);
+            } catch {
+                //expected, it's handled just below
+            }
+            const details = jsonData ?? { details: data };
 
             throw initializeNetworkError({
                 message: 'failed response',
                 httpStatusCode: statusCode,
                 url: endpoint,
-                exception: { details: data }
+                exception: details
             });
         }
         return response;
