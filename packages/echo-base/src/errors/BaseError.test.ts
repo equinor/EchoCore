@@ -9,7 +9,6 @@ describe('BaseError', () => {
         expect(actualError.message).toBe(message);
         expect(actualError.name).toBe('BaseError');
         expect(actualError.stack).toBeTruthy();
-        expect(actualError.errorTraceId.includes('frontEnd')).toBeTruthy();
     });
 
     it('should preserve innerError with properties', () => {
@@ -48,7 +47,7 @@ describe('BaseError', () => {
         const innerError = { errors: { errorTraceId: null } };
         const actualError = new BaseError({ name: 'BaseError', message, innerError });
 
-        expect(actualError.errorTraceId.includes('frontEnd')).toBeTruthy();
+        expect(actualError.errorTraceId).toBe('frontEnd_mocked-static-id-9999');
     });
 });
 
