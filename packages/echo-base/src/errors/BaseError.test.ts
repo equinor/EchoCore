@@ -42,17 +42,29 @@ describe('BaseError', () => {
 
         expect(actualError.errorTraceId).toBe('backendErrorTraceId');
     });
+
+    it(`should generate frontEnd stackTraceId if innerError/backEnd stackTraceId is null`, () => {
+        const innerError = { errors: { errorTraceId: null } };
+        const actualError = new BaseError({ name: 'BaseError', message, innerError });
+
+        expect(actualError.errorTraceId).toBe('frontEnd_mocked-static-id-9999');
+    });
 });
 
 describe('getAllProperties', () => {
-    const input = { a: 'a', b: 1, c: { nestedProp: 'prop1' } };
-
     it('should return an empty object if undefined argument', () => {
         const actualError = getAllProperties(undefined);
         expect(actualError).toStrictEqual({});
     });
 
     it('should preserve properties of different types', () => {
+        const input = { a: 'a', b: 1, c: { nestedProp: 'prop1' } };
+        const actualError = getAllProperties(input);
+        expect(actualError).toStrictEqual(input);
+    });
+
+    it('should preserve null & undefined value', () => {
+        const input = { c: { nestedProp: null, nestedProp2: undefined } };
         const actualError = getAllProperties(input);
         expect(actualError).toStrictEqual(input);
     });

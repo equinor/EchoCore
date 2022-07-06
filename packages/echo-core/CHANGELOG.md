@@ -3,36 +3,9 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## v0.6.10
+## v0.6.18
 
-### Added
-
-- Added echoUtils which contains helper functions:
-
-```TS
-const errorUtils: {
-    toError: (error: unknown) => BaseError | Error;
-    is: {
-        error: (err: Error) => err is Error;
-        baseError: (error: Error) => error is BaseError;
-        networkError: (error: Error) => error is NetworkError;
-        backendError: (error: Error) => error is BackendError;
-        notFoundError: (error: Error) => error is NotFoundError;
-        forbiddenError: (error: Error) => error is ForbiddenError;
-        unauthorizedError: (error: Error) => error is UnauthorizedError;
-    };
-    findPropertyByName: (object: Error | Record<string, unknown>, propertyName: string, deepSearch?: boolean) => unknown;
-    getAllProperties: (objectWithProperties: object | Record<string, unknown>, args?: { ignoreEquals?: string[]; ignoreIncludes?: string[] 
-    }) => Record<string, unknown>;
-}
-```
-
-## v0.6.9
-
-### Fix
-
-- findPropertyByName: will now also find negative values as empty string and boolean which is set to false.
-- findPropertyByName & getAllProperties: can now take an object as argument, not just error.
+- Updated to use latest echo-base 0.6.11.
 
 ## v0.6.8
 
