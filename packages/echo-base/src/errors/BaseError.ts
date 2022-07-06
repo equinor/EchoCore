@@ -148,8 +148,7 @@ export function getAllProperties(
     const rec: Record<string, unknown> = {};
     names.forEach((name) => {
         const value = object[name];
-        const valueType = typeof value;
-        if (valueType === 'function' || isPropertyIgnored(name, args)) {
+        if (typeof value === 'function' || isPropertyIgnored(name, args)) {
             //ignore
         } else if (!!value && typeof value === 'object') {
             rec[name] = getAllProperties(value, args);
