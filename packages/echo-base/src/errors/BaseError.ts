@@ -151,7 +151,7 @@ export function getAllProperties(
         const valueType = typeof value;
         if (valueType === 'function' || isPropertyIgnored(name, args)) {
             //ignore
-        } else if (typeof value === 'object') {
+        } else if (!!value && typeof value === 'object') {
             rec[name] = getAllProperties(value, args);
         } else {
             rec[name] = value;
