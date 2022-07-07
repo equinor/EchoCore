@@ -182,12 +182,19 @@ describe('findPropertyByName', () => {
         const record = {
             aString: 'name',
             aNumber: 0,
-            nested: { anArray: ['a', 'b'] }
+            anEmptyString: '',
+            nested: { anArray: ['a', 'b'] },
+            aNullValue: null,
+            anUndefined: undefined
         };
 
-        expect(findPropertyByName(record, 'anArray')).toStrictEqual(['a', 'b']);
-        expect(findPropertyByName(record, 'aNumber')).toBe(0);
         expect(findPropertyByName(record, 'aString')).toBe('name');
+        expect(findPropertyByName(record, 'aNumber')).toBe(0);
+        expect(findPropertyByName(record, 'anEmptyString')).toBe('');
+        expect(findPropertyByName(record, 'nested')).toStrictEqual({ anArray: ['a', 'b'] });
+        expect(findPropertyByName(record, 'anArray')).toStrictEqual(['a', 'b']);
+        expect(findPropertyByName(record, 'aNullValue')).toBe(null);
+        expect(findPropertyByName(record, 'anUndefined')).toBe(undefined);
     });
 });
 
