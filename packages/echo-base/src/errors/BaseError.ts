@@ -150,6 +150,8 @@ export function getAllProperties(
         const value = object[name];
         if (typeof value === 'function' || isPropertyIgnored(name, args)) {
             //ignore
+        } else if (Array.isArray(value)) {
+            rec[name] = value;
         } else if (!!value && typeof value === 'object') {
             rec[name] = getAllProperties(value, args);
         } else {

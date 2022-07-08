@@ -177,6 +177,25 @@ describe('findPropertyByName', () => {
         const actualPropertyMessage = findPropertyByName(error, 'anotherProperty');
         expect(actualPropertyMessage).toBe('another value');
     });
+
+    it('should find and return properties of different types: string, number, array ', () => {
+        const record = {
+            aString: 'name',
+            aNumber: 0,
+            anEmptyString: '',
+            nested: { anArray: ['a', 'b'] },
+            aNullValue: null,
+            anUndefined: undefined
+        };
+
+        expect(findPropertyByName(record, 'aString')).toBe('name');
+        expect(findPropertyByName(record, 'aNumber')).toBe(0);
+        expect(findPropertyByName(record, 'anEmptyString')).toBe('');
+        expect(findPropertyByName(record, 'nested')).toStrictEqual({ anArray: ['a', 'b'] });
+        expect(findPropertyByName(record, 'anArray')).toStrictEqual(['a', 'b']);
+        expect(findPropertyByName(record, 'aNullValue')).toBe(null);
+        expect(findPropertyByName(record, 'anUndefined')).toBe(undefined);
+    });
 });
 
 class CustomTestError extends Error {

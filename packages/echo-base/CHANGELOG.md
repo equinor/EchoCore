@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v0.6.12
+
+### Fix
+
+- findPropertyByName & getAllProperties now correctly preserve array. A bug in last version returned is as a dictionary instead. 
+
 ## v0.6.11
 
 ### Fix
