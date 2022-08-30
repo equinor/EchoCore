@@ -19,3 +19,14 @@ export function usePlantsData(): PlantsData {
 export function usePlants(): Plant[] {
     return usePlantsData().plants;
 }
+
+/**
+ * Returns with the plant that has the passed instCode, or undefined if none of the plants has the passed instCode.
+ * @param {string} args.instCode Plant installation code
+ * @returns {Plant | undefined} {Plant | undefined}
+ */
+export function usePlantByInstCode(args: { instCode: string }): Plant | undefined {
+    const plants = usePlants();
+
+    return plants.find((plant) => plant.instCode.toLocaleLowerCase() === args.instCode.toLocaleLowerCase());
+}
