@@ -28,5 +28,5 @@ export function usePlants(): Plant[] {
 export function usePlantByInstCode(args: { instCode: string }): Plant | undefined {
     const plants = usePlants();
 
-    return plants.find((plant) => plant.instCode === args.instCode);
+    return plants.find((plant) => plant.instCode.toLocaleLowerCase() === args.instCode.toLocaleLowerCase());
 }
