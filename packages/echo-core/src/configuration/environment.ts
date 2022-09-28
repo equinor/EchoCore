@@ -25,6 +25,7 @@ export interface EnvironmentVariables {
     REACT_APP_AZURE_BUILD_NUMBER: string;
     REACT_APP_ECHO_3D_WEB_URL: string;
     REACT_APP_ECHO_3D_WEB_ENABLED: string;
+    REACT_APP_XLD_ENABLED?: string;
 }
 
 const echoEnv = {
@@ -42,7 +43,8 @@ const echoEnv = {
     REACT_APP_APPINSIGHTS_INSTRUMENTATIONKEY: process.env.REACT_APP_APPINSIGHTS_INSTRUMENTATIONKEY,
     REACT_APP_AZURE_BUILD_NUMBER: process.env.REACT_APP_AZURE_BUILD_NUMBER,
     REACT_APP_ECHO_3D_WEB_URL: process.env.REACT_APP_ECHO_3D_WEB_URL,
-    REACT_APP_ECHO_3D_WEB_ENABLED: process.env.REACT_APP_ECHO_3D_WEB_ENABLED
+    REACT_APP_ECHO_3D_WEB_ENABLED: process.env.REACT_APP_ECHO_3D_WEB_ENABLED,
+    REACT_APP_XLD_ENABLED: process.env.REACT_APP_XLD_ENABLED
 };
 
 //seems like window._env_ is not available in a worker
@@ -57,3 +59,4 @@ export const env = (): EnvironmentVariables => {
 export function setEnv(environmentVariables: EnvironmentVariables): void {
     environmentVariableInstance = environmentVariables;
 }
+
