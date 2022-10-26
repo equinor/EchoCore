@@ -22,7 +22,7 @@ module.exports = {
         // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
         // e.g. "@typescript-eslint/explicit-function-return-type": "off",
         '@typescript-eslint/no-use-before-define': 'off',
-        'linebreak-style': ['warn', 'windows'],
+        'linebreak-style': ['warn', process.platform === 'win32' ? 'windows' : 'unix'], // https://stackoverflow.com/q/39114446/2771889
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
         'react/prop-types': [2, { ignore: ['children'] }]
