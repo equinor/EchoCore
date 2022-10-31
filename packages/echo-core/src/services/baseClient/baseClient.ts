@@ -1,13 +1,8 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
-import { BaseError, ErrorArgs, toError } from '@equinor/echo-base';
+import { toError } from '@equinor/echo-base';
 import { AuthenticationProvider } from '../authentication/authProvider';
+import { AuthenticationError } from './authenticationError';
 import { fetchWithTokenLogic } from './fetchWithTokenLogic';
-
-export class AuthenticationError extends BaseError {
-    constructor(args: ErrorArgs) {
-        super({ ...args, name: 'AuthenticationError' });
-    }
-}
 
 /**
  * Base Client class providing methods for performing a fetch with authentication and acquiring AccessToken.

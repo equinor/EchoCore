@@ -7,8 +7,9 @@ import {
     RedirectRequest,
     SilentRequest
 } from '@azure/msal-browser';
-import { BaseError } from '@equinor/echo-base';
 import { UserProperties } from '../../types/userProperties';
+import { AuthenticationError } from '../baseClient/authenticationError';
+
 import { defaultLoginRequest, loginSilentlyRequest, logoutRequest } from './authProviderConfig';
 
 /**
@@ -44,14 +45,12 @@ export class AuthenticationProvider {
     }
 
     async getUserProperties(): Promise<UserProperties> {
-        if (this.userProperties?.account) {
-            return this.userProperties;
+        if (!this.userProperties?.account) {
+            await this.ssoSilentOrRedirectToAuthenticate();
         }
 
-        await this.ssoSilentOrRedirectToAuthenticate();
         if (!this.userProperties?.account) {
-            throw new BaseError({
-                name: 'AuthError',
+            throw new AuthenticationError({
                 message: 'account is null, failed to ssoSilentOrRedirectToAuthenticate'
             });
         }
@@ -74,8 +73,7 @@ export class AuthenticationProvider {
             if (response) {
                 logRequest && logRequest('Got response');
                 if (!response.account) {
-                    throw new BaseError({
-                        name: 'AuthError',
+                    throw new AuthenticationError({
                         message: 'account is null, failed to handleRedirectPromise'
                     });
                 }
@@ -105,8 +103,7 @@ export class AuthenticationProvider {
             .then((response) => {
                 if (!response.account || this.throwAnError) {
                     this.throwAnError = false;
-                    throw new BaseError({
-                        name: 'AuthError',
+                    throw new AuthenticationError({
                         message:
                             'account is null, failed to acquireTokenSilent loginSilentlyRequest getAllAccounts()[0]'
                     });
@@ -122,9 +119,7 @@ export class AuthenticationProvider {
                     this.publicClient.acquireTokenRedirect(this.loginRequest).then();
                 } else {
                     console.error(er);
-
-                    throw new BaseError({
-                        name: 'AuthError',
+                    throw new AuthenticationError({
                         message: 'Silent token acquisition failed',
                         innerError: er
                     });
