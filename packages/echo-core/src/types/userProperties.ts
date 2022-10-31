@@ -1,6 +1,5 @@
 import { AccountInfo } from '@azure/msal-browser';
 
 export interface UserProperties {
-    account: AccountInfo | null;
-    loginError: boolean;
+    account: AccountInfo;
 }

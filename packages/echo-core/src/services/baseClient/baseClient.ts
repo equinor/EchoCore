@@ -1,5 +1,5 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
-import { ArgumentError, BaseError, ErrorArgs, toError } from '@equinor/echo-base';
+import { BaseError, ErrorArgs, toError } from '@equinor/echo-base';
 import { AuthenticationProvider } from '../authentication/authProvider';
 import { fetchWithTokenLogic } from './fetchWithTokenLogic';
 
@@ -29,12 +29,10 @@ export class BaseClient {
      * @memberof BaseClient
      */
     async getAccessToken(): Promise<string> {
-        if (!this.authProvider.userProperties.account)
-            throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
-
+        const userAccount = await this.authProvider.getUserAccount(); //should throw
         try {
             const authenticationResult = await this.authProvider.aquireTokenSilentOrRedirectToAuthenticate(
-                this.getSilentRequest(this.authProvider.userProperties.account),
+                this.getSilentRequest(userAccount),
                 this.authProvider.loginRequest
             );
             return authenticationResult ? authenticationResult.accessToken : '';
@@ -66,9 +64,7 @@ export class BaseClient {
         body?: BodyInit,
         signal?: AbortSignal
     ): Promise<Response> {
-        if (!this.authProvider.userProperties.account)
-            throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
-        const accessToken = await this.getAccessToken();
+        const accessToken = await this.getAccessToken(); //can throw
         return await this.fetchWithToken(url, accessToken, headerOptions, method, body, signal);
     }
 

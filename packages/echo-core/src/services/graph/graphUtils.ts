@@ -40,10 +40,10 @@ export const graphGetProfilePicture = async (): Promise<string | undefined> => {
 };
 
 async function authenticate(): Promise<AuthenticationResult | null> {
-    if (!EchoAuthProvider.userProperties.account) return null;
+    const userAccount = await EchoAuthProvider.getUserAccount();
 
     return await EchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate(
-        graphApiRequest(EchoAuthProvider.userProperties.account),
+        graphApiRequest(userAccount),
         EchoAuthProvider.loginRequest
     );
 }
