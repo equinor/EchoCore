@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v0.6.23
+
+-   Breaking: EchoAuthProvider.userProperties is now correctly defined as optional. Instead use getUserProperties or getUserAccount to automatically start auth process if needed.
+-   Breaking: EchoAuthProvider.userProperties.loginError removed. The auth process will now instead throw error if auth fails, forcing the app to deal with the error (log it to appInsight).
+-   Changed: echoClient.getAccessToken will authenticate if necessary.
+
 ## v0.6.22
 
 -   Downgraded app insight package, as it breaks unit tests.
