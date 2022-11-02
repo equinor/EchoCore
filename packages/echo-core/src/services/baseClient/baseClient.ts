@@ -24,7 +24,7 @@ export class BaseClient {
      * @memberof BaseClient
      */
     async getAccessToken(): Promise<string> {
-        const userAccount = await this.authProvider.getUserAccount(); //should throw
+        const userAccount = await this.authProvider.getUserAccount(); // used to (if account null): throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
         try {
             const authenticationResult = await this.authProvider.aquireTokenSilentOrRedirectToAuthenticate(
                 this.getSilentRequest(userAccount),
@@ -32,6 +32,7 @@ export class BaseClient {
             );
             return authenticationResult ? authenticationResult.accessToken : '';
         } catch (exception) {
+            console.log(exception);
             throw new AuthenticationError({ message: 'failed to authenticate', innerError: toError(exception) });
         }
     }
@@ -59,7 +60,7 @@ export class BaseClient {
         body?: BodyInit,
         signal?: AbortSignal
     ): Promise<Response> {
-        const accessToken = await this.getAccessToken(); //can throw
+        const accessToken = await this.getAccessToken(); // used to (if account null): throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
         return await this.fetchWithToken(url, accessToken, headerOptions, method, body, signal);
     }
 
