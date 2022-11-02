@@ -35,10 +35,7 @@ export class AuthenticationProvider {
     loginRequest: RedirectRequest;
     isAuthenticated: boolean;
 
-    throwAnError: boolean;
-
     constructor(configuration: Configuration, loginRequest = defaultLoginRequest) {
-        this.throwAnError = false;
         this.publicClient = new PublicClientApplication(configuration);
         this.loginRequest = loginRequest;
         this.isAuthenticated = false;
@@ -101,8 +98,7 @@ export class AuthenticationProvider {
         await this.publicClient
             .acquireTokenSilent(loginSilentlyRequest(this.publicClient.getAllAccounts()[0]))
             .then((response) => {
-                if (!response.account || this.throwAnError) {
-                    this.throwAnError = false;
+                if (!response.account) {
                     throw new AuthenticationError({
                         message:
                             'account is null, failed to acquireTokenSilent loginSilentlyRequest getAllAccounts()[0]'

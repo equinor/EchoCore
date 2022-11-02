@@ -10,9 +10,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 -   EchoAuthProvider.userProperties is now correctly defined as optional. Instead use getUserProperties or getUserAccount to automatically start auth process if needed.
 -   EchoAuthProvider.userProperties.loginError removed. The auth process will now instead throw error if auth fails, forcing the app to deal with the error (log it to appInsight).
 
-### Changed
+### Fix
 
 -   echoClient.getAccessToken will authenticate if necessary.
+-   getPlantsData will now load data from localStorage if it hasn't been set/loaded yet
 
 ## v0.6.22
 
