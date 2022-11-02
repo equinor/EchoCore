@@ -149,7 +149,10 @@ export class AuthenticationProvider {
                     this.publicClient.acquireTokenRedirect(redirectRequest).catch(console.error).then();
                 } else {
                     console.error(er);
-                    throw er;
+                    throw new AuthenticationError({
+                        message: 'aquireTokenSilentOrRedirectToAuthenticate',
+                        innerError: er
+                    });
                 }
             });
         return authenticationResult ? authenticationResult : null;
