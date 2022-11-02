@@ -5,7 +5,7 @@ import { GlobalState } from '../types/state';
 import { dispatch, readState } from './coreActions/globalActions';
 
 /**
- * Function for updating plantsData in global state.
+ * Function for updating plantsData in global state. Existing data is kept/overwritten.
  * @export
  * @param {Partial<PlantsData>} partialPlantsData
  */
@@ -24,7 +24,20 @@ export function setPlantsData(partialPlantsData: Partial<PlantsData>): void {
  * @return {*}  {Readonly<PlantsData>}
  */
 export function getPlantsData(): Readonly<PlantsData> {
-    return readState(getCoreContext(), (state: GlobalState) => state.plantsData);
+    const plants = readState(getCoreContext(), (state: GlobalState) => state.plantsData);
+    if (plants.plants.length > 0) {
+        return plants;
+    }
+
+    const plantsFromStorage = persistPlantsData.getPlantsDataFromLocalStorage();
+    if (plantsFromStorage.plants.length > 0) {
+        dispatch(getCoreContext(), (state: GlobalState) => {
+            const newState = { ...state, plantsFromStorage };
+            return newState;
+        });
+    }
+
+    return plantsFromStorage;
 }
 
 /**
