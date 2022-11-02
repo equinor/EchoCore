@@ -186,12 +186,3 @@ export class AuthenticationProvider {
         return adResult ? adResult.accessToken : undefined;
     };
 }
-
-function tokenExpiresInSeconds(userProperties: UserProperties) {
-    const expiration = userProperties?.account?.idTokenClaims?.exp ?? 0;
-    const now = Math.floor(Date.now() / 1000);
-    const expiresIn = expiration - now;
-    console.log('Token expires in', expiresIn);
-
-    return expiresIn;
-}

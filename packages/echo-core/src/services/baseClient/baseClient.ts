@@ -32,7 +32,6 @@ export class BaseClient {
             );
             return authenticationResult ? authenticationResult.accessToken : '';
         } catch (exception) {
-            console.log(exception);
             throw new AuthenticationError({ message: 'failed to authenticate', innerError: toError(exception) });
         }
     }
