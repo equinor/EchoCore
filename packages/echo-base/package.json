@@ -31,8 +31,8 @@
         "url": "https://github.com/equinor/EchoCore/issues"
     },
     "devDependencies": {
-        "@types/node": "^18.11.7",
-        "typedoc": "^0.23.18",
+        "@types/node": "^18.11.9",
+        "typedoc": "^0.23.19",
         "typescript": "^4.8.4"
     },
     "files": [
@@ -41,6 +41,6 @@
         "src"
     ],
     "dependencies": {
-        "tslib": "^2.4.0"
+        "tslib": "^2.4.1"
     }
 }
