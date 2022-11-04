@@ -5,7 +5,7 @@ import { GlobalState } from '../types/state';
 import { dispatch, readState } from './coreActions/globalActions';
 
 /**
- * Function for updating plantsData in global state. Existing data is kept/overwritten.
+ * Function for updating plantsData in global state.
  * @export
  * @param {Partial<PlantsData>} partialPlantsData
  */

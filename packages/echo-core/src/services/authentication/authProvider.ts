@@ -26,8 +26,7 @@ import { defaultLoginRequest, loginSilentlyRequest, logoutRequest } from './auth
  */
 export class AuthenticationProvider {
     /**
-     * Deprecated userProperties property. Instead use getUserProperties() or getUserAccount()
-     * // @deprecated
+     * Instead use getUserProperties() or getUserAccount(), which will automatically authenticate and return the user properties.
      */
     userProperties?: UserProperties;
 
