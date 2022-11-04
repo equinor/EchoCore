@@ -6,6 +6,7 @@ import { PlantsData } from '../../types/plants';
 
 beforeEach(() => {
     initialize();
+    setPlantsData({ plants: [] });
 });
 
 function initialize(): void {
@@ -33,7 +34,7 @@ const mockPlantsData: PlantsData = {
 
 describe('globalPlantsDataActions', () => {
     describe('getPlantsData', () => {
-        it('should return default plantsData', () => {
+        it('should return default/empty plantsData', () => {
             const result = getPlantsData();
             expect(result).toEqual(plantsData);
         });
@@ -42,12 +43,21 @@ describe('globalPlantsDataActions', () => {
             const result = getPlantsData();
             expect(result).toEqual(mockPlantsData);
         });
+
+        it('should clear plants', () => {
+            setPlantsData(mockPlantsData);
+            const result = getPlantsData();
+            expect(result).toEqual(mockPlantsData);
+
+            setPlantsData({ plants: [] });
+            const result2 = getPlantsData();
+            expect(result2).toEqual({ plants: [] });
+        });
     });
     describe('getPlants', () => {
-        it('should return default list of plants', () => {
-            const plants = plantsData.plants;
+        it('should return empty/default list of plants', () => {
             const result = getPlants();
-            expect(result).toEqual(plants);
+            expect(result).toStrictEqual(plantsData.plants);
         });
         it('should return new list of plants', () => {
             const plants = mockPlantsData.plants;

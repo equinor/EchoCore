@@ -17,14 +17,18 @@ jest.mock('../../configuration/environment', () => {
     };
 });
 
+const userProperties = {
+    account: {
+        username: 'test@test.no'
+    }
+};
+
 jest.mock('../../services/authentication/echoProvider', () => ({
     EchoAuthProvider: {
         aquireTokenSilentOrRedirectToAuthenticate: jest.fn(),
-        userProperties: {
-            account: {
-                username: 'test@test.no'
-            }
-        }
+        userProperties,
+        getUserProperties: () => userProperties,
+        getUserAccount: () => userProperties.account
     }
 }));
 
@@ -34,7 +38,7 @@ beforeEach(() => {
         account: { username: 'test@test.no' }
     } as unknown as AccountInfo;
 
-    EchoAuthProvider.userProperties.account = accountMock;
+    EchoAuthProvider.userProperties = { account: accountMock };
 });
 
 describe('graphGetProfile', () => {
@@ -82,13 +86,13 @@ describe('graphGetProfile', () => {
     });
 
     it('should return undefined because no account is present on auth provider', async () => {
-        EchoAuthProvider.userProperties.account = null;
+        EchoAuthProvider.userProperties = undefined;
 
         const aquireTokenSilentOrRedirectToAuthenticateSpy =
             EchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate as jest.Mock;
 
         const graphProfile = await graphGetProfile();
-        expect(aquireTokenSilentOrRedirectToAuthenticateSpy).not.toBeCalled();
+        expect(aquireTokenSilentOrRedirectToAuthenticateSpy).toBeCalled();
         expect(fetchMock).not.toBeCalled();
         expect(graphProfile).toBe(undefined);
     });
@@ -148,14 +152,14 @@ describe('graphGetProfilePicture', () => {
     });
 
     it('should return undefined because no account is present on auth provider', async () => {
-        EchoAuthProvider.userProperties.account = null;
+        EchoAuthProvider.userProperties = undefined;
 
         const aquireTokenSilentOrRedirectToAuthenticateSpy =
             EchoAuthProvider.aquireTokenSilentOrRedirectToAuthenticate as jest.Mock;
 
         const graphProfileUrl = await graphGetProfilePicture();
-        expect(aquireTokenSilentOrRedirectToAuthenticateSpy).not.toBeCalled();
-        expect(fetchMock).not.toBeCalled();
+        expect(aquireTokenSilentOrRedirectToAuthenticateSpy).toBeCalled();
+        expect(fetchMock).toBeCalled();
         expect(graphProfileUrl).toBe(undefined);
     });
 });

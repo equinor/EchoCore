@@ -48,7 +48,7 @@ describe('handleLogin', () => {
         expect(AuthProvider.publicClient.getAllAccounts).not.toBeCalled();
 
         expect(AuthProvider.isAuthenticated).toBe(true);
-        expect(AuthProvider.userProperties.account).toBe(account);
+        expect(AuthProvider.userProperties?.account).toBe(account);
     });
 
     it('should successfully be authenticated and logged', async () => {
@@ -65,7 +65,7 @@ describe('handleLogin', () => {
         await AuthProvider.handleLogin(logFunc);
         expect(logFunc).toHaveBeenCalledWith('Got response');
         expect(AuthProvider.isAuthenticated).toBe(true);
-        expect(AuthProvider.userProperties.account).toBe(account);
+        expect(AuthProvider.userProperties?.account).toBe(account);
     });
 
     it('should be prompted to enter username and password', async () => {
@@ -110,7 +110,7 @@ describe('handleLogin', () => {
         expect(AuthProvider.publicClient.getAllAccounts).toBeCalled();
         expect(ssoSilentOrRedirectToAuthenticateSpy).toBeCalled();
         expect(AuthProvider.isAuthenticated).toBe(true);
-        expect(AuthProvider.userProperties.account).toBe(account);
+        expect(AuthProvider.userProperties?.account).toBe(account);
     });
 
     it('should attempt sso-silent or acquire token with redirect, and request is logged', async () => {
@@ -150,7 +150,7 @@ describe('ssoSilentOrRedirectToAuthenticate', () => {
         expect(AuthProvider.publicClient.acquireTokenSilent).toBeCalled();
         expect(AuthProvider.publicClient.getAllAccounts).toBeCalled();
         expect(AuthProvider.isAuthenticated).toBe(true);
-        expect(AuthProvider.userProperties.account).toBe(account);
+        expect(AuthProvider.userProperties?.account).toBe(account);
     });
 
     it('should catch InteractionRequiredAuthError, redirect to prompt user for username and password', async () => {
@@ -187,7 +187,10 @@ describe('ssoSilentOrRedirectToAuthenticate', () => {
             }
         ]);
 
-        await AuthProvider.ssoSilentOrRedirectToAuthenticate();
+        await expect(() => AuthProvider.ssoSilentOrRedirectToAuthenticate()).rejects.toThrowError(
+            'Silent token acquisition failed'
+        );
+
         expect(AuthProvider.publicClient.acquireTokenSilent).toBeCalled();
         expect(AuthProvider.publicClient.getAllAccounts).toBeCalled();
         expect(AuthProvider.publicClient.acquireTokenRedirect).not.toBeCalled();
@@ -241,30 +244,27 @@ describe('aquireTokenSilentOrRedirectToAuthenticate', () => {
         );
         (AuthProvider.publicClient.acquireTokenRedirect as jest.Mock).mockReturnValue(Promise.resolve());
 
-        const authenticationResult = await AuthProvider.aquireTokenSilentOrRedirectToAuthenticate(
-            request,
-            AuthProvider.loginRequest
-        );
+        await expect(() =>
+            AuthProvider.aquireTokenSilentOrRedirectToAuthenticate(request, AuthProvider.loginRequest)
+        ).rejects.toThrowError('aquireTokenSilentOrRedirectToAuthenticate');
 
         expect(AuthProvider.publicClient.acquireTokenSilent).toBeCalled();
         expect(AuthProvider.publicClient.acquireTokenRedirect).not.toBeCalled();
-        expect(AuthProvider.userProperties.loginError).toMatchObject(new Error('Unknown error occurred'));
         expect(console.error).toBeCalled();
-        expect(authenticationResult).toBe(null);
     });
 });
 
 describe('logout', () => {
     it('should call public client logout', () => {
         const logoutSpy = jest.spyOn(AuthProvider.publicClient, 'logout');
-
+        AuthProvider.userProperties = { account: {} as unknown as AccountInfo };
         AuthProvider.logout();
         expect(logoutSpy).toBeCalled();
     });
 
     it('should not call public client logout because account is empty', () => {
         const logoutSpy = jest.spyOn(AuthProvider.publicClient, 'logout');
-        AuthProvider.userProperties.account = null;
+        AuthProvider.userProperties = undefined;
         AuthProvider.logout();
         expect(logoutSpy).not.toBeCalled();
     });

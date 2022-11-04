@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v0.7.0
+
+### Breaking changes
+
+-   EchoAuthProvider.userProperties is now correctly defined as optional. Instead use getUserProperties or getUserAccount to automatically start auth process if needed.
+-   EchoAuthProvider.userProperties.loginError removed. The auth process will now instead throw error if auth fails, forcing the app to deal with the error (log it to appInsight).
+
+### Fix
+
+-   echoClient.getAccessToken will authenticate if necessary.
+-   getPlantsData will now load data from localStorage if it hasn't been set/loaded yet
+
 ## v0.6.22
 
 -   Downgraded app insight package, as it breaks unit tests.
