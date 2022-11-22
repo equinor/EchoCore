@@ -1,4 +1,5 @@
 import {
+    AccountInfo,
     AuthenticationResult,
     Configuration,
     InteractionRequiredAuthError,
@@ -7,6 +8,8 @@ import {
     SilentRequest
 } from '@azure/msal-browser';
 import { UserProperties } from '../../types/userProperties';
+import { AuthenticationError } from '../baseClient/authenticationError';
+
 import { defaultLoginRequest, loginSilentlyRequest, logoutRequest } from './authProviderConfig';
 
 /**
@@ -22,7 +25,11 @@ import { defaultLoginRequest, loginSilentlyRequest, logoutRequest } from './auth
     };
  */
 export class AuthenticationProvider {
-    userProperties = {} as UserProperties;
+    /**
+     * Instead use getUserProperties() or getUserAccount(), which will automatically authenticate and return the user properties.
+     */
+    userProperties?: UserProperties;
+
     publicClient: PublicClientApplication;
     loginRequest: RedirectRequest;
     isAuthenticated: boolean;
@@ -31,6 +38,24 @@ export class AuthenticationProvider {
         this.publicClient = new PublicClientApplication(configuration);
         this.loginRequest = loginRequest;
         this.isAuthenticated = false;
+    }
+
+    async getUserProperties(): Promise<UserProperties> {
+        if (!this.userProperties?.account) {
+            await this.ssoSilentOrRedirectToAuthenticate();
+        }
+
+        if (!this.userProperties?.account) {
+            throw new AuthenticationError({
+                message: 'account is null, failed to ssoSilentOrRedirectToAuthenticate'
+            });
+        }
+        return this.userProperties;
+    }
+
+    async getUserAccount(): Promise<AccountInfo> {
+        const userProperties = await this.getUserProperties();
+        return userProperties.account;
     }
 
     /**
@@ -43,7 +68,13 @@ export class AuthenticationProvider {
             this.isAuthenticated = false;
             if (response) {
                 logRequest && logRequest('Got response');
-                this.userProperties.account = response.account;
+                if (!response.account) {
+                    throw new AuthenticationError({
+                        message: 'account is null, failed to handleRedirectPromise'
+                    });
+                }
+
+                this.userProperties = { account: response.account };
                 this.isAuthenticated = true;
             } else if (this.publicClient.getAllAccounts().length === 0) {
                 logRequest && logRequest('No response and no users');
@@ -66,7 +97,14 @@ export class AuthenticationProvider {
         await this.publicClient
             .acquireTokenSilent(loginSilentlyRequest(this.publicClient.getAllAccounts()[0]))
             .then((response) => {
-                this.userProperties.account = response.account;
+                if (!response.account) {
+                    throw new AuthenticationError({
+                        message:
+                            'account is null, failed to acquireTokenSilent loginSilentlyRequest getAllAccounts()[0]'
+                    });
+                }
+
+                this.userProperties = { account: response.account };
                 this.isAuthenticated = true;
             })
             .catch((er) => {
@@ -76,6 +114,10 @@ export class AuthenticationProvider {
                     this.publicClient.acquireTokenRedirect(this.loginRequest).then();
                 } else {
                     console.error(er);
+                    throw new AuthenticationError({
+                        message: 'Silent token acquisition failed',
+                        innerError: er
+                    });
                 }
             });
     };
@@ -101,8 +143,11 @@ export class AuthenticationProvider {
                 if (er instanceof InteractionRequiredAuthError) {
                     this.publicClient.acquireTokenRedirect(redirectRequest).catch(console.error).then();
                 } else {
-                    this.userProperties.loginError = er;
                     console.error(er);
+                    throw new AuthenticationError({
+                        message: 'aquireTokenSilentOrRedirectToAuthenticate',
+                        innerError: er
+                    });
                 }
             });
         return authenticationResult ? authenticationResult : null;
@@ -121,7 +166,7 @@ export class AuthenticationProvider {
      * Based on the @azure/msal-browser package
      */
     logout = (): void => {
-        if (this.userProperties.account) {
+        if (this.userProperties?.account) {
             this.publicClient.logout(logoutRequest(this.userProperties.account));
         }
     };

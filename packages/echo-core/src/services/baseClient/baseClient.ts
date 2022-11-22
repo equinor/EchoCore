@@ -1,13 +1,8 @@
 import { AccountInfo, SilentRequest } from '@azure/msal-browser';
-import { ArgumentError, BaseError, ErrorArgs, toError } from '@equinor/echo-base';
+import { toError } from '@equinor/echo-base';
 import { AuthenticationProvider } from '../authentication/authProvider';
+import { AuthenticationError } from './authenticationError';
 import { fetchWithTokenLogic } from './fetchWithTokenLogic';
-
-export class AuthenticationError extends BaseError {
-    constructor(args: ErrorArgs) {
-        super({ ...args, name: 'AuthenticationError' });
-    }
-}
 
 /**
  * Base Client class providing methods for performing a fetch with authentication and acquiring AccessToken.
@@ -29,12 +24,10 @@ export class BaseClient {
      * @memberof BaseClient
      */
     async getAccessToken(): Promise<string> {
-        if (!this.authProvider.userProperties.account)
-            throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
-
+        const userAccount = await this.authProvider.getUserAccount(); // used to (if account null): throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
         try {
             const authenticationResult = await this.authProvider.aquireTokenSilentOrRedirectToAuthenticate(
-                this.getSilentRequest(this.authProvider.userProperties.account),
+                this.getSilentRequest(userAccount),
                 this.authProvider.loginRequest
             );
             return authenticationResult ? authenticationResult.accessToken : '';
@@ -66,9 +59,7 @@ export class BaseClient {
         body?: BodyInit,
         signal?: AbortSignal
     ): Promise<Response> {
-        if (!this.authProvider.userProperties.account)
-            throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
-        const accessToken = await this.getAccessToken();
+        const accessToken = await this.getAccessToken(); // used to (if account null): throw new ArgumentError({ argumentName: 'authProvider.userProperties.account' });
         return await this.fetchWithToken(url, accessToken, headerOptions, method, body, signal);
     }
 
