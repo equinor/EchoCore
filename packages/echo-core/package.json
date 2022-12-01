@@ -78,5 +78,17 @@
     },
     "files": [
         "dist/"
-    ]
+    ],
+    "exports": {
+        ".": "./dist/index.js",
+        "./logger": "./dist/logger.js",
+        "./package.json": "./package.json"
+    },
+    "typesVersions": {
+        "*": {
+            "logger": [
+                "dist/logger.d.ts"
+            ]
+        }
+    }
 }

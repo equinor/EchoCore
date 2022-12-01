@@ -5,21 +5,44 @@ import del from 'rollup-plugin-delete';
 import tslibResolveId from 'rollup-plugin-tslib-resolve-id';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 import ts2 from 'rollup-plugin-typescript2';
-import pkg from './package.json';
 
 const extensions = ['.jsx', '.js', '.tsx', '.ts'];
 export default [
     {
-        input: pkg.source,
+        input: ['./src/index.ts'],
         output: {
-            file: pkg.main,
+            dir: 'dist',
+            format: 'cjs',
+            exports: 'named'
+        },
+        external: ['react', 'react-dom', 'react-router-dom', '@equinor/echo-base', '@azure/msal-browser'],
+        plugins: [
+            // multi({ preserveModules: true }),
+            tslibResolveId(),
+            del({ targets: 'dist/*', runOnce: true }),
+            ts2(),
+            typescriptPaths(),
+            babel({
+                babelrc: false,
+                babelHelpers: 'bundled',
+                presets: [['@babel/preset-env', { modules: false }], ['@babel/preset-react']],
+                extensions,
+                exclude: 'node_modules/**'
+            }),
+            commonjs(),
+            nodeResolve()
+        ]
+    },
+    {
+        input: ['./src/logger.ts'],
+        output: {
+            dir: 'dist',
             format: 'cjs',
             exports: 'named'
         },
         external: ['react', 'react-dom', 'react-router-dom', '@equinor/echo-base', '@azure/msal-browser'],
         plugins: [
             tslibResolveId(),
-            del({ targets: 'dist/*', runOnce: true }),
             ts2(),
             typescriptPaths(),
             babel({
