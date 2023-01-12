@@ -16,6 +16,7 @@ export interface EnvironmentVariables {
     REACT_APP_LOGGER_ACTIVE: boolean;
     REACT_APP_API_URL: string;
     REACT_APP_WEB_URL: string;
+    REACT_APP_WEB_PROD_URL: string;
     REACT_APP_AZURE_AD_TENNANT: string;
     REACT_APP_AZURE_AD_TENNANT_ID: string;
     REACT_APP_AZURE_AD_CLIENT_ID: string;
@@ -36,6 +37,7 @@ const echoEnv = {
     REACT_APP_LOGGER_ACTIVE: process.env.REACT_APP_LOGGER_ACTIVE === 'true',
     REACT_APP_API_URL: process.env.REACT_APP_API_URL,
     REACT_APP_WEB_URL: process.env.REACT_APP_WEB_URL,
+    REACT_APP_WEB_PROD_URL: process.env.REACT_APP_WEB_PROD_URL,
     REACT_APP_AZURE_AD_TENNANT: process.env.REACT_APP_AZURE_AD_TENNANT,
     REACT_APP_AZURE_AD_TENNANT_ID: process.env.REACT_APP_AZURE_AD_TENNANT_ID,
     REACT_APP_AZURE_AD_CLIENT_ID: process.env.REACT_APP_AZURE_AD_CLIENT_ID,
