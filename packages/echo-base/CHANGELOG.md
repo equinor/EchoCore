@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v0.6.22
+
+### Fix
+
+-   updated npm packages
+
 ## v0.6.21
 
 ### Fix
