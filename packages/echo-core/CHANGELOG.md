@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v0.7.3
+
+-   Updated npm packages, fixes blank screen error on safari.
+
+## v0.7.2
+
+-   Added env variable REACT_APP_WEB_PROD_URL
+
+## v0.7.1
+
+-   Added env variable REACT_APP_WEB_URL
+
 ## v0.7.0
 
 ### Breaking changes
