@@ -1,6 +1,8 @@
-import { Atom } from '@dbeining/react-atom';
-import { GlobalState, GlobalStateContext } from '../types';
+import { useStore } from 'zustand';
+import { createStore, StoreApi } from 'zustand/vanilla';
+import { GlobalStateContext } from '../types';
 import { GlobalsStateActions } from '../types/actions';
+import { GlobalState } from './../types/state';
 import { defaultGlobalState } from './defaultStates';
 
 /**
@@ -10,9 +12,11 @@ import { defaultGlobalState } from './defaultStates';
  *
  * `Echo Core only`
  */
-export function createGlobalState(defaultState: GlobalState): Atom<GlobalState> {
-    return Atom.of(defaultState);
-}
+export const globalStore = createStore(() => ({
+    ...defaultGlobalState
+}));
+
+export const useGlobalStore = <T>(selector: (state: GlobalState) => T) => useStore(globalStore, selector);
 
 /**
  * Echo Core function for creating the GlobalApplicationContext.
@@ -21,13 +25,12 @@ export function createGlobalState(defaultState: GlobalState): Atom<GlobalState> 
  *
  * `Echo Core only.`
  */
-export function createGlobalApplicationContext(state: Atom<GlobalState>): GlobalStateContext {
-    const ctx: GlobalStateContext = {
-        state,
+export function createGlobalApplicationContext(store: StoreApi<GlobalState>): GlobalStateContext {
+    return {
+        state: store,
         actions: {} as GlobalsStateActions
         // Todo update with httpApi, authentication and more...
     };
-    return ctx;
 }
 
 /**
@@ -36,7 +39,7 @@ export function createGlobalApplicationContext(state: Atom<GlobalState>): Global
  *
  * `Echo Core only.`
  */
-export const CoreContext = createGlobalApplicationContext(createGlobalState(defaultGlobalState));
+export const CoreContext = createGlobalApplicationContext(globalStore);
 
 /**
  * Exposing the Echo GlobalStateContext
@@ -52,6 +55,6 @@ export function getCoreContext(): GlobalStateContext {
  *
  * `Echo Framework and Echo Core`
  */
-export function getCoreState(): Atom<GlobalState> {
+export function getCoreState(): StoreApi<GlobalState> {
     return CoreContext.state;
 }
