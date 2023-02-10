@@ -25,7 +25,7 @@ export const useGlobalStore = <T>(selector: (state: GlobalState) => T) => useSto
  *
  * `Echo Core only.`
  */
-export function createGlobalApplicationContext(store: StoreApi<GlobalState>): GlobalStateContext {
+function createGlobalApplicationContext(store: StoreApi<GlobalState>): GlobalStateContext {
     return {
         state: store,
         actions: {} as GlobalsStateActions
@@ -39,7 +39,7 @@ export function createGlobalApplicationContext(store: StoreApi<GlobalState>): Gl
  *
  * `Echo Core only.`
  */
-export const CoreContext = createGlobalApplicationContext(globalStore);
+const CoreContext = createGlobalApplicationContext(globalStore);
 
 /**
  * Exposing the Echo GlobalStateContext
