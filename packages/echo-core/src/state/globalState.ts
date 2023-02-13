@@ -39,7 +39,7 @@ function createGlobalApplicationContext(store: StoreApi<GlobalState>): GlobalSta
  *
  * `Echo Core only.`
  */
-const CoreContext = createGlobalApplicationContext(globalStore);
+export const CoreContext = createGlobalApplicationContext(globalStore);
 
 /**
  * Exposing the Echo GlobalStateContext
