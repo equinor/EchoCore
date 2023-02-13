@@ -1,5 +1,5 @@
 import { useGlobalState } from '../state/useGlobalState';
-import { ActivePanel, ActiveState, EchoAppState, GlobalState } from '../types';
+import { ActivePanel, ActiveState, EchoAppState } from '../types';
 
 /**
  *
@@ -8,7 +8,7 @@ import { ActivePanel, ActiveState, EchoAppState, GlobalState } from '../types';
  * @return {*}  {EchoAppState}
  */
 export function useAppState(): EchoAppState {
-    return useGlobalState((state: GlobalState) => state.app);
+    return useGlobalState((state) => state.app);
 }
 
 /**

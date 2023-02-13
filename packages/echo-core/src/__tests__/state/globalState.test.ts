@@ -1,33 +1,22 @@
-import { deref } from '@dbeining/react-atom';
-import { defaultGlobalState } from '../../state/defaultStates';
-import { createGlobalApplicationContext, createGlobalState, getCoreContext } from '../../state/globalState';
-import { GlobalsStateActions } from '../../types/actions';
-import { GlobalStateContext } from '../../types/state';
+import { getCoreContext, getCoreState, globalStore } from '../../state/globalState';
 
-describe('createGlobalState', () => {
-    it('should return empty Atom global state ', () => {
-        const result = deref(createGlobalState(defaultGlobalState));
-        expect(result).toStrictEqual(defaultGlobalState);
-    });
-});
-
-describe('createGlobalApplicationContext', () => {
+describe('getCoreContext()', () => {
     it('should return global context ', () => {
-        const globalState = createGlobalState(defaultGlobalState);
-        const expected: GlobalStateContext = {
-            state: globalState,
-            actions: {} as GlobalsStateActions
-        };
-        const result = createGlobalApplicationContext(globalState);
-        expect(result).toStrictEqual(expected);
-    });
-});
-
-describe('getCoreContext', () => {
-    it('should return global context ', () => {
-        const globalState = createGlobalState(defaultGlobalState);
-        const expected = createGlobalApplicationContext(globalState);
+        // when
         const result = getCoreContext();
-        expect(result).toStrictEqual(expected);
+
+        // then
+        expect(result).toStrictEqual({
+            state: globalStore,
+            actions: {}
+        });
     });
+});
+
+describe('getCoreState()', () => {
+    // when
+    const result = getCoreState();
+
+    // then
+    expect(result).toStrictEqual(globalStore);
 });
