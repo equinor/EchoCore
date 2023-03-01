@@ -38,7 +38,7 @@
     "dependencies": {
         "@azure/msal-browser": "^2.32.2",
         "@dbeining/react-atom": "^4.1.21",
-        "@microsoft/applicationinsights-web": "^2.8.9",
+        "@microsoft/applicationinsights-web": "^2.8.10",
         "sha1": "^1.1.1"
     },
     "devDependencies": {
