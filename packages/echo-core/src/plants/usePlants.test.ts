@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import { setPlantsData } from '../actions';
 import { Plant } from './../types/plants';
 import { usePlantByInstCode } from './usePlants';

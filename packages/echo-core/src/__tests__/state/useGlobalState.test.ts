@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import { globalStore } from '../../state/globalState';
 import { useGlobalState } from '../../state/useGlobalState';
 import { GlobalState } from '../../types';
