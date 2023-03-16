@@ -53,7 +53,6 @@
         "@rollup/plugin-commonjs": "^22.0.2",
         "@rollup/plugin-node-resolve": "^13.3.0",
         "@rollup/plugin-typescript": "^11.0.0",
-        "@testing-library/react-hooks": "^8.0.1",
         "@types/jest": "^29.2.6",
         "@types/react": "^18.0.26",
         "@types/react-router-dom": "^5.3.3",
