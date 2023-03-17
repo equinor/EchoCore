@@ -1,6 +1,6 @@
-import { Atom } from '@dbeining/react-atom';
 import { User } from '@microsoft/microsoft-graph-types';
 import React from 'react';
+import { StoreApi } from 'zustand/vanilla';
 import { UserProfileBeta } from '../services/graph/graphTypes';
 import { GlobalsStateActions } from './actions';
 import { Dict, EmptyObject } from './common';
@@ -14,7 +14,7 @@ import { Settings } from './settings';
 import { PanelUI, UI } from './ui';
 
 /**
- * The global state, the hart of Echo. The state contains user related data,
+ * The global state, the heart of Echo. The state contains user related data,
  * like user info and application settings. This state is not meant to have any search data
  * or large data sets. The active module is able to use the moduleState or the context provider.
  *
@@ -38,7 +38,7 @@ export interface GlobalState {
     moduleContext: ModuleContext<unknown>;
 }
 export interface GlobalStateContext {
-    state: Atom<GlobalState>;
+    state: StoreApi<GlobalState>;
     actions: GlobalsStateActions;
 }
 

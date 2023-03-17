@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react';
 import { registerMultipleExtensions } from '../../actions/coreActions';
 import { useExtensionsByComponentName } from '../../hooks/useExtension';
 import { ExtensionRegistration } from './../../types/registry/extension.types';
