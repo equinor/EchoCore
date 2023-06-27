@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v0.8.1
+
+### Fix
+
+-   Fixed fetch JSON parsing on error. Validation error is now parsed properly and attached as innerError.
+
+## v0.8.0
+
+-   Upgraded to React 18
+
 ## v0.7.3
 
 -   Updated npm packages, fixes blank screen error on safari.
