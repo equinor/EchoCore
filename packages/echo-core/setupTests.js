@@ -1,5 +1,22 @@
 const mGetRandomValues = jest.fn().mockReturnValueOnce(new Uint32Array(10));
 
+jest.mock('@microsoft/applicationinsights-web', () => {
+    return {
+        ApplicationInsights: class MockClass {
+            loadAppInsights = jest.fn();
+            addTelemetryInitializer = jest.fn();
+            trackPageView = jest.fn();
+        },
+        SeverityLevel: {
+            Verbose: 0,
+            Information: 1,
+            Warning: 2,
+            Error: 3,
+            Critical: 4
+        }
+    };
+});
+
 Object.defineProperty(window, 'fetch', {
     value: jest.fn()
 });

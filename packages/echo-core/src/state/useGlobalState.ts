@@ -1,6 +1,5 @@
-import { useAtom } from '@dbeining/react-atom';
 import { GlobalState } from '../types/state';
-import { getCoreState } from './globalState';
+import { useGlobalStore } from './globalState';
 
 /**
  * Hook that yields the full global state.
@@ -16,6 +15,6 @@ export function useGlobalState(): GlobalState;
 export function useGlobalState<R>(select: (state: GlobalState) => R): R;
 
 export function useGlobalState<R>(select?: (state: GlobalState) => R): GlobalState | R {
-    const state = useAtom(getCoreState());
-    return typeof select === 'function' ? select(state) : state;
+    const selector = typeof select === 'function' ? select : (state: GlobalState) => state as unknown as R;
+    return useGlobalStore(selector);
 }

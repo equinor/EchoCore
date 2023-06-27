@@ -5,5 +5,5 @@ module.exports = {
     singleQuote: true,
     printWidth: 120,
     tabWidth: 4,
-    endOfLine: 'crlf', //"lf|crlf|cr|auto"
+    endOfLine: 'auto', //"lf|crlf|cr|auto"
 };

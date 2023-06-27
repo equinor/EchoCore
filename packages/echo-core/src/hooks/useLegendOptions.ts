@@ -1,10 +1,7 @@
-import { useAtom } from '@dbeining/react-atom';
-import { CoreContext } from '../state/globalState';
+import { useGlobalState } from '../state/useGlobalState';
 import { LegendOptions } from '../types/legend';
 
 export function useLegendOptions(): LegendOptions {
-    const { legendOptions } = useAtom(CoreContext.state);
+    const legendOptions = useGlobalState((state) => state.legendOptions);
     return { ...legendOptions };
 }
-
-export default useLegendOptions;

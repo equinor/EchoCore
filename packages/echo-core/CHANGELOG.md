@@ -3,63 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## v0.6.11 (next version - edit this when releasing)
+## v0.8.1
 
 ### Fix
 
-- Fixed fetch JSON parsing on error. Validation error is now parsed properly and attached as innerError.
-  
-## v0.6.10
+-   Fixed fetch JSON parsing on error. Validation error is now parsed properly and attached as innerError.
 
-### Added
+## v0.8.0
 
-- Added echoUtils which contains helper functions:
+-   Upgraded to React 18
 
-```TS
-const errorUtils: {
-    toError: (error: unknown) => BaseError | Error;
-    is: {
-        error: (err: Error) => err is Error;
-        baseError: (error: Error) => error is BaseError;
-        networkError: (error: Error) => error is NetworkError;
-        backendError: (error: Error) => error is BackendError;
-        notFoundError: (error: Error) => error is NotFoundError;
-        forbiddenError: (error: Error) => error is ForbiddenError;
-        unauthorizedError: (error: Error) => error is UnauthorizedError;
-    };
-    findPropertyByName: (object: Error | Record<string, unknown>, propertyName: string, deepSearch?: boolean) => unknown;
-    getAllProperties: (objectWithProperties: object | Record<string, unknown>, args?: { ignoreEquals?: string[]; ignoreIncludes?: string[] 
-    }) => Record<string, unknown>;
-}
-```
+## v0.7.3
 
-## v0.6.9
+-   Updated npm packages, fixes blank screen error on safari.
+
+## v0.7.2
+
+-   Added env variable REACT_APP_WEB_PROD_URL
+
+## v0.7.1
+
+-   Added env variable REACT_APP_WEB_URL
+
+## v0.7.0
+
+### Breaking changes
+
+-   EchoAuthProvider.userProperties is now correctly defined as optional. Instead use getUserProperties or getUserAccount to automatically start auth process if needed.
+-   EchoAuthProvider.userProperties.loginError removed. The auth process will now instead throw error if auth fails, forcing the app to deal with the error (log it to appInsight).
 
 ### Fix
 
-- findPropertyByName: will now also find negative values as empty string and boolean which is set to false.
-- findPropertyByName & getAllProperties: can now take an object as argument, not just error.
+-   echoClient.getAccessToken will authenticate if necessary.
+-   getPlantsData will now load data from localStorage if it hasn't been set/loaded yet
+
+## v0.6.22
+
+-   Downgraded app insight package, as it breaks unit tests.
+
+## v0.6.21
+
+-   Updated MSAL package and other minor packages
+
+## v0.6.19
+
+-   Updated to use latest echo-base 0.6.12.
+-   Updated nuget packages
+
+## v0.6.18
+
+-   Updated to use latest echo-base 0.6.11.
 
 ## v0.6.8
 
 ### Fix
 
-- Handle rejected echo modules
+-   Handle rejected echo modules
 
 ## v0.6.7
 
 ### Added
-- Added support for Extensions: now specific, core application components can be extended by Echo Modules during the module setup phase.
+
+-   Added support for Extensions: now specific, core application components can be extended by Echo Modules during the module setup phase.
 
 ## v0.6.0
+
 ### Added
+
 -   `setLegendOption()` now also emits `LegendTypeChanged` event on EventHub if the legend type has been changed.
 -   `analytics.createAnalyticsModule` now supports static event or error properties
+
 ### Breaking changes
+
 See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
+
 ## v0.5.0
 
 ### Breaking changes
+
 See breaking changes for errors in: [@equinor/echo-base](https://github.com/equinor/EchoCore/blob/main/packages/echo-base)
 
 -   Errors are not exported through echo-core anymore, but from echo-base. Exporting them from both caused type errors when using instanceof, which caused difficult bug to debug. Import all error types from echo-base instead, BaseError, ToError, NetworkError, etc.
@@ -70,154 +91,81 @@ import { BaseError, NetworkError, toError } from '@equinor/echo-base';
 
 -   BaseClient.fetchWithToken throws error as before if response.ok is false. But the error.message was changed to 'failed response' or 'uncaught exception response' to easier distinguish the error types.
 
-
 ## 0.2.105 (2021-06-15)
-
-
 
 ## 0.2.105 (2021-06-15)
 
 **Note:** Version bump only for package @equinor/echo-core
 
-
-
-
-
 ## 0.2.105 (2021-06-15)
-
-
 
 ## 0.2.105 (2021-06-15)
 
 **Note:** Version bump only for package @equinor/echo-core
 
-
-
-
-
 ## 0.2.105 (2021-06-15)
-
-
 
 ## 0.2.105 (2021-06-15)
 
 **Note:** Version bump only for package @equinor/echo-core
-
-
-
-
 
 ## 0.2.105 (2021-06-11)
-
-
 
 ## 0.2.105 (2021-06-11)
 
 **Note:** Version bump only for package @equinor/echo-core
 
-
-
-
-
 ## 0.2.105 (2021-06-11)
-
-
 
 ## 0.2.105 (2021-06-11)
 
 **Note:** Version bump only for package @equinor/echo-core
-
-
-
-
 
 ## 0.3.1 (2021-06-11)
 
-
-
 # 0.3.0 (2021-06-11)
 
 **Note:** Version bump only for package @equinor/echo-core
 
-
-
-
-
 # 0.3.0 (2021-06-11)
-
-
 
 ## 0.2.105 (2021-06-11)
 
-
 ### Features
 
-* **#43369:** Add procosys project functionality ([#43](https://github.com/equinor/EchoCore/issues/43)) ([90eab7f](https://github.com/equinor/EchoCore/commit/90eab7f549a05ebf27a4ffdf54ff8f16abedfac9)), closes [#43369](https://github.com/equinor/EchoCore/issues/43369)
-
-
-
-
+-   **#43369:** Add procosys project functionality ([#43](https://github.com/equinor/EchoCore/issues/43)) ([90eab7f](https://github.com/equinor/EchoCore/commit/90eab7f549a05ebf27a4ffdf54ff8f16abedfac9)), closes [#43369](https://github.com/equinor/EchoCore/issues/43369)
 
 ## 0.2.103 (2021-06-09)
 
-
-
 ## 0.2.100 (2021-06-09)
-
 
 ### Bug Fixes
 
-* version ([#42](https://github.com/equinor/EchoCore/issues/42)) ([f4f484b](https://github.com/equinor/EchoCore/commit/f4f484b5fcf4c34014d7d503caef438114adf138))
-
-
-
-
+-   version ([#42](https://github.com/equinor/EchoCore/issues/42)) ([f4f484b](https://github.com/equinor/EchoCore/commit/f4f484b5fcf4c34014d7d503caef438114adf138))
 
 ## 0.2.102 (2021-06-09)
 
-
-
 ## 0.2.100 (2021-06-09)
-
 
 ### Bug Fixes
 
-* update echo-base version ([#41](https://github.com/equinor/EchoCore/issues/41)) ([e3c0228](https://github.com/equinor/EchoCore/commit/e3c022898af693fcd00eeb2f555da927ef5c1fa6))
-
-
-
-
+-   update echo-base version ([#41](https://github.com/equinor/EchoCore/issues/41)) ([e3c0228](https://github.com/equinor/EchoCore/commit/e3c022898af693fcd00eeb2f555da927ef5c1fa6))
 
 ## 0.2.101 (2021-06-09)
 
-
-
 ## 0.2.100 (2021-06-09)
-
 
 ### Bug Fixes
 
-* **#42583:** Upload to STID Media ([#40](https://github.com/equinor/EchoCore/issues/40)) ([8044457](https://github.com/equinor/EchoCore/commit/8044457e8150b3fdfa97afd117111be2017f39cb)), closes [#42583](https://github.com/equinor/EchoCore/issues/42583)
-
-
-
-
+-   **#42583:** Upload to STID Media ([#40](https://github.com/equinor/EchoCore/issues/40)) ([8044457](https://github.com/equinor/EchoCore/commit/8044457e8150b3fdfa97afd117111be2017f39cb)), closes [#42583](https://github.com/equinor/EchoCore/issues/42583)
 
 ## 0.1.4 (2021-04-16)
-
-
 
 ## 0.1.4 (2021-04-16)
 
 **Note:** Version bump only for package @equinor/echo-core
 
-
-
-
-
 ## 0.1.4 (2021-04-16)
-
-
 
 ## 0.1.4 (2021-04-16)
 
