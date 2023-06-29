@@ -15,7 +15,7 @@ export class ModuleSettings<T> {
     constructor(key: string, initialState: T) {
         this.store = store;
         this.key = '';
-        this.setup(key, initialState);
+        this.setup<T>(key, initialState);
     }
     /**
      * Setter function fro setting the module settings
@@ -70,7 +70,7 @@ export class ModuleSettings<T> {
      * @param {Partial<T>} initialState
      * @memberof ModuleSettings
      */
-    protected setup(key: string, initialState: Partial<T>): void {
+    protected setup<T>(key: string, initialState: Partial<T>): void {
         if (this.isKeyUnique(key)) {
             this.store.moduleSettings[key] = initialState;
             this.key = key;
