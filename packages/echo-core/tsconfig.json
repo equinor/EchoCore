@@ -12,16 +12,11 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "isolatedModules": false,
-        "noImplicitAny": false ,
+        "noImplicitAny": false,
         "noEmit": true,
-        "declaration":true,
-        "sourceMap": true,
+        "declaration": true,
         "jsx": "react"
     },
-   "include": [
-      "./src" 
-   ],
-   "exclude": [
-       "./src/__tests__"
-   ]
+    "include": ["./src"],
+    "exclude": ["./src/__tests__"]
 }

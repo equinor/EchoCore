@@ -10,7 +10,7 @@ import { SettingStore, store } from './settingsStore';
  */
 export class ModuleSettings<T> {
     protected store: SettingStore;
-    public key: string;
+    key: string;
 
     constructor(key: string, initialState: T) {
         this.store = store;
