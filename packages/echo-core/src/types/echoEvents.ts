@@ -3,5 +3,6 @@ export enum EchoEvents {
     PlantChanged = 'plantChanged',
     ProcosysProjectChanged = 'procosysProjectChanged',
     Toaster = 'toaster',
-    SearchItemDetailsClosed = 'SearchItemDetailsClosed'
+    SearchItemDetailsClosed = 'SearchItemDetailsClosed',
+    FullScreenModeEnabled = 'fullScreenModeEnabled'
 }
