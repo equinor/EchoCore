@@ -4,5 +4,6 @@ export enum EchoEvents {
     ProcosysProjectChanged = 'procosysProjectChanged',
     Toaster = 'toaster',
     SearchItemDetailsClosed = 'SearchItemDetailsClosed',
-    FullScreenModeEnabled = 'fullScreenModeEnabled'
+    FullScreenModeEnabled = 'fullScreenModeEnabled',
+    TurnaroundDataSelectionButtonClicked = 'turnaroundDataSelectionButtonClicked'
 }
