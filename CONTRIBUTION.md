@@ -35,7 +35,7 @@ tips on how you can make reporting your issue as effective as possible.
 
 ### Where to report
 
-New issues can be reported in our [list of issues](https://github.com/equinor/echoutils/issues).
+New issues can be reported in our [list of issues](https://github.com/equinor/echocore/issues).
 
 Before filing a new issue, please search the list of issues to make sure it does
 not already exist.
@@ -179,7 +179,7 @@ https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#names
 
 ## Development scripts
 
-See [Development](https://github.com/equinor/EchoCore/blob/main/packages/echo-core/README.md#development) for how to run the project.
+See [Development](https://github.com/equinor/EchoCore/blob/main/packages/echo-core/README.md#development)
 
 ## Testing
 
