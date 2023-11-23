@@ -1,14 +1,14 @@
 ![logo](https://raw.githubusercontent.com/equinor/EchoCore/main/doc/ee.png)
 
-# ~~Echo-Core~~ is now Archived
+# ~~Echo-Core~~ is now Archived (on Oct 17, 2023)
 
 This repo has moved to: https://github.com/equinor/EchopediaWeb
 
 SubFolders:
 
-- https://github.com/equinor/EchopediaWeb/tree/dev/libs/echo-core
+-   https://github.com/equinor/EchopediaWeb/tree/dev/libs/echo-core
 
-- https://github.com/equinor/EchopediaWeb/tree/dev/libs/echo-base
+-   https://github.com/equinor/EchopediaWeb/tree/dev/libs/echo-base
 
 A monorepo with all tools needed to communicate with echo framework. the repo contains two packages.
 You can read more about them in the links below.
